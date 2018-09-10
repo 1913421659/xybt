@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>媒体派单详情</title>
+</head>
+{include file="public/css" /}
+{include file="public/js" /}
+<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>
+<body>
+<div id="vue_page">
+    <!--顶部说明-->
+    {include file="public/header1" /}
+    <!-- header2 -->
+    {include file="public/header2" /}
+    <!--menu-->
+    <div class="new_menu">
+        <div class="wrap">
+            {include file="public/menu_r" /}
+        </div>
+    </div>
+    <!--menu结束-->
+    <!--企业主页-->
+    <div class="que_con business_b clearfix">
+        <div class="wrap">
+            <div class="que_menu_1">
+                <p>
+                    <img src="/__RESOURCES__images/home.png"/>
+                    <a href="{:url('index/index')}">首页</a>
+                    <img src="/__RESOURCES__images/right_2.png"/>
+                    <a href="{:url('company/index')}">管理营销</a>
+                    <img src="__RESOURCES__images/right_2.png"/>
+                    <a href="{:url('company/media_dispatch')}">媒体派单</a>
+                    <img src="__RESOURCES__images/right_2.png"/>
+                    <a href="#">派单详情</a>
+                </p>
+            </div>
+            <div class="que_a" style="margin-top: 0;">
+                <div class="row">
+                    <div class="col-md-3 que_left">
+                        <div class="after_box" style="border: none;">
+                            {empty name="$company"}
+                            <!--未加入企业-->
+                                <span>
+                                    <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                </span>
+                            <!--未加入企业-->
+                            <div class="after_pp">{$me.nick_name}</div>
+                            <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                            <p class="com_box">
+                                <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                            </p>
+                            {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                            <div class="after_pp" >{$company.company_name}</div>
+                            {/empty}
+                        </div>
+                        <div class="des"></div>
+                        {include file="company/_left" /}
+                        <script>
+						new Vue({
+						el:'.col-md-3.que_left',
+							data:{
+								action:704
+							}
+						});
+						</script>
+                    </div>
+                    <div class="col-md-9 que_right " id="need_result">
+                        <div class="row">
+                            <div class="col-md-12 need_right ">
+                                <div class="recice_con">
+                                    <div class="media">
+                                        <div class="media-left media-middle">
+                                            <a class="com_list_4" href="#">
+                                                <img class="media-object img-circle" src="{$info.user_picture|get_image_path}" alt="..." >
+                                            </a>
+                                        </div>
+                                        <div class="media-body recice_p">
+                                            <h4 class="media-heading recice_title">{$info.media_title_sub}</h4>
+                                            <p class="active_nav">派单人：{$info.nick_name}</p>
+                                            <p>派单时间：{$info.add_time|date="Y-m-d",###}<span class="margin_right">状态：{$info.status_name}</span></p>
+                                            <a href="{:url('media/detail',['id'=>$info.media_id])}" class="dispath_a">查看资源详情</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="des"></div>
+                                <div class="channel_box">
+                                    <div class="data_title channel_t"><span></span><label class="active_nav">派单信息：</label></div>
+                                    <table class="table dispatch_table qudao_i">
+                                        <tr>
+                                            <td>派单标题：</td>
+                                            <td>{$info.order_title}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>接单渠道：</td>
+                                            <td>{$info.media_title}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>订单类型：</td>
+                                            <td>{$info.order_type_name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>说明文档：</td>
+                                            <td><a href="{$info.link}" class="active_nav dispatch_more">点击查看</a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>派单价格：</td>
+                                            <td><span class="active_nav">{$info.price_sum}</span>元</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dispatch_s">派单说明：</td>
+                                            <td class="dispatch_td">{$info.remarks}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--马上抢弹窗-->
+    <div class="now_tan">
+        <div class="now_tan_a">
+            <div class="now_tan_c shen_box_1">
+                <ul>
+                    <li>
+                        <div class="header_now">
+                            付款
+                            <a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+                        </div>
+                        <div class="res_inner">
+                            <p class="confirm_t">确定，并向    <span class="active_nav">覃俊威</span> 支付</p>
+                            <p class="confirm_moneny active_nav">200000元</p>
+                        </div>
+                        <div class="dibu">
+                            <a class="dd_now shen_now recice_bg" href="javascript:;"  title="">取消</a>
+                            <a class="dd_now shen_now" href="javascript:;"  title="">确定</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--企业主页结束-->
+<!--footer-->
+{include file="public/footer1" /}
+<!--右侧导航栏-->
+{include file="public/footer2" /}
+{include file="public/js_1" /}
+
+</body>
+
+</html>

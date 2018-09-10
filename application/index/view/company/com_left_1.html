@@ -1,0 +1,54 @@
+<template>
+	<!--加入企业后的-->
+    <div class="que_l">
+		<a href="{:url('company/index')}" title="" class="color_1 " :class="{color_1:action==1, active_nav:action==20}">
+		   <span class="que_act" v-if="action==20"></span>		
+			<img  class="per_img" src="__RESOURCES__images/ying_8_8.png" v-if="action==20" />
+			<img  class="per_img" src="__RESOURCES__images/ying_8.png" v-else  />
+			企业信息
+		</a>
+	</div>
+     <div class="que_l">
+		<a href="{:url('company/apply_list')}" title=""  class="color_1" :class="{color_1:action==1, active_nav:action==21}">
+				<span class="que_act" v-if="action==21"></span>		
+			<img  class="per_img" src="__RESOURCES__images/ying_9_9.png"  v-if="action==21"/>
+			<img  class="per_img" src="__RESOURCES__images/ying_9.png" v-else  />
+			员工列表
+		</a>
+	</div>
+     <div class="que_l">
+		<a href="#" title="" class="color_1" :class="{color_1:action==1, active_nav:action==22}">
+			<span class="que_act" v-if="action==22"></span>					
+			<img  class="per_img" src="__RESOURCES__images/ying_10_10.png"  v-if="action==22" />
+			<img  class="per_img" src="__RESOURCES__images/ying_10.png" v-else  />
+			加入申请<label class="active_nav">（0）</label>
+		</a>
+	</div>
+     <div class="que_l">		
+		<a href="{:url('company/bind')}" title="" class="color_1" :class="{color_1:action==1, active_nav:action==23}">
+			<span class="que_act" v-if="action==23"></span>					
+			<img  class="per_img" src="__RESOURCES__images/ying_11_11.png"  v-if="action==23" />
+			<img  class="per_img" src="__RESOURCES__images/ying_11.png" v-else />
+			结算绑定
+		</a>
+	</div>
+	 <div class="que_l">
+		<a href="{:url('company/com_money')}" title="" class="color_1" :class="{color_1:action==1, active_nav:action==24}">	
+		   <span class="que_act" v-if="action==24"></span>		
+			<img  class="per_img" src="__RESOURCES__images/ying_13_13.png"  v-if="action==24" />
+			<img  class="per_img" src="__RESOURCES__images/ying_13.png" v-else  />
+			企业余额
+		</a>
+	</div>
+	 <div class="que_l">
+		<a href="{:url('company/payment')}" title="" class="color_1" :class="{color_1:action==1, active_nav:action==25}">	
+		    <span class="que_act" v-if="action==25"></span>		
+			<img  class="per_img" src="__RESOURCES__images/ying_14_14.png"  v-if="action==25" />
+			<img  class="per_img" src="__RESOURCES__images/ying_14.png" v-else  />
+			支付管理<label class="active_nav">（0）</label>
+		</a>
+	</div>	
+</template>
+<script>
+	$('#main_nav_company').addClass('menu_home ');
+</script>

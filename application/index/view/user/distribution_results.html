@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的需求-产品分销-需求结果</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body >
+		<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--顶部说明-->
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix" >
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img :src="menu_home" /><a href="index.html">{{home}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal_1}}</a>
+						<img :src="menu_img1" /><a href="Myneeds.html">{{marketing_list1}}</a>
+						<img :src="menu_img1" /><a href="Myneed_results.html">{{result}}</a>
+					</p>
+				</div>
+				<div class="que_a">
+					<div class="row">			
+						<div class="col-md-12 need_right ">
+							<div class="d_box1 vv">
+							   <div class="row">
+								<div class="col-md-12">
+									<div class="d_left">
+										<div class="media">
+										  <div class="media-left media-middle">
+										    <a class="ad_img" href="Productdistribution_detail.html">
+										      <img class="media-object" :src="meed_img1" alt="...">
+										    </a>
+										  </div>
+										  
+										  <div class="media-body need_p">
+										    <h4 class="media-heading dd_title">{{meeg_title}}</h4>
+										    <p class="res_p2">{{publisher}}&nbsp;&nbsp;&nbsp;&nbsp;{{release_time}}&nbsp;&nbsp;&nbsp;&nbsp;{{Audit}}</p>
+										    <p class="res_pp"><span>总预算：25056元</span><span>剩余预算：25056元</span><span>数量：5000个</span><span>完成数量：6555个</span><span>商品单价：10.4元</span></p>
+										  	<p>
+										  		<a class="btn btn-default need_shen" :href="{:url('user/distribution_apply')}" role="button" v-on:click="My_check">申请审核</a>
+										  	</p>
+										  </div>
+										</div>
+										
+								    </div>
+								</div>
+																
+							</div>
+							</div>
+							<div class="des"></div>
+							<div class="per_nei vv">
+							    <div style="line-height: 73px;">
+									<div class="need_h">											
+										<span style="float: left;">{{time}}</span>
+										 <div class="layui-input-inline month layui_r" style="float: left;">
+									        <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+									      </div>
+									      <form class="search_btn" style="top: 1px;">
+												<button class="btn btn-default" type="submit">搜索</button>
+										  </form>
+										<!--<span>-</span><input class="laydate-icon need_u" id="end" value="2014-6-29" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">--> 											
+									</div>
+									
+									
+									<span class="res_span">注：录入数据后需锁定才能保存，锁定后将不能更改</span>
+								</div>
+							</div>
+							
+							<div class=""  style="padding: 0 20px;">
+								<table class="table table_5">
+									<tr class="table_first">
+								  	   <td>时间</td>
+								       <td>编号</td>
+								       <td>单价</td>
+								       <td>金额</td>
+								       <td>数量</td>
+								       <td>锁定</td>
+								    </tr>
+								    <tr >
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text"class="search_input res_2" placeholder="" value="125"></td>
+								       <td><span class="suoding">已锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value="" placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								    <tr>
+								  	   <td>2017-11-12</td>
+								       <td>01001</td>
+								       <td>55元</td>
+								       <td>55元</td>
+								       <td><input type="text" class=" search_input" value=""  placeholder="请录入"></td>
+								       <td><span class="suoding active_suo">锁定</span></td>
+								    </tr>
+								</table>
+							</div>
+									
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+					
+		{include file="public/footer1" /}
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		</div>	
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					menu_home:"__RESOURCES__images/home.png",
+					home:"首页",
+					menu_img1:"__RESOURCES__images/right_2.png",
+					personal:"个人中心",
+					personal_1:"我的需求",
+					marketing_list1:"产品分销",
+					result:"需求结果",
+					meed_img1:"__RESOURCES__images/mian_1.png",
+					meeg_title:"双11全球狂欢节",
+					publisher:"发布人：覃俊威",
+					release_time:"发布时间：2017-02-50",
+					Audit:"20小时审核",
+					time:"时间：",
+					tan_title:"审核需求",
+					tan_img1:"__RESOURCES__images/yinyuanfuLOGO.png",
+					tan_tiltle1:"南城先生",
+					tan_vip:"vip1",
+					tan_id:"ID：326666",
+					tan_jibie:"蚁兵达人",
+					tan_Identity:"学生",
+					provinces:[
+						{province1:"审核状态"},
+						{province1:"待审核"},
+						{province1:"审核通过"},
+						{province1:"审核不过"},
+						{province1:"重新提交"}],
+					rewards:[{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					},
+					{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					},
+					{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					}],
+					
+				},
+				methods:{
+					My_check:function(){
+						$(".now_tan").fadeIn(300);
+					},
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					}
+				}	
+			})
+		</script>		
+		<script type="text/javascript">
+			laydate.render({
+			    elem: '#test1'
+			  });
+		</script>
+		<script type="text/javascript">
+	    	function changeState(el) {
+	        	if (el.readOnly) el.checked=el.readOnly=false;
+	       		 else if (!el.checked) el.readOnly=el.indeterminate=true;
+	   		};
+	    	window.onload = function() {
+			    baguetteBox.run('.baguetteBoxOne');			
+			};			
+			$("._scroll").yi_scroll();
+            $("._scroll-mh").yi_scroll({isMaxHeight:true,isBar:true});
+	            
+		 </script>
+
+	</body>
+	
+</html>

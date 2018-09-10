@@ -1,0 +1,17 @@
+/* CSS Document */
+
+
+ul.flex{display:flex;}
+ul.flex>li{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+.slide-fade-enter-active {
+transition: all .5s;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+
+opacity: 0;
+}

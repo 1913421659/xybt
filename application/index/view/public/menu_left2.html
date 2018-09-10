@@ -1,0 +1,52 @@
+<style type="text/css">
+.menu_left_l2{height:25px; overflow:hidden;}
+.menu_left_l2 a{display:inline-block;}
+</style>
+<div class="menu_left">
+	<div class="menu_top">
+		<span id="shouqi"><img src="__RESOURCES__images/more.png"/></span>
+		<h3 >市场营销服务</h3>
+	
+	<div class="menu_bottom clearfix" id="menu_bottom">
+
+		{foreach name="promotion" key="k" item="v"}
+		<!-- 二级分类 -->
+		<?php $pChild[$k] = $v['child']; ?>
+
+		<div class="menu_1 clearfix">
+			<span><img src="<?php kee($v['id'], $promotionLogo); ?>"/></span>
+			<div class="menu_2">
+				<div class="menu_3 clearfix">
+					<span><a href="{:url('marketing/index',['key' => $v.id])}" title="" alt="">{$v.promotion_name}</a></span>
+			        <span><img src="__RESOURCES__images/chuang.png"/></span>
+				</div>
+				<div class="menu_3 clearfix">
+					<div class="menu_left_l2 submenu">
+					{foreach name="v.child" key="k1" item="v1"}
+						{if condition="$k1 lt 3"}
+							<a href="{:url('marketing/index',['key' => $v.id, 'p_id'=> $v1.id])}" title="" alt="">{$v1.promotion_name}</a>
+			        	{/if}
+			        {/foreach}
+					</div>
+				</div>
+			</div> 
+			<div class="menu_4">
+				<div class="menu_a clearfix">
+					<ul class="mrnu_ul clearfix">
+						<span class="aa"></span>
+						{foreach name="v.child" key="k2" item="v2"}
+							{if condition="$k2 egt 2"}
+								<li class="menu_p"><a href="{:url('marketing/index',['key' => $v.id, 'p_id'=> $v2.id])}" title="" alt="">{$v2.promotion_name}</a></li>
+				        	{/if}
+				        {/foreach}
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		{/foreach}
+		
+		
+	</div>
+	</div>
+</div>

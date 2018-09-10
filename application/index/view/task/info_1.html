@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>免费福利-详情</title>
+	</head>
+		{include file="public/css" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="">
+					<div class="row">
+						<div class="col-md-9 detail_right clearfix">
+							<div class="d_box1">
+							   <div class="row">
+								<div class="col-md-8">
+									<div class="d_left">
+										<div class="media">
+										  <div class="media-left  mianfei_1">
+											<a class="ad_img" href="{:url('marketing/info',['key' => $info.id])}">
+											  <img class="media-object" src="{:get_image_path($info['banner_img'])}" alt="...">
+											</a>
+										  </div>
+										  <div class="media-body ">
+											<h4 class="media-heading d_title">{$info.name}</h4>
+											<p class="d_c">分红：{$info.cutting_value|default="0"}蚁币</p>
+											<p class="mian_2 main_8">
+												<span class="main_6" style="overflow: visible;float: left;"><img src="{:get_image_path($info['logo_img'])}" />&nbsp;&nbsp;</span>
+												<span>{$value.promotion_name|default=""}</span>&nbsp;&nbsp;
+												<span>余{$info.qty-$info.brought_total}份</span>&nbsp;&nbsp;
+												<span>{$info.task_exam_time_type_name}审核</span>
+											</p>
+											<p><a class="d_now wei_js" href="javascript:;" title="">马上抢</a></p>
+										  </div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div  class="d_er">
+										<div class="d_er_img">
+										   <img src="__RESOURCES__images/app_down.png" />
+										</div>
+										<p style="margin-top: 10px;">扫描二维码</p>
+										<p>下载APP享受最佳体验</p>
+									</div>
+								</div>
+								<div class="fenxiang clearfix">
+									<div class="col-md-1">分享到：</div>
+									<div class="col-md-11">
+										<div class="bdsharebuttonbox fenxiang_1">
+											<!--<a href="#" class="bds_more" data-cmd="more"></a>-->
+											<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">qq空间</a>
+											<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博 </a>
+											<a href="#" class="bds_weixin bds_peng" data-cmd="weixin" title="分享到微信">朋友圈</a>
+											<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">QQ</a>
+											<span  class="bds_aaa"><img src="__RESOURCES__images/share_dating.png" />分享大厅</span>
+											<span  class="bds_aaa"><img src="__RESOURCES__images/shoucang_1.png" />加入收藏</span>
+										</div>	
+										
+									</div>
+									
+								</div>
+							</div>
+							</div>
+							<!--操作流程-->
+							<div class="caozuo_box clearfix">
+								<h4>操作流程<small>（请严格按照“操作演示”流程操作）</small></h4>
+								<div class="shijian">
+									<div class="container1">
+										<div class="main main1">
+											<ul class="cbp_tmtimeline d_beform">
+												<li>
+													<div class="cbp_tmicon d-img"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_1_id']]; ?>  </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_1_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="cbp_tmicon d-img2"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_2_id']]; ?>  </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_2_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="cbp_tmicon d-img3"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_3_id']]; ?> </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_3_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--操作演示-->
+							{notempty name="info.task_flow_img"}
+							<div class="caozuo_box ccc clearfix">
+								<h4>操作演示<small>(点击下图可放大显示)</small></h4>
+								<!--<div class="shijian">-->
+									<div id="slider" >
+										{foreach name="info.task_flow_img" key="key" item="value"}
+											<div class="spic">
+												<img src="{$value.img_path|get_image_path}" />
+												
+											</div>
+										{/foreach}
+									</div>
+								<!--</div>-->
+							</div>
+							{/notempty}
+							<!--演示流程结束-->
+							<div class="caozuo_box vv  clearfix">
+								<h4>产品介绍</h4>
+								<div class="jieshao">
+									<?php $content = explode(PHP_EOL, $info['content']); ?>
+									{foreach name="content" key="key" item="value"}
+									 <p>{$value}</p>
+									{/foreach}
+									 
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3  detail_l">
+							<div class="per_title8 ">
+								<h5>相关推荐</h5>
+							</div>
+							{foreach name="push" key="key" item="value"}
+									<div class="per_h">
+										<div class="media">
+										  	<div class="media-left">
+											    <a class="ad_img_kk" href="{:url('marketing/info',['key' => $value['id']])}">
+											      	<img class="media-object" src="{$value.banner_img|get_image_path}" alt="...">
+											    </a>
+										  	</div>
+										  	<div class="media-body per_j  mark_aa">
+										    	<h4 class="media-heading" title="{$value.name}" style=" width: 103px !important;">{$value.name|msubstr=###,0,10}</h4>
+										 		<p>分红：{$value.cutting_value|default="0"}蚁币</p>
+										 		<p><a  class="market_box" href="{:url('marketing/info',['key' => $value['id']])}" title="">马上抢</a></p>
+										  	</div>
+										</div>
+									</div>
+							{/foreach}
+							
+							
+							
+							
+							<!--常见问题- ->
+							<div class="per_title8 ">
+								<h5>常见问题</h5>
+							</div>
+							<ul class="detail_a">
+							  <li class="detail_act"><span ></span><a href="#" title="">怎么申请成为小蚁达人呢？</a></li>
+							  <li><span ></span><a href="#" title="">小蚁兵团是个什么样的APP？</a></li>
+							</ul><!---->
+							
+						</div>
+						<div class="des"></div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		<div class="wei_tan">
+			
+			
+		</div>
+		<!-- 二维码弹窗 -->
+		<div class="wei_tan">
+			<div class="wei_tan1">
+				<div class="now_tan_c">
+					<ul>
+						<li>
+							<div class="header_now">
+								任务领取提示<span class="wei_1">此任务需下载小蚁兵团APP体验</span>
+							</div>
+							<div class="content_now">
+								<div class="row bottom_jjj  wei_3">
+								 	<div class="col-md-6">
+								 		<div class="wei_2">
+								 			<div id="task_qr"><a href="#"><img src="__RESOURCES__images/aa_1.png"/></a></div>
+								 			<p>任务领取二维码</p>
+											<p style="font-size:11px;">（请使用小蚁兵团APP扫一扫）</p>
+								 		</div>
+								 	</div>
+								  	<div class="col-md-6">
+								  		<div class="wei_2">
+								 			<a href="#"><img src="__RESOURCES__images/app_down.png" width="166" height="166" /></a>
+								 			<p>小蚁兵团APP二维码</p>
+								 		</div>
+								  	</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:;"><img class="guanbiBtn" src="__RESOURCES__images/c888.png"/></a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		{include file="public/js" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript" src="__RESOURCES__js/jquery.qrcode.min.js" ></script>
+		
+	    <script>
+		$('#main_nav_marketing').addClass('menu_home');
+		
+//		window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{bdCustomStyle: "__RESOURCES__css/style.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='__RESOURCES__baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+			$(document).ready(function() {
+				$('#slider').slider({ speed: 500 });
+			});
+			// 二维码弹窗
+			$(".guanbiBtn").click(function(){
+			   	$(".wei_tan").fadeOut(500);
+			});
+			$(".wei_js").click(function(){
+			   	$(".wei_tan").fadeIn(500);
+			});
+			$('#task_qr a').html('').css('padding','4px').qrcode({
+						//render: "table",
+						width: 158,
+						height:158,
+						text: "{$info.qr_str}"
+					})
+		</script>
+		<script>
+			
+			window._bd_share_config = {
+			 common: {
+			 "bdText" : "",
+			 "bdMini" : "2",
+			 "bdMiniList" : false,
+			 "bdPic" : "",
+			 "bdStyle" : "0",
+			 "bdSize" : "24"
+			 },
+			 share: [{
+//			 bdCustomStyle: "__RESOURCES__baidushare/static/api/css/share.css" 
+			 }]
+			}
+			with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="__RESOURCES__baidushare/static/api/js/share.js?cdnversion="+~(-new Date()/36e5)];
+		</script>
+	</body>
+	
+</html>

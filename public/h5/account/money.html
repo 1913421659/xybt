@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>提现</title>		
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>	
+		<style>
+			
+		</style>
+	</head>
+	<body style="background-color: #f1f0f0;">
+	<div id="media_content">
+		<header class="hanner_box" >
+			<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span >提现</span>
+		</header>
+		<div class="comment_box" >
+			<div class="commentBox" style="padding: 0 1rem;">
+				<p class="xianTitle">可用余额：200蚁币<span>（100蚁币=1元）</span> </p>
+				<p class="xian_moeny">可提现金额：2元</p>
+				<p class="xian_shuru">
+					<span>￥</span><input type="text" placeholder="请输入金额" />
+				</p>
+				<div class="commentBox shuoming">
+					<p class="xianTitle">我的零钱：2元</p>
+					<p class="xianColor">注：注:金额必须大于5元才能提现（首次提现大于1元即可），提现到钱包的金额只能在小蚁商城内进行购买商品。</p>
+				</div>
+				
+			</div>
+			<div class="des"></div>
+			<div class="commentBox weui-cell_access" style="padding:0 1rem;">
+				
+				<div class="weui-panel__hd">选择提现方式</div>
+				  <div class="weui-panel__bd">
+				    <a href="methods.html" class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__hd xianImg" >
+				        <img class="weui-media-box__thumb" src="../images/zhifubao1.png"  />
+				      </div>
+				      <div class="weui-media-box__bd">
+				        <h4 class="weui-media-box__title">支付宝</h4>
+				        <p class="weui-media-box__desc">666666@qq.com</p>
+				        
+				      </div>
+				      <span class="weui-cell__ft" style="right: -15px;"></span>
+				    </a>				    
+				</div>	
+				<div class="weui-panel__bd" style="border-bottom: 1px solid #EEEEEE;">
+				    <a href="methods.html" class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__hd xianImg" >
+				        <img class="weui-media-box__thumb" src="../images/lingqian.png"  />
+				      </div>
+				      <div class="weui-cell__bd">
+				      <p class="methodTitle">小蚁钱包</p>
+				    </div>
+				      <span class="weui-cell__ft" style="right: -15px;"></span>
+				    </a>				    
+				</div>	
+				
+			</div>
+			<div class="qrBtn"><a  href="javascript:;" class="weui-btn  weui-btn_primary_1">确认提现</a></div>
+			
+		</div>
+		
+	</div>
+	<script>
+		var media_content=new Vue({
+			el:"#media_content",
+			data:{
+				
+			},
+			methods:{
+				
+				
+			}
+		})
+	</script>
+	
+	
+		
+	</body>
+</html>

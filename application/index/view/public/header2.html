@@ -1,0 +1,46 @@
+<div class="header_second clearfix">
+	<div class="wrap">
+		<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+			<img src="__RESOURCES__images/logo.png" />
+		</a>
+		<span class="h_shuoming">一站式整合营销平台</span>
+		<div class="search">
+			<form class="form_box" id="searchForm" onSubmit="return false;;">
+				<input type="text" id="search" name="search"  placeholder="请输入关键字" value="<?=isset($search)?$search:''?>"/>
+                <input type="hidden" id="searchType" name="type" value="1"/>
+				<button class="buttom_1" type="button" id="searchBtn">
+					<img src="__RESOURCES__images/search_a.png" />
+				</button>
+				<button class="guanbi" type="button" id="guanbi_1">
+					<img src="__RESOURCES__images/guanbi.png" />
+				</button>
+			</form>
+			<div class="xiala">
+				<div class="quanbu">
+					<div class="mySelect" id="searchCondition">
+						<span id="">搜需求</span>
+						<ul class="mySelect_ul">
+							<li><a href="#" data="1" title="搜需求">搜需求</a></li>
+							<li><a href="#" data="2" title="搜商品">搜商品</a></li>
+							<li><a href="#" data="3" title="搜应用">搜应用</a></li>
+						</ul>
+				    </div>
+				</div>
+				<div class="xiala_a xiala_jj">
+				</div>
+			</div>
+		</div>	
+		<div class="second_right second_q">
+			<a href="{:url('media/settled')}" title="" alt="">
+				<span><img src="__RESOURCES__images/tuiguang_2.png"/></span>
+			    <span>资源入驻</span>
+			</a>
+		</div>
+		<div class="second_right ">
+			<a href="{:url('task/create')}" title="" alt="">
+				<span><img src="__RESOURCES__images/tuiguang_1.png"/></span>
+			    <span>我要推广</span>
+			</a>
+		</div>
+	</div>
+</div>

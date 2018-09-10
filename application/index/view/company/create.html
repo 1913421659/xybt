@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>创建企业</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error,span.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   fieldset{disp{/**/}lay:none;}
+	   .show{display:block;}
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--创建企业-->
+		<div class="clearfix">
+			<div class="wrap" id="page_create">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">创建企业</a> 
+					</p>
+				</div>
+				<div class="enter_inner">
+					<template>
+					<div class="creat_box">
+						<ul class="creat_ul">
+							<li class="creat_act">
+								<label>1</label>填写基本信息
+								<span class="creat_des"></span>
+								<div class="creat_bottom"></div>
+							</li>
+							<li v-bind:class="{creat_act:step>=2}">
+								<label>2</label>填写开票信息
+								<span class="creat_des" v-if="step>=2"></span>
+								<div class="creat_bottom" v-if="step>=2"></div>
+							</li>
+							<li v-bind:class="{creat_act:step>=3}">
+								<label>3</label>对私结算账户
+								<span class="creat_des" v-if="step>=3"></span>
+								<div class="creat_bottom" v-if="step>=3"></div>
+							</li>
+							<li v-bind:class="{creat_act:step>=4}">
+								<small class="cteat_img"><img src="__RESOURCES__images/chenggong.png" v-if="step==4"><img src="__RESOURCES__images/create_1.png" v-else></small>成功创建企业
+								<span class="creat_des" v-if="step>=4"></span>
+								<div class="creat_bottom" v-if="step>=4"></div>
+							</li>
+						</ul>
+					</div>
+					<!--列表-->
+					<div class="creat_list">
+						<p class="settlement_tishi" v-if="step==3">至少绑定一种结算方式，慎重填写，修改绑定请联系客服</p>
+						<form class="cmxform" id="create_form" method="" action="" onSubmit="return false;" enctype="multipart/form-data">	
+							<fieldset id="form_step_1" v-bind:class="{show:step==1}">
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>企业名称：</label>
+									<input  type="text" class="form-control input_p" id="company_name" name="company_name" placeholder="" onKeyUp="$('#company_name2').val($(this).val());">
+								</p>							
+								<!--上传营业照-->
+							
+								 <!--上传营业照-->
+								<div class="form-group">
+									<label  class="col-sm-2 control-label left1"><span>* </span>营业执照：</label>
+									<div class="col-sm-5">
+										<!--<form enctype="multipart/form-data">-->
+										<input name="license_path" type="file" multiple class="file creat_border" id="license_path" data-min-file-count="1">
+										<!--</form>-->
+									</div>
+								</div>
+								<!--上传营业照-->
+								<!--上传营业照-->
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span> 信用代码：</label>
+									<input  type="text" class="form-control input_p" id="credit_code" placeholder="" name="credit_code">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>*</span>办公地址：</label>
+									<input  type="text" class="form-control input_p" id="business_address" placeholder="" name="business_address">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>企业法人：</label>
+									<input  type="text" class="form-control input_p" id="legal_person" placeholder="" name="legal_person">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>*</span>创建联系人：</label>
+									<input  type="text" class="form-control input_p" id="contact_name" placeholder="" name="contact_name">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>联系电话：</label>
+									<input  type="text" class="form-control input_p" id="contact_phone" placeholder="" name="contact_phone">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span> * </span>邮箱：</label>
+									<input  type="text" class="form-control input_p" id="contact_email" placeholder="" name="contact_email">
+								</p>
+								<p class="form_ee form_sub form_bb">
+									<input type="button" class="dengru" v-on:click="nextStep" value="下一步" />
+								</p>
+							</fieldset>
+						</form>
+						<form id="form_step_2" onSubmit="return false;">
+							<fieldset v-bind:class="{show:step==2}">
+								<p class="form_ee">
+									<label for="company_name2" class="col-sm-2 control-label left1" ><span>* </span>企业名称：</label>
+									<input  type="text" class="form-control input_p" id="company_name2" name="company_name2" placeholder="" onKeyUp="$('#company_name').val($(this).val());">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>银行账号：</label>
+									<input  type="text" class="form-control input_p" id="company_account" placeholder="" name="company_account">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>开户行：</label>
+									<input  type="text" class="form-control input_p" id="company_bank_name" placeholder="" name="company_bank_name">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>单位地址：</label>
+									<input  type="text" class="form-control input_p" id="company_address" placeholder="" name="company_address">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>*</span>税务登记号：</label>
+									<input  type="text" class="form-control input_p" id="tax_number" placeholder="" name="tax_number">
+								</p>
+								<p class="form_ee">
+									<label for="company_name" class="col-sm-2 control-label left1" ><span>* </span>联系电话：</label>
+									<input  type="text" class="form-control input_p" id="ticket_phone" placeholder="" name="ticket_phone">
+								</p>
+								<p class="form_ee form_sub form_bb">
+									<input type="button" value="下一步" class="dengru"  v-on:click="nextStep" />
+									<a class="billing_back" href="#" v-on:click="prevStep">返回上一步</a>
+								</p>
+							</fieldset>
+						</form>
+							<fieldset v-bind:class="{show:step==3}">
+							 	<div class="setlement_div">
+								
+									<form id="form_step_3_1">
+									<input type="hidden" name="personal_alipay_bind" id="personal_alipay_bind" value="0" />
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定支付宝</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >支付宝：</label>
+										<input  type="text" class="form-control input_cart"  name="personal_alipay_name" placeholder="" id="personal_alipay_name" v-on:keyup="checkAliName">
+								   </p>
+								   </form>
+							 		
+							 	</div>
+							 	<div class="setlement_div">
+								<form id="form_step_3_2" onSubmit="return false;">
+									<input type="hidden" name="personal_wechat_bind" id="personal_wechat_bind" value="0" />
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定微信</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >微信：</label>
+										<input  type="text" class="form-control input_cart" id="personal_wechat_name" name="personal_wechat_name" placeholder="" v-on:keyup="checkWx">
+								   </p>	
+								   </form>	
+							 	</div>
+							 	<div class="setlement_div">
+								<form id="form_step_3_3" onSubmit="return false;">
+									<input type="hidden" name="personal_bank_bind" id="personal_bank_bind" value="0" />
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定银行卡</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >持卡人姓名：</label>
+										<input  type="text" class="form-control input_cart " name="personal_bank_user" placeholder="" id="personal_bank_user" v-on:keyup="checkBank"><span class="error" v-if="err_bank&1">请输入持卡人姓名</span>
+								   </p>
+								   <p class="settlement_p input_c">
+										<label for="nickname" class="col-sm-3 control-label left1" >开户银行：</label>
+										<input  type="text" class="form-control input_cart "  name="personal_bank_name" placeholder="" id="personal_bank_name" v-on:keyup="checkBank"><span class="error" v-if="err_bank&2">请输入开户银行</span>
+								   </p>	
+								   <p class="settlement_p input_c">
+										<label for="nickname" class="col-sm-3 control-label left1" >卡号：</label>
+										<input  type="number" class="form-control input_cart "  name="personal_bank_number" placeholder="" id="personal_bank_number" v-on:keyup="checkBank"><span class="error" v-if="err_bank&4">请输入卡号</span>
+								   </p>	
+							 		</form>
+							 	</div>
+							    <p class="form_ee form_sub form_bb">							
+							        <button class="dengru" type="button" id="next" v-on:click="submit">创建企业</button>
+							   		<a class="billing_back back_o" href="#">返回上一步</a>
+								</p>
+							 </fieldset>
+							 <fieldset style="text-align:center;" id="form_step_4" v-bind:class="{show:step==4}">
+								<p class="enter_dess">您已成功创建企业</p>
+								<p>
+									<a class="btn btn-default enter_link" href="#" role="button">我的企业</a>
+								</p>
+							 </fieldset>
+					</div>
+					</template>
+				</div>
+			</div>
+			
+		</div>
+		<!--创建企业结束-->
+		<!--footer-->
+		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+		Company.initCreate();
+		$('#main_nav_company').addClass('menu_home ');
+		</script>
+	</body>
+	
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>分享大厅</title>
+	</head>
+	{include file="public/css" /}
+	<body style="background-color: #f8f8f8;">
+		<!--顶部说明-->
+	   <!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<br clear="all"/>
+			
+		<div class="que_con que-a clearfix" id="share_hall">
+			<div class="wrap">
+				
+				<div class="share_box">
+					<div class="row">
+						<div class="col-md-9 share_right clearfix">
+                            {foreach name="shareList.data" item="value"}
+							<div class="share_box_1">			
+								<div class="share_top">
+									<div class="media">
+									  <div class="media-left media-middle">
+									    <a class="share_r" href="#">
+									      <img class="media-object" src="{$value.user_picture?get_image_path($value.user_picture):'__RESOURCES__images/touxiang.png' }" alt="...">
+									    </a>
+									  </div>
+									  <div class="media-body  share_k">
+									    <h5 class="media-heading">{$value.nick_name}</h5>
+									   	<p><span>{$value.add_time|formatDateDiffNow}</span><span>来自免费福利</span></p>
+									  </div>
+									</div>
+								</div>
+							    <p class="share_h">{$value.title}<a href="{$value.share_url}">分享</a></p>
+								<div class="share_p">
+									<div class="row">
+										<div class="col-md-6 clearfix">
+											<a class="img_left" href="{:url('marketing/info',['key'=>$value.task_id])}">
+												<img src="{$value.logo_img|get_image_path}" />
+											</a>
+										</div>
+										<div class="col-md-6 clearfix">
+											<div class="share_pl">
+												<div class="praise">
+                                                    {if condition="$value.is_point eq 1" }
+													<span class="praise_1" data="{$value.id}" style="color: rgb(255, 92, 0);"><label class="praise-img zan_lable2"></label>点赞</span>
+													（<span class="praise-txt">{$value.favour_total}</span>）
+													<span class="add-num"><em>+1</em></span>
+                                                    {else /}
+                                                    <span class="praise_1" data="{$value.id}"><label class="praise-img zan_lable1"></label>点赞</span>
+                                                    （<span class="praise-txt">{$value.favour_total}</span>）
+                                                    <span class="add-num"><em>+1</em></span>
+                                                    {/if}
+												</div>
+												<span class="pinglun"><img src="__RESOURCES__images/pinglun.png"/>评论（{$value.comment_number}）</span>
+											</div>
+										</div>
+										<div class="col-md-12 ping_box clearfix">
+											<form role="form"> 
+											  <div class="form-group">
+												   <textarea class="form-control textarea_box" data_share_id="{$value.id}" rows="2" placeholder="写下你的想说的话..." data_respond="" ></textarea>
+											  </div> 
+											  <div class="col-md-12">
+											  		<p class="queding">
+											  			<button class="btn btn-default btn1" type="button">取消</button>
+											  			<button class="btn btn-default btn2" type="button">评论</button>
+											  		</p>
+											  </div>
+											</form>
+                                            {foreach name="$value.comment_list" item="cc"}
+
+                                            {if condition="$cc.respond_user_id gt 0"}
+											<div class="huifu_box">
+												<div class="row pinglun_a">
+													<div class="col-md-12 clearfix">
+														<div class="share_top">
+															<div class="media">
+															  <div class="media-left media-middle">
+															    <a class="share_rr" href="#">
+															      <img class="media-object" data="{$cc.user_id}" dataName="{$cc.username.nick_name}" src="{$cc.username.user_picture?get_image_path($cc.username.user_picture):'__RESOURCES__images/touxiang.png' }" alt="...">
+															    </a>
+															  </div>
+															  <div class="media-body  share_k">
+															   <div class="col-md-9">
+															     	<p class="share_h ">{$cc.username.nick_name}<span class="huifu_span">回复</span>{$cc.respond_user_name.nick_name}<span class="huifu_a">：{$cc.content}</span></p>
+															   		<div class="col-md-12 clearfix mm">{$cc.add_time|formatDateDiffNow}</div>
+															   </div>
+													           <div class="col-md-3">{if condition="$cc.mine == 0"}<button class="huifu_2" type="button">回复</button>{/if}</div>
+															  </div>
+															</div>
+														</div>
+													</div>
+												</div>
+											 </div>
+                                              {else /}
+                                            <div class="huifu_box">
+                                                <div class="row pinglun_a">
+                                                    <div class="col-md-9 clearfix">
+                                                        <div class="share_top">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                    <a class="share_rr" href="#">
+                                                                        <img class="media-object" data="{$cc.user_id}" dataName="{$cc.username.nick_name}" src="{$cc.username.user_picture?get_image_path($cc.username.user_picture):'__RESOURCES__images/touxiang.png' }" alt="...">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body  share_k">
+                                                                    <h5 class="media-heading">{$cc.username.nick_name}</h5>
+                                                                    <div class="col-md-12 clearfix mm">
+                                                                        {$cc.add_time|formatDateDiffNow }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9"><p class="share_h "><span class="huifu_a">{$cc.content}</span></p></div>
+                                                    <div class="col-md-3">{if condition="$cc.mine == 0"}<button class="huifu_2"  type="button">回复</button>{/if}</div>
+                                                </div>
+                                            </div>
+                                             {/if}
+                                            {/foreach}
+										</div>
+
+									</div>
+								</div>
+						    </div>
+                            <div class="des"></div>
+                            {/foreach}
+
+						</div>
+
+						<div class="col-md-3  share_left">
+							<div class="share_main">
+								<div class="per_title8 ">
+									<h5>福利推荐</h5>
+								</div>
+								<div class="per_h" v-for="item in hot_1">
+									<div class="media">
+									  <div class="media-left">
+									    <a class="share_img" :href="'{:url('marketing/info')}&key='+item.id">
+									      <img class="media-object" :src="item.banner_img" alt="...">
+									    </a>
+									  </div>
+									  <div class="media-body share_a">
+									    <h4 class="media-heading share_limit">{{item.name}}</h4>
+									 	<p>分红：{{item.cutting_value}}蚁币</p>
+									 	<p><a  class="market_box" :href="'{:url('marketing/info')}&key='+item.id" title="">马上抢</a></p>
+									  </div>
+									</div>
+								</div>	
+								
+							</div>
+							<div class="des"></div>
+							<div class="share_main">
+								<div class="per_title8 ">
+									<h5>广告推荐</h5>
+								</div>
+								<div class="per_h" v-for="item in hot_2">
+									<div class="media">
+									  <div class="media-left">
+									    <a class="ad_img1" :href="'{:url('marketing/info')}&key='+item.id">
+									      <img class="media-object" :src="item.logo_img" alt="...">
+									    </a>
+									  </div>
+									  <div class="media-body share_a">
+									    <h4 class="media-heading share_limit">{{item.name}}</h4>
+                                          <p>分红：{{item.cutting_value}}蚁币</p>
+									 	<p><a  class="market_box" :href="'{:url('marketing/info')}&key='+item.id" title="">马上抢</a></p>
+									  </div>
+									</div>
+								</div>	
+								
+							</div>
+							
+						</div>
+						
+						<!--分页-->
+						<div class="fenye1 col-md-9">
+							<div class="fenye">
+								
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				  </div>
+				</div>
+				
+			</div>
+		
+		
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	
+	    {include file="public/js" /}
+	    {include file="public/js_1" /}
+		<script>
+			var share_hall=new Vue({
+				el:"#share_hall",
+				//侧边数据
+				data:{
+					items:[
+						{
+						share_img1:"__RESOURCES__images/6.png",
+						share_title:"新人注册送1000书币",
+						share_des:"分红：600蚁币",
+						share_btn:"马上抢",
+					 },
+					 {
+						share_img1:"__RESOURCES__images/6.png",
+						share_title:"新人注册送1000书币",
+						share_des:"分红：600蚁币",
+						share_btn:"马上抢",
+					 },
+					 {
+						share_img1:"__RESOURCES__images/6.png",
+						share_title:"新人注册送1000书币",
+						share_des:"分红：600蚁币",
+						share_btn:"马上抢",
+					 }
+			       ],
+                    hot_1:<?=$hot_1?>,
+                    hot_2:<?=$hot_2?>
+				}
+				
+			})
+		</script>
+		
+		<script type="text/javascript">
+//		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}
+			
+			//init
+			$(function(){
+				var totalPage = {$shareList.last_page};
+				var totalRecords = {$shareList.total};
+				var pageNo = getParameter('pno');
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : pageNo,
+					//总页码
+					total : totalPage,
+					//总数据条数
+					totalRecords : totalRecords,
+					//链接前部
+					hrefFormer : 'index.php?s=/index/index/sharethehall',
+					//链接尾部
+					hrefLatter : '.html',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "&pno="+n;
+					}
+					
+				});
+			});
+
+            //评论点击取消关闭评论框
+            $('.btn1').click(function(){
+//                $(this).closest('.ping_box').hide();
+                $(this).closest('.ping_box').find('textarea').val('').attr('placeholder','写下你的想说的话...').attr('data_respond','');
+            });
+
+            var sendPing = false;
+            //发表评论
+            $('.btn2').click(function(){
+                if(sendPing){
+                    return ;
+                }
+                var msg = $(this).closest('.ping_box').find('.textarea_box').val();
+                var resId = $(this).closest('.ping_box').find('.textarea_box').attr('data_respond');
+                var shareId = $(this).closest('.ping_box').find('.textarea_box').attr('data_share_id');
+                console.log('shareId='+ shareId+';msg='+msg+';resId='+resId);
+                if(msg==null || msg=='' || typeof msg=='undefined'){
+                    layer.msg('请填写评论内容...');
+                    return ;
+                }
+
+                if(shareId==null || typeof shareId=='undefined' ){
+                    return;
+                }
+
+                if(!resId){
+                    resId = 0;
+                }
+                var data = {
+                    'content':msg,
+                    'shareId':shareId,
+                    'resUserId':resId
+                };
+//                console.log(data);
+                var th = $(this);
+                sendPing = true;
+                $.ajax({
+                    type:'post',
+                    url:'index.php?s=/index/index/shareComment',
+                    data:data,
+                    async:true,
+                    success:function(response){
+                        if(response.code==1){
+                            $(th).closest('.ping_box').find('textarea').val('').attr('placeholder','写下你的想说的话...').attr('data_respond','');
+                            insertMessage($(th).closest('.ping_box'),response.data.content,response.data.user,response.data.respond,response.data.add_time);
+                            sendPing = false;
+                        }else if(response.code==0){
+                            layer.msg(response.msg);
+                            window.location.reload();
+                        }else if(response.code==-1){
+                            layer.msg(response.msg);
+                            window.location.href="index.php?s=/index/login/index/from/index-sharethehall.html";
+                        }
+                    },
+                    error:function(msg){
+                        console.log(msg);
+                    }
+                });
+
+
+            });
+
+            //回复某个用户
+            $('.huifu_2').click(function(){
+                var resId = $(this).closest('.huifu_box').find('img').attr('data');
+                var resName = $(this).closest('.huifu_box').find('img').attr('dataName');
+                $(this).closest('.ping_box').find('textarea').attr('data_respond',resId).attr('placeholder','回复：'+resName).focus();
+            });
+
+            //插入信息
+            function insertMessage(th,msg,user,response,addtime){
+                var str = '';
+                if(response==null || response.length==0){
+                    str +='<div class="huifu_box">'+
+                    '<div class="row pinglun_a">'+
+                    '<div class="col-md-9 clearfix">'+
+                    '<div class="share_top">'+
+                    '<div class="media">'+
+                    '<div class="media-left media-middle">'+
+                    '<a class="share_rr" href="#">'+
+                    '<img class="media-object" data="'+user['user_id']+'" src="'+user['user_picture']+'" alt="...">'+
+                    '</a></div><div class="media-body  share_k"><h5 class="media-heading">'+user['nick_name']+'</h5>'+
+                    '<div class="col-md-12 clearfix mm">'+addtime+'</div></div></div></div></div>'+
+                    '<div class="col-md-9"><p class="share_h "><span class="huifu_a">'+msg+'</span></p></div>'+
+                    '<div class="col-md-3"></div></div></div>';
+                }else{
+                    str +='<div class="huifu_box">'+
+                    '<div class="row pinglun_a">'+
+                    '<div class="col-md-12 clearfix">'+
+                    '<div class="share_top">'+
+                    '<div class="media">'+
+                    '<div class="media-left media-middle">'+
+                    '<a class="share_rr" href="#">'+
+                    '<img class="media-object" data="'+user['user_id']+'" src="'+user['user_picture']+'" alt="...">'+
+                    '</a></div><div class="media-body  share_k"><div class="col-md-9">'+
+                    '<p class="share_h ">'+user['nick_name']+'<span class="huifu_span">回复</span>'+response['respond_user_name']+'<span class="huifu_a">：'+msg+'</span></p>'+
+                    '<div class="col-md-12 clearfix mm">'+addtime+'</div></div>'+
+                    '<div class="col-md-3"></div></div></div></div></div></div></div>';
+                }
+
+                $(th).append(str);
+            }
+			
+			</script>
+			
+
+	</body>
+	
+</html>

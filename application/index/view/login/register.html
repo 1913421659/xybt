@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+	</head>
+	{include file="public/css" /}
+		{include file="public/js" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   #Verification-error{
+	   	float: right;
+	   }
+	   #agree-error{
+	   	float: right;
+	   }
+	</style>
+	<body>
+		<div class="container-fluid header_second1">
+		 	<div class="wrap">
+		 		<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/logo.png">
+				</a>
+				<span class="h_shuoming  xiu">账号注册</span>
+				<ul class="heaader_right heaader_right1">
+					<li><a href="{:url('index/index')}">首页</a></li>
+					<li><span></span><a href="{:url('index/aboutus')}">关于我们</a></li>
+					
+				</ul>
+		 	</div>
+		</div>
+		<div class="container-fluid min_p">
+			<div class="wrap">
+				<ul class="success_box">
+					<li>已有账号？ <a href="{:url('login/index')}" title="">登录</a> </li>
+					
+				</ul>
+				<div class="success_a">
+					<div class="sign">
+						
+					  <form class="cmxform" id="form_register" method="post" action="{:url('login/register')}">
+							<fieldset>
+								<p class="form_ee">
+									<label for="mobile" class="col-sm-2 control-label left1" ><span>* </span>手机号</label>
+									 <input type="text" name="mobile" id="mobile" class="form-control input_p" :class="{error:mobile_err>0}" v-on:keyup="checkPhone" v-on:blur="checkPhone"  placeholder="请输入手机号"  data-rule-mobile="true" data-msg-required="请输入手机号" data-msg-mobile="请输入正确格式" />
+									<template>
+										<label v-if="mobile_err==1" for="number11" class="error">请输入手机号</label>
+										<label v-if="mobile_err==2" for="number11" class="error">请输入正确的手机号</label>
+										<label v-if="mobile_err==3" for="number11" class="error">用户不存在</label>
+									</template>
+								</p>
+								
+								<p class="form_ee">
+									<label for="password" class="col-sm-2 control-label left1"><span>* </span>密码</label>
+									<input :class="{error:password_err>0}" v-on:keyup="checkPassword" id="password" name="password" type="password" class="form-control input_p" placeholder="请输入新密码">
+                                    <template>
+										<label v-if="password_err==1" for="number11" class="error">请输入密码</label>
+										<label v-if="password_err==2" for="number11" class="error">密码长度不应少到5个字符</label>
+										<label v-if="password_err==3" for="number11" class="error">密码错误！</label>
+									</template>
+								</p>
+								<p class="form_ee">
+									<label for="confirm_password" class="col-sm-2 control-label left1"><span>* </span>重复密码</label>
+									<input :class="{error:password2_err>0}" v-on:keyup="checkPassword2" id="confirm_password" name="confirm_password" type="password" class="form-control input_p" placeholder="请输入重复密码">
+                                    <template>
+										<label v-if="password2_err==1" for="number11" class="error">请输入密码</label>
+										<label v-if="password2_err==2" for="number11" class="error">密码长度不应少到5个字符</label>
+										<label v-if="password2_err==3" for="number11" class="error">两次密码不一致！</label>
+									</template>
+								</p>
+								<p class="form_ee form_uu" style="width: 490px;">
+									<label for="Verification"  class="col-sm-2 control-label left1" style="min-width: 96.66px;"><span>* </span>验证码</label>
+									<input :class="{error:code_err>0}" v-on:keyup="checkCode" type="number" name="code" class="form-control input_p number1" id="v_code" placeholder="请输入获取验证码" >
+                                    <template>
+							        	<input class="btn btn-default yanzzheng" v-if="wait==0" type="button" value="获取验证码" placeholder="获取验证码" v-on:click="sendSms" />
+							        	<button type="button" class="btn btn-default yanzzheng" v-if="wait>0" value="" placeholder="获取验证码" >重新发送({{wait}})</button>
+										<label v-if="code_err==1" for="number11" class="error">获取验证码必填！</label>
+									</template>
+								</p>
+								<p class="form_ee" style="width: 469px;">	
+									<label for="Verification"  class="col-sm-2 control-label left1"  style="min-width: 96.66px;">&nbsp;&nbsp;</label>
+							       <input type="checkbox" id="agree" name="agree" checked="checked">    
+							       <label  class="che1" for="agree">我已阅读并同意<a class="cart1 " href="{:url('login/agreement')}" target="_blank">《小蚁兵团服务协议》</a></label>
+								</p>
+								<p class="form_ee form_sub">
+							        <button type="button" v-on:click="submit" class="dengru">确认</button>
+								</p>
+							</fieldset>
+						</form>		
+					
+					
+					</div>
+					
+				</div>
+			</div>
+		</div>
+				
+		<!--协议-->
+		<div class="footer_k">
+			<p>©2017广州点升信息技术啊有限公司 Copyright © 2008-2015 vip.com，All Rights Reserved  {if condition="isset($_CFG['icp_number'])"}<a href="http://www.miibeian.gov.cn/" target="_blank">{$_CFG['icp_number']}</a>{/if}</p>
+		</div>
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript" src="__RESOURCES__js/jquery.tablescroll.js" ></script>
+		<script type="text/javascript">
+		
+User.Register = new function(){
+	$this = this;
+	$this.View = {
+		mobile_err :0,
+		password_err : 0,
+		password2_err : 0,
+		code_err : 0,
+		wait : 0,
+	};
+	$this.View = new Vue({
+		el:"#form_register",
+		data:$this.View,
+		methods:{
+			checkPhone : function(){
+				var _mobile = $('#mobile').val();
+				if(_mobile == ''){
+					this.mobile_err = 1;
+				}else if(!(/^1[34578]\d{9}$/).test(_mobile)){
+					this.mobile_err = 2;
+				}else{
+					this.mobile_err = 0;
+				}
+			},
+			checkPassword : function(){
+				var _password = $('#password').val();
+				if(_password == ''){
+					this.password_err = 1;
+				}else if(/^.{1,4}$/.test(_password)){
+					this.password_err = 2;
+				}else{
+					this.password_err = 0;
+				}
+			},
+			checkPassword2 : function(){
+				var _password = $('#confirm_password').val();
+				if(_password == ''){
+					this.password2_err = 1;
+				}else if(/^.{1,4}$/.test(_password)){
+					this.password2_err = 2;
+				}else if(_password != $('#password').val()){
+					this.password2_err = 3;
+				}else{
+					this.password2_err = 0;
+				}
+			},
+			checkCode : function(){
+				var _v = $('#v_code').val();
+				if(_v == ''){
+					this.code_err = 1;
+				}else{
+					this.code_err = 0;
+				}
+				
+			},
+			sendSms : function(){
+				this.checkPhone();
+				this.checkPassword();
+				this.checkPassword2();
+				if(this.mobile_err ==0 && this.password_err==0 && this.password2_err==0){
+					var _url = "{:url('login/ajaxSendRegSms')}";
+					var _data = {
+						mobile : $('#mobile').val(),
+					};
+					$.post(_url,_data,function(rs){
+						if(rs.code == 1){
+							$this.View.wait = 60;
+							return true;
+							//window.wxc.xcConfirm('验证码已发送，请在手机上查收', 'success');
+						}else{
+							layer.alert(rs.msg,{icon:0});
+						}
+						
+					},'json');
+				}
+			},
+			submit : function(){
+				this.checkPhone();
+				this.checkPassword();
+				this.checkPassword2();
+				this.checkCode();
+				if(this.mobile_err ==0 && this.password_err==0 && this.password2_err==0 && this.code_err==0){
+					var _url = "{:url('login/ajaxRegister')}";
+					var _data = {
+						mobile : $('#mobile').val(),
+						password : $('#password').val(),
+						code : $('#v_code').val()
+					};
+					$.post(_url,_data,function(rs){
+						if(rs.status == 1){
+							$this.View.wait = 60;
+							location.href="/";
+							return true;
+						}else{
+							layer.alert(rs.msg,{icon:0});
+						}
+						
+					},'json');
+				}
+			},
+		}
+	});
+	$this.timmer = window.setInterval(function(){
+		var _v = $this.View.wait - 1;
+		if(_v >=0){
+			$this.View.wait = _v;
+		}
+	},1000);
+};
+/** /
+		User.Register.init();
+		$('#Verification').keyup(function(){
+			if($(this).val()==""){
+				$(this).parent().find('.yz').css({
+					"display":"inline-block",
+				});
+			
+			}else{
+				$(this).parent().find('.yz').css({
+					"display":"none",
+				});
+				$('#Verification').css({"border":"1px dotted #ccc"});
+			}
+		
+		});/**/
+	</script>
+	</body>
+	
+</html>

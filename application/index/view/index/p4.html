@@ -1,0 +1,162 @@
+<!--直播资源-->
+<div class="louti" id="living_list">
+	<div class="section_2  section_3 " >
+		<div class="csc_2">
+			<img src="__RESOURCES__images/tuiguang_10.png" />
+			<h2>直播资源</h2>
+			<ul class="fen_ul" id="wangluo">
+				<li v-for = "item,index  in live_sub"><a href="#">{{item.name}}</a></li>
+			</ul>
+			<a class="more_box_1" href="?s=/index/media/index/type/7" title="">更多<span class="more_i"></span></a>
+		</div>
+		<div class="con_fen6">
+			<div class="sec_2_1">
+				<div class="live_box">
+					<div class="live_left">
+						
+						<div class="live_banner">
+							<?php $ad = getOneAdByPositionName('PC端首页直播资源');?>
+								{if condition="$ad"}
+							<a href="{$ad['ad_link']}" target="_blank">
+								<img src="{$ad['ad_code']|get_image_path}" width="963" height="82"/>
+							</a>{/if}
+						</div>
+						<div v-if="loading" class="recording">
+							加载中... ... 
+						</div>
+						<ul v-else class="live_list clearfix">
+							<li v-for="item in list">
+								<div class="live_list_li">
+									<a :href="'{:url('media/detail')}/id/'+item.id" class="live_img">
+										<img :src="item.logo"  class="img-circle"/>
+									</a>
+									<p class="live_title"><a :href="'{:url('media/detail')}/id/'+item.id">{{item.title_sub}}</a></p>
+									<div class="row live_b" >
+										<div class="col-md-4 wei_ti">
+											<p class="active_nav">
+												<template v-if="item.title == ''">-</template>
+												<template v-else>{{item.title}}</template>
+											</p>
+											<p class="wei_a">平台</p>
+										</div>
+										<div class="col-md-4 wei_ti">
+											<p class="active_nav">{{item.price_1}}元</p>
+											<p class="wei_a">价格</p>
+										</div>
+										<div class="col-md-4 wei_ti">
+											<p class="active_nav">{{item.power}}</p>
+											<p class="wei_a">粉丝</p>
+										</div>
+									</div>
+									<div class="new_ad_title live_top clearfix">
+										<a class="qidao_pai_1" :href="'{:url('media/detail')}/id/'+item.id">我要派单</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="live_right">
+						<div class="live_right_a">
+							<div class="data_title">
+							    <span></span><label>直播红人排行榜</label> 
+						    </div>
+						    <div class="live_b_b">	
+						    	<div v-if="loading" class="recording">
+									加载中... ... 
+								</div>
+						    	<ul v-else>
+						    		<li v-for = "(sort,index) in list_sort">
+						    			<a  :href="'{:url('media/detail')}/id/'+sort.id">
+						    			<div  class="live_r_b">
+									    	<div class="live_r_l">
+									    		<span class="data_badge_1">{{index + 1}}</span>
+									    	</div>
+									    	<div class="live_r_r">
+									    		<div class="media">
+												    <a class="media-left live_img_r" :href="'{:url('media/detail')}/id/'+sort.id" >
+												        <img class="media-object img-circle" :src="sort.logo" alt="" >								            
+												    </a>
+												    <div class="media-body">
+												        <h4 class="media-heading live_r_t">
+												        	<a :href="'{:url('media/detail')}/id/'+sort.id">
+												        	<template v-if="sort.title == ''">-</template>
+															<template v-else>{{sort.title_sub}}</template>
+												        	</a>
+												        </h4>
+												    	<p class="live_r_a">接单数：{{sort.history}}</p>
+												    </div>
+												</div>
+									    	</div>
+									    </div>
+									    </a>
+									    <!--<div class="live_hover">
+									    	<a class="qidao_pai_2" :href="'{:url('media/detail')}/id/'+sort.id">我要派单</a>
+									    </div>-->
+						    		</li>
+		
+							    </ul>
+						  </div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>	
+	</div>
+	<script>
+	var living_list_url = '?s=/index/data/channelMediaList';
+	var living_list = new Vue({
+		el:"#living_list",
+		data:{
+			list:[],
+			list_sort:[],
+			loading:false,
+			live_sub:[],
+		},
+		methods:{
+			living_list:function(){
+				this.loading = true;
+				$.post(living_list_url,{limit:3,type_id:7},function(rs){
+					living_list.loading = false;
+					if(rs.status == 1){
+						living_list.list = rs.data.list;
+					}else{
+						layer.msg(rs.msg);
+					}
+					
+				},"json");
+			},
+			living_sort:function(){
+				this.loading = true;
+				$.post(living_list_url,{limit:6,type_id:7},function(rs){
+					living_list.loading = false;
+						if(rs.status == 1){
+							living_list.list_sort = rs.data.list;
+						}else{
+							layer.msg(rs.msg);
+						}
+				},"json");
+			},
+			liveSub:function(){
+				$.post('?s=index/data/channelMediaCategoryList',{limit:6,type_id:7},function(rs){
+						if(rs.status == 1){
+							living_list.live_sub = rs.data;
+						}else{
+							layer.msg(rs.msg);
+						}
+				},"json");
+			},
+			init:function(){
+				this.living_list();
+				this.living_sort();
+				this.liveSub();
+			}
+		},
+	})
+	living_list.init();
+</script>
+
+</div>
+<!--网络营销结束-->

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>创建企业</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--创建企业-->
+		<div class="clearfix">
+			<div class="wrap">
+				<div class="enter_inner">
+					 <div class="creat_box">
+					 	<ul class="creat_ul">
+					 		<li class="creat_act">
+					 			<label>1</label>填写基本信息
+					 			<span class="creat_des"></span>
+					 			<div class="creat_bottom"></div>
+					 		</li>
+					 		<li>
+					 			<label>2</label>填写开票信息
+					 		</li>
+					 		<li>
+					 			<label>3</label>对私结算账户
+					 		</li>
+					 		<li>
+					 			<small class="cteat_img"><img src="__RESOURCES__images/create_1.png"></small>成功创建企业
+					 		</li>
+					 	</ul>
+					 </div>
+					 <!--列表-->
+					 <div class="creat_list">
+				 	    <form class="cmxform" id="create_form" method="" action="">
+				 	    	
+							<fieldset>
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>* </span>企业名称：</label>
+									<input  type="text" class="form-control input_p" id="nickname" name="nickname" placeholder="">
+								</p>							
+								<!--上传营业照-->
+							
+								 <!--上传营业照-->
+								   <div class="form-group">
+								    <label  class="col-sm-2 control-label left1"><span>* </span>营业执照：</label>
+								    <div class="col-sm-5">
+								    	 <!--<form enctype="multipart/form-data">-->
+							                <input id="file-0" class="file creat_border" type="file" multiple data-min-file-count="1">
+		
+							            <!--</form>-->
+											
+								    </div>
+								   </div>
+								   <!--上传营业照-->
+								
+								
+							  
+							    <!--上传营业照-->
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>* </span> 信用代码：</label>
+									<input  type="text" class="form-control input_p" id="CreditCode" placeholder="" name="CreditCode">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>*</span>办公地址：</label>
+									<input  type="text" class="form-control input_p" id="officeAddress" placeholder="" name="officeAddress">
+								</p>
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>* </span>企业法人：</label>
+									<input  type="text" class="form-control input_p" id="Corporate" placeholder="" name="Corporate">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>*</span>创建联系人：</label>
+									<input  type="text" class="form-control input_p" id="contact" placeholder="" name="contact">
+								</p>
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>* </span>联系电话：</label>
+									<input  type="text" class="form-control input_p" id="contactNumber" placeholder="" name="contactNumber">
+								</p>							
+								
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span> * </span>邮箱：</label>
+									<input  type="text" class="form-control input_p" id="email" placeholder="" name="email">
+								</p>
+								<p class="form_ee">
+									<label for="nickname" class="col-sm-2 control-label left1" ><span>* </span>企业角色：</label>
+									<input  type="text" class="form-control input_p" id="role" placeholder="" name="role">
+								</p>
+								
+					
+								 
+								<p class="form_ee form_sub form_bb">
+									
+							      <button class="dengru" id="next">下一步</button>
+							   
+								</p>
+							</fieldset>
+						</form>				
+										
+					 	
+					</div>
+					 
+					 
+				</div>
+			</div>
+			
+		</div>
+		<!--创建企业结束-->
+		
+		
+		
+		<!--footer-->
+		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+		{include file="public/js_1" /}
+	    <script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+		<script type="text/javascript">
+	       $("#file-0").fileinput({
+	        'allowedFileExtensions' : ['jpg', 'png','gif'],
+	       });
+        </script>  
+        <script>
+			$.validator.setDefaults({
+				submitHandler: function() {
+					alert("submitted!");
+				}
+			});
+		$("#create_form").validate({
+			rules: {
+				nickname: "required",
+				license:"required",
+				CreditCode:"required",
+				officeAddress: "required",
+				Corporate:"required",
+				contact:"required",
+				contactNumber: "required",
+				email:"required",
+				role:"required"
+				
+			},
+			messages: {
+				nickname: "企业名称必填",	
+				license:"营业执照必填",
+				CreditCode:"信用代码必填",
+				officeAddress: "办公地址必填",
+				Corporate:"企业法人必填",
+				contact:"创建联系人必填",
+				contactNumber: "联系电话必填",
+				email:{
+					required:"邮箱必填",
+                    email:"E-Mail格式不正确"
+				},				
+				role:"企业角色必填"
+			
+			}
+		});	
+	$('#main_nav_company').addClass('menu_home ');
+	</script>
+		
+			
+	</body>
+	
+</html>

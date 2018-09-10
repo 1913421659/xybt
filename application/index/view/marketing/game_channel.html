@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>游戏渠道</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		
+		{include file="public/header2" /}	
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix" id="vue_page">
+			<div class="wrap">
+				<div class="que_menu">
+					<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="#">媒体资源</a><img src="__RESOURCES__images/right_2.png"/><a href="#">应用渠道</a></p>
+				</div>
+				<div class="que_a">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							{include file="media/_left" /}							
+						</div>
+						
+						<div class="col-md-9 que_right_1 ">
+							<div class="app_title" >
+								<dl class="listi_index clearfix" >
+								    <dt>
+								                 地区：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub sub_left">
+									    	<a href="javascript:void(0)" class="a_sub_act">全部</a> 
+									   </div> 
+									   <div class="sub_right">
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" class="">上海</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" class="">北京</a> 
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>
+								<dl class="listi_index clearfix" >
+								    <dt>
+								                      接单数量：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub sub_left">
+									    	<a href="javascript:void(0)" class="a_sub_act">全部</a> 
+									   </div> 
+									   <div class="sub_right">
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" class=""> 200以下 </a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" class="">100以下</a> 
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>
+								<dl class="listi_index clearfix" >
+								    <dt>
+								                       接单金额：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub sub_left">
+									    	<a href="javascript:void(0)" class="a_sub_act">全部</a> 
+									   </div> 
+									   <div class="sub_right">
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" class=""> 1万以下 </a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" class="">2万以下</a> 
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>
+								<dl class="listi_index clearfix">
+								    <dt>
+								                     接单金额：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub">
+									    	<div class="aly_right">
+												 <div  class="block star_num starttwo clearfix" n="5">
+												      <div  class="star_score"></div>
+												 </div>
+											</div>
+									   </div> 
+									   
+								    </dd>
+								</dl>
+							</div>
+							
+							 <ul class="qidao_list">
+								<li v-for="list_lis in list_li">
+									<div class="qidao_li_list" style="margin-left: 0;">
+										<div class="media">
+										 	 <div class="media-left media-middle">
+											    <a href="#" class="qidao_img">
+											      <img class="media-object" :src="list_lis.aly_img" alt="...">
+											    </a>
+										  	</div>
+										 	 <div class="media-body">
+											    <h5 class="media-heading qidao_title">{{list_lis.aly_title}}</h5>
+											   	<p class="qidao_des"><span>认证企业</span></p>
+											   	<p class="active_nav">交易金额：{{list_lis.aly_moneny}}元</p>
+										  	</div>
+										</div>
+										<div class="qidao_bottom">
+											<div class="qidao_left">渠道星级 </div>
+											<div class="qidao_right">
+												 <div  class="block star_num starttwo clearfix" n="5">
+												      <div  class="star_score"></div>
+												 </div>
+											</div>
+											<div class="qidao_paidan">
+												<div class="qidao_left">接单数量 </div>
+												<div class="qidao_right qidao_bottom_1">
+													<span>{{list_lis.aly_num}}</span> <a class="qidao_pai" href="#">我要派单</a>
+												</div>
+											</div>
+										</div>											
+									</div>	
+								</li>
+
+							</ul>
+							
+			
+							<!--分页-->
+							<div class="fenye">
+								
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager" class="style_1"></div>
+								</div>
+							</div>
+							
+				
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<!--右侧导航栏-->
+		<script>
+	    $('.star_num').each(function(i,e){
+	  		scoreFun($(e),{
+	           fen_d:22,//每一个a的宽度
+	           ScoreGrade:$(e).attr('n')//a的个数5
+	         });
+	  	});
+	     //显示分数
+	      $(".show_number li p").each(function(index, element) {
+	        var num=$(this).attr("tip");
+	        var www=num*2*16;
+	        $(this).css("width",www);
+	
+	    });
+		</script>
+		<script type="text/javascript">
+		var _url_ajax_list = "{:url('media/ajaxList')}";
+		var _url_ajax_cat_list = "{:url('media/ajaxCatList')}";
+		var kkpager_bak = clone(kkpager);
+		var view = new Vue({
+			el:'#vue_page',
+			data:{
+				action:202,
+				task_list_1:[],
+				task_list_2:[],
+				list_li:[{
+					aly_img:"__RESOURCES__images/yinyuanfuLOGO.png",
+					aly_title:"新闻类/阅读类/安全类/理财",
+					aly_moneny:"20000",
+					aly_num:"100000",
+				}
+				],
+				list:[
+				],
+				page_info:{
+					this : 1,
+					this_total : 20,
+					end : 20,
+					total : 100,
+				},
+				filter : {
+					type_id:1,
+					cat_id:0,
+					page:1,
+					price_1:'0-0',
+					price_2:'0-0',
+					title:'',
+					title_sub:'',
+				},
+				
+			},
+			methods:{
+				//翻页
+				gotoPage:function(n){
+					this.filter.page=n;
+					this.flushList();
+				},
+				
+			},
+			updated:function(){
+				//有些参数是可选的，比如lang，若不传有默认值
+				$('#kkpager').html('');
+				kkpager = clone(kkpager_bak);
+				var config = {
+					pagerid :'kkpager',
+					pno : view.page_info.page,
+					//总页码
+					total : view.page_info.end,
+					//总数据条数
+					totalRecords : view.page_info.total,
+					getLink : function(n){
+						return "javascript:view.gotoPage('" + n + "');";
+					}
+				};
+				kkpager.generPageHtml(config, true);
+				kkpager.selectPage(view.page_info.page);
+			},
+		});	
+		//左侧链接
+		$.post("{:url('task/ajaxGetTop')}",{parent_id:4,limit:5},function(rs){
+			if(rs.status){
+				view.task_list_1 = rs.data;
+			}
+		},'json');
+		$.post("{:url('task/ajaxGetTop')}",{parent_id:5,limit:5},function(rs){
+			if(rs.status){
+				view.task_list_2 = rs.data;
+			}
+		},'json');
+		for(var i=0;i<26;i++){
+		view.list_li.push(view.list_li[0]);
+		};
+		$('#main_nav_marketing').addClass('menu_home');
+	   </script>
+		
+		
+	</body>
+	
+</html>

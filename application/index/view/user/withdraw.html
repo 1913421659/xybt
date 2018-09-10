@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+	</head>
+	{include file="public/css" /}
+		{include file="public/js" /}
+	<style type="text/css">
+	.with_r.disabled{
+	}
+	.with_r.disabled span.with_span{border:none;}
+	input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   #money-error{
+	   	   float: right;
+           margin-top: 5px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				<div class="que_menu clearfix">
+					<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('user/index')}">个人中心</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('user/withdraw')}">我的钱包</a> <img src="__RESOURCES__images/right_2.png"/>提现</p>
+				</div>
+				<div class="re_box " style="padding-top: 49px;">
+					<div class="re_a with_box">
+						<div class="per_nei">
+							<div class="row per_k">
+							  <div class="col-md-8 title_aaa with_a">我的零钱余额：<span>{$userSession.user_money}</span> <small>元</small></div>
+							  <div class="col-md-4 title_b"><a class="color_act" href="#" title="">提现记录</a></div>
+							</div>
+						</div>
+						<form method="post" id="form_withdraw" action="{:url('user/withdraw')}" class="with_box">
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		<div class="re_left">选择提现方式：</div>
+							 	</div>
+							 	<!--钱包-->
+							  	<div class="col-md-8">
+							  		<div class="">
+							  			<div class="with_r active_cc" data-value="钱包">
+							  				 <span class="with_span active_c"></span>钱包
+							  			</div>	  			
+							  		</div>
+							  	</div>
+							  
+							</div>
+							<!--<div class="row xian_a">-->
+							 	<!--<div class="col-md-3">-->
+							 		<!---->
+							 	<!--</div>-->
+							 	<!--&lt;!&ndash;微信&ndash;&gt;-->
+							  	<!--<div class="col-md-8">-->
+							  		<!--<div class="">-->
+							  			<!--<div class="with_r {if condition="$userSession.wechat_bind != 1"}disabled{/if}" data-value="微信">-->
+							  				 <!--<span class="with_span"></span>微信<label id="with_b">({if condition="$userSession.wechat_bind == 1"}{$userSession.wechat_name}{else/}未绑定{/if})</label>				  				-->
+							  			<!--</div>{if condition="$userSession.wechat_bind != 1"}-->
+							  			<!--<a class="with_go" href="{:url('user/bindwx')}">去绑定</a>{/if}-->
+							  		<!--</div>-->
+							  	<!--</div>-->
+							<!--</div>-->
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		
+							 	</div>
+							 	<!--支付宝-->
+							  	<div class="col-md-8">
+							  		<div class="">
+							  			<div class="with_r {if condition="$userSession.alipay_bind != 1"}disabled{/if}" data-value="支付宝">
+							  				 <span class="with_span"></span>支付宝<label id="with_b">({if condition="$userSession.alipay_bind == 1"}{$userSession.alipay_name}{else/}未绑定{/if})</label>				  				
+							  			</div>{if condition="$userSession.alipay_bind != 1"}
+							  			<a class="with_go" href="{:url('user/bindali')}">去绑定</a>{/if}
+							  		</div>
+							  	</div>
+							</div>
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		
+							 	</div>
+							 	<!--银行卡-->
+							  	<div class="col-md-8">
+							  		<div class="">
+							  			<div class="with_r {if condition="$userSession.bank_bind != 1"}disabled{/if}" data-value="银行卡">
+							  				 <span class="with_span"></span>银行卡<label id="with_b">({if condition="$userSession.bank_bind == 1"}{:substr($userSession.bank_number,0,4)}****{:substr($userSession.bank_number,-4)}{else/}未绑定{/if})</label>				  				
+							  			</div>{if condition="$userSession.bank_bind != 1"}
+							  			<a class="with_go" href="{:url('user/bindcard')}">去绑定</a>{/if}
+							  		</div>
+							  	</div>
+							</div>
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		<div class="re_left">可用余额：</div>
+							 	</div>
+							 	<!--可提余额-->
+							  	<div class="col-md-8">
+							  		<div class="with_k">
+							  			 {$userSession.yi_currency_total}   (100蚁币 = 1元)
+							  		</div>
+							  	</div>
+							</div>
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		<div class="re_left">可提现金额：</div>
+							 	</div>
+							 	<!--可提余额-->
+							  	<div class="col-md-8">
+							  		<div class="with_k">
+							  			 <span class="color_act"> {:floor($userSession.yi_currency_total/100)}</span> 元
+							  		</div>
+							  	</div>
+							</div>
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		<div class="re_left">提现金额：</div>
+							 	</div>
+							 	<!--银行卡-->
+							  	<div class="col-md-8">
+							  		<div class="with_k" style="width: 268px">
+							  			<input name="money" type="number" placeholder="请输入金额" value="" />元
+							  		</div>
+							  	</div>
+							</div>
+							<div class="row xian_a">
+							 	<div class="col-md-3">
+							 		<div class="re_left">&nbsp;</div>
+							 	</div>
+							 	<!--可提余额-->
+							  	<div class="col-md-8">
+							  		<div class="with_k">
+							  			 <span class="color_actact">注：金额必须大于10元才能体现（首次提现大于5元即可），提现到钱包的金额只能在小蚁商城内进行购买商品 。</span> 
+							  		</div>
+							  	</div>
+							</div>
+							<input type="hidden" name="payment" id="payment" value="钱包" />
+							<div class="row bottom_j">
+								<div class="col-md-10">
+									<input type="submit" class="fabu" value="提现" />
+								</div>
+	
+							</div>
+					    </form>
+					<!--结束-->
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+		<script>
+		 	$(function(){
+				$("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+				$("input[type=file]").each(function(){
+					if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("No file selected...");}
+				});
+			});
+			$('.with_r').click(function(e) {
+				if($(this).hasClass('disabled')){
+					return false;
+				}
+				$('#payment').val($(this).data('value'));
+				$('.with_r').removeClass('active_cc').find('span.with_span').removeClass('active_c');
+				$(this).addClass('active_cc').find('span.with_span').addClass('active_c');
+			});
+			//表单验证
+		$("#form_withdraw").validate({
+			rules: {
+				money: {required:true},
+			},
+			messages: {
+				money: {
+					required:'请输入提现金额',
+					number:'请输入正确的金额数值',
+				},	
+			},
+			submitHandler: function() {
+				var _data = $('#form_withdraw').serialize();
+				_url = '';
+				$.post(_url, _data, function(rs){
+					if(rs.status){
+						location.href="{:url('user/wallet')}";
+					}else{
+						layer.msg(rs.msg);
+					}
+				},'json');
+				console.log(_data);
+				return false;
+			}
+		});
+		</script>
+		<script type="text/javascript">
+	    function changeState(el) {
+	        if (el.readOnly) el.checked=el.readOnly=false;
+	        else if (!el.checked) el.readOnly=el.indeterminate=true;
+	    }
+	</script>
+	</body>
+
+</html>

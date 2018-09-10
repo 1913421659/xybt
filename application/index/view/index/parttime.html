@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$user_info.post_type==1?'兼职成长营':'兼职达人'}</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		<div class="header_second clearfix" style="border-bottom: 1px solid #ff5c00;width: 100%;padding: 4px 0;background-color: #fff;">
+			<div class="wrap">
+				<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/recharge_logo.png" />
+				</a>
+				<span class="header_des" style="left: -101px;"></span>
+				<span class="h_shuoming jionhall_title active_nav">任务大厅</span>
+			</div>
+		</div>
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>				
+						<a href="{:url('index/parttime')}">任务大厅</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">{$user_info.post_type==1?'兼职成长营':'兼职达人'}</a>
+					</p>
+				</div>
+				<div class="com_contain" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							
+					        {include file="index/parttime_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:1
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " >	
+							<div class="row">
+								<div class="jionhall_img">
+									<img src="__RESOURCES__images/jionhall_{$user_info.post_type==1?'a':'b'}.png" />
+									<!--完成了KPI自动升级成为兼职达人-->
+									<!--替换的图片-->
+									<!--<img src="__RESOURCES__images/jionhall_b.png" />-->
+								</div>
+								<div class="des"></div>
+								<div class="jionhall_box">
+									<h4 class="title_aa active_nav"><span class="wx_span"></span>待领取的任务</h4>
+									<!--第一个模块福利--> 
+									<!--一页显示七个-->
+                                    {volist name="task_list.data" id="item"}
+									<div class="d_box_2" style="padding: 10px;margin-bottom: 10px;">									 
+										<div class="col-md-10">
+											<div class="search_box_inner">
+												<div class="media">
+												  <div class="media-left  mianfei_1">
+													<a class="jionhall_img_a" href="#">
+													  <img class="media-object" src="{$item.banner_img|get_image_path}" onerror="__RESOURCES__images/a_16.png"  alt="...">
+													</a>
+												  </div>
+												  <div class="media-body ">
+													<h4 class="media-heading search_title"><span class="jion_hall jion_hall_{$item.parent_promotion_id}">{$item.parent_promotion_id==3?'促销':($item.parent_promotion_id==2?'体验':'福利')}</span>{$item.name}</h4>
+													<p class="search_con_a">
+                                                        {switch name="$item.parent_promotion_id"}
+                                                        {case value="3"}分红：{$item.cutting_value|number_format}蚁币{/case}
+                                                        {case value="2"}奖励：{$item.reward_value|number_format}蚁币</span><span>分红：{$item.cutting_value|number_format}蚁币{/case}
+                                                        {default /}分红：{$item.cutting_value|number_format}蚁币
+                                                        {/switch}
+													</p>
+													<p class="">
+														<span>
+															<img class="span_img" src="{$item.logo_img|get_image_path}" height="20px" width="20px" />
+														</span>
+														<span>{$item.promotion_name}</span>&nbsp;&nbsp;
+														<span>余{$item.qty-$item.brought_total}份</span>&nbsp;&nbsp;
+														<span>{$item.exam_time_name}审核</span>
+													</p>
+													<p class="search_detail" style="width:400px;">产品介绍：{$item.content}</p>
+												  </div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div>
+												<div class="now-a clearfix search_now">
+											         <a href="{:url('marketing/info',['key'=>$item.id])}">马上抢</a>
+										        </div>
+											</div>
+										</div>
+									
+								  </div>
+                                  {/volist}
+                                   {empty name="task_list.data"}
+                                   <div class="jionhall_innter">
+                                        <div class="com_no_data">
+                                            <img src="__RESOURCES__images/jionhall_c.png" />
+                                            <p>暂无</p>
+                                            <!--<input type="submit" style="margin-top: 10px;" class="fabu" value="申请加入兼职">-->
+                                        </div>
+                                   </div>
+                                   {/empty}
+
+								</div>
+							</div>
+							<!--分页-->
+                            {notempty name="$task_list.data"}
+                            <div class="fenye">
+                                <div style="width:800px;margin:0 auto;">
+                                    <div id="kkpager"></div>
+                                </div>
+                            </div>
+                            {/notempty}
+							
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+		<script type="text/javascript">
+//		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}
+			
+			//init
+			$(function(){
+                var totalPage = '{$task_list.last_page}';
+                var totalRecords = '{$task_list.total}';
+                var pageNo = '{$task_list.current_page}';
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : pageNo,
+					//总页码
+					total : totalPage,
+					//总数据条数
+					totalRecords : totalRecords,
+					//链接前部
+					hrefFormer : '{:url("index/parttime")}',
+					//链接尾部
+					hrefLatter : '',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "/page/"+n;
+					}
+					
+				});
+			});
+			
+			</script>
+		
+			
+	</body>
+	
+</html>

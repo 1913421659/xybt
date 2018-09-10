@@ -1,0 +1,561 @@
+<!doctype html>
+	<html>
+    <head>
+        <meta charset="utf-8">
+        <title>我的宣传页</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="__RESOURCES__css/swiper.min.css" />
+        <!--<link rel="stylesheet" href="__RESOURCES__css/owl.carousel.css" />-->
+        <link rel="stylesheet" href="__RESOURCES__css/font-awesome.css">
+        <!--<link rel="stylesheet" href="__RESOURCES__css/owl.theme.default.css" />-->
+        <link rel="stylesheet" href="__RESOURCES__css/bootstrap.min.css" />
+        <link rel="stylesheet" href="__RESOURCES__css/animate.css" />
+        <link rel="stylesheet" href="__RESOURCES__css/bootsnav.css">
+        <link rel="stylesheet" href="__RESOURCES__css/style_1.css">
+        <!--<script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>-->
+    </head>
+    <body>
+        <div class="culmn dowebok">
+            <!--头部-->
+           <nav class="navbar navbar-default bootsnav navbar-fixed white no-background">
+                <div class="container">  
+                   
+                   
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                            <i class="fa fa-bars anniu"></i>
+                        </button>
+                        <a class="navbar-brand" href="{:url('index/index')}">
+                            <img src="__RESOURCES__images/logo_8888.png" class="logo logo-display logo_imgbox" alt="">
+                            <img src="__RESOURCES__images/footer-logo.png" class="logo logo-scrolled logo_imgbox" alt="">
+                        </a>
+                    </div>               
+                    <div class="collapse navbar-collapse" id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-center">
+                            <li><a href="#home">小蚁兵团</a></li>                    
+                            <li><a href="#features">企业营销</a></li>
+                            <li><a href="#feature1">万能营销</a></li>
+                            <li><a href="#download">圈子营销</a></li>
+                        </ul>
+                    </div>
+                </div>   
+            </nav>
+            <!--头部 Sections-->
+            <section id="home" class="home">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_home">
+                            <div class="col-md-6 wow bounceInLeft animated">
+                                <div class="home_text">
+                                    <h1 class="text-white wow fadeInDown" data-wow-duration="0.01" data-wow-delay="0.02s">小 蚁 兵 团</h1>
+                                </div>
+
+                                <!--<div class="home_btns m-top-30">
+                                    <a href="https://bootstrapthemes.co" target="_blank" class="btn btn-danger m-top-20">Download</a>
+       
+                                </div>-->
+                                <div class="m-top-30 header_sub wow fadeInLeftBig" data-wow-duration="0.03" data-wow-delay="0.04s">
+                                	小蚁兵团是为了解决中小企业营销难营销贵而创立，目前集合超过70多种营销方式，可以实现小到文章浏览、转发、评论，大到媒体、电视广告等多种营销方式，基本上适用于市面上99%的产品营销推广。
+                                </div>
+                                <div class="m-top-30 header_vid">
+                                	<iframe id="iframe_1" src="http://shop.yi-zu.com/video.php" frameborder="0" marginheight=0 marginwidth=0 scrolling="no"  width=100% height=100%></iframe>
+                                	<!--<video class="video_box" src="shop.yi-zu.com/video.php" controls="controls"></video>-->
+                                	
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-md-6 wow bounceInRight animated">
+                                <div class="phone_one phone_attr1 text-center sm-m-top-50" >
+                                    <div class="attr_deg"></div>
+                                    <div class="attr_rio text-uppercase"></div>
+                                    <div class="attr_sun text-uppercase text-white"></div>
+                                    <div class="attr_lon text-uppercase text-white"></div>
+                                    <div class="app_img">
+                                       <img src="__RESOURCES__images/phone01.png" alt="" />
+                                       <div class="app_img_1">
+                                       		<div class="app_1">
+                                       			<img class="app_3" src="__RESOURCES__images/erweima_bg_u.png"/>
+                                       			<div class="app_2" id="qr_1">
+                                       				<img src="__RESOURCES__images/app_down.png" width="137" height="137"/>
+                                       				<img  class="app_5" src="__RESOURCES__images/logo_mmm.png" />
+                                       			</div>
+                                       		</div>
+                                       		<a class="anzhuo_ppp" href="{if condition="$data.download_link"}{$data.download_link|get_image_path}{else/}http://shop.yi-zu.com/xybt_download{/if}"><img src="__RESOURCES__images/android_u.png"/> </a>
+                                       		<a class="ios_ooo" href="#"><img src="__RESOURCES__images/ios_u.png"/> </a>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="scrooldown">
+                            <a href="#features"><i class="fa fa-chevron-down"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!--头部 Sections结束-->
+            <!--引导页-->
+            <!--<section id="features" class="features">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_features p-top-100">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="head_title text-center">
+                                    <h2 class="wow fadeInDown animated">引导页<span class="line_a wow fadeInDown animated" data-wow-delay="0.2s" ></span></h2>
+                                    <h5 class="wow fadeInDown animated" data-wow-delay="0.4s" >四张引导图，是小蚁兵团的整个营销流程的浓缩，分别是发布产品、达人营销、审核验证、获取收益</h5>
+                                </div>                             
+						        <div class="row">
+							        <div class="large-12 columns">
+							          <div class="owl-carousel  wow fadeInUpBig animated" data-wow-duration="1s" >
+								            <div class="item">
+								              <h4 ><img src="__RESOURCES__images/step_1.png"/></h4>
+								            </div>
+								            <div class="item">
+								              <h4><img src="__RESOURCES__images/step_2.png"/></h4>
+								            </div>
+								            <div class="item">
+								              <h4><img src="__RESOURCES__images/step_3.png"/></h4>
+								            </div>
+								            <div class="item">
+								              <h4><img src="__RESOURCES__images/step_4.png"/></h4>
+								            </div>
+							         
+							            </div>
+							         
+					                </div>
+						          
+						        </div>
+							  </div>
+							    
+                            </div>
+                 
+                        </div>
+                    </div>
+                </div>
+            </section>-->
+			<!--引导页结束-->
+            <!--标题-->
+            <section  class="features">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_features p-top-100">
+                            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                                <div class="head_title text-center">
+                                    <h2 class="wow fadeInDown animated">小蚁兵团五大功能模块<span class="line_a wow fadeInDown animated" data-wow-delay="0.2s"></span></h2>
+                                    <h5  class="subtitle wow fadeInDown animated" data-wow-delay="0.4s" >小蚁兵团主要有五大板块构成，分别是营销、市场、商城、蚁圈、管理</h5>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </section>
+			<!--标题结束-->
+
+			<!--五大板块轮播-->	
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="main_drag roomy-50">
+                            <div class="col-md-12 wow fadeInUpBig animated" data-wow-duration="1s">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper " >
+                                        <div class="swiper-slide" style="background-image:url(__RESOURCES__images/drag1.png)"></div> 
+                                        <div class="swiper-slide" style="background-image:url(__RESOURCES__images/drag2.png)"></div> 
+                                        <div class="swiper-slide" style="background-image:url(__RESOURCES__images/drag3.png)"></div>
+                                                                            
+                                        <div class="swiper-slide" style="background-image:url(__RESOURCES__images/drag5.png)"></div>
+                                        <div class="swiper-slide" style="background-image:url(__RESOURCES__images/drag4.png)"></div>
+                                    </div>
+                                    <!-- If we need navigation buttons -->
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+			<!--五大板块轮播结束-->
+			<!--特色功能-->
+            <section id="features" class="feature">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-md-8 col-md-offset-2 col-sm-12">
+                            <div class="head_title text-center ">
+                                 <h2 class="features_title wow fadeInDown animated" >一站式企业营销<span class="line_a wow fadeInDown animated" data-wow-delay="0.2s"></span></h2>
+                                 <h5 class="subfeature wow fadeInDown animated" data-wow-delay="0.4s" >在小蚁兵团注册会员、创建企业即可实现两种企业营销</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--特色功能结束-->           
+            <section id="screen_area" class="screen_area">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_screen">
+                        	 <!-- Screen01-->
+                            <div class="screen01 roomy-50 screen01_a">
+                                <div class="col-md-6">
+                                    <div class="screen01_img text-center wow bounceInLeft animated" >
+                                        <div class="attr_cloudy text-white"></div>
+                                        <div class="attr_deg2 text-white"></div>
+                                        <img src="__RESOURCES__images/screen05.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="screen01_content m-top-100 wow bounceInRight animated" >
+                                        <div class="screen01_content_img ">
+                                            <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-30">发布产品</h2>
+                                        <p class="m-top-20">企业员工可以通过小蚁平台进行发布推广需求，并且支持发布的营销
+种类目前多达70多种，还可以拥有选择平台审核或者自己审核的权利</p>
+
+                                        <ul class="list-inline m-top-50">
+                                            <li class="text-center" ></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Screen02-->
+                            <div class="screen02 roomy-50 m-top-100">
+                                <div class="col-md-6 col-md-push-6">
+                                    <div class="screen02_img text-center wow bounceInRight animated">
+                                        <div class="attr_sun2 text-white"></div>
+                                        <div class="attr_deg3 text-white"></div>
+                                        <img src="__RESOURCES__images/screen08.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-md-pull-6">
+                                    <div class="screen02_content m-top-100 wow bounceInLeft animated" >
+                                         <div class="screen01_content_img ">
+                                            <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-30">接入产品</h2>
+                                        <p class="m-top-20">企业员工可以通过小蚁平台的万能营销进行搜寻，接入适合的产品并进行推广，企业负责人通过营销管理查看员工的业绩</p>
+
+                                        <ul class="list-inline m-top-50">
+                                             <li class="text-center"></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Screen03-->
+                            <div class="screen01 roomy-50 screen01_a m-top-100 screen01_1">
+                                <div class="col-md-6">
+                                    <div class="screen01_img text-center wow bounceInLeft animated" >
+                                        <div class="attr_cloudy text-white" style="right: 6%;"></div>
+                                        <div class="attr_deg2 text-white"></div>
+                                        <img src="__RESOURCES__images/screen03.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="screen01_content m-top-100 wow bounceInRight animated" >
+                                        <div class="screen01_content_img ">
+                                 			<span></span>
+                                 			<span></span>
+                                 			<span></span>
+                                        </div>
+                                        <h2 class="m-top-30">企业管理</h2>
+                                        <p class="m-top-20">企业负责人可以通过管理我的需求、营销管理来查看员工的推广业绩和营销业绩</p>
+
+                                        <ul class="list-inline m-top-50">
+                                            <li class="text-center" ></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                  
+                        </div>
+                    </div>
+                </div>
+            </section>
+             <!-- title2-->
+            <section id="feature1" class="feature">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-md-8 col-md-offset-2 col-sm-12">
+                            <div class="head_title text-center ">
+                                 <h2 class="features_title wow fadeInDown animated animated animated" style="visibility: visible; animation-name: fadeInDown;">万能营销<span class="line_a wow fadeInDown animated animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;"></span></h2>
+                                 <h5 class="subfeature wow fadeInDown animated animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInDown;">万能营销由6大部分组成，分别是免费福利、产品体验、促销活动、网络营销、产品分销、广告投放</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+             <!-- Screen-->
+             <section id="screen_area" class="screen_area">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_screen">
+                        	<!-- Screen01-->
+                            <div class="screen03 roomy-50">
+                                <div class="col-md-6">
+                                    <div class="screen03_img text-center wow bounceInLeft animated">
+                                        <div class="attr_rainy2 text-white"></div>
+                                        <div class="attr_deg4 text-white"></div>
+                                        <img src="__RESOURCES__images/screen01.png?20180321" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="screen03_content m-top-100 wow bounceInRight animated">
+                                        <div class="screen01_content_img ">
+                                           <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-40">万能营销六大部分</h2>
+                                        
+                                        <p class="m-top-20">免费福利：适用福利活动推广，主要用于新增用户和提升活跃等；</p>
+										<p  class="m-top-0">产品体验：适用完成任务推广，主要用于兼职任务和注册开户等；</p>
+										<p class="m-top-0">促销活动：适用活动促销推广，主要用于提升销售和用户活跃等；</p>
+										<p  class="m-top-0">网络营销：适用品牌宣传推广，主要用于软文推广和话题炒作等；</p>
+										<p  class="m-top-0">产品分销：适用产品分成推广，主要用于游戏分销和商品分销等；</p>
+										<p  class="m-top-0">广告投放：适用快速传播推广，主要用于媒体广告和电视广告等。</p>
+										
+
+                                        <ul class="list-inline m-top-50">
+                                            <li class="text-center" ></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>	
+                            <!-- Screen1-->
+                            <div class="screen02 roomy-50 m-top-100 screen01_1">
+                                <div class="col-md-6 col-md-push-6">
+                                    <div class="screen02_img text-center wow bounceInRight animated">
+                                        <div class="attr_sun2 text-white"></div>
+                                        <div class="attr_deg3 text-white"></div>
+                                        <img src="__RESOURCES__images/screen02.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-md-pull-6">
+                                    <div class="screen02_content m-top-100 wow bounceInLeft animated" >
+                                         <div class="screen01_content_img ">
+                                            <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-30">万能营销模板</h2>
+                                        <p class="m-top-20">我们根据八卦原理创造了万能营销。在同一页面模板，我们将产品信息、操作流程、演示流程、领取申请等变换组合实现万能营销</p>
+                                        <ul class="list-inline m-top-50">
+                                             <li class="text-center"></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+           	  
+           	  	
+           	  <!-- title3-->
+            <section id="download" class="feature">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-md-8 col-md-offset-2 col-sm-12">
+                            <div class="head_title text-center ">
+                                 <h2 class="features_title wow fadeInDown animated animated animated" style="visibility: visible; animation-name: fadeInDown;">圈子营销<span class="line_a wow fadeInDown animated animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;"></span></h2>
+                                 <h5 class="subfeature wow fadeInDown animated animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInDown;">分享赚分红、分享更自豪、分享建兵团、社交聊天</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+ 
+               <!-- Screen03-->
+               <!-- Screen2-->
+             <section id="screen_area" class="screen_area">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_screen">    	
+                            <!-- Screen1-->
+                            <div class="screen02 roomy-50">
+                                <div class="col-md-6 col-md-push-6">
+                                    <div class="screen02_img text-center wow bounceInRight animated">
+                                        <div class="attr_sun2 text-white"></div>
+                                        <div class="attr_deg3 text-white"></div>
+                                        <img src="__RESOURCES__images/screen09.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-md-pull-6">
+                                    <div class="screen02_content m-top-100 wow bounceInLeft animated" >
+                                         <div class="screen01_content_img ">
+                                            <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-30">圈子营销</h2>
+                                        <p class="m-top-20">小蚁兵团圈子营销主要通过微信、QQ、微博等社交工具实现。他最大特点是借
+花献佛，借商家优惠促销+推广费用做成超级礼包，用户分享超级礼包获得推广
+收益，好友获得超级礼包，一举两得</p>
+                                        <ul class="list-inline m-top-50">
+                                            <li class="text-center"></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+							<!-- Screen2-->
+                            <div class="screen03 roomy-50 m-top-100">
+                                <div class="col-md-6">
+                                    <div class="screen03_img text-center wow bounceInLeft animated">
+                                        <div class="attr_rainy2 text-white"></div>
+                                        <div class="attr_deg4 text-white"></div>
+                                        <img src="__RESOURCES__images/screen10.png" alt="" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="screen03_content m-top-100 wow bounceInRight animated">
+                                        <div class="screen01_content_img ">
+                                            <span ></span>
+                                            <span ></span>
+                                            <span></span>
+                                        </div>
+                                        <h2 class="m-top-40">商家和渠道交流</h2>                                       
+                                        <p class="m-top-20">小蚁兵团的聊天模块可以实现商家和渠道的社交活动以及团队之间的营销交流</p>
+                                       <ul class="list-inline m-top-50">
+                                            <li class="text-center" ></li>
+                                            <li class="text-center"> </li>
+                                            <li class="text-center"> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>	
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+     	
+           <!--App 下载-->
+            <section id="download" class="download m-top-100">
+                <div class="download_overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="main_download ">
+                            <div class="col-md-6 wow bounceInLeft animated">
+                                <div class="download_item roomy-100">
+                                    <h2 class="text-white" >小蚁兵团APP下载链接</h2>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                    	<a class="anzhuo_a" href="javascript:;" id="qr_2" >
+                                    		<img src="__RESOURCES__images/app_down.png" width="108" height="108" />
+                                    	</a>
+                                    	<div class="download_app m-top-30" >
+                                            <a class="download_android" href="{if condition="$data.download_link"}{$data.download_link|get_image_path}{else/}http://shop.yi-zu.com/xybt_download{/if}"><img class="img_1" src="__RESOURCES__images/anzhou_logo.png" alt="" />Android</a>
+                                            
+                                         </div>
+                                    </div>
+                                    <script>
+									
+									</script>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                    	<a class="anzhuo_a" href="javascript:;">
+                                    		<img src="__RESOURCES__images/ios.png" />
+                                    	</a>
+                                    	<div class="download_app m-top-30">
+                                            
+                                            <a class="download_android" href=""><img class="img_2" src="__RESOURCES__images/appay_logo.png" alt="" />待开放...</a>
+                                         </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 wow bounceInRight animated">
+                                <div class="download_item m-top-70">
+                                    <img class="app_right" src="__RESOURCES__images/appdownload1.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+			<!--App 下载结束-->
+            <!-- 返回顶部-->
+            <div class="scrollup">
+                <a href="#"><i class="fa fa-chevron-up"></i></a>
+            </div>          	
+            <!-- 返回顶部结束 -->     
+            <footer id="footer" class="footer bg-black">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main_footer text-center p-top-40 p-bottom-30">
+                                <p class="footer_ti" >
+                                    Copyright © 2008-2018 yi-zu.com，All Rights Reserved <a class="color" href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备13058350号-1</a>
+                                    <span class="footer_q">版权所有 广州点升信息技术有限公司   </span>
+                                   
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script  src="__RESOURCES__js/jquery-1.11.2.min.js" ></script>
+        <script  src="__RESOURCES__js/jquery.qrcode.min.js" ></script>
+        <script  src="__RESOURCES__js/bootstrap.min.js" ></script>
+       
+
+        <script src="__RESOURCES__js/jquery.easing.1.3.js"></script>
+        <script src="__RESOURCES__js/swiper.min.js"></script>
+        <!--<script src="__RESOURCES__js/swiper.jquery.min.js" ></script>-->
+        <script src="__RESOURCES__js/bootsnav.js"></script>
+		<script src="__RESOURCES__js/wow.min.js" ></script>
+        <script src="__RESOURCES__js/plugins.js"></script>              
+       <script src="__RESOURCES__js/main_1.js"></script>
+       
+		 <script>
+		 	$("#main_nav_xuan").addClass("active_nav");
+            $(document).ready(function() {
+				{if condition="$data.download_link"}
+				$('#qr_1').html('').css('padding','4px').qrcode({
+					width: 129,
+					height:129,
+					text: "{$data.download_link|get_image_path}"
+				});
+				$('#qr_2').html('').css('padding','4px').qrcode({
+					width: 112,
+					height:112,
+					text: "{$data.download_link|get_image_path}"
+				});
+				{/if}
+			});
+           </script>
+           
+         
+    </body>
+</html>

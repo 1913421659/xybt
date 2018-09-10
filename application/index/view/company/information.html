@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业资料</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+	
+		<!--企业资料-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="que_a">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					       <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:21
+							}
+						});
+						</script>
+						
+						<div class="col-md-9 que_right ">							
+							<div class="row">
+								<!--员工资料-->
+								<div class="business_jianjie" style="min-height: 941px;">
+										<div class="per_nei">
+											<div class="row per_k">
+												<div class="col-md-8 title_aa">员工列表</div>	
+												<!--<div class="col-md-4">
+													<a class="bianji after_1" href="{:url('company/users')}">更多</a>
+												</div>-->
+											</div>
+										</div>
+										<div class="business_yuan" id="page_company_users">
+											
+											<div class="Business_box business_border" v-for="item in user_list">
+												<div class="media">
+												  <div class="media-left media-middle">								   
+														<a href="#" class="business_left"><img src="__RESOURCES__images/a1.png" /></a>
+												  </div>
+												  <div class="media-body business_ov">
+														<div class="business_top clearfix">
+															<p class="business_pp"><span class="vip business_xiu">VIP{{item.user_rank_level}}</span><template v-if="item.nick_name == ''">{{item.user_name}}</template><template v-else>{{item.nick_name}}</template><a class="business_xiu master" href="#" v-if="item.is_manage">管理员</a><a class="bianji sent_mesege"  :href="'{:url('chat/index01')}'.replace('.html','') + '/uid/' + item.user_id" target="_blank" v-if="!item.is_me">发消息</a></p>
+															<ul class="business_ul_list">
+																<li>ID：{{item.user_id}}</li>
+																<li>达人等级：{{item.rank_name}}</li>
+																<li>电话号码：{{item.mobile_phone}}</li>
+																<li>备注：</li>
+																<!--#TODO 修改功能暂时欠着<li><a class="business_xiu" href="#">修改</a></li>-->{if condition="$is_manage"}
+																<a class="bianji sent_mesege1" href="#" v-if="!item.is_manage" v-on:click="removeUser(item.user_id)">移除员工</a>{/if}
+															</ul>
+														</div>	
+												  </div>
+												</div>
+											</div>
+											<div class="business_more">
+												<div v-if="is_end">已全部加载</div>
+												<div v-else-if="is_loading">加载中...</div>
+												<a href="javascript:void()" @click="getUserList" v-else>点击查看更多</a>
+											</div>
+											
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+	</body>
+	
+</html>

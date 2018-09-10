@@ -1,0 +1,116 @@
+/* CSS Document */
+
+ul.company_left_nav{
+	position:relative;
+}
+ul.company_left_nav>li{
+	padding:0 20px;
+	border-bottom:1px solid #f1f1f1;
+	line-height: 56px;
+	background-repeat:no-repeat;
+	background-position:30px 20px;
+}
+.ico_company_info{/*企业信息*/
+	background-image:url(../images/ying_8.png);
+}
+.ico_company_info.action{
+	background-image:url(../images/ying_8_8.png);
+}
+.ico_company_users{/*员工信息*/
+	background-image:url(../images/ying_9.png);
+}
+.ico_company_users.action{
+	background-image:url(../images/ying_9_9.png);
+}
+.ico_company_apply{
+	background-image:url(../images/ying_10.png);
+}
+.ico_company_apply.action{
+	background-image:url(../images/ying_10_10.png);
+}
+.ico_company_bind{
+	background-image:url(../images/ying_11.png);
+}
+.ico_company_bind.action{
+	background-image:url(../images/ying_11_11.png);
+}
+.ico_company_money{
+	background-image:url(../images/ying_13.png);
+}
+.ico_company_money.action{
+	background-image:url(../images/ying_13_13.png);
+}
+.ico_company_payment{
+	background-image:url(../images/ying_14.png);
+}
+.ico_company_payment.action{
+	background-image:url(../images/ying_14_14.png);
+}
+.ico_company_merchant{
+	background-image:url(../images/ying_1.png);
+}
+.ico_company_merchant.action{
+	background-image:url(../images/ying_1_1.png);
+}
+.ico_company_channel{
+	background-image:url(../images/ying_2.png);
+}
+.ico_company_channel.action{
+	background-image:url(../images/ying_2_2.png);
+}
+.ico_company_pay{
+	background-image:url(../images/ying_5.png);
+}
+.ico_company_pay.action{
+	background-image:url(../images/ying_5_5.png);
+}
+.ico_company_gathering{
+	background-image:url(../images/ying_6.png);
+}
+.ico_company_gathering.action{
+	background-image:url(../images/ying_6_6.png);
+}
+.ico_company_paylog{
+	background-image:url(../images/ying_7.png);
+}
+.ico_company_paylog.action{
+	background-image:url(../images/ying_7_7.png);
+}
+
+ul.company_left_nav>li>a{
+	padding-left: 55px;
+	color: #454545;
+    width: 100%;
+    display: block;
+}
+ul.company_left_nav>li.group>a{
+    background: url(../images/xia.png)no-repeat 170px 25px;
+}
+ul.company_left_nav>li.action>a{
+	color:#FF5C00;
+}
+ul.company_left_nav>li>span{
+    position: absolute;
+    left: 0px;
+    width: 3px;
+    height: 51px;
+    display: none;
+    text-align: left;
+    background-color: #ff5c00;
+}
+ul.company_left_nav>li.action>span{
+    display: inline-block;
+}
+.company_left_nav_sub a{
+    display: block;
+	width:100%;
+    background: url(../images/right_2.png) 15px no-repeat;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    color: #454545;	
+}
+.company_left_nav_sub a.action{
+	color:#FF5C00;
+	background-image:url(../images/right_1.png);
+}

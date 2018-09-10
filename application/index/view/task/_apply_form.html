@@ -1,0 +1,153 @@
+<div class="now_tan">
+	<div class="now_tan_a">
+		<div class="now_tan_c">
+			<ul>
+				<li>
+					<div class="header_now">
+						请填写申请信息
+					</div>
+					<div class="content_now">
+						<!-- hidden id -->
+						<input type="hidden" name="task_id" value="{$info.id}" />
+
+						<div class="row bottom_jjj ">
+							<div class="col-md-3">
+								<div class="re_left">联系人：</div>
+							</div>
+							<div class="col-md-8">
+								<div class="re_right1">	
+									<input type="text" name="contact_name"  class="form-control btn_a" id="contact1" placeholder="联系人">			
+								</div>
+								<div class="tishi" id="tishi1">联系人不能为空！</div>
+							</div>
+						  
+						</div>
+						<div class="row bottom_jjj ">
+							<div class="col-md-3">
+								<div class="re_left">联系人手机号码：</div>
+							</div>
+							<div class="col-md-8">
+								<div class="re_right1">	
+									<input type="number" name="contact_phone"  class="form-control btn_a" id="shoujihao" placeholder="联系人手机号码">			
+								</div>
+								<div class="tishi" id="tishi2">联系人手机号码！</div>
+							</div>
+							
+						</div>
+						<div class="row bottom_jjj ">
+							<div class="col-md-3">
+								<div class="re_left">申请说明：</div>
+							</div>
+							<div class="col-md-8">
+								<div class="re_right re_7">
+									<textarea id="apply" name="content"  class="form-control  " rows="5" placeholder="请输入申请说明" ></textarea>
+								</div>
+								<div class="tishi tishi2" id="tishi3">申请说明！</div>
+							</div>
+								
+						</div>
+						<div style="margin: 0 auto; text-align: center;"><a class="dd_now" href="javascript:;" title="">马上申请</a></div>
+						
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;"><img class="guanbiBtn" id="guanbiBtn" src="__RESOURCES__images/c888.png"/></a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+<!--第二个弹窗-->
+<div class="shenqing">
+	<div class="shenqing_b">
+		<div class="shengqing_a">
+			<ul>
+				<li><img src="__RESOURCES__images/yes1.png" class="msg_img" /><span class="msg1">申请成功</span></li>
+				<li class="msg2"></li>
+				<li><a class="fabu1" href="#" title="">确认</a></li>
+			</ul>
+			<p class="shenqing_p"><a href="#"><img src="__RESOURCES__images/see.png"/>查看我的营销任务</a></p>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+
+			// 填写资料弹窗
+			$("#guanbiBtn").click(function(){
+			   	$(".now_tan").fadeOut(100);
+			});
+			$(".fabu1").click(function(){
+			   	$(".shenqing").fadeOut(200);
+			});
+			$(".js_tan").click(function(){
+			   	$(".now_tan").fadeIn(300);
+			});
+		   	$(".dd_now").click(function(){
+		   		if($("#contact1").val()==""){
+		   			$("#tishi1").css("display","block");
+		   		    return false;
+		        }
+		        if($("#shoujihao").val()==""){
+		   			$("#tishi2").css("display","block");
+		   		    return false;
+		        }
+			 	if($("#apply").val()==""){
+			 		$("#tishi3").css("display","block");
+			 		return false;
+			    }
+			 	if(!($("#contact1").val()=="" && $("#shoujihao").val()=="" && $("#apply").val()=="")){
+			 		$.ajax({
+			 			type:'post',
+			 			url:'{:url("task/apply")}',
+			 			data:{
+			 				task_id:$('input[name="task_id"').val(),
+			 				contact_phone:$('input[name="contact_phone"').val(),
+			 				contact_name:$('input[name="contact_name"').val(),
+			 				content:$('#apply').val(),
+			 			},
+			 			dataType:'json',
+			 			success:function(res){
+			 				
+			 				if(res.status == 1){
+								layer.alert('您的申请已提交到小蚁兵团后台审核，请耐心等待 !',{title:'申请成功'}, function(index){
+									layer.close(index);
+									$(".now_tan").fadeOut(100);
+								});
+			 					//$('msg_img').show();
+			 					//$('.msg1').html('申请成功');
+			 					//$('.msg2').html('您的申请已提交到小蚁兵团后台审核，请耐心等待 !');
+			 				}else{
+								layer.alert(res.msg, {title:'申请失败'}, function(index){
+									layer.close(index);
+									if(res.data.url != 'undefined'){
+										location.href = res.data.url;
+									}
+								});
+			 					//$('msg_img').hide();
+			 					//$('.msg1').html('申请失败');
+			 					//$('.msg2').html(res.msg);
+			 				}
+				  			//$(".shenqing").fadeIn(600);
+			 			},
+			 		});
+			 	    
+			 	}
+		   	});
+			$("#contact1").blur(function(){
+			   	if($("#contact1").val()!==""){
+			   		$("#tishi1").css("display","none");
+			   	}
+			});
+			$("#shoujihao").blur(function(){
+			   	if($("#shoujihao").val()!==""){
+			   		$("#tishi2").css("display","none");
+			   	}
+			});
+		    $("#apply").blur(function(){
+		   		if($("#apply").val()!==""){
+		   			$("#tishi3").css("display","none");
+		   		}
+		   	});
+</script>

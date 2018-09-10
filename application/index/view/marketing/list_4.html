@@ -1,0 +1,23 @@
+
+
+<div class="row m_1">
+{foreach name="list" item="value"}
+	<div  class="col-md-3 ">
+		<div class="mark_m">
+			<a href="{:Url('marketing/info',['key'=>$value.id])}" title=""><img src="{$value.banner_img|get_image_path}"></a>
+			<div class="sec_bb sec_cc ziti">
+				<p class="mian_1">{$value.name}</p>
+				<p class="mian_2">奖励：{:number_format(intval($value.reward_value)/100)}元</p>
+				<div class="main_3">
+					<span><img src="{$value.logo_img|get_image_path}" /></span>
+					<span>{$value.promotion_name|default=""}</span>
+					<span>{$exam_time_type[$value.exam_time_type_id]}审核</span>
+					<span>{$value.checkout_name}</span>
+				</div>
+				<a href="{:Url('marketing/info',['key'=>$value.id])}" title="" alt="">马上申请</a>	
+			</div>
+		</div>
+	</div>
+	{/foreach}
+
+</div>

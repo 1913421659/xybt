@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>网络营销-详情</title>
+	</head>
+		{include file="public/css" /}
+		{include file="public/js" /}
+	<body>
+	<div id="app">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="">
+					<div class="row">
+						<div class="col-md-9 detail_right clearfix">
+							<div class="d_box1">
+							   <div class="row">
+								<div class="col-md-8">
+									<div class="d_left">
+										<div class="media">
+										  <div class="media-left mianfei_1">
+											<a class="ad_img" href="{:url('marketing/info',['key' => $info.id])}">
+											 <span class=""><img class="media-object" src="{:get_image_path($info['banner_img'])}" alt="..."></span> 
+											</a>
+										  </div>
+										  <div class="media-body">
+											<h4 class="media-heading d_title">{$info.name}</h4>
+											<p class="d_c">奖励：{:number_format(intval($info.reward_value)/100)}元</p>
+											<p class="main2 main_8">
+												<span class="main_6" style="overflow: visible;float: left; top: 0;"><img src="{:get_image_path($info['logo_img'])}" /></span>&nbsp;&nbsp;
+												<span>{$info.promotion_name}</span>&nbsp;&nbsp;
+												<span>{$info.task_exam_time_type_name}审核</span>&nbsp;&nbsp;
+												<span>{$info.checkout_name}</span>
+											</p>
+												<p>
+                                                    {if condition="empty($info.operation)"}
+                                                    <a class="d_now js_tan" href="javascript:;" title="">马上申请</a>
+                                                    {elseif condition="$info.status==5" }
+                                                    <a class="d_now js_tan" href="javascript:;" title="">{$info.operation}</a>
+                                                    {elseif condition="$info.status >= 6 && $info.status<=9" }
+                                                    <a class="d_now" disabled title="">{$info.operation}</a>
+                                                    {elseif condition="$info.status == 10 || $info.status == 21 || $info.status==11" }
+                                                    <a class="d_now js_tan_oo" href="javascript:;" title="">上传审核</a>
+                                                    {/if}
+												</p>
+										  </div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div  class="d_er">
+										<div class="d_er_img">
+										   <img src="__RESOURCES__images/app_down.png" />
+										</div>
+										<p style="margin-top: 10px;">扫描二维码</p>
+										<p>下载APP享受最佳体验</p>
+									</div>
+								</div>
+								<div class="fenxiang clearfix">
+									<div class="col-md-1">分享到：</div>
+									<div class="col-md-11">
+										<div class="bdsharebuttonbox fenxiang_1">
+											<!--<a href="#" class="bds_more" data-cmd="more"></a>-->
+											<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">qq空间</a>
+											<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博 </a>
+											<a href="#" class="bds_weixin bds_peng" data-cmd="weixin" title="分享到微信">朋友圈</a>
+											<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">QQ</a>
+											<span  class="bds_aaa"><img src="__RESOURCES__images/share_dating.png" />分享大厅</span>
+											<span  class="bds_aaa"><img src="__RESOURCES__images/shoucang_1.png" />加入收藏</span>
+										</div>	
+										
+									</div>
+									
+								</div>
+							</div>
+							</div>
+							<!--操作流程-->
+							<div class="caozuo_box clearfix">
+								<h4>操作流程<small>（请严格按照“操作演示”流程操作）</small></h4>
+								<div class="shijian">
+									<div class="container1">
+										<div class="main main1">
+											<ul class="cbp_tmtimeline d_beform">
+												<li>
+													<div class="cbp_tmicon d-img"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_1_id']]; ?>  </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_1_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="cbp_tmicon d-img2"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_2_id']]; ?>  </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_2_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="cbp_tmicon d-img3"></div>
+													<div class="cbp_tmlabel">
+														<div class="row">
+														  <div class="col-md-12 foot-w1"><?php echo $info['task_step_field'][$info['task_step_3_id']]; ?>  </div>
+														  <div class="col-md-12 foot_22">{$info.task_step_3_content|default="无"}</div>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--操作演示-->
+							{notempty name="info.task_flow_img"}
+							<div class="caozuo_box ccc clearfix">
+								<h4>操作演示<small>(点击下图可放大显示)</small></h4>
+								<!--<div class="shijian">-->
+									<div id="slider" >
+										{foreach name="info.task_flow_img" key="key" item="value"}
+											<div class="spic">
+												<img src="{$value.img_path|get_image_path}" />
+												
+											</div>
+										{/foreach}
+									</div>
+								<!--</div>-->
+							</div>
+							{/notempty}
+							<!--演示流程结束-->
+							<div class="caozuo_box vv  clearfix">
+								<h4>产品介绍</h4>
+								<div class="jieshao">
+									<?php $content = explode(PHP_EOL, $info['content']); ?>
+									{foreach name="content" key="key" item="value"}
+									 <p>{$value}</p>
+									{/foreach}
+									 
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3  detail_l">
+							<div class="per_title8 ">
+								<h5>相关推荐</h5>
+							</div>
+							{foreach name="push" key="key" item="value"}
+								<div class="per_h">
+									<div class="media">
+										<div class="media-left">
+											<a class="ad_img_kk" href="{:url('marketing/info',['key' => $value['id']])}">
+												<img class="media-object" src="{$value.banner_img|get_image_path}" alt="...">
+											</a>
+										</div>
+										<div class="media-body per_j  mark_aa">
+											<h4 class="media-heading" title="{$value.name}" style="width: 103px !important;">{$value.name|msubstr=###,0,10}</h4>
+											<p>奖励：{:number_format(intval($value.reward_value)/100)}元</p>
+											<p><a  class="market_box" href="{:url('marketing/info',['key' => $value['id']])}" title="">马上申请</a></p>
+										</div>
+									</div>
+								</div>
+							{/foreach}
+							
+							
+							
+							
+							<!--常见问题- ->
+							<div class="per_title8 ">
+								<h5>常见问题</h5>
+							</div>
+							<ul class="detail_a">
+							  <li class="detail_act"><span ></span><a href="#" title="">怎么申请成为小蚁达人呢？</a></li>
+							  <li><span ></span><a href="#" title="">小蚁兵团是个什么样的APP？</a></li>
+							</ul><!---->
+							
+						</div>
+						<div class="des"></div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		<div class="wei_tan"></div>
+
+		<!--马上申请弹窗-->
+		<div class="now_tan" v-on:click="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c">
+					<ul>
+						<li>
+							<div class="header_now">
+								请填写申请信息
+							</div>
+							<div class="content_now">
+								<!-- hidden id -->
+								<input type="hidden" name="task_id" value="{$info.id}" />
+		
+								<div class="row bottom_jjj ">
+									<div class="col-md-3">
+										<div class="re_left">联系人：</div>
+									</div>
+									<div class="col-md-8">
+										<div class="re_right1">	
+											<input type="text" name="contact_name"  class="form-control btn_a" id="contact1" placeholder="联系人">			
+										</div>
+										<div class="tishi" id="tishi1">联系人不能为空！</div>
+									</div>
+								  
+								</div>
+								<div class="row bottom_jjj ">
+									<div class="col-md-3">
+										<div class="re_left">联系人手机号码：</div>
+									</div>
+									<div class="col-md-8">
+										<div class="re_right1">	
+											<input type="number" name="contact_phone"  class="form-control btn_a" id="shoujihao" placeholder="联系人手机号码">			
+										</div>
+										<div class="tishi" id="tishi2">联系人手机号码！</div>
+									</div>
+									
+								</div>
+								<div class="row bottom_jjj ">
+									<div class="col-md-3">
+										<div class="re_left">申请说明：</div>
+									</div>
+									<div class="col-md-8">
+										<div class="re_right re_7">
+											<textarea id="apply" name="content"  class="form-control  " rows="5" placeholder="请输入申请说明" ></textarea>
+										</div>
+										<div class="tishi tishi2" id="tishi3">申请说明！</div>
+									</div>
+										
+								</div>
+								<a class="dd_now" href="javascript:;" title="">马上申请</a>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:;"><img class="guanbiBtn" id="guanbiBtn" v-on:click="close_a" src="__RESOURCES__images/c888.png"/></a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--第二个弹窗-->
+		<div class="shenqing">
+			<div class="shenqing_b">
+				<div class="shengqing_a">
+					<ul>
+						<li><img src="__RESOURCES__images/yes1.png" class="msg_img" /><span class="msg1">申请成功</span></li>
+						<li class="msg2"></li>
+						<li><a class="fabu1" href="#" title="">确认</a></li>
+					</ul>
+					<p class="shenqing_p"><a href="#"><img src="__RESOURCES__images/see.png"/>查看我的营销任务</a></p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!--弹窗-->	
+		<div class="now_tan_11">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_2">
+					<ul>
+						<li style=" width: 780px;height: 539px;">
+							<div class="header_now">
+							          <span class="net_box">上传文件<label class="net_lable"></label></span>
+							          <dl class="net_ul">
+							          	<dd class="active_dd">上传截图</dt>
+							          	<dd>上传文档</dd>
+							          </dl>
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" id="guanbiBtn1"  v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							<div class="res_inner js_a">
+								 <div class="container_ooo c_9 _scroll" v-bind="scroll">
+									<div class="_panel-box">
+										
+										<div class="content_now" >
+										
+											<div  class="net_top">
+												<div class="hello">
+												    <div class="upload">
+												      <div class="upload_warp">
+												        <div class="upload_warp_left" @click="fileClick">
+												          <img src="__RESOURCES__images/cc_99.png">
+												        </div>
+												        <div class="upload_warp_right" @drop="drop($event)" @dragenter="dragenter($event)" @dragover="dragover($event)">
+												          或者将文件拖到此处
+												        </div>
+												      </div>
+												      <div class="upload_warp_text">
+												        选中{{imgList.length}}张文件，共{{bytesToSize(this.size)}}
+												      </div>
+												      <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
+												      <div class="upload_warp_img" v-show="imgList.length!=0">
+												        <div class="upload_warp_img_div" v-for="(item,index) of imgList">
+												          <div class="upload_warp_img_div_top">
+												            <div class="upload_warp_img_div_text">
+												              {{item.file.name}}
+												            </div>
+												            <img src="__RESOURCES__images/colse_5.png" class="upload_warp_img_div_del" @click="fileDel(index)">
+												          </div>
+												          <img :src="item.file.src">
+												        </div>
+												      </div>
+												    </div>
+												  </div>
+												   													
+											</div>	
+											
+										</div>
+				                        
+				                       
+									</div>
+							   </div>	
+									
+						   </div>
+							<div class="res_inner js_a net_dis">
+							    
+										
+								<div class="content_now" >											
+									<div  class="net_top">
+										<div class="net_wendang ">
+											
+											<div class="row bottom_j">
+											 	
+											  	<div class="col-md-12">
+											  		<div class="re_right">
+											  			<div class="re_xia">
+											  			  <div class="uploader white">
+																<input type="text" :value="uploadFilesName" id="shangchuan" class="filename" readonly/>
+																<input type="button" name="file" class="button" value="上传"/>
+																<input type="file" @change="fileChange($event)" size="30"/>
+															</div>
+					
+											  			 </div>
+					
+					
+											  		</div>
+											  	</div>
+											  	<div class="net_p">
+												  请正确上传后缀名为<span class="active_nav">.doc  .docx   .xls   .xlsx   .ppt   .pptx </span>   的文件
+											    </div>
+											</div>										
+										</div>
+									</div>
+									
+									
+								</div>
+				                        		
+							</div>
+					
+							<div class="dibu">
+							   <a class="dd_now_pp shen_now" href="javascript:;" @click="btnExaminSubmit()" title="">提交审核</a>
+							</div>		
+						</li>				
+					</ul>
+				</div>
+			</div>
+			
+		</div>			
+		
+	</div>
+		
+		
+		{include file="public/js_1" /}	
+		<script type="text/javascript" src="__RESOURCES__js/jquery.qrcode.min.js" ></script>
+		<script>
+			
+			window._bd_share_config = {
+			 common: {
+			 "bdText" : "",
+			 "bdMini" : "2",
+			 "bdMiniList" : false,
+			 "bdPic" : "",
+			 "bdStyle" : "0",
+			 "bdSize" : "24"
+			 },
+			 share: [{
+//			 bdCustomStyle: "__RESOURCES__baidushare/static/api/css/share.css" 
+			 }]
+			}
+			with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="__RESOURCES__baidushare/static/api/js/share.js?cdnversion="+~(-new Date()/36e5)];
+		</script>
+	    <script>
+		$('#main_nav_marketing').addClass('menu_home');
+		
+//		window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+			$(document).ready(function() {
+				     $('#slider').slider({ speed: 500 });
+			   });
+		</script>
+		<script>			  
+			  var app = new Vue({
+			    el: '#app',
+			    data () {
+			      return {
+			        imgList: [],
+//                    filesList: [],
+                    uploadFiles: null,
+                    uploadFilesName: null,
+                    uploadImg: [],
+			        size: 0,
+			        
+			      }
+			    },
+			      methods: {
+			          fileClick() {
+			              document.getElementById('upload_file').click()
+			          },
+			          fileChange(el) {
+			              if (!el.target.files[0].size) return;
+			              this.fileList(el.target);
+			              el.target.value = ''
+			          },
+			          scroll:function(){
+			          	$("._scroll").yi_scroll();
+			          	 $("._scroll-mh").yi_scroll({isMaxHeight:true,isBar:true});
+			          },
+			          fileList(fileList) {
+			              let files = fileList.files;
+			              for (let i = 0; i < files.length; i++) {
+			                  //判断是否为文件夹
+			                  if (files[i].type != '') {
+			                      this.fileAdd(files[i]);
+			                  } else {
+			                      //文件夹处理
+			                      this.folders(fileList.items[i]);
+			                  }
+			              }
+			          },
+			        My_check:function(){
+						$(".now_tan_11").fadeIn(300);
+					},
+					close:function(){
+						$(".now_tan_11").fadeOut(100);
+					},
+					now_tan:function(){
+					   $(".now_tan").fadeIn(300);
+					},
+					close_a:function(){
+					   $(".now_tan").fadeOut(100);
+					   	return false;
+					},
+					
+			          //文件夹处理
+			          folders(files) {
+			              let _this = this;
+			              //判断是否为原生file
+			              if (files.kind) {
+			                  files = files.webkitGetAsEntry();
+			              }
+			              files.createReader().readEntries(function (file) {
+			                  for (let i = 0; i < file.length; i++) {
+			                      if (file[i].isFile) {
+			                          _this.foldersAdd(file[i]);
+			                      } else {
+			                          _this.folders(file[i]);
+			                      }
+			                  }
+			              })
+			          },
+			          foldersAdd(entry) {
+			              let _this = this;
+			              entry.file(function (file) {
+			                  _this.fileAdd(file)
+			              })
+			          },
+			          fileAdd(file) {
+			              //总大小
+			              this.size = this.size + file.size;
+			              //判断是否为图片文件
+			              if (file.type.indexOf('image') == -1) {
+                              let reader = new FileReader();
+                              reader.vue = this;
+                              reader.readAsDataURL(file);
+                              reader.onload = function () {
+                                  file.src = this.result;
+                                  console.log('走这里了='+file.name);
+                                  this.vue.uploadFilesName = '';
+                                  this.vue.uploadFilesName = file.name;
+                                  this.vue.uploadFiles=file.src;
+                              }
+			              } else {
+			                  let reader = new FileReader();
+			                  reader.vue = this;
+			                  reader.readAsDataURL(file);
+			                  reader.onload = function () {
+			                      file.src = this.result;
+                                  this.vue.uploadImg.push(file.src);
+			                      this.vue.imgList.push({
+			                          file
+			                      });
+			                  }
+			              }
+			          },
+			          fileDel(index) {
+			              this.size = this.size - this.imgList[index].file.size;//总大小
+			              this.imgList.splice(index, 1);
+                          this.uploadImg.splice(index, 1);
+			          },
+			          bytesToSize(bytes) {
+			              if (bytes === 0) return '0 B';
+			              let k = 1000, // or 1024
+			                  sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+			                  i = Math.floor(Math.log(bytes) / Math.log(k));
+			              return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+			          },
+			          dragenter(el) {
+			              el.stopPropagation();
+			              el.preventDefault();
+			          },
+			          dragover(el) {
+			              el.stopPropagation();
+			              el.preventDefault();
+			          },
+			          drop(el) {
+			              el.stopPropagation();
+			              el.preventDefault();
+			              this.fileList(el.dataTransfer);
+			          },btnExaminSubmit(){
+                          console.log(this.uploadFilesName);
+                          if(this.imgList.length==0 && this.uploadFiles==''){
+                              layer.msg('请上传图片或文档');
+                              return;
+                          }
+                          var obj = {};
+                          var self = this;
+                          obj.images = this.uploadImg;
+                          obj.files = this.uploadFiles;
+                          obj.filesName = this.uploadFilesName;
+                          obj.task_user_id = $('input[name="task_id"]').val();
+                          $.ajax({
+                              type:'post',
+                              url:'{:url("marketing/marketingPostExamine")}',
+                              data:obj,
+                              dataType:'json',
+                              success:function(response){
+                                  if(response.code==-1){
+                                      window.location.href="{:url('login/index', ['from' => urlencode(request()->path())])}";
+                                  }else if(response.code==1){
+                                      layer.msg(response.msg);
+                                      self.imgList=[];
+                                      self.uploadImg = [];
+                                      self.uploadFiles = null;
+                                      self.close();
+                                      window.location.reload();
+                                  }else{
+                                      layer.msg(response.msg);
+                                  }
+                              },error:function(err){
+                                  console.log(err);
+                              }
+                          })
+                      }
+			      }
+			  });
+			
+	        	$("._scroll").yi_scroll();
+		        $("._scroll-mh").yi_scroll({isMaxHeight:true,isBar:true});
+				$("#guanbiBtn1").click(function(){
+			   		$(".now_tan_11").fadeOut(100);	
+			    });			  
+			   $(".js_tan_oo").click(function(){
+			   	   $(".now_tan_11").fadeIn(300);
+			   });
+			   $(function(){
+						$("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+						$("input[type=file]").each(function(){
+						if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("No file selected...");}
+					});
+				});
+				$(".net_ul dd").click(function(){
+					$(".net_ul dd").removeClass("active_dd");
+					$(this).addClass("active_dd");
+					var dd=$(this).index();
+					$(".js_a").hide();
+					$(".js_a").eq(dd).show();
+					
+					
+				});
+	
+			// 填写资料弹窗
+			$("#guanbiBtn").click(function(){
+			   	$(".now_tan").fadeOut(100);
+			   	return false;
+			});
+			$(".fabu1").click(function(){
+			   	$(".shenqing").fadeOut(200);
+			});
+			$(".js_tan").click(function(){
+			   	$(".now_tan").fadeIn(300);
+			   
+			});
+		   	$(".dd_now").click(function(){
+		   		if($("#contact1").val()==""){
+		   			$("#tishi1").css("display","block");
+		   		    return false;
+		        }
+		        if($("#shoujihao").val()==""){
+		   			$("#tishi2").css("display","block");
+		   		    return false;
+		        }
+			 	if($("#apply").val()==""){
+			 		$("#tishi3").css("display","block");
+			 		return false;
+			    }
+			 	if(!($("#contact1").val()=="" && $("#shoujihao").val()=="" && $("#apply").val()=="")){
+			 		$.ajax({
+			 			type:'post',
+			 			url:'{:url("task/apply")}',
+			 			data:{
+			 				task_id:$('input[name="task_id"]').val(),
+			 				contact_phone:$('input[name="contact_phone"]').val(),
+			 				contact_name:$('input[name="contact_name"]').val(),
+			 				content:$('#apply').val(),
+			 			},
+			 			dataType:'json',
+			 			success:function(res){
+			 				
+			 				if(res.status == 1){
+								layer.alert('您的申请已提交到小蚁兵团后台审核，请耐心等待 !',{title:'申请成功'}, function(index){
+									layer.close(index);
+									$(".now_tan").fadeOut(100);
+								});
+			 					//$('msg_img').show();
+			 					//$('.msg1').html('申请成功');
+			 					//$('.msg2').html('您的申请已提交到小蚁兵团后台审核，请耐心等待 !');
+			 				}else{
+								layer.alert(res.msg, {title:'申请失败'}, function(index){
+									layer.close(index);
+									if(res.data.url != 'undefined'){
+										location.href = res.data.url;
+									}
+								});
+			 					//$('msg_img').hide();
+			 					//$('.msg1').html('申请失败');
+			 					//$('.msg2').html(res.msg);
+			 				}
+				  			//$(".shenqing").fadeIn(600);
+			 			},
+			 		});
+			 	    
+			 	}
+		   	});
+			$("#contact1").blur(function(){
+			   	if($("#contact1").val()!==""){
+			   		$("#tishi1").css("display","none");
+			   	}
+			});
+			$("#shoujihao").blur(function(){
+			   	if($("#shoujihao").val()!==""){
+			   		$("#tishi2").css("display","none");
+			   	}
+			});
+		    $("#apply").blur(function(){
+		   		if($("#apply").val()!==""){
+		   			$("#tishi3").css("display","none");
+		   		}
+		   	});
+      </script>
+	</body>
+	
+</html>

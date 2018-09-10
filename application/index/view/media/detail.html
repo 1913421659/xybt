@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>媒体资源详情</title>
+	</head>	
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>	
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->	
+		<!--企业资料-->
+		<div class="que_con business_b clearfix" id="wx_details">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('marketing/index')}">营销推广</a>
+						<template>
+							<img src="__RESOURCES__images/right_2.png"/>
+							<a href="{:url('media/index',['type'=>$type->id])}">
+								{$type->name}
+							</a> 
+						</template>
+					</p>
+				</div>
+				<!--<script>
+				alert('{$id}');
+				
+				</script>-->
+				<div class="wx_box clearfix">
+					<h4 class="title_aa active_nav"><span class="wx_span"></span> 资源详情</h4>
+						<template>
+						{include file="media/_detail_1" /}
+						{include file="media/_detail_2" /}
+						{include file="media/_detail_3" /}
+						{include file="media/_detail_4" /}
+						{include file="media/_detail_5" /}
+						{include file="media/_detail_6" /}
+						{include file="media/_detail_7" /}
+						{include file="media/_detail_8" /}					
+						</template>
+					</div>
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+	    <script>
+//	    	var type_id=$type_id;
+            var url="?s=/index/data/channelMediaDetail&id={$id}";
+//          var _url_ajax_title = '?s=index/data/channelMediaAttrGroups';
+			var need_result=new Vue({
+				el:"#wx_details",
+				data:{
+					tableText:{},
+					obj:[],
+					page_sub:'',
+				},
+				mounted:function(){
+					this.$nextTick(function(){
+						this.cartView();
+					});
+				},
+				methods:{
+					cartView:function(){
+						var _this=this;
+//						console.log({$id});
+						 $.post(url, {parent_id:1,limit:1,id:{$id}}, function(rs) {
+						 	need_result.obj = rs.data;
+						 },'json');
+							
+					},
+					getAttr:function(n){
+                        var data = this.obj.attr;
+                        for(var i in data){
+                            if(data[i].id==n){
+                                return data[i].values;
+                            }
+                        }
+					},
+					init:function(){
+						this.getAttr();
+					}
+					
+					
+				}
+				
+			});
+			need_result.init();
+			$('#main_nav_marketing').addClass('menu_home');
+			
+
+		</script>
+	
+</html>

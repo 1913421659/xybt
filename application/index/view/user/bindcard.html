@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的钱包</title>
+	</head>
+	{include file="public/css" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+	    {include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				<div class="que_menu">
+					<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('user/index')}">个人中心</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('user/wallet')}">我的钱包</a></p>
+				</div>
+				<div class="que_a">
+					<div class="row">
+						<div class="col-md-3  min_w">
+						{include file="user/left" /}
+						</div>
+						
+						<div class="col-md-9 wallet_right wallet_n ">
+							<div class="per_title8">
+								<h5>绑定银行卡</h5>
+							</div>
+							<div class="cart_box">
+								<div class="row cart_box1">
+									
+								   <div class="col-md-3 cart_r">
+								   		<span>&nbsp;</span>
+								   </div>
+								   <div class="col-md-5">
+								   	<div id="" class="cart_xiala cart1">
+								     	{if condition="$userSession.bank_bind == 1"}已绑定银行卡{else/}请绑定持卡人的本人银行卡{/if}
+								   	</div>
+								   		
+								   </div>
+								</div>
+								{if condition="$userSession.bank_bind == 1"}
+									<p class="form_eee">
+										<label for="username" class="col-sm-3 control-label left1" >持卡人：</label>
+										<input id="username" readonly name="bank_user" type="text" class="form-control input_pp" value="{$userSession.bank_user}">
+									</p>							
+									<p class="form_eee">
+										<label for="bank_name" class="col-sm-3 control-label left1">开户银行：</label>
+										<input id="bank_name" readonly name="bank_name" type="text" class="form-control input_pp"  value="{$userSession.bank_name}">
+									</p>
+									<p class="form_eee">
+										<label for="cardnumber" class="col-sm-3 control-label left1">卡号：</label>
+										<input id="bank_number" readonly name="bank_number" type="cardnumber" class="form-control input_pp" value="{$userSession.bank_number}">
+									</p>
+								{else/}
+								<form  class="cmxform" id="bingForm" method="post" action="{:url('user/bindcard')}">
+									<fieldset>
+										<p class="form_eee">
+											<label for="username" class="col-sm-3 control-label left1" ><span>* </span>持卡人：</label>
+											<input id="username" name="bank_user" type="text" class="form-control input_pp" placeholder="请输入持卡人姓名">
+										</p>							
+										<p class="form_eee">
+											<label for="bank_name" class="col-sm-3 control-label left1"><span>* </span>开户银行：</label>
+											<input id="bank_name" name="bank_name" type="text" class="form-control input_pp" placeholder="请输入开户银行">
+										</p>
+										<p class="form_eee">
+											<label for="cardnumber" class="col-sm-3 control-label left1"><span>* </span>卡号：</label>
+											<input id="bank_number" name="bank_number" type="cardnumber" class="form-control input_pp" placeholder="请输入银行卡号">
+										</p>	
+										<p class="form_eee form_sub">
+											<button id="bind_a" type="submit">绑定银行卡</button>
+										    <!--<button class="dengru" id="submit">登陆</button>-->
+										  
+										</p>
+									</fieldset>
+								</form>
+								{/if}
+							</div>
+						
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+        <!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+		<script type="text/javascript">
+	    function changeState(el) {
+	        if (el.readOnly) el.checked=el.readOnly=false;
+	        else if (!el.checked) el.readOnly=el.indeterminate=true;
+	     }
+	    </script>
+	    <script>
+
+		$("#bingForm").validate({
+			rules: {
+				bank_user: "required",
+				bank_name: "required",
+				bank_number:"required",
+			},
+			messages: {
+				bank_user: "必填!",		
+				bank_name: "必填!",
+				bank_number:"必填!",
+			},
+			submitHandler: function() {
+				return true;
+			}
+		});
+	
+
+	</script>
+	<script>
+		$('#menu_7').addClass('color_act').prev().show();
+		$('#menu_7 .per_img').hide().filter('.act').show();
+	</script>
+	</body>
+	
+</html>

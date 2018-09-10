@@ -1,0 +1,26 @@
+<ul class="tou_ul chan_1 clearfix">
+	{foreach name="list" item="value"}
+	<li>
+		<div class="ti_e tou_ee">
+			<div class="ti_e_l">
+				<a href="{:Url('marketing/info',['key'=>$value.id])}"><img src="{$value.logo_img|get_image_path}"></a>
+			</div>
+			<div class="ti_e_r">
+				<p>{$value.name}</p>
+				<div class="main_4"><span>奖励：{$value.reward_value|number_format}蚁币</span><span>分红：{$value.cutting_value|number_format}蚁币</span></div>	
+				<div class="main_3">
+					<span><img src="{$value.logo_img|get_image_path}" /></span>
+					<span>{$value.promotion_name|default=""}</span>
+                    <span>余{$value.qty-$value.brought_total}份</span>
+					<span>{$value.checkout_name}</span>
+					<!--<span>{if condition="$value.company_id"}企业发布{/if}</span>-->
+				</div>
+	
+			</div>
+			<div class="now-a clearfix">
+				<a href="{:Url('marketing/info',['key'=>$value.id])}">马上抢</a>
+			</div>
+		</div>
+	</li>
+	{/foreach}
+</ul>

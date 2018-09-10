@@ -1,0 +1,32 @@
+<ul class="company_left_nav">
+	{if condition="$company"}
+	<li class="ico_company_info" :class="{action:action==100}"><span></span><a href="{:url('company/index')}">企业信息</a></li>
+	<li class="ico_company_users" :class="{action:action==200}"><span></span><a href="{:url('company/users')}">员工列表</a></li>
+	<li class="ico_company_apply" :class="{action:action==300}"><span></span><a href="{:url('company/apply_list')}">申请加入<span>(0)</span></a></li>
+	<li class="ico_company_bind" :class="{action:action==400}"><span></span><a href="{:url('company/bind')}">结算绑定</a></li>
+	<li class="ico_company_money" :class="{action:action==500}"><span></span><a href="{:url('company/com_money')}">企业余额</a></li>
+	<li class="ico_company_payment" :class="{action:action==600}"><span></span><a href="{:url('company/payment')}">支付管理<span>(0)</span></a></li>
+	{/if}
+	<li class="ico_company_merchant group" :class="{action:action>700 && action<800}"><span></span><a href="javascript:;" onclick="$(this).next().slideToggle(500)" >商家管理</a>
+		<div class="company_left_nav_sub hide1" :class="{show1:action>700 && action<800}">
+			<a href="{:url('company/myneed')}" :class="{action:action==701}">商家需求</a>
+			<!--<a href="#" :class="{action:action==702}">营销工具</a>-->
+			<a href="{:url('company/channel_dispatch')}" :class="{action:action==703}">渠道派单</a>
+			<a href="{:url('company/media_dispatch')}" :class="{action:action==704}">媒体派单</a>
+		</div>
+	</li>
+	<li class="ico_company_channel group" :class="{action:action>800 && action<900}"><span></span><a href="javascript:;" onclick="$(this).next().slideToggle(500)">渠道管理</a>
+		<div class="company_left_nav_sub hide1" :class="{show1:action>800 && action<900}">
+			<a href="{:url('company/mytask')}" :class="{action:action==801}" >产品管理</a>
+			<a href="{:url('company/channel_receipt')}" :class="{action:action==802}">渠道接单</a>
+			<a href="{:url('company/media_receipt')}" :class="{action:action==803}">媒体接单</a>
+		</div>
+	</li>
+	<!--<li class="ico_company_pay" :class="{action:action==900}"><span></span><a href="{:url('company/pay_project')}">待付款项目<span>(0)</span></a></li>-->
+	<!--<li class="ico_company_gathering" :class="{action:action==1000}"><span></span><a href="{:url('company/receice_project')}">待收款项目<span>(0)</span></a></li>-->
+	<li class="ico_company_paylog" :class="{action:action==1100}"><span></span><a href="{:url('company/income_record')}">收支记录</a></li>
+</ul>
+<!--企业管理菜单栏结束-->
+<script>
+	$('#main_nav_company').addClass('menu_home');
+</script>

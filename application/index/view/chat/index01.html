@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>聊天窗口</title>
+</head>
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/resources/css/com.css"/>
+<link rel="stylesheet" href="/resources/css/style.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/jquery.emoji.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/index.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/jquery.mCustomScrollbar.min.css"/>
+<style>
+	body{
+		min-width: 0px;
+	}
+
+    .chat_emoji{
+        background-color:#ffffff;
+    }
+
+    .chat_emoji span {
+        padding: 0 0;
+        background-color: rgba(241,241,241,0);
+    }
+
+    .media-body span{
+        padding: 0 0;
+        background-color: rgba(241,241,241,0);
+    }
+
+    #contactBox span{
+        padding: 0 0;
+        background-color: rgba(241,241,241,0);
+        height: 25px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+<body class="body_box">
+<div class="chat_box wrap">
+<div class="chat_w">
+    <div class="row">
+        <div class="col-md-3 chat_left">
+            <div class="char_l_top">
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="/index.php?s=/index/user/index.html" class="img_top">
+                            <img id="sendUserImg" class="media-object" src="<?= !empty($curuser['user_picture'])?get_image_path($curuser['user_picture']):'/resources/images/touxiang.png' ?>" alt="头像">
+                        </a>
+                    </div>
+                    <input type="hidden" id="sendUserId" value="<?=$curuser['user_id']?>">
+                    <div class="media-body chat_l_title">
+                        <h4 class="media-heading" id="sendUserName"><?=empty($curuser['nick_name'])?$curuser['user_name']:$curuser['nick_name']?></h4>
+                        <p><span id="sendUserRankName"><?=$list_rank[$curuser['user_rank']]->rank_name?></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat_l_sec clearfix">
+                <ul class="chat_ul">
+                    <li>
+                        <a href="/index.php?s=/index/user/wallet.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_7.png"/></dt>
+                                <dd>钱包</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/user/myshare.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_3.png"/></dt>
+                                <dd>分享</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/user/myneed/key/3.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_2.png"/></dt>
+                                <dd>促销</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/marketing/index/key/3/p_id/27.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_13.png"/></dt>
+                                <dd>众筹</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/marketing/index/key/2/p_id/70.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_2.png"/></dt>
+                                <dd>游戏</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="chat_l_three">
+                <div class="container11 c_1 _scroll clearfix">
+                    <input type="hidden" id="contactStr" value="<?=$lastContactStr?>"/>
+                    <div class="_panel-box" id="contactBox">
+                        <?php if(!empty($lastContactList)){foreach($lastContactList as $k=>$v){ ?>
+                        <div class="ct-item active_aaa" onclick="leftBoxItemEvent(this)">
+                            <input class="contactEach" id="<?=$v['user_id'].'_1' ?>" type="hidden" value="<?=$v['user_id']?>" data="<?=!empty($v['rank_name'])?$v['rank_name']:''?>" c_type="1">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <a href="#" class="chat_three">
+                                        <img class="media-object" src="<?=!empty($v['user_picture'])?get_image_path($v['user_picture']):'/resources/images/touxiang.png'?>" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body chat_title">
+                                    <h4 class="media-heading"><?=empty($v['nick_name'])?$v['user_name']:$v['nick_name']?></h4>
+                                    <p><span></span> </p>
+                                </div>
+                            </div>
+                            <img class="img_right" src="/resources/images/l_15.png" onclick="delBoxItemEvent(this);"/>
+                        </div>
+                        <?php }}?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9 chat_p">
+            <div class="chat_right_t clearfix">
+                <div class="col-md-6 chat_2" style="height: 49px;" id="currentUser" <?php if(!empty($lastContactList)){echo 'data="'.$lastContactList[0]['user_id'].'" ctype="PRIVATE"  ' ;}?>><?php if(!empty($lastContactList)){ echo '<span>'.$lastContactList[0]['rank_name'].'</span>'.(empty($lastContactList[0]['nick_name'])?$lastContactList[0]['user_name']:$lastContactList[0]['nick_name']);}?></div>
+                <div class="col-md-6 chat_r_r">
+                    <div class="chat_r_1 chat_hover">
+                        <a href="/index.php"><img src="/resources/images/l_8.png"/>首页</a>
+                        <small></small>
+                        <a href="index.php?s=/index/company/index.html"><img src="/resources/images/l_6.png"/>企业管理</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 chat_r_l ">
+                        <div class="chat_r_pp">
+                            <div class="container22 c_2 _scroll">
+                                <div class="_panel-box" id="chat_window">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_bottom clearfix">
+                            <div class="chat_5">
+                                <div class="chat_5_l chat_5_t">
+                                    <img src="/resources/images/l_1.png" id="emoji"/>
+                                    <!--表情-->
+                                    <div class="chat_emoji">
+                                    	<div class="container33 c_8 _scroll clearfix">
+											<div class="_panel-box" style="padding: 2px 16px;">
+
+											</div>
+										</div>
+                                    </div>
+                                    <!--表情结束-->
+                                    <!--<img src="/resources/images/l_9.png"/>-->
+                                </div>
+
+                            </div>
+                            <div class="chat_6">
+                                <textarea id="message_box" data-emojiable="true" style="line-height: 20px;padding: 10px 16px;"></textarea>
+
+                                <div class="fasong_2" style="z-index: 10">
+                           
+                                    <button class="btn" type="button" id="clear_message_box" onclick="sendTextMessageAjax()">发送</button>
+                                       <div class="btn-group sent_messege " role="group">
+										    <button type="button" class="btn  dropdown-toggle buttom_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">										      
+										      <small class="sent_border"></small>
+										      <span class="caret sent_img"></span>
+										    </button>
+										    <ul class="dropdown-menu dropdown_2">
+										      <li data="enter"><span class="glyphicon dropdown_1 drop_1" aria-hidden="true"></span><small>按Enter键发送消息</small></li>
+										      <li data="ctrlEnter"><span class="glyphicon dropdown_1 drop_2" aria-hidden="true"></span><small>按Ctrl+Enter键发送消息</small></li>
+										    </ul>
+									  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 chat_r_p">
+                        <div class="chat_menu">
+                            <ul class="chat_ul_li" id="chat_ul_li">
+                                <!--<li class="active_u">-->
+                                <!--最近聊天-->
+                                <!--</li>-->
+                                <li class="active_u" style="width: 50%">
+                                    我的圈子
+                                </li>
+                                <li style="width: 50%">
+                                    我的群组
+                                </li>
+                            </ul>
+                            <div class="chat_b_4">
+                                <div class="fenzhu">
+                                    <div class="container_p c5 _scroll">
+                                        <div class="_panel-box">
+                                            <!--我的上级-->
+                                            <ul class="chat_u">
+                                                <li>
+                                                    <img src="/resources/images/l_11.png"/> 我的上级
+                                                </li>
+                                                <div class="chat_y">
+                                                    <?php foreach($parentsList as $k=>$v){ ?>
+                                                    <div class="media chat_o" data="<?=$v['user_id']?>" data1 = "<?=$v['rank_name']?>" ctype="PRIVATE">
+                                                        <div class="media-left media-middle">
+                                                            <a href="#" class="chat_three">
+                                                                <img class="media-object" src="<?=!empty($v['user_picture'])?get_image_path($v['user_picture']):'/resources/images/touxiang.png'?>"
+                                                                     alt="...">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body chat_title1">
+                                                            <h4 class="media-heading" style="margin-top: 12px;"><font><?=empty($v['nick_name'])?$v['user_name']:$v['nick_name']?></font>
+                                                                <!--<small>9-15</small>-->
+                                                            </h4>
+                                                            <!--<p>在吗？我有事找你...</p>-->
+                                                        </div>
+                                                    </div>
+                                                    <?php }?>
+                                                </div>
+                                            </ul>
+                                            <!--亲友圈-->
+                                            <ul class="chat_u">
+                                                <li>
+                                                    <img src="/resources/images/l_11.png"/> 亲友圈
+                                                </li>
+                                                <div class="chat_y">
+                                                    <?php foreach($relativesList as $k=>$v){ ?>
+                                                    <div class="media chat_o" data="<?=$v['user_id']?>" data1 = "<?=$v['rank_name']?>" ctype="PRIVATE">
+                                                        <div class="media-left media-middle">
+                                                            <a href="#" class="chat_three">
+                                                                <img class="media-object" src="<?=!empty($v['user_picture'])?get_image_path($v['user_picture']):'/resources/images/touxiang.png'?>"
+                                                                     alt="...">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body chat_title1">
+                                                            <h4 class="media-heading" style="margin-top: 12px;"><font><?=empty($v['nick_name'])?$v['user_name']:$v['nick_name']?></font>
+                                                                <!--<small>9-15</small>-->
+                                                            </h4>
+                                                            <!--<p>在吗？我有事找你...</p>-->
+                                                        </div>
+                                                    </div>
+                                                    <?php }?>
+                                                </div>
+                                            </ul>
+
+                                            <!--朋友圈-->
+                                            <ul class="chat_u">
+                                                <li>
+                                                    <img src="/resources/images/l_11.png"/> 朋友圈
+                                                </li>
+                                                <div class="chat_y">
+                                                    <?php foreach($friendList as $k=>$v){ ?>
+                                                    <div class="media chat_o" data="<?=$v['user_id']?>" data1 = "<?=$v['rank_name']?>" ctype="PRIVATE">
+                                                        <div class="media-left media-middle">
+                                                            <a href="#" class="chat_three">
+                                                                <img class="media-object" src="<?=!empty($v['user_picture'])?get_image_path($v['user_picture']):'/resources/images/touxiang.png'?>"
+                                                                     alt="...">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body chat_title1">
+                                                            <h4 class="media-heading" style="margin-top: 12px;"><font><?=empty($v['nick_name'])?$v['user_name']:$v['nick_name']?></font>
+                                                                <!--<small>9-15</small>-->
+                                                            </h4>
+                                                            <!--<p>在吗？我有事找你...</p>-->
+                                                        </div>
+                                                    </div>
+                                                    <?php }?>
+                                                </div>
+                                            </ul>
+                                            <!--关系圈-->
+                                            <ul class="chat_u">
+                                                <li>
+                                                    <img src="/resources/images/l_11.png"/> 关系圈
+                                                </li>
+                                                <div class="chat_y">
+                                                    <?php foreach($relationList as $k=>$v){ ?>
+                                                    <div class="media chat_o" data="<?=$v['user_id']?>" data1 = "<?=$v['rank_name']?>" ctype="PRIVATE">
+                                                        <div class="media-left media-middle">
+                                                            <a href="#" class="chat_three">
+                                                                <img class="media-object" style="margin-top: 12px;" src="<?=!empty($v['user_picture'])?get_image_path($v['user_picture']):'/resources/images/touxiang.png'?>"
+                                                                     alt="...">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body chat_title1">
+                                                            <h4 class="media-heading"><font><?=empty($v['nick_name'])?$v['user_name']:$v['nick_name']?></font>
+                                                                <!--<small>9-15</small>-->
+                                                            </h4>
+                                                            <!--<p>在吗？我有事找你...</p>-->
+                                                        </div>
+                                                    </div>
+                                                    <?php }?>
+                                                </div>
+                                            </ul>
+                                            <!--商家-->
+
+                                            <!--渠道-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fenzhu fenzhu1">
+                                    <div class="container_p c5 _scroll">
+                                        <div class="_panel-box">
+                                            <?php foreach($groupList as $k=>$v){ ?>
+                                            <div class="media chat_o" data="<?=$v['group_id']?>" ctype="GROUP">
+                                                <div class="media-left media-middle">
+                                                    <a href="#" class="chat_three">
+                                                        <img class="media-object" src="<?=!empty($v['group_img'])?get_image_path($v['group_img']):'/resources/images/group-img.png'?>"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body chat_title1">
+                                                    <h4 class="media-heading" style="margin-top: 12px;"><font><?=$v['group_name']?></font>
+                                                        <!--<small>9-15</small>-->
+                                                    </h4>
+                                                    
+                                                </div>
+                                            </div>
+                                            <?php }?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script type="text/javascript" src="/resources/js/jquery.1.12.3.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/resources/js/yi-scroll.js"></script>
+<script type="text/javascript" src="/resources/js/js.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="/resources/rongcloud/protobuf-2.2.7.min.js" ></script>-->
+<!--<script type="text/javascript" src="/resources/rongcloud/RongIMLib-2.2.7.min.js" ></script>-->
+<script src="http://cdn.ronghub.com/RongIMLib-2.2.5.min.js"></script>
+<script src="http://cdn.ronghub.com/RongEmoji-2.2.5.min.js"></script>
+<script src="http://cdn.ronghub.com/Libamr-2.2.5.min.js"></script>
+<script src="http://cdn.ronghub.com/RongIMVoice-2.2.5.min.js"></script>
+
+<script src="/resources/rongcloud/index.js"></script>
+<script type="text/javascript" src="/resources/emoji/js/jquery.emoji.min.js"></script>
+<script type="text/javascript" src="/resources/emoji/js/jquery.mCustomScrollbar.min.js"></script>
+
+<script>
+    var $ = jQuery;
+    $("._scroll").yi_scroll();
+    $("._scroll-mh").yi_scroll({isMaxHeight: true, isBar: true});
+
+    var params = {
+        appKey: "<?=$appkey?>",
+        token: "<?=$token ?>",
+        navi: ''
+    };
+
+
+    var userId = '<?=$curuser['user_id']?>';
+    var callbacks = {
+        getInstance: function (instance) {
+            registerMessage("PersonMessage");
+        },
+        getCurrentUser: function (userInfo) {
+            userId = userInfo.userId;
+        },
+        receiveNewMessage: function (message) {
+            //判断是否有 @ 自己的消息
+            var mentionedInfo = message.content.mentionedInfo || {};
+            var ids = mentionedInfo.userIdList || [];
+            for (var i = 0; i < ids.length; i++) {
+                if (ids[i] == userId) {
+                    alert("有人 @ 了你！");
+                }
+            }
+            console.log(message);
+        }
+    }
+
+    init(params, callbacks);
+
+    $('.chat_o').click(function(){
+        $('#chat_window').html('');
+
+        var ctype = $(this).attr('ctype');
+        var targetId = $(this).attr('data');
+        var username =  $(this).children(1).find('font');
+        var headImg = $(this).find('img').attr('src');
+        var c_type = 1;//默认是PRIVATE
+        var rank_name = $(this).attr('data1');
+        if(ctype=='PRIVATE'){
+            c_type = 1;
+            $('#currentUser').attr('data',targetId);
+            $('#currentUser').html('<span>'+rank_name+'</span>'+username.html());
+            $('#currentUser').attr('ctype','PRIVATE');
+            showContactLeft(targetId,username.html(),headImg,c_type,rank_name,'',0);
+        }else if(ctype=='GROUP'){
+            c_type = 3;
+            $('#currentUser').attr('data',targetId);
+            $('#currentUser').attr('ctype','GROUP');
+            $('#currentUser').html(username.html());
+            $('#currentUser').attr('imgv',headImg);
+            showContactLeft(targetId,username.html(),headImg,c_type,'','',0);
+        }
+
+        showReadMessage(targetId,c_type);//切换的时候，先显示已读信息
+        showUnreadMessage(targetId,c_type);//显示
+    })
+
+    RongIMLib.RongIMEmoji.init(null,{
+        size : 24,
+        lang: 'zh',
+        url : "./emojis.png"
+    });
+    emojis = RongIMLib.RongIMEmoji.emojis;
+
+    var onoff=true;
+    $("#emoji").click(function(){
+        if(onoff){
+            $(".chat_emoji").css("display","block");
+            $.each(emojis,function(index,item){
+                $(".chat_emoji ._panel-box").append(item);
+            });
+            onoff=false;
+        }else{
+            $(".chat_emoji").css("display","none");
+            onoff=true;
+        }
+        cancelBubble();
+    });
+
+    $('.chat_emoji ._panel-box').click(function(event){
+        var e = event || window.event;
+        var target = e.target || e.srcElement;
+        var isTrue = $(target).hasClass('RC_Expression');
+        if(isTrue){
+            var emo = $(target).parent().attr('name');
+            $('#message_box').val($('#message_box').val()+ RongIMLib.RongIMEmoji.symbolToEmoji(emo));
+            $(".chat_emoji").css("display","none");
+            onoff=true;
+        }
+        cancelBubble();
+    });
+
+    $(window).click(function(){
+        $(".chat_emoji").css("display","none");
+        onoff=true;
+    });
+    readyLastContact();
+
+    $('#message_box').focus();
+
+    //页面离开提示
+    $(window).bind('beforeunload',function(){
+        return '';
+    });
+
+    sendTypeKey = getCookie('sendTypeKey_'+userId);
+    var sendTypeKey = typeof sendTypeKey =='undefined'?'ctrlEnter':getCookie('sendTypeKey_'+userId);//ctrl+enter
+
+    if(sendTypeKey=='enter'){
+        $('.drop_1').addClass('glyphicon-ok');
+    }else if(sendTypeKey=='ctrlEnter'){
+        $('.drop_2').addClass('glyphicon-ok');
+    }
+
+    //按键事件
+    $(document).keypress(function(e){
+        if(sendTypeKey=='enter'){
+            if(!(e.shiftKey || e.ctrlKey || e.esc || e.altKey || e.keyCode==9) && e.which == 13){
+                sendTextMessageAjax();
+            }
+        }else if(sendTypeKey=='ctrlEnter'){
+            if(e.ctrlKey && (e.which == 13 || e.which==10)){
+                sendTextMessageAjax();
+            }
+        }
+    });
+
+	$(".dropdown-menu li").click(function(){
+        sendTypeKey = $(this).attr('data');
+        if(sendTypeKey=='ctrlEnter'){
+            $('.drop_1').removeClass('glyphicon-ok');
+            $('.drop_2').addClass('glyphicon-ok');
+        }else if(sendTypeKey=='enter'){
+            $('.drop_2').removeClass('glyphicon-ok');
+            $('.drop_1').addClass('glyphicon-ok');
+        }
+
+        setCookie('sendTypeKey_'+userId,sendTypeKey);
+    });
+
+</script>
+
+</body>
+
+</html>

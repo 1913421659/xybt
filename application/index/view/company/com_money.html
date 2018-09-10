@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业余额</title>
+	</head>	
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>	
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->	
+		<!--企业资料-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">企业余额</a> 
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+						    <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:500
+							}
+						});
+						</script>
+						
+						<div class="col-md-9 que_right" id="need_result" >							
+							<div class="row">
+								<div class="moneny_box clearfix">
+									<h5 class="money_title">企业余额(元)</h5>
+									<p class="money_span">
+										<span>{$company.company_money}</span><a class="money_a" href="{:url('company/com_recharge')}">充值</a>
+									</p>
+								</div>
+								<div class="des"></div>
+								<div class="money_con">
+									<div class="col-md-12 need_right ">
+										<div class="money_p">
+											<h4 class="money_ji">充值记录</h4>
+										    <div class="layui-input-inline month">
+										        <input type="text" class="layui-input " id="test3" :change="recordView" :value="month" placeholder="yyyy-MM">
+										    </div>
+										</div>
+										<div class=""  style="padding: 0 20px;">
+											<table class="table table_1 table_td">
+												<tr class="table_first">
+											  	   <td>创建时间</td>
+											       <td>名称</td>
+											       <td>金额</td>
+											       <td>支付方式</td>
+											       <td>状态</td>
+											    </tr>
+											    <!--<template v-if>-->
+											     <tr v-for="table in tables">
+											  	   <td >{{time(table.add_time)}}</td>
+											       <td><template v-if="table.bill_type==1">充值</template></td>
+											       <td>{{table.money}}</td>
+											       <td><template v-if="table.recharge_type==1">支付宝</template></td>
+											       <td>
+												       	<template v-if="table.status==0">待处理</template>
+												        <template v-if="table.status==1">成功</template>
+												        <template v-if="table.status==2">失败</template>
+											       </td>
+											    </tr>
+											    <!--</template>-->
+											</table>
+                                        	 <!--无数据-->
+		                                    <div class="com_no_data" v-if="tables.length==0">
+		                                        <img src="__RESOURCES__images/no_data_1.png" />
+		                                        <p>暂无数据</p>
+		                                    </div>
+		                                     <!--无数据-->
+										</div>	
+								    </div>
+								    <!--分页-->
+									<div class="fenye" v-if="tables.length>0">
+										<div style="width:800px;margin:0 auto;">
+											<div id="kkpager"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+	    <script>
+	    	var url="?s=/index/data/companyBillList";
+	    	var kkpager_bak = clone(kkpager);
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+                    month:'',
+					tables:{},
+					page_info:{},
+					filter:{
+						page:1
+					}
+				},
+				mounted:function(){
+					this.$nextTick(function(){
+						this.recordView();
+					});
+				},
+				methods:{
+					recordView:function(){
+                        var month = this.month;
+                        var page = this.filter.page;
+						 $.post(url, {month:month,page:page}, function(rs) {
+						 	need_result.tables = rs.data.list;
+                            need_result.page_info = rs.data.page_info;
+                            need_result.month = rs.data.month;
+						 },'json');		
+					},
+					//翻页
+					gotoPage:function(n){
+						this.filter.page=n;
+                        this.recordView();
+					}
+				},
+				updated:function(){
+				//有些参数是可选的，比如lang，若不传有默认值
+				$('#kkpager').html('');
+				kkpager = clone(kkpager_bak);
+				var config = {
+					pagerid :'kkpager',
+					pno : need_result.page_info.page,
+					//总页码
+					total : need_result.page_info.end,
+					//总数据条数
+					totalRecords : need_result.page_info.total,
+					getLink : function(n){
+						return "javascript:need_result.gotoPage('" + n + "');";
+					}
+				};
+				kkpager.generPageHtml(config, true);
+				kkpager.selectPage(need_result.filter.page);
+			}
+			
+		});
+		
+		</script>
+	    <script>	
+	    //年月选择器
+		laydate.render({
+		    elem: '#test3'
+		    ,type: 'month'
+		    ,done: function(value){
+                need_result.month=value;
+                need_result.recordView();
+            }
+		});
+		function time(t){
+			var mydata=new Date(t*1000);
+			var this_date = new Date();
+			var str = '';
+			if (mydata.toDateString() === this_date.toDateString()) {
+			 	str += '今天'
+			}else{
+				str += mydata.getFullYear()+"-" + (mydata.getMonth()+1)+"-" + mydata.getDate()
+			}
+			str +=" "+mydata.getHours()+":"+mydata.getMinutes();	
+			return str;	
+		}
+		
+		</script>
+		
+	</body>
+	
+</html>

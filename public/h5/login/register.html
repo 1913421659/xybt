@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>注册账号</title>
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/jquery-weui.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/jquery-weui.min.js" ></script>
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="homeBox">	
+			<header class="hanner_box" >
+				<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span >注册账号</span>
+			</header>
+			<div class="qr_box">
+				<form  onsubmit="return false">
+					<div class="weui-panel weui_input  weui-panel_access">
+						<div class="weui-cell  ">
+						    <div class="weui-cell__hd"><label  class="weui-label"><img class="loginImg" src="../images/deng_1.png" /></label></div>
+						    <div class="weui-cell__bd">
+						      <input class="weui-input loginInput loginI" id="phoneNumber" v-model="phoneNumber"   type="text"  placeholder="请输入手机号" >
+						    </div>
+						</div>
+						<div class="weui-cell " style="padding: 0;">
+						    <div class="weui-cell__hd" style="padding: 10px 0px 10px 15px;"><label  class="weui-label"><img class="loginImg" src="../images/yanzhengma.png" /></label></div>
+						    <div class="weui-cell__bd" style="padding: 10px 0px 10px 0;">
+						    	<input class="weui-input loginInput" id="password" v-model="verificationCode"  type="password"  placeholder="请输入验证码" >
+						    </div>
+						    <div class="weui-cell__ft">
+						        <button class="weui-vcode-btn codeNumber" type="submit" @click="send" >
+						          	<template>
+						          		<span v-if="sendMsgDisabled">{{time+'秒后获取'}}</span>
+		  								<span v-if="!sendMsgDisabled">获取验证码</span>
+						          	</template>					         	 	
+						        </button>
+					        </div>
+						</div>
+						<div class="weui-cell ">
+						    <div class="weui-cell__hd"><label  class="weui-label"><img class="loginImg" src="../images/deng_2.png" /></label></div>
+						    <div class="weui-cell__bd">
+						    	<input class="weui-input loginInput" id="password" v-model="passwordNumber"  type="password"  placeholder="请输入密码" >
+						    </div>
+						</div>
+					</div>					
+					<div class="qrBtn_3"><a @click="register" href="javascript:;" class="weui-btn  weui-btn_primary_1">确认登录</a></div>
+					<<div class="loginBox">
+						已阅读并同意<a href="#" class="active">《小蚁兵团用户注册协议》</a><a class="loginForget" href="login.html">已有账号</a>
+					</div>
+				</form>					
+			</div>			
+		</div>
+		<script>
+			var homeBox1 = new Vue({
+				el:"#homeBox",
+				data:{
+					phoneNumber:'',
+					passwordNumber:'',
+					verificationCode:'',
+					time: 60, // 发送验证码倒计时
+					sendMsgDisabled: false,
+				},
+				methods:{
+					menuBtn:function(){
+						$("#menu_show").animate({left:"0%"},"800");
+					},
+					menu_hide:function(){
+						$("#menu_show").animate({left:"-100%"},"800");						
+					},
+					register:function(){
+						if(this.phoneNumber==''){
+							$.toast("请输入手机号","text");						 							
+						}else if(!(/^1[34578]\d{9}$/).test(this.phoneNumber)){
+							$.toast("请输入正确的手机号", "text");
+						}else if(this.passwordNumber==''){
+							$.toast("请输入密码","text");	
+						}else if(/^.{1,4}$/.test(this.passwordNumber)){
+							$.toast("长度不应少到5个字符","text");	
+						}else if(this.verificationCode==''){
+							$.toast("请输入验证码","text");		
+						}else{
+							alert("成功");
+						}						
+					},
+					send:function(){
+						if(this.phoneNumber==''){
+							$.toast("请输入手机号","text");						 							
+						}else if(!(/^1[34578]\d{9}$/).test(this.phoneNumber)){
+							$.toast("请输入正确的手机号", "text");
+						}else{
+							let messige = this;
+						    messige.sendMsgDisabled = true;
+						    let interval = window.setInterval(function() {
+							    if ((messige.time--) <= 0) {
+							    	messige.time = 60;
+							    	messige.sendMsgDisabled = false;
+							    	window.clearInterval(interval);
+							    }
+						    }, 1000);
+						}											   
+					}										
+				},					 
+			})
+		</script>		
+	</body>
+</html>

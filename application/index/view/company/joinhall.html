@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>兼职成长营</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		<div class="header_second clearfix" style="border-bottom: 1px solid #ff5c00;width: 100%;padding: 4px 0;background-color: #fff;">
+			<div class="wrap">
+				<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/recharge_logo.png" />
+				</a>
+				<span class="header_des"></span>
+				<span class="h_shuoming xiu active_nav">任务大厅</span>
+			</div>
+		</div>
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="com_contain">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					       <div class="des"></div>
+					        {include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:0
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " >	
+							<div class="row">
+								<!--<div  class="com_content">
+									<div class="col-md-8 title_aa">商家需求</div>
+									<a href="{:url('company/myneed')}" class="com_more">更多</a>
+								</div>-->
+								<div class="search_con">
+									<div class="d_box_2">
+									   <div class="row">
+										<div class="col-md-10">
+											<div class="search_box_inner">
+												<div class="media">
+												  <div class="media-left  mianfei_1">
+													<a class="search_img" href="#">
+													  <img class="media-object" src="__RESOURCES__images/a_16.png" alt="...">
+													</a>
+												  </div>
+												  <div class="media-body ">
+													<h4 class="media-heading search_title"><span class="jion_hall">福利<span>摩拜单车免费骑行周卡 可与月卡叠加</h4>
+													<p class="search_con_a">分红：2000蚁币</p>
+													<p class="">
+														<span>
+															<img src="__RESOURCES__images/a_16.png" height="30px" width="30px" />
+														</span>
+														<span>礼包 </span>&nbsp;&nbsp;
+														<span>余2000份</span>&nbsp;&nbsp;
+														<span> 24小时审核</span>
+													</p>
+													<p class="search_detail" style="width:400px;">产品介绍：摩拜单车免费骑行周卡，领取后可免费骑行7天，可与已有月卡叠加，新老用户均...</p>
+												  </div>
+												</div>
+												
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div>
+												<div class="now-a clearfix search_now">
+											         <a href="#">马上抢</a>
+										        </div>
+											</div>
+											
+										</div>
+										
+									</div>
+								  </div>
+								</div>
+
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+		
+			
+	</body>
+	
+</html>

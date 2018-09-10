@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$art.title}</title>
+	</head>
+		{include file="public/css" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="que_a">
+					<div class="row">						
+						<div class="col-md-12" style="background:#FFF;">
+							<div class="que_r_a que_top">
+								<h4 class="que-title about_titie">{$art.title}</h4>
+							</div>
+							<div class="row">
+								<div class="col-md-12 detail">
+									{$art.content}
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		
+		{include file="public/js" /}
+		{include file="public/js_1" /}
+	</body>
+	
+</html>

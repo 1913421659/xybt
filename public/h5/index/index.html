@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>小蚁并团</title>
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />		
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="homeBox">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+				    <div class="swiper-slide" v-for="item in banner"><a href="#"><img :src="item.banner_1" alt=""></a> </div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<div class="weui-flex home_list">
+			  	<div class="weui-flex__item" v-for="item in menuList">
+			  		<a href="#">
+			  			<span class="home_img"><img :src="item.menuImg" /></span>
+			  			<p>{{item.menuTitle}}</p>			  			
+			  		</a>
+			  	</div>			 	
+			</div>
+			<div class="weui-flex home_list home_list_1">
+			  	<div class="weui-flex__item" v-for="item in menuList_1">
+			  		<a href="#">
+			  			<span class="home_img"><img :src="item.menuImg_1" /></span>
+			  			<p>{{item.menuTitle_1}}</p>			  			
+			  		</a>
+			  	</div>			 	
+			</div>
+			<div class="des"></div>
+			<div class="menu_title">
+				<div class="weui-flex">
+				 	<div class="weui-flex__item menu_left" style="border-right: 1px solid #ddd;">
+				 		<a href="#" class="menu_a active">
+				 			<p>我要推广 <span class="home_right"></span></p>
+				 			<p>七十多种营销方式</p>
+				 		</a>
+						<span class="home_img_bg">
+				 			<img src="images/tuiguang.png" />
+				 		</span>
+				 	</div>
+				 	<div class="weui-flex__item menu_left">
+				 		<a href="#" class="menu_a active">
+				 			<p>资源入驻 <span class="home_right"></span></p>
+				 			<p>实现多种资源入驻</p>
+				 		</a>
+						<span class="home_img_bg">
+				 			<img src="images/ruzhu.png" />
+				 		</span>
+				 	</div>
+				 	
+				</div>
+			</div>
+			<div class="des"></div>
+		</div>
+		<script>
+			var homeBox = new Vue({
+				el:"#homeBox",
+				data:{
+					banner:[
+						{banner_1:"../images/banner_1.png"},
+						{banner_1:"../images/banner_2.png"},
+						{banner_1:"../images/banner_1.png"},	
+					],
+					menuList:[
+						{
+							menuImg:"../images/qudao_fenlei.png",
+							menuTitle:"渠道资源",
+						},
+						{
+							menuImg:"../images/weixin_fenlei.png",
+							menuTitle:"微信资源",
+						},
+						{
+							menuImg:"../images/guanggao_fenlei.png",
+							menuTitle:"广告投放",
+						},
+						{
+							menuImg:"../images/zhibo_fenlei.png",
+							menuTitle:"直播资源",
+						},
+						{
+							menuImg:"../images/wangluo_fenlei.png",
+							menuTitle:"网络营销",
+						},
+					],
+					menuList_1:[
+						{
+							menuImg_1:"../images/weibo_fenlei.png",
+							menuTitle_1:"微博资源",
+						},
+						{
+							menuImg_1:"../images/cuxiao_fenlei.png",
+							menuTitle_1:"促销活动",
+						},
+						{
+							menuImg_1:"../images/fenxiao_fenlei.png",
+							menuTitle_1:"产品分销",
+						},
+						{
+							menuImg_1:"../images/shipin_fenlei.png",
+							menuTitle_1:"视频资源",
+						},
+						{
+							menuImg_1:"../images/tiyan_fenlei.png",
+							menuTitle_1:"产品体验",
+						},
+					],
+					
+				},
+				methods:{
+					
+				},
+				 beforeCreate() {
+				    this.$nextTick(function () {
+				     var swiper = new Swiper('.swiper-container', {
+					        loop: true,
+					        pagination: '.swiper-pagination',
+					        paginationClickable: true,
+					        nextButton: '.swiper-button-next',
+					        prevButton: '.swiper-button-prev',
+//					        autoplay:3000,
+					    });
+				    })
+				  }
+			})
+			
+		</script>
+	</body>
+</html>

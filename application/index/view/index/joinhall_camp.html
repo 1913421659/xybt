@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代理规则</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		<div class="header_second clearfix" style="border-bottom: 1px solid #ff5c00;width: 100%;padding: 4px 0;background-color: #fff;">
+			<div class="wrap">
+				<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/recharge_logo.png" />
+				</a>
+				<span class="header_des" style="left: -101px;"></span>
+				<span class="h_shuoming jionhall_title active_nav">加盟大厅</span>
+			</div>
+		</div>
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>				
+						<a href="{:url('index/joinhall')}">加盟大厅</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">代理规则</a> 
+					</p>
+				</div>
+				<div class="com_contain" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							
+					        {include file="index/jion_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:4
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " >	
+							<div class="row">
+								<div class="jionhall_img">
+									<div class="jionhall_img">
+                                        <?php $parttime_type = $info['agent_type']==3?3:($info['agent_type']==2?1:2); ?>
+                                        <img src="__RESOURCES__images/parttime_{$parttime_type}.png" />
+										<!--完成了KPI自动升级成为成蚁达人-->
+										<!--替换的图片-->
+										<!--<img src="__RESOURCES__images/parttime_1.png" />-->
+										<!--完成了KPI自动升级成为合作代理-->
+										<!--替换的图片-->
+										<!--<img src="__RESOURCES__images/parttime_3.png" />-->
+									</div>
+								</div>
+								<div class="des"></div>
+								<div class="jionhall_box">
+									<h4 class="title_aa active_nav"><span class="wx_span"></span>代理规则</h4>
+									<!--第一个模块--> 
+									<div class="jionhall_rult">
+                                        {if condition="$info['agent_type']==1"}
+                                        <p>1：幼蚁代理人数不限，KPI：平均每人5000元；</p>
+                                        <p>2：以网络营销、产品分销和广告投放确认结算作为统计；</p>
+                                        <p>3：幼蚁代理连续两月完成指定KPI，升级成为成蚁代理；</p>
+                                        <p>4：KPI计算以申请成为幼蚁代理时间起计算30天；</p>
+                                        <p>5：后面加入人员从下一个申请成为幼蚁代理时间起计；</p>
+                                        <p>6：未完成当月任务额，每月每人KPI上调20%；</p>
+                                        <p>7：连续两个月未完成KPI，减少50%任务推送量；</p>
+                                        <p>8：连续三个月未完成KPI，退出幼蚁代理。</p>
+                                        {elseif condition="$info['agent_type']==2"}
+                                        <p>1：成蚁代理人数不限，KPI：平均每人10000元；</p>
+                                        <p>2：以网络营销、产品分销和广告投放确认结算作为统计；</p>
+                                        <p>3：成蚁代理连续两月完成指定KPI，可以申请成为合伙代理；</p>
+                                        <p>4：KPI计算以申请成为幼蚁代理时间起计算30天；</p>
+                                        <p>5：后面加入人员从下一个申请成为幼蚁代理时间起计；</p>
+                                        <p>6：未完成当月任务额，每月每人KPI上调20%；</p>
+                                        <p>7：连续两个月未完成KPI，降回幼蚁代理。</p>
+                                        {elseif condition="$info['agent_type']==3"}
+										<p>1：合伙代理人数不限，KPI：按公司实际情况制定；</p>
+										<p>2：以网络营销、产品分销和广告投放确认结算作为统计；</p>
+										<p>3：KPI计算以每个自然月计算。</p>
+                                        {/if}
+									</div>
+								</div>
+
+							</div>
+							
+							
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					
+				},
+				methods:{
+					
+				}
+			})
+		</script>	
+	</body>
+	
+</html>

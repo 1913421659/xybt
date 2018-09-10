@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的企业</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="com_contain">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					       <div class="des"></div>
+					        {include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:0
+							}
+						});
+						</script>
+
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					items:[
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_price_2:"424.00",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"广告投放",
+							n_num:"20000",
+							n_shoucang:"0",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_price_2:"424.00",
+							n_fabu:"覃小伟",
+							n_time:"2017-02-02",
+							n_qudao:"广告投放",
+							n_num:"20000",
+							n_shoucang:"0",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_price_2:"424.00",
+							n_fabu:"覃小伟",
+							n_time:"2017-02-02",
+							n_qudao:"广告投放",
+							n_num:"20000",
+							n_shoucang:"0",
+						
+						},
+					],
+					lists:[
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"未加入/创建企业",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"未加入/创建企业",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"未加入/创建企业",
+						
+						},
+					],
+					take:[
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"待接单",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"待接单",
+						},
+						{
+							n_src:"__RESOURCES__images/angr.png",
+							n_title:"推广各类APP/应用/游戏",
+							n_price_1:"755245",
+							n_fabu:"覃小威",
+							n_time:"2017-02-02",
+							n_qudao:"IOS渠道",
+							n_num:"覃大威",
+							n_shoucang:"待接单",
+						},
+					]
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+		
+			
+	</body>
+	
+</html>

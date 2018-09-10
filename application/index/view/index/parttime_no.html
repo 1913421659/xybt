@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>暂时未加入任何兼职</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		<div class="header_second clearfix" style="border-bottom: 1px solid #ff5c00;width: 100%;padding: 4px 0;background-color: #fff;">
+			<div class="wrap">
+				<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/recharge_logo.png" />
+				</a>
+				<span class="header_des" style="left: -101px;"></span>
+				<span class="h_shuoming jionhall_title active_nav">任务大厅</span>
+			</div>
+		</div>
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>				
+						<a href="{:url('index/parttime')}">任务大厅</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">未加入任何兼职</a> 
+					</p>
+				</div>
+			    <div class="jionhall_innter">
+			    	 <div class="com_no_data">
+                        <img src="__RESOURCES__images/jionhall_c.png" />
+                        <p>暂时未加入任何兼职</p>
+                        <input type="submit" v-on:click="My_check" style="margin-top: 10px;" class="fabu" value="申请加入兼职">
+                    </div>			    	
+			    </div>	
+			</div>
+			<div class="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_1">
+					<ul>
+						<li>
+							<div class="header_now">
+								申请加入兼职成长营
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							
+							<div class="res_inner">
+							    <div class="container_ooo c_8 _scroll">
+									<div class="_panel-box">										
+										<div class="content_now" >
+											<div class="jionhall_img">
+												<img src="__RESOURCES__images/jionhall_d.png" />
+											</div>
+											<div class="jionhall_box">
+												<h4 class="title_aa active_nav"><label><img src="__RESOURCES__images/jionhall_44.png" /></label>成长营规则</h4>
+												<!--第一个模块--> 
+												<div class="jionhall_rult">
+													<p>1：加入成长营可获得专业培训；；</p>
+													<p>2：根据您的需要推送兼职任务；</p>
+													<p>3：以福利、体验和促销的奖励和分红作为任务额；</p>
+													<p>4：兼职人员每月完200元的任务额；</p>
+													<p>5：任务额以加入时间起计算30天；</p>
+													<p>6：完成当月任务额度的升级为兼职达人；</p>
+													<p>7：未完成当月任务额，第二月增长20%任务额；</p>
+													<p>8：第二月未完任务，退出成长营；</p>
+													<p>9：再次申请加入成长营、任务额在退出的基础上增加10%；  </p>
+												</div>
+											</div>
+										</div>
+									</div>
+							   </div>
+							
+							</div>
+							<div class="dibu">
+							   <a class="dd_now shen_now" @click="btn_sub" title="">确认申请加入兼职成长营</a>
+							</div>
+						</li>	
+					</ul>
+				</div>
+			</div>
+			
+		</div>	
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					
+				},
+				methods:{
+					My_check:function(){
+						$(".now_tan").fadeIn(300);
+					},
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					},
+					getScorll:function(){
+						$("._scroll").yi_scroll();
+					},
+                    btn_sub:function(){
+                        $.post('{:url("index/parttime_in")}',{},function(rs){
+                            if(rs.code){
+                                layer.msg(rs.msg);
+                                window.setTimeout(function(){
+                                    window.location.href="{:url('index/parttime')}";
+                                },1500);
+                            }else{
+                                layer.msg(rs.msg);
+                            }
+                        },"json");
+                    },
+					init:function(){
+						this.getScorll();
+					}
+				}
+			})
+			company_need.init();
+		</script>
+		
+	</body>
+	
+</html>

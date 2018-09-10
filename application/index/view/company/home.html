@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的企业</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">企业信息</a> 
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:100
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right ">	
+								<div class="row">
+									<div id="page_company_home">
+							<template>
+									<div class="Business_box" v-if="is_manage">
+										<div class="media">
+										  <div class="media-left media-middle">								   
+												<!--上传头像-->
+												<div class="file_shang">
+													<div id="preview">
+														<img id="imghead" width=100% height=auto border=0 src='{$company.company_head_portrait|default='__RESOURCES__images/touxiang.png'}'>
+													</div>
+													<div class="input8 input9">
+													  <input id="company_logo" name="company_logo" type="file" v-on:change="saveLogo()" /> 
+													</div> 
+												</div>
+										  </div>
+										  <div class="media-body business_ov">
+												<div class="business_top clearfix">
+													<p class="business_p">{{company_name}}</p>
+													<ul class="business_ul business_li_list">
+														<li><a href="{:url('company/users')}">企业员工（{{user_number}}）</a></li>
+														<li><a href="{:url('company/apply')}">申请审核（{{apply_number}}）</a></li>
+														<li>
+															<div class="business_hover">
+																<p class="hover_p">企业二维码</p>
+																<div class="business_erm">
+																	<span><img src="{$company.qrcode_path}"/></span>
+																</div>
+															</div>
+														
+														</li>
+													</ul>
+												</div>	
+										  </div>
+										</div>
+									</div>
+									
+									<div class="business_jianjie">
+										<div class="per_nei">
+											<div class="row per_k">
+												<div class="col-md-8 title_aa">企业简介</div>	
+												{if condition="$is_manage"}
+												<div class="col-md-4">
+													<a class="bianji after_1" href="#" v-on:click="saveRemarks" v-if="open_edit">保存</a>
+													<a class="bianji after_1" href="#" v-on:click="editRemarks" v-else>编辑</a>
+												</div>{/if}
+											</div>
+										</div>
+										<div class="business_detail">
+											<p v-if="open_edit">
+												<textarea rows="5" id="company_remarks" style="width:100%;">{{remarks}}</textarea>
+											</p>
+											<p v-else>
+												{{remarks}}
+											</p>
+										</div>
+									</div>
+									<!--员工管理-->
+							</template>
+									</div>
+									<div class="des"></div>
+									<div class="business_jianjie" >
+										<p class="settlement_tishi ziliao_des">暂不提供修改资料，如有需求请联系客服   </p>
+										<form class="cmxform" id="create_form" method="" action="">
+										     <fieldset>
+													
+											    <div class="settlement_cart">
+										 			<span class="settlement_title ziliao_title">企业基本资料</span>
+										 		</div>
+												<!--企业基本资料-->
+												<div class="creat_list">
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>企业名称：</label>
+														<input name="nickname"  type="text" class="form-control input_p" id="nickname" placeholder="" value="{$company.company_name}" readonly>
+													</p>							
+													<!--上传营业照-->
+												
+													 <!--上传营业照-->
+													   <div class="form-group">
+													    <label  class="col-sm-3 control-label left1"><span>* </span>营业执照：</label>
+													    <div class="col-sm-5">
+													    	 <div  class="ziliao_img">
+													    	 	<!--上传图片-->
+													    	 	<img src="{$company.license_path|get_image_path}" />
+													    	 </div>
+													    </div>
+													   </div>
+													   <!--上传营业照-->
+													
+												    <!--上传营业照-->
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span> 信用代码：</label>
+														<input name="CreditCode"  type="text" class="form-control input_p" id="CreditCode" placeholder="" value="{$company.credit_code}" readonly>
+													</p>							
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>办公地址：</label>
+														<input name="officeAddress"  type="text" class="form-control input_p" id="officeAddress" placeholder="" value="{$company.business_address}" readonly>
+													</p>
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>企业法人：</label>
+														<input name="Corporate"  type="text" class="form-control input_p" id="Corporate" placeholder="" value="{$company.legal_person}" readonly>
+													</p>							
+													
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>*</span>创建联系人：</label>
+														<input name="contact"  type="text" class="form-control input_p" id="contact" placeholder="" value="{$company.contact_name}" readonly>
+													</p>
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>联系电话：</label>
+														<input name="contactNumber"  type="text" class="form-control input_p" id="contactNumber" placeholder="" value="{$company.contact_phone}" readonly>
+													</p>							
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span> * </span>邮箱：</label>
+														<input name="email"  type="text" class="form-control input_p" id="email" placeholder="" value="{$company.contact_email}" readonly>
+													</p>
+												
+												<!--企业基本资料结束-->
+												</div>
+												<div class="settlement_cart">
+										 			<span class="settlement_title ziliao_title">企业开票信息</span>
+										 		</div>
+										      <!--列表-->
+										       <div class="creat_list">
+									 	   
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>企业名称：</label>
+														<input name="nickname1"  type="text" class="form-control input_p" id="nickname" placeholder="" value="{$company.ticket_company_name}" readonly>
+													</p>							
+													
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>银行账号：</label>
+														<input name="CreditCode1"  type="text" class="form-control input_p" id="CreditCode" placeholder="" value="{$company.company_account}" readonly>
+													</p>							
+													
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>开户行：</label>
+														<input name="officeAddress1"  type="text" class="form-control input_p" id="officeAddress" placeholder="" value="{$company.company_bank_name}" readonly>
+													</p>
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>单位地址：</label>
+														<input name="Corporate1"  type="text" class="form-control input_p" id="Corporate" placeholder="" value="{$company.company_address}" readonly>
+													</p>							
+													
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>税务登记号：</label>
+														<input name="contact1"  type="text" class="form-control input_p" id="contact" placeholder="" value="{$company.tax_number}" readonly>
+													</p>
+													<p class="form_ee">
+														<label for="" class="col-sm-3 control-label left1" ><span>* </span>联系电话：</label>
+														<input name="contactNumber1"  type="text" class="form-control input_p" id="contactNumber" placeholder="" value="{$company.ticket_phone}" readonly>
+													</p>							
+										        </div>
+									         </fieldset>
+										</form>		
+									</div>
+									
+								</div>
+						   </div>
+						<script>
+							with(Company.view_home){
+								company_id = "{$company.id}";
+								company_name="{$company.company_name}";
+								company_head_portrait = "{$company.company_head_portrait}";
+								remarks = "{$company.remarks|default='管理员很懒，还没写企业简介'}";
+								qrcode_path = "{$company.qrcode_path}";
+								user_number = "{$user_number}";
+								apply_number = "{$apply_number}";
+								is_manage = "{$is_manage}";
+							}
+							//这里绑定了Vue，请查看js/Company.js
+							Company.initHome();
+							Company.initUsers();
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+			$(".hover_p").hover(function(){
+				$(".business_erm").fadeIn();
+			},function(){
+				$(".business_erm").fadeOut();
+			});
+		</script>
+		<script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+		<script type="text/javascript">
+	       $("#file-0").fileinput({
+	        'allowedFileExtensions' : ['jpg', 'png','gif'],
+	       });
+        </script>  
+        <script>
+			$.validator.setDefaults({
+				submitHandler: function() {
+					alert("submitted!");
+				}
+			});
+		$("#create_form").validate({
+			rules: {
+				nickname: "required",
+				CreditCode:"required",
+				officeAddress: "required",
+				Corporate:"required",
+				contact:"required",
+				contactNumber: "required",
+				email:"required",
+				role:"required",
+				nickname1:"required",
+				CreditCode1:"required",
+				officeAddress1:"required",
+				Corporate1:"required",
+				contact1:"required",
+				contactNumber1:"required"
+			},
+			messages: {
+				nickname: "企业名称必填",	
+				CreditCode:"银行账号必填",
+				officeAddress: "开户行必填",
+				Corporate:"单位地址必填",
+				contact:"税务登记号必填",
+				contactNumber: "联系电话必填",
+				nickname1:"企业名称必填",
+				CreditCode1:"银行账号必填",
+				officeAddress1: "开户行必填",
+				Corporate1:"单位地址必填",
+				contact1:"税务登记号必填",
+				contactNumber1:"联系电话必填"
+			}
+		});
+	</script>
+			
+	</body>
+	
+</html>

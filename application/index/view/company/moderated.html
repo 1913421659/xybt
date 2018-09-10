@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>等待审核</title>
+	</head>
+	 {include file="public/css" /}
+	 {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业管理-->
+		<div class="enterp_box clearfix" style="padding-bottom: 40px;">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">加入企业</a> 
+						</p>
+				</div>
+				<div class="row">
+					<div class="col-md-3 que_left">
+						<div class="after_box" style="border: none;">
+                            {empty name="$company"}
+                            <!--未加入企业-->
+                                <span>
+                                    <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                </span>
+                            <!--未加入企业-->
+                            <div class="after_pp">{$me.nick_name}</div>
+                            <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                            <p class="com_box">
+                                <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                            </p>
+                            {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                            <div class="after_pp" >{$company.company_name}</div>
+                            {/empty}
+					  </div>
+					<div class="des"></div>
+							{include file="company/_left" /}
+
+					<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:0
+							},
+                            methods:{
+                                del_apply:function(){
+                                    console.log();
+                                    $.post('{:url("company/ajaxDeleApply")}',{},function(rs){
+                                        layer.msg(rs.msg);
+                                        window.location.reload();
+                                    });
+                                }
+                            }
+						});
+                        new Vue({
+                            el:'.col-md-3.que_left',
+                            data:{
+                                action:0
+                            }
+                        });
+
+					</script>
+					</div>
+					<div class="col-md-9 que_right">
+		                <div class="enter_inner">
+							 <div class="enter_first">
+		                     	<p class="enter_time"><img src="__RESOURCES__images/ying_12.png" </p>
+							 	<p class="enter_apply">您正在申请加入</p>
+							 	<p class="enter_des enter_4">{$apply_company.company_name}</p>
+							 	<p>
+							 		<a class="enter_link_5" href="#" role="button">请耐心等待管理员审核</a>
+							 	</p>
+                                <p class="enter_des enter_4"><a class="enter_link_like" id="del_apply"  role="button">取消申请</a></p>
+							 </div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		
+	    <script>
+            $('#del_apply').click(function(){
+                $.post('{:url("company/ajaxDeleApply")}',{},function(rs){
+                    layer.msg(rs.msg);
+                    window.setTimeout(function(){
+                        window.location.reload();
+                    },1500)
+                });
+            })
+	    </script>
+		<!--企业管理结束-->
+		<!--footer-->
+		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+		{include file="public/js_1" /}
+			
+	</body>
+	
+</html>

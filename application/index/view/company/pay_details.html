@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>待支付项目详情</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body>
+	<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">待付款项目</a> 
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">收款详情</a> 
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+                            <span>
+                                <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                            </span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:6
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " id="need_result">	
+								<div class="row">
+									<div class="col-md-12 need_right ">
+										<div class="xue_v">
+											<span class="xue_b">收款详情</span>	
+										</div>
+										<div class="recice_con">
+											<div class="media">
+											  <div class="media-left">
+											    <a class="ad_img_kk recices_img" href="#">
+											      <img class="media-object" :src="rc_img" alt="...">
+											    </a>
+											  </div>
+											  <div class="media-body recice_p">
+											    <h4 class="media-heading recice_title">{{rc_title}}</h4>
+											 	<p class="active_nav">接单人：{{rc_name}}</p>
+											 	<p>接单时间：{{rc_time}}</p>
+											 	<p class="recice_m">待付<span>{{rc_num}}元</span></p>
+											  </div>
+											</div>	
+										</div>
+										<ul class="recice_list">
+											<li>
+												<p>渠道：{{rc_form}}</p>
+												<p>结算周期：{{rc_month}}</p>
+											</li>
+											<li>
+												<p>申请时间：{{rc_apply_time}}</p>
+												<p>营销方式：{{rc_method}}</p>
+											</li>
+											<li>
+												<p>申请付款人：{{rc_man}}</p>
+												<!--<p>开票信息：<a href="#" class="active_nav">查看开票信息</a> </p>-->
+											</li>
+											<li>
+												<p>联系电话：{{rc_phone}}</p>
+												<!--<p>数据：<a href="#"  class="active_nav">查看推广数据</a> </p>-->
+
+											</li>
+											
+										</ul>
+										<div class="gathering">
+										    <a class="gather_a" v-on:click="My_check" href="#">去支付</a>
+								       </div>	
+								    </div>
+								</div>
+						   </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--马上抢弹窗-->
+		<div class="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_1">
+					<ul>
+						<li>
+							<div class="header_now">
+								收款
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							<div class="res_inner">
+							    <p class="confirm_t">确定，已收到 <span class="active_nav">覃俊威</span>的付款</p>
+							    <p class="confirm_moneny active_nav">200000元</p>
+							    <p class="confirm_balance">余额：3000000元</p>
+							</div>
+							<div class="dibu">
+							   <a class="dd_now shen_now recice_bg" href="javascript:;"  title="">取消</a>
+
+							    <a class="dd_now shen_now" href="javascript:;"  title="">确定</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+		<!--企业主页结束-->	
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}	
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					rc_img:"__RESOURCES__images/111.png",
+					rc_title:"新人注册就送1000书币",
+					rc_name:"覃俊威",
+					rc_time:"2017-12-11",
+					rc_num:"1000000",
+					rc_form:"广州点升信息技术有限公司",
+					rc_month:"周结",
+					rc_apply_time:"2017-12-11",
+					rc_method:"广告投放",
+					rc_man:"金木研",
+					rc_phone:"12345678901",
+				},
+				methods:{
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					},
+					My_check:function(event){
+						$(".now_tan").fadeIn(300);
+                  },
+				}
+			});
+			
+			
+		</script>
+		
+
+	</body>
+	
+</html>

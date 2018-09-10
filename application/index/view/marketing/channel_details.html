@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>渠道详情</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		
+		{include file="public/header2" /}	
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix" id="vue_page">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('marketing/index')}">营销推广</a><img src="__RESOURCES__images/right_2.png"/><a href="#">应用渠道</a><img src="__RESOURCES__images/right_2.png"/><a href="#">APP服务推广</a></p>
+				</div>
+				<div class="que_a_a">	
+					<div class="d_left channel_box">
+						<div class="media">
+						  <div class="media-left mianfei_1">
+							<a class="channel_img" href="#">
+							  <img class="media-object" src="__RESOURCES__images/yinyuanfuLOGO.png" alt="...">
+							</a>
+						  </div>
+						  <div class="media-body">
+							<h4 class="media-heading channel_title">APP推广/游戏推广/百度百科/软文推广/地铁广告</h4>
+							<div class="channel_btn" >
+								<span class="channel_des">认证企业</span>
+								<div class="qidao_star"></div>
+							</div>	
+							<p class="mian_channel">渠道类型：应用渠道  &nbsp;&nbsp;&nbsp;&nbsp;  接单数：10000
+							    <a class="channel_j" href="javascript:;" title="">马上申请</a>
+							</p>
+							<p class="d_c">
+								交易总额：10000000000元
+							</p>
+						  </div>
+						</div>
+						<div class="fenxiang clearfix ">
+							<div class="col-md-1" style="width: 75px;">分享到：</div>
+							<div class="col-md-11">
+								<div class="bdsharebuttonbox fenxiang_1">
+									<!--<a href="#" class="bds_more" data-cmd="more"></a>-->
+									<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">qq空间</a>
+									<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博 </a>
+									<a href="#" class="bds_weixin bds_peng" data-cmd="weixin" title="分享到微信">朋友圈</a>
+									<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">QQ</a>
+									<span  class="bds_aaa"><img src="__RESOURCES__images/share_dating.png" />分享大厅</span>
+									<span  class="bds_aaa"><img src="__RESOURCES__images/shoucang_1.png" />加入收藏</span>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div class="des"></div>
+					<div class="channel_box" >
+						<div class="data_title channel_t">
+						    <span></span><label>渠道特长：</label> 
+					    </div>
+					    <p class="channel_p">这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这
+里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述这里是渠道特长的描述</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<!--右侧导航栏-->
+		<script type="text/javascript">
+		var view = new Vue({
+			el:'#vue_page',
+			data:{
+				action:0,
+			},
+			methods:{		
+			},			
+		});	 
+		//左侧链接
+		$.post("{:url('task/ajaxGetTop')}",{parent_id:4,limit:5},function(rs){
+			if(rs.status){
+				view.task_list_1 = rs.data;
+			}
+		},'json');
+		$.post("{:url('task/ajaxGetTop')}",{parent_id:5,limit:5},function(rs){
+			if(rs.status){
+				view.task_list_2 = rs.data;
+			}
+		},'json');
+		
+		</script>
+		<script>
+    	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+		$(document).ready(function() {
+			$('#slider').slider({ speed: 500 });
+		});
+		$('#main_nav_marketing').addClass('menu_home');
+		</script>
+	</body>
+	
+</html>

@@ -1,0 +1,113 @@
+ <!--渠道资源-->
+ <div class="louti" id="channel_box">
+	<div class="section_2 section_3" >
+		<div class="csc_2">
+			<div class="ad_img_box">
+				<?php $ad = getOneAdByPositionName('PC端首页广告投放上');?>
+				{if condition="$ad"}
+				<a href="{$ad['ad_link']}" target="_blank"><img src="{$ad['ad_code']|get_image_path}" /></a>
+				{/if}
+			</div> <!-- 广告投放图片样式-->
+
+
+			<h2>渠道资源</h2>
+			<ul class="fen_ul" >
+				<li v-for="item,index in category_list"><a :href="'?s=/index/channel/index/category_id/'+item.id">
+					<template v-if="index < 7">
+						{{item.category_name}}
+					</template>
+
+				</a></li>
+			</ul>
+			<a class="more_box_1" href="?s=/index/channel/index/category_id/1" title="">更多<span class="more_i"></span></a>
+		</div>
+		<div class="con_fen5">
+			<div class="sec_2_7">
+			    <div class="chan_box">
+					<?php $ad = getOneAdByPositionName('PC端首页渠道资源');?>
+					{if condition="$ad"}
+					<a href="{$ad['ad_link']}" target="_blank"><img src="{$ad['ad_code']|get_image_path}" width="217" height="394" /></a>
+					{/if}
+								
+			    </div>
+			    <div v-if="loading" class="recording">
+					加载中... ... 
+				</div>
+				<div v-else>
+				    <ul  class="qidao_list">			
+						<li v-for="item in list">
+							<div class="qidao_li">
+								<div class="media">
+								  <div class="media-left media-middle">
+								    <a  :href="'{:url('channel/channel_details')}/id/'+ item.id" class="qidao_img">
+								      <img class="media-object" :src="item.company_head_portrait" alt="...">
+								    </a>
+								  </div>
+								  <div class="media-body">
+								    <h5 class="media-heading qidao_title"><a :href="'{:url('channel/channel_details')}/id/'+ item.id">{{item.name}}</a> </h5>
+								   	<p class="qidao_des">
+								   		<span>
+									   		<template v-if="item.is_auth==0 || item.is_auth==null">普通企业</template>
+								            <template v-if="item.is_auth==1">认证企业</template>
+								   	  </span>
+								   	</p>
+								   	<p class="active_nav">交易总额：{{item.price_total}}元</p>
+								  </div>
+								</div>
+								<div class="qidao_bottom">
+									<div class="qidao_left">渠道星级 </div>
+									<div class="qidao_right">
+										  <div class="qidao_star" :class="'qidao_star_' + item.company_grade" ></div>
+									</div>
+									<div class="qidao_paidan">
+										<div class="qidao_left">接单数量 </div>
+										<div class="qidao_right qidao_bottom_1">
+											<span>{{item.order_total}}</span> <a class="qidao_pai" :href="'{:url('channel/channel_details')}/id/'+ item.id">我要派单</a>
+										</div>
+									</div>
+								</div>											
+							</div>	
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var channel_url = "?s=/index/data/channelCompanyList";
+		var nav_sub = "?s=/index/data/channelCompanyCategoryList";
+		var  channel_box =new Vue({
+			el:"#channel_box",
+			data:{
+				list:[],
+				loading:false,
+				category_list:[],
+			},
+			methods:{
+				channer_list:function(){
+					this.loading = true;
+					$.post(channel_url,{page_size:6},function(rs){
+						channel_box.loading = false;
+						if(rs.status == 0){
+							channel_box.list = rs.data.list;
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+					
+				},
+				nav_sub:function(){
+					$.post(nav_sub,{s:'/index/data/channelCompanyCategoryList'},function(rs){
+						channel_box.category_list = rs.data;					
+					},'json');
+				},
+				init:function(){
+					this.channer_list();
+					this.nav_sub();
+				}
+			},
+			
+		})
+		channel_box.init();
+	</script>
+</div>

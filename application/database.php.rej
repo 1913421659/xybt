@@ -1,0 +1,22 @@
+diff a/application/database.php b/application/database.php	(rejected hunks)
+@@ -14,15 +14,15 @@
+     // 数据库类型
+     'type'            => 'mysql',
+     // 服务器地址
+-	'hostname'        => $db_host,//'localhost',
++    'hostname'        => $db_host,//'localhost',
+     // 数据库名
+-	'database'        => $db_name,//'xybtdev',
++    'database'        => $db_name,//'xybtdev',
+     // 用户名
+-	'username'        => $db_user,//'root',
++    'username'        => $db_user,//'root',
+     // 密码
+-	'password'        => $db_pass,//'root',//@$^S3N7qsj2A',
++    'password'        => $db_pass,//'root',//@$^S3N7qsj2A',
+     // 端口
+-	'hostport'        => $port,//'',
++    'hostport'        => $port,//'',
+     // 连接dsn
+     'dsn'             => '',
+     // 数据库连接参数

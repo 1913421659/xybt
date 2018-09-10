@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+		<title>红包大派送！现金抢不停！</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+		<script src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+		<style>
+		.slide-fade-enter-active {
+		  transition: all .2s ease;
+		}
+		.slide-fade-leave-active {
+		  transition: all .5s ;
+		}
+		.slide-fade-enter, .slide-fade-leave-to
+		/* .slide-fade-leave-active for below version 2.1.8 */ {
+
+		  opacity: 0;
+		}
+		</style>
+	</head>
+	<body>
+		<!--<div class="headerWrapper container-fluid"></div>-->
+       			
+		<div id="vue">
+			 <div class="rule_box rule_share_1"  @click="closeshare" >
+				<div class="rule_a">
+					<div class="share_img"></div>
+				</div>
+			</div>	
+			<div class="lottery_title">
+				<img src="images/title_1.png" />
+				<img src="images/title_2.png" style="position: relative;top: -3px;" />
+				<p class="lottery_change">活动已结束，敬请关注下次活动。</p>
+			</div>
+			
+			<div class="draw" id="lottery">
+				<table style="width: 256px; height: 247px; box-sizing: border-box; margin: 0 auto; margin-top: 5px;">
+					<tr>
+						<td class="item lottery-unit lottery-unit-0">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">0.2元</span>
+						</td>
+						<td class="gap"></td>
+						<td class="item lottery-unit lottery-unit-1">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">0.4元</span>
+						</td>
+						<td class="gap"></td>
+						<td class="item lottery-unit lottery-unit-2">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">0.6元</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="gap-2" colspan="5"></td>
+					</tr>
+					<tr>
+						<td class="item lottery-unit lottery-unit-7">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">10元</span>
+						</td>
+						<td class="gap"></td>
+						<td class="">
+							<div class="draw-btn img" @click="luck"><img src="images/dianji.png" /></div>
+						</td>
+						<td class="gap"></td>
+						<td class="item lottery-unit lottery-unit-3">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">0.8元</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="gap-2" colspan="5"></td>
+					</tr>
+					<tr>
+						<td class="item lottery-unit lottery-unit-6">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">5元</span>
+						</td>
+						<td class="gap"></td>
+						<td class="item lottery-unit lottery-unit-5">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">2元</span>
+						</td>
+						<td class="gap"></td>
+						<td class="item lottery-unit lottery-unit-4">
+							<div class="img">
+								<img src="images/p1/1.png" alt="">
+							</div>
+							<span class="name">1元</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="lottery_btn">
+				<a href="javascript:;" class="bottery_btn_left" @click="showMyPoster">我的海报</a>
+				<a href="javascript:;"  class="bottery_btn_right" @click="showMyPrize">红包排行榜</a>
+			</div>
+			<div class="guizeBox">
+				<!--<span class="sanjiaoxing"></span>-->
+				<p style="font-size: 14px;color: #b70e0e;line-height: 35px;">活动规则</p>
+				<p>1 . 整个活动参与抽奖的初始次数为2次；</p>
+				<p>2 . 每邀请一人赠送次数1次（被邀请的人必须新参与用户，被邀请人已注册过小蚁兵团不会新增次数）；</p>
+				<p>3 . 凡是中奖用户需按提现说明流程实现提现；</p>
+				<p>4 . 活动最终解释权归小蚁兵团所有。</p>
+			</div>
+			
+			
+			<!--第一个弹窗 恭喜您！获得劲爆流量王充电宝1个-->
+			<template>
+				
+			<!--领取次数完毕之后弹窗-->
+			<transition name="slide-fade">
+			<div class="rule_box"   v-if="layer==20">
+				<div id='info' class="rule_a">
+					<div class="lottery_alert">
+						<h5 class="lottery_t">分享提示</h5>
+						<span class="lottery_close" @click="layer=0"></span>
+						<div class="lottery_inner">
+							<div class="" style="padding: 48px 30px;color: #c01005;font-size: 14px;text-align: left;">
+								<p>您的抽奖机会已经用完！</p>
+								<p>生成海报，每分享1位好友参与，可新增1次抽奖机会。</p>						
+							</div>
+							<a class="now_share" @click="showMyPoster" href="javascript:;">生成海报</a>
+							<a class="now_share" href="#" style="display:none">立即分享</a>
+						</div>
+					</div>	
+				</div>
+			</div>
+			</transition>
+			<transition name="slide-fade">
+			<div class="rule_box" v-if="layer==1" >
+				<div id='info' class="rule_a">
+					<div class="lottery_alert">
+						<h5 class="lottery_t">恭喜您！获得{{luck_rs_name}}元红包。</h5>
+						<span class="lottery_close" @click="layer=0"></span>
+						<div class="lottery_inner">
+							<div class="lottery_inner_b">
+								<span class="lottery_span"><img :src="'images/p2/1.png'"></span>
+							</div>
+							<a class="now_share" @click="showMyPrize" href="#">确认领取</a>
+							<a class="now_share" href="#" style="display:none">立即分享</a>
+						</div>
+					</div>	
+				</div>
+			</div>
+			</transition>
+			
+			<!--短信登录-->
+			<transition name="slide-fade">
+			<div class="rule_box" v-if="layer==11">
+				<div class="rule_a">
+					<div class="lottery_alert">
+						<h5 class="lottery_t">登录小蚁兵团，参与抽奖活动！</h5>
+						<span class="lottery_close" @click="layer=0"></span>
+						<div class="lottery_inner">
+							<div class="lottery_inner_b">
+								<form class="form_submit zhuce_a">
+									<input type="number" placeholder="请输入手机号码" v-model="login_form.mobile" />
+									<div class="yanzheng">
+										<input class="input_left" type="number" placeholder="请输入验证码" v-model="login_form.code" />
+										<button class="input_right" type="button" v-if="send_sms_wait>0">重新获取（{{send_sms_wait}}s）</button>
+										<button class="input_right" type="button" @click="sendSms" v-else >获取验证码</button>
+									</div>
+									<button class="submit_btn" type="button" @click="login">登录</button>
+								</form>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			</transition>
+			<transition name="slide-fade">
+			<div class="hongbao_box" v-if="layer==14">			
+				<div class="hongbao_aa">
+				<span class="lottery_close" @click="layer=0" style="right: 9px;top: 8px;"></span>
+				<img :src="poster" id="poster" style="width:100%;" />
+				</div>
+			</div>
+			</transition>
+			
+			<!--红包排行榜-->
+			<transition name="slide-fade">
+			<div class="hongbao_box" v-if="layer==13">				
+				<div class="hongbao_aa">
+				<span class="lottery_close" @click="layer=0" style="right: 9px;top: 8px;"></span>
+				<div class="hongbao_top">
+					<a href="javascript:;" class="hong_a" style="position: relative;">
+						<img src="images/mingci.png" />
+						<p style="color: rgb(236, 72, 83);font-size: 21px;position: absolute;top: 25px;left: 28px;font-weight: bold;width: 76px;text-align: center;">{{user.my_top}}</p>
+					</a>
+					<div class="hong_right">
+						<p>账号：{{user.name}}</p>
+						<p>红包金额：{{user.total}} 元</p>
+						<p style="padding:5px;"><a href="#"  @click="again" style="    color: #fff;
+    font-size: 15px;
+    border: 1px solid #fff;
+    padding: 2px 9px;
+    border-radius: 2px; background:#fc9304;">你还有{{user.times}}次</a></p>
+					</div>
+					<a href="#" class="tixian_box" @click="tixianShow">提现</a>
+				</div>
+				<div class="hongbao_bottom">
+					<span class="img_top_1">
+						<img src="images/mingci_bg.png" />
+					</span>
+					<div class="hongbao_a">
+						<table class="table_box">
+							<tr>
+								<td style="border-right: none;">排名</td>
+								<td style="border-right: none;">账号</td>
+								<td>红包金额</td>
+							</tr>
+							<tr v-for="(item,i) in top">
+								<td>
+									<img :src="'images/number'+(i+1)+'.png'" style="width: 30px;position: relative;top: 5px;" v-if="i<3" /><span v-else>{{i+1}}</span>
+								</td>
+								<td>{{item.name}}</td>
+								<td>{{item.total}}</td>
+							</tr>
+						</table>
+						<div style="text-align:center;"><a href="javascript:;" @click="flushTop" v-if="top_is_end==false">显示更多</a><span v-else>没有更多了</span></div>
+					</div>
+					
+				</div>
+			</div>
+			</div>
+			</transition>
+			
+			</template>
+		</div>
+		
+
+		<!--弹窗layer-->
+		<script type="text/javascript" src="js/lottery.js"></script>
+        <script type="text/javascript">
+            $('.content').niceScroll({
+                cursorcolor: "#fecd8a",//#CC0071 光标颜色
+                cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+                touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+                cursorwidth: "5px", //像素光标的宽度
+                cursorborder: "0", // 	游标边框css定义
+                cursorborderradius: "5px",//以像素为光标边界半径
+                autohidemode: false //是否隐藏滚动条
+            });
+            
+        </script>
+		<script type="text/javascript">
+			var lottery = {
+				index: -1, //当前转动到哪个位置，起点位置
+				count: 0, //总共有多少个位置
+				timer: 0, //setTimeout的ID，用clearTimeout清除
+				speed: 20, //初始转动速度
+				times: 0, //转动次数
+				cycle: 50, //转动基本次数：即至少需要转动多少次再进入抽奖环节
+				prize: -1, //中奖位置
+				ready: 1,//是否准备好（可以转）
+				init: function(id) {
+					if($('#' + id).find('.lottery-unit').length > 0) {
+						this.obj = $('#' + id);
+						this.count = this.obj.find('.lottery-unit').length;
+						this.obj.find('.lottery-unit.lottery-unit-' + this.index).addClass('active');
+					};
+				},
+				next: function() {
+					this.obj.find('.lottery-unit.lottery-unit-' + this.index).removeClass('active');
+					this.index = (this.index + 1)%this.count;
+					this.obj.find('.lottery-unit.lottery-unit-' + this.index).addClass('active');
+					return false;
+				},
+				roll:function roll() {
+					lottery.times += 1;
+					lottery.next(); //转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+	
+					if(lottery.times > lottery.cycle + 10 && lottery.prize == lottery.index) {
+						clearTimeout(lottery.timer);
+						vue.showPrize();
+						vue.flushLogs();
+						//TODO 这里要把中奖层显示出来。
+						lottery.prize = -1;
+						lottery.times = 0;
+						lottery.ready = 1;
+					} else {
+						if(lottery.times < lottery.cycle) {
+							lottery.speed -= 10;
+						} else if(lottery.times == lottery.cycle) {
+							//var index = Math.random() * (lottery.count) | 0; //静态演示，随机产生一个奖品序号，实际需请求接口产生
+							//lottery.prize = index;
+						} else {
+							if(lottery.times > lottery.cycle + 10 && ((lottery.prize == 0 && lottery.index == 7) || lottery.prize == lottery.index + 1)) {
+								lottery.speed += 110;
+							} else {
+								lottery.speed += 20;
+							}
+						}
+						if(lottery.speed < 40) {
+							lottery.speed = 40;
+						};
+						lottery.timer = setTimeout(lottery.roll, lottery.speed); //循环调用
+					}
+					return false;
+				}
+			};
+			window.onload = function() {
+				lottery.init('lottery');
+				
+				$(".now_share").click(function(){
+					alert(11);
+					$(".share_img").css("display","block");
+				});
+			};
+		</script>
+	</body>
+</html>

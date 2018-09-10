@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>加入我们    </title>
+	</head>
+		{include file="public/css" /}
+		{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="row">
+					{include file="index/art_left" /}
+			<script>
+			showLeftNavAct(4);
+			</script>
+					
+					<div class="col-md-9 que_right que_o">
+						<div class="que_r_a que_top">
+							<h5 class="que-title about_titie">加入我们 <small>JOIN US</small> </h4>
+						</div>
+						<div class="row">
+							<div class="col-md-12 detail">
+								{$art.content}
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}	
+		{include file="public/js_1" /}
+	</body>
+	
+</html>

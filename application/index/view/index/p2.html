@@ -1,0 +1,123 @@
+<div class="louti" id="floor_wechat">
+
+
+
+	<div class="section_2  section_3" >
+		<div class="csc_2">
+			<div class="ad_img_box">
+				<?php $ad = getOneAdByPositionName('PC端微博资源下');?>
+				{if condition="$ad"}
+				<a href="{$ad['ad_link']}" target="_blank"><img src="{$ad['ad_code']|get_image_path}" /></a>
+				{/if}
+			</div>
+			<h2>微信资源</h2>
+			<ul class="fen_ul" id="tiyan">
+				<li v-for="item in cat_list"><a href="?s=/index/media/index/type/3">{{item.name}}</a></li>
+			</ul>
+			<a class="more_box_1" href="?s=/index/media/index/type/3" title="">更多<span class="more_i"></span></a>
+		</div>
+		<div class="con_fen4">
+			<div class="">
+				<div class="wei_right">
+					<div v-if="loading" class="recording">
+						加载中... ...
+					</div>
+				    <div v-else class="ti_r_b">
+				    	<ul class="wei_list clearfix">
+							<li v-for="item in list">
+								<div class="wei_li">
+									<div class="clearfix wei_box">
+										<div class="media wei_left">
+										  <div class="media-left">
+											<a :href="'{:url('media/detail')}/id/'+item.id" class="wei_li_img">
+											  <img class="media-object" :src="item.logo" onerror="javascript:this.src='__RESOURCES__images/media_wx_default.jpg';" alt="...">
+											</a>
+										  </div>
+										  <div class="media-body wei_tilte">
+											<h5 class="media-heading qidao_title"><a :href="'{:url('media/detail')}/id/'+item.id">{{item.title}}</a></h5>
+											<p class="wei_p">{{item.title_sub}}</p>
+										  </div>
+										</div>
+										<div class="wei-right">
+											<a class="qidao_pai wei_b" :href="'{:url('media/detail')}/id/'+item.id" >我要派单</a>
+										</div>
+									</div>
+									<div class="wei_bottom">
+										<div class="row wei_last">
+											<div class="col-md-3 wei_ti">
+												<p><img src="__RESOURCES__images/tuiguang_17.png" /></p>
+												<p class="wei_a">粉丝数</p>
+												<p class="active_nav" v-if="item.power > 10000">{{Math.floor(item.power/10000)}}万+</p>
+												<p class="active_nav" v-else>{{item.power}}</p>
+											</div>
+											<div class="col-md-3 wei_ti">
+												<p><img src="__RESOURCES__images/read-mode.png" /></p>
+												<p class="wei_a">头条价格</p>
+												<p class="active_nav">{{item.price_1}}</p>
+											</div>
+											<div class="col-md-3 wei_ti">
+												<p><img src="__RESOURCES__images/drafts.png" /></p>
+												<p class="wei_a">平均阅读量</p>
+												<p class="active_nav" v-if="item.power_2 > 10000">{{Math.floor(item.power_2/10000)}}万+</p>
+												<p class="active_nav" v-else>{{item.power_2}}</p>
+											</div>
+											<div class="col-md-3 wei_ti">
+												<p><img src="__RESOURCES__images/dial.png" /></p>
+												<p class="wei_a">接单数</p>
+												<p class="active_nav">{{item.history}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+				    	</ul>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var floor_wechat = new Vue({
+			el:"#floor_wechat",
+			data:{
+				list:[],
+				loading:false,
+				cat_list:[],
+				
+			},
+			methods:{
+				
+				flushList:function(){
+					this.loading = true;
+					$.post('?s=/index/data/channelMediaList', {
+						limit:8,
+						type_id:3,
+					}, function(rs){
+						floor_wechat.loading = false;
+						if(rs.status == 1){
+							floor_wechat.list = rs.data.list;
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				},
+				flushCatList:function(){
+					$.post('?s=/index/data/channelMediaCategoryList', {
+						limit:6,
+						type_id:3,
+					}, function(rs){
+						if(rs.status == 1){
+							floor_wechat.cat_list = rs.data
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				}
+			}
+		});
+		floor_wechat.flushList();
+		floor_wechat.flushCatList();
+		//floor_wechat.errorImg01();
+		</script>
+</div>

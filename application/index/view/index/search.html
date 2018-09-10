@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>搜索结果</title>
+	</head>
+		{include file="public/css" /}
+		{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">				
+				<div class="que_a que_bb">
+					<div class="row">
+						<div class="col-md-9 detail_right clearfix">										
+							<div class="per_search">
+								<form class="form_team form_search" id="form_user_team_list" onSubmit="return false;">
+									<input type="text" id="search_search" name="search" placeholder="请输入关键字" value="{$search}">
+									<button class="buttom_1_1_1" id="search_search_btn" type="button">
+										<img src="__RESOURCES__images/search_jion.png">
+									</button>
+								</form>
+								<span class="search_box">本次共找到<label>{$data.total}</label>条信息</span>
+							</div>
+							<div class="per_search" id="category">
+								<ul class="search_ul">
+									<li>全部</li>
+									<li>免费福利</li>
+									<li>产品体验</li>
+									<li>促销活动</li>
+									<li>网络营销</li>
+									<li>产品分销</li>
+									<li>广告投放</li>
+								</ul>								
+							</div>
+							<div class="per_search" id="orderBy">
+								<ul class="search_ul">
+									<li>全部</li>
+									<li>最高人气</li>
+									<li>最新发布</li>
+								</ul>								
+							</div>
+							<div class="des"></div>
+                            {volist name="data['data']" id="v"}
+							<div class="search_con">
+								<div class="d_box_2">
+								   <div class="row">
+									<div class="col-md-10">
+										<div class="search_box_inner">
+											<div class="media">
+											  <div class="media-left  mianfei_1">
+												<a class="search_img" href="#">
+												  <img class="media-object" src="{$v.banner_img|get_image_path}" alt="...">
+												</a>
+											  </div>
+											  <div class="media-body ">
+												<h4 class="media-heading search_title"><span class="search_con_a">【{$v['promotion_name']}】</span>{$v.name}</h4>
+												<p class="search_con_a">分红：{$v.cutting_value}蚁币</p>
+												<p class="">												              
+													<span>{$v.prom_name}</span>&nbsp;&nbsp;
+													<span>余{$v.qty-$v.brought_total}份</span>&nbsp;&nbsp;
+													<span>{$v.exam_time_type_id}H</span>
+												</p>
+												<p class="search_detail" style="width:400px;">产品说明：{$v.content}</p>
+											  </div>
+											</div>
+											
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div>
+											<div class="now-a clearfix search_now">
+										         <a href="{:url('marketing/info',['key'=>$v.id])}">马上申请</a>
+									        </div>
+										</div>
+										
+									</div>
+									
+								</div>
+							  </div>
+							</div>
+                            {/volist}
+
+							
+					    </div> 
+		
+						<div class="col-md-3  detail_l">
+							
+							<!--热门搜索-->
+							<div class="per_title8 ">
+								<h5>热门搜索</h5>
+							</div>
+							<ul class="search_hot clearfix">
+							  <li>
+                                {volist name="keywordList" id="v"}
+							  	<span>{$v}</span>
+                                {/volist}
+							  </li>
+							  
+							</ul><!--
+							<div class="div_xue">
+								<a href="#" title="">
+									<img src="__RESOURCES__images/xue_4.png" />
+								</a>
+								
+							</div>-->
+						</div>
+						<!--分页-->
+						<div class="fenye1 col-md-9">
+							<div class="fenye">
+								
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript">
+//		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}			
+			//init
+			$(function(){
+				var totalPage = 30;
+				var totalRecords = 390;
+				var pageNo = getParameter('pno');
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : {$data.current_page},
+					//总页码
+					total : {$data.last_page},
+					//总数据条数
+					totalRecords : {$data.total},
+					//链接前部
+					hrefFormer : '{$pageUrl}',
+					//链接尾部
+					hrefLatter : '',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "/pno/"+n;
+					}
+					
+				});
+			});
+
+            $(function() {
+                var category_li_in = {$category};
+                var orderBy_li_in = {$orderBy};
+
+                $('#category li').eq(category_li_in).addClass('active_nav');//初始化六大营销选择项
+                $('#orderBy li').eq(orderBy_li_in).addClass('active_nav');//初始化排序选择项
+
+                $('#category li').click(function(){
+                    var category = $(this).index();
+                    $('#category').find('.active_nav').removeClass('active_nav');
+                    $(this).addClass('active_nav');
+                    window.location.href="{:url('index/search',['type'=>$type,'search'=>$search,'orderBy'=>$orderBy])}/category/"+category;
+                })
+
+                $('#orderBy li').click(function(){
+                    var orderBy = $(this).index();
+                    $('#orderBy').find('.active_nav').removeClass('active_nav');
+                    $(this).addClass('active_nav');
+                    window.location.href="{:url('index/search',['type'=>$type,'search'=>$search,'category'=>$category])}/orderBy/"+orderBy;
+                })
+
+                $('#search_search_btn').click(function(){
+                    var search = $('#search_search').val();
+                    if(search=='' || $.trim(search)==''){
+                        $('#search_search').val('');
+                        $('#search_search').focus();
+                        return ;
+                    }
+                    var url = "{:url('index/search')}";
+                    url += "/type/1/search/"+search;
+                    window.location.href=url;
+
+                });
+            });
+			</script>
+		
+	</body>
+	
+</html>

@@ -1,0 +1,59 @@
+<!--产品分销-->
+<div class="section_2 section_3 louti">
+	<div class="csc_2">
+		<img src="__RESOURCES__images/tuiguang_12.png" />
+		<h2>产品分销</h2>
+		<ul class="fen_ul" id="chan_a">
+			{foreach name="all_child_list.5" item="v" }
+			{if condition="$key lt 6"}
+			<li><a href="{:url('marketing/index',['key' =>5, 'p_id'=> $v['id']])}">{$v.promotion_name}</a></li>
+			{/if}
+			{/foreach}
+		</ul>
+		<a class="more_box_1" href="{:url('marketing/index',['key' => 5])}" title="">更多<span class="more_i"></span></a>
+	</div>
+	<div class="con_fen3">
+		<div class="sec_2_1">
+			<ul class="sec_2_2 sec_3_3_2" style="width: 983px;">
+				{foreach name="task_list.5" key="key" item="value"}
+				<li>
+					
+					<div class="xiao_box">
+						<a  href="{:url('marketing/info', ['key' => $value['id']])}" title=""><img src="{$value.banner_img|get_image_path}" /></a>
+						<div class="sec_bb_4">
+							<p class="xiao_title">{$value.name}</p>
+							<p class="mian_2 xiao_dis">分成：{:number_format(intval($value.cutting_value)/100)}元</p>
+							<div class="main_h">
+								<span style="display: none;"></span>
+								<span>{$value.promotion_name|default=""}</span>
+								<span>{$value.task_exam_time_type_name}审核</span>
+								<span>{$value.checkout_name}</span>
+							</div>
+							<div class="xiao_t">
+								<a class="qidao_pai_1"  href="{:url('marketing/info', ['key' => $value['id']])}" title="" alt="">我要申请</a>
+							</div>
+							
+								
+						</div>
+					</div>
+				</li>
+				{/foreach}
+				
+			</ul>
+		    <div class="chan_box" style="margin-top: 0;">
+				<?php $ad = getOneAdByPositionName('PC端首页产品分销上');?>
+				{if condition="$ad"}
+				<a class="fenxiao_img" href="{$ad['ad_link']}" target="_blank"><img src="{$ad['ad_code']|get_image_path}" /></a>{/if}
+		    	
+		    	<div class="chan_aaa">
+					<?php $ad = getOneAdByPositionName('PC端首页产品分销下');?>
+		    		{if condition="$ad"}
+					<a  class="fenxiao_img" style="margin-top: 10px;"  href="{$ad['ad_link']}" target="_blank"><img src="{$ad['ad_code']|get_image_path}" /></a>{/if}
+		    	</div>
+		    </div>
+		</div>
+		
+	</div>	
+	
+</div>
+<!--产品分销结束-->

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$title}</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<body>
+	<div id="vue_page">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		
+		{include file="public/header2" /}	
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix" id="vue_page">
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img src="__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('marketing/index')}">营销管理</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('media/index',['type'=>$type_id])}">
+							<template v-if="{$type_id}==1">论坛资源</template>
+							<template v-else-if="{$type_id}==2">微博资源</template>
+							<template v-else-if="{$type_id}==3">微信资源</template>
+							<template v-else-if="{$type_id}==4">朋友圈资源</template>
+							<template v-else-if="{$type_id}==5">博客资源</template>
+							<template v-else-if="{$type_id}==6">视频资源</template>
+							<template v-else-if="{$type_id}==7">直播资源</template>
+							<template v-else="{$type_id}==8">头条资源</template>
+						</a>
+					</p>
+				</div>
+				<div class="que_a">
+					<div class="row">
+						{include file="media/_left" /}
+						<script>
+						vue_page.data.left_nav.action=300 + {$type_id};
+						</script>
+						<div class="col-md-9 que_right " id="data_table">
+							<div class="mark_b clearfix">
+								<div class="zi_con">
+									<ul class="zi_menu">
+										<!--<li class="zi_active" style="display:none;"><a href="#">全部</a></li>
+										<li style="display:none;"><a href="#">优质资源</a></li>
+										<li style="display:none;"><a href="#">推荐热门资源</a></li>-->
+									</ul>									
+								</div>
+								<div class="zi_search" style="margin-top: 10px;">
+									<div class="search_zi">
+										<form class="form_box_zi">
+											<!--<input id="search_title" class="zi_name_1" type="text" placeholder="论坛名称"/>-->											
+											<input id="search_title_sub" class="zi_name" type="text" placeholder="请输入关键字">
+											<button class="buttom_1" type="button" v-on:click="searchByName">
+												<img src="__RESOURCES__images/search_a.png">
+											</button>
+											
+										</form>
+									</div>
+									<div class="zi_a zi_b" style="display:none;">
+										<a href="#" title="" alt="">
+										    <span class="zi_box">批量搜索</span>
+										</a>				
+									</div>
+								</div>
+								<div class="zi_list clearfix">
+									<template>
+										<dl class="listi_index clearfix" style="" v-for="item in attr_group_list" >
+											<dt>{{item.name}}：</dt>
+											<dd class="zi_sub">
+												<div class="a_sub sub_left"><a :class="{a_sub_act:attr_selected[item.id]==0}" href="javascript:void(0)" v-on:click="selectAttr(item.id, 0)" >全部</a></div>											          
+												<div class="sub_right">
+													<div class="a_sub" v-for="item2 in item.attr"><a href="javascript:void(0)" :class="{a_sub_act:attr_selected[item.id] == item2.id}" v-on:click="selectAttr(item.id, item2.id)" >{{item2.name}} </a></div>
+												</div>
+											</dd>
+										</dl>
+									</template>
+									<dl class="listi_index clearfix" >
+										<dt>置顶价格：</dt>
+										<dd class="zi_sub">											
+											<div class="a_sub sub_left"><a :class="{a_sub_act:filter.price_1=='0-0'}" href="javascript:void(0)" v-on:click="changePrice1('0-0')">全部</a></div>
+											<div class="sub_right">
+												<div class="a_sub"><a :class="{a_sub_act:filter.price_1=='0-50'}" href="javascript:void(0)" v-on:click="changePrice1('0-50')" >0~50元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_1=='50-100'}" href="javascript:void(0)" v-on:click="changePrice1('50-100')" >50~100元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_1=='100-150'}" href="javascript:void(0)" v-on:click="changePrice1('100-150')" >100~150元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_1=='150-200'}" href="javascript:void(0)" v-on:click="changePrice1('150-200')" >150~200元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_1=='200-300'}" href="javascript:void(0)" v-on:click="changePrice1('200-300')" >200~300元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_1=='300-0'}" href="javascript:void(0)" v-on:click="changePrice1('300-0')" >300元以上</a></div>
+											    <div class="a_sub" style="display:none;">
+													<input class="input_zi" type="number" name="" id="" value="" />
+													<span class="zi_des"></span>
+													<input class="input_zi" type="number" name="" id="" value="" />
+													<span class="zi_yuan">元</span>
+													<input class="input_buttom" type="button" name="" id="" value="查询" />
+												</div>
+											</div>
+										</dd>
+									</dl>
+									
+									<dl class="listi_index clearfix" >
+										<dt>加精价格：</dt>
+										<dd class="zi_sub">											
+											<div class="a_sub sub_left"><a :class="{a_sub_act:filter.price_2=='0-0'}" href="javascript:void(0)"  v-on:click="changePrice2('0-0')" >全部</a></div>
+											<div class="sub_right">
+												<div class="a_sub"><a :class="{a_sub_act:filter.price_2=='0-50'}" href="javascript:void(0)" v-on:click="changePrice2('0-50')" >0~50元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_2=='50-100'}" href="javascript:void(0)" v-on:click="changePrice2('50-100')" >50~100元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_2=='100-150'}" href="javascript:void(0)" v-on:click="changePrice2('100-150')" >100~150元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_2=='150-200'}" href="javascript:void(0)" v-on:click="changePrice2('150-200')" >150~200元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_2=='200-300'}" href="javascript:void(0)" v-on:click="changePrice2('200-300')" >200~300元 </a></div>
+											    <div class="a_sub"><a :class="{a_sub_act:filter.price_2=='300-0'}" href="javascript:void(0)" v-on:click="changePrice2('300-0')" >300元以上</a></div>
+												<div class="a_sub" style="display:none;">&nbsp;
+													<input class="input_zi" type="number" name="" id="" value="" />
+													<span class="zi_des"></span>
+													<input class="input_zi" type="number" name="" id="" value="" />
+													<span class="zi_yuan">元</span>&nbsp;
+													<input class="input_buttom" type="button" name="" id="" value="查询" />
+                                                </div>
+											</div>																						
+										</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="des"></div>
+							<div class="zi_paixun">
+								<ul class="paixu">
+							        <li><span>排序:</span></li>
+							        <li><a class="zi_sheng zi_sheng1" href="#" v-on:click="setOrderBy(event,0)">默认<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a></li>
+							        <li><a class="zi_sheng" href="#" v-on:click="setOrderBy(event,1)">置顶价格<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a></li>
+							        <li><a class="zi_jiang" href="#" v-on:click="setOrderBy(event,2)">置顶价格<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a></li>
+							        <li><a class="zi_sheng" href="#" v-on:click="setOrderBy(event,3)">加精价格<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a></li>
+							        <li><a class="zi_jiang" href="#" v-on:click="setOrderBy(event,4)">加精价格<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a></li>
+							        <li style="" class="zi_right_1" >资源总数:<font color="#FF5C00">{{page_info.total}}</font>&nbsp;&nbsp;&nbsp;
+							        	<a href="javascript:" class="biliang" style="visibility:hidden;">批量派单</a>
+							        </li>
+							    </ul>
+							</div>
+							<div class="zi_table">
+								{if condition="$type_id==1"}
+									{include file="media/_list_1"}
+								{elseif condition="$type_id==2"}
+									{include file="media/_list_2"}
+								{elseif condition="$type_id==3"}
+									{include file="media/_list_3"}
+								{elseif condition="$type_id==4"}
+									{include file="media/_list_4"}
+								{elseif condition="$type_id==5"}
+									{include file="media/_list_5"}
+								{elseif condition="$type_id==6"}
+									{include file="media/_list_6"}
+								{elseif condition="$type_id==7"}
+									{include file="media/_list_7"}
+								{elseif condition="$type_id==8"}
+									{include file="media/_list_8"}
+								{/if}
+							</div>
+							<!--分页-->
+							<div class="fenye" v-if="page_info.total>0">
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager" class="style_1"></div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		{include file="public/js_1" /}
+		<script type="text/javascript">				
+		var _url_ajax_list = "{:url('media/ajaxList')}";
+		var kkpager_bak = clone(kkpager);
+		vue_page.appendData({
+			attr_group_list : [],
+			attr_selected : [],
+			list:[
+			],
+			page_info:{},
+			filter : {
+				type_id:{$type_id},
+				cat_id:0,
+				page:1,
+				price_1:'0-0',
+				price_2:'0-0',
+				price_3:'0-0',
+				title:'',
+				title_sub:'',
+				attr : '',
+                order_by:''
+			}
+		});		
+		vue_page.appendMethods({
+			getAttrGroupList : function(){
+				//获取扩展属性
+				$.post('?s=index/data/channelMediaAttrGroups',{type_id:vue_page.filter.type_id},function(rs){
+					vue_page.attr_group_list = rs.data;
+					for(var i=0; i<rs.data.length; i++){
+						vue_page.attr_selected[rs.data[i].id] = 0;
+					}
+				});
+			},
+			flushList : function(){
+				$.post(_url_ajax_list, vue_page.filter,function(rs){
+					if(rs){
+						vue_page.list = rs.data.list;
+						vue_page.page_info = rs.data.page_info;
+					}else{
+						layer.msg(rs.msg);
+					}
+				},'json');
+			},
+			gotoPage : function(n){
+				this.filter.page=n;
+				this.flushList();
+			},
+			selectAttr : function(g_id,id){
+				Vue.set(this.attr_selected, g_id, id);
+				this.filter.attr = [];
+                this.filter.page = 1;
+				for(var i in this.attr_selected){
+					this.filter.attr.push(this.attr_selected[i]);
+				}
+				this.flushList();
+			},
+			changePrice1 : function(price){
+				if(this.filter.price_1==price){
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.price_1 = price;
+				this.flushList();
+			},
+			changePrice2 : function(price){
+				if(this.filter.price_2==price){
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.price_2 = price;
+				this.flushList();
+			},
+			changePrice3 : function(price){
+				if(this.filter.price_3==price){
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.price_3 = price;
+				this.flushList();
+			},
+			searchByName : function(){
+				var search_title = $('#search_title').val();
+				var search_title_sub = $('#search_title_sub').val();
+				if(search_title == this.filter.title && search_title_sub == this.filter.title_sub){
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.title = search_title;
+				this.filter.title_sub = search_title_sub;
+				this.flushList();
+			},
+            setOrderBy : function(th,id){
+//          	inArray函数用于在数组中查找指定值，并返回它的索引值（如果没有找到，则返回-1）
+               var o = $.inArray(id,[0,1,2,3,4]);
+               $('.zi_sheng1').removeClass('zi_sheng1');
+               $(th.target).addClass('zi_sheng1');
+               this.filter.page = 1;
+               this.filter.order_by = o;
+               this.flushList();
+            },
+			init : function(){
+				this.getAttrGroupList();
+				this.flushList();
+			},
+            showBigImg:function(n){
+                layer.open({
+                    title:false,
+                    type:1,
+                    resize:false,
+                    shadeClose:true,
+                    content: '<img src="'+n+'">',
+                    offset: 'auto',
+                    area: ['430px', '430px']
+                });
+            }
+		});
+		
+			vue_page.updated = function(){
+				//有些参数是可选的，比如lang，若不传有默认值
+				$('#kkpager').html('');
+				kkpager = clone(kkpager_bak);
+				var config = {
+					pagerid :'kkpager',
+					pno : vue_page.page_info.page,
+					//总页码
+					total : vue_page.page_info.end,
+					//总数据条数
+					totalRecords : vue_page.page_info.total,
+					getLink : function(n){
+						return "javascript:vue_page.gotoPage('" + n + "');";
+					}
+				};
+				kkpager.generPageHtml(config, true);
+				kkpager.selectPage(vue_page.page_info.page);
+			};
+			</script>		
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		</div>
+	</body>
+		<script>
+		$('#main_nav_marketing').addClass('menu_home');
+		vue_page = new Vue(vue_page);
+		vue_page.init();
+        var is_submit = false;
+        function media_collect(d,s){
+            if(is_submit){
+                return ;
+            }
+            is_submit = true;
+            $.ajax({
+                type:'post',
+                url:"{:url('index/media/media_collect')}",
+                data:{media_id:d,status:s},
+                async:true,
+                success:function(response){
+                    var obj = JSON.parse(response);
+                    layer.msg(obj.msg);
+                    is_submit = false;
+                    vue_page.flushList();
+                },
+                error:function(msg){
+                    console.log(msg);
+                }
+            })
+        }
+		</script>	
+	
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>小蚁兵团一站式整合营销平台</title>
+		<meta name="keywords" http-equiv="keywords" content="营销,网络营销,企业营销" />
+		<meta name="description" http-equiv="description" content="小蚁兵团为企业提供一站式企业营销服务，目前提供超过70多种营销方式，很好解决了中小企业营销难营销贵的困境。" />
+	</head>
+	{include file="public/css" /}
+    {include file="public/js" /}
+    
+	<link rel="stylesheet" href="__RESOURCES__css/new_index.css" />
+	<link rel="stylesheet" href="__RESOURCES__css/style.css" />
+	<style>
+		.data_title_eight{
+			position: absolute;
+			left: 370px;
+		}
+	</style>
+
+	<body style="background-color: #fafafa;">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--菜单栏目-->
+
+		<!--菜单栏目结束-->
+		
+		<div class="nav_box clearfix" style="background-color: #fafafa; margin-top: 10px;">
+			<div class="wrap">
+				<!--banner——left-->
+				<div class="nav_left_1">
+					<div class="data_title">
+						<span></span><label>最新公告</label>
+					</div>
+					<div class="data_list data_list_a">
+						<ul>
+                            {foreach name='hot_task_list' item='hot'}
+							<li>
+								<a href="{:url('marketing/info',['key'=>$hot.id])}">
+									<span class="badge data_badge">{$key+1}</span>
+									<span class="data_title_8">{$hot.name}</span>
+									<!--<span class="fensi active_nav">粉丝数:15W+</span>-->
+									<!--<span class="data_jiage active_nav">价格3...</span>-->
+									<span class="data_title_8 data_title_eight" style="margin-top:-55px;">{$hot.add_time|date='m-d',###}</span>
+
+								</a>
+							</li>
+                            {/foreach}
+						</ul>
+					</div>
+					
+				</div>
+				<!--banner——left-->
+				<!--banner-->
+				<div class="menu_right_new">
+					
+					<div class="bannder_box">
+						<div class="banner" id="b04">
+							<ul>
+								{foreach name="ad_list.banner" item="v"}
+								
+						        <li><a class="banner_img" href="{in name="$v['ad_link']" value="http://,#"}#{else/}{$v.ad_link}" target="_blank{/in}"><img src="{$v.ad_code|get_image_path}" alt="" width="662" height="320" ></a></li>
+								{/foreach}
+								
+						   </ul>
+						    <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="__RESOURCES__images/left_p.png" alt="prev" width="28" height="28"></a>
+    						<a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="__RESOURCES__images/right_p.png" alt="next" width="28" height="28"></a>
+					    </div>
+					</div>
+					<div class="content_box" style="width: 258px;">
+						{if condition="empty($userSession) eq true"}
+						<!--登入前-->
+						<div class="loading1 loading_2">
+							<p><img src="__RESOURCES__images/touxiang.png" /></p>
+							<p>Hi，欢迎来到小蚁兵团！</p>
+							<form class="form_1">
+								<a href="{:url('login/index')}" class="button_2">登录</a>
+								<a href="{:url('login/register')}" class="button_3">注册</a>
+							</form>
+						</div>
+						{else/}
+						<!--登入后-->
+						<div class="loading1">
+							<p><a href="{:url('user/index')}"><img src="{$userSession.user_picture ? get_image_path($me.user_picture) : '__RESOURCES__images/touxiang.png'}" width="100%" /></a></p>
+							<p>Hi，欢迎来到小蚁兵团！</p>
+							<form class="form_11">
+								<div class="per_vip loading_h">
+									<span>VIP{$list_rank[$me.user_rank]->sort_order}{/*$list[$me.user_id].sort_order|default=""*/}</span>{$me.nick_name|default=""}
+								</div>
+							</form>
+						</div>
+						{/if}
+						 <!--公告-->
+						<div class="con_chu" style="display:none;">
+							<ul class="con_ul">
+								<li class="active_1">公告 </li>
+								
+							</ul>
+							<div class="con_1">
+								<div class="con_xiao js_1 ">
+									<!--{foreach name="hot_task_list" item="value"}
+									<p><a href="{:url('marketing/info', ['key' => $value['id']])}" style="width:99%;" title="{$value.name}" alt="">[{$value.promotion_name}]&nbsp;{$value.name}</a></p>
+									{/foreach}-->
+									
+									<div class="gonggao_1">
+										{foreach name="notic_list" item="value"}
+										<p><a href="{:url('index/notice', ['id'=>$value.article_id])}" target="_blank" title="{$value.title}">{$value.title}</a></p>
+										{/foreach}
+									</div>
+									<div class="gonggao_2">
+										<span class="gonggao_img">
+											<img src="__RESOURCES__images/home_88.png" />
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="con_3" >
+							<ul class="con_4">
+								<li class="con_4_a">
+									<a href="{:url('index/joinhall')}" title="" alt="">
+										<img style="margin-top: 4px;" src="__RESOURCES__images/tuiguang_6.png" />
+										<span>新手指导</span>
+									</a>
+								</li>
+								<li class="con_4_a">
+									<a href="{:url('index/sharethehall')}" title="" alt="">
+										<img src="__RESOURCES__images/tuiguang_7.png" />
+										<span>分享大厅</span>
+									</a>
+								</li>
+								<li class="con_4_a">
+									<a href="{:url('index/rechargehall')}" title="" alt="">
+										<img src="__RESOURCES__images/ipone.png" />
+										<span>我的钱包</span>
+									</a>
+								</li>
+							</ul>
+							<!--<ul class="con_4">
+								<li class="con_4_a">
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/hongbao.png" />
+										<span>抢红包</span>
+									</a>
+								</li>
+								<li class="con_4_a">
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/xinyongka.png" />
+										<span>申请信用卡</span>
+									</a>
+								</li>
+								<li class="con_4_a">
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/lipin.png" />
+										<span>旅游礼包</span>
+									</a>
+								</li>
+								
+							</ul>-->
+						</div>
+					</div>
+				</div>
+				<!--banner-->
+			    <!--section-->
+				<div class="section_1" style="display: none;">
+					<div class="wrap aaa clearfix">
+						<div class="sec_left">
+							<p>商家发布产品</p>	
+							<p><span id="xiantiao"></span>市场营销流程</p>
+								
+							
+						</div>
+						<div class="sec_right">
+							<ul class="sec_a">
+								<li>
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/a_1.png" />
+										<p>发布任务</p>
+									</a>
+								</li>
+								<li>
+									<img src="__RESOURCES__images/jiantou.png">
+								</li>
+								<li>
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/a_2.png" />
+										<p>万能营销</p>
+									</a>
+								</li>
+								<li>
+									<img src="__RESOURCES__images/jiantou.png">
+								</li>
+								<li>
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/a_3.png" />
+										<p>审核验证</p>
+									</a>
+								</li>
+								<li>
+									<img src="__RESOURCES__images/jiantou.png">
+								</li>
+								<li>
+									<a href="#" title="" alt="">
+										<img src="__RESOURCES__images/a-4.png" />
+										<p>获取利益</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="new_data_box">
+					<!--各楼层HTML-->
+					{include file="index/p3" /}
+					{include file="index/p1" /}
+					{include file="index/p5" /}
+					{include file="index/p2" /}
+					{include file="index/p6" /}
+					{include file="index/p4" /}
+					{include file="index/p7" /}
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}	
+			
+		<!--楼层导航-->
+		<div class="lou_uuu">
+			<div class="wrap1">
+				
+				<div id="loutinav" >
+					<div class="lout_a">
+						<img src="__RESOURCES__images/tuiguang_22.png" />
+					</div>	
+			        <ul class="louti_list">
+			        	<li class="active"><span>广告投放</span></li>
+			        	<li><span>渠道资源</span></li>
+			        	<li><span>产品分销</span></li>
+			        	<li><span>微信资源</span></li>
+			        	<li><span>微博资源</span></li>
+			        	<li><span>直播资源</span></li>
+			        	<li><span>视频资源</span></li>
+			            <!--<li class="last">顶部</li>-->
+			        </ul>
+			        <div class="lout_er">
+			        	<img src="__RESOURCES__images/app_down.png" />
+			        </div>
+			        <div class="lout_down">
+			        	<p>扫码下载小蚁兵团</p>
+			        </div>
+		    </div>
+		</div>
+	</div>	
+	
+	<!--右侧导航栏-->
+	{include file="public/footer2" /}
+  	{include file="public/js_1" /}	
+	<script>
+		
+		$('#main_nav_index').addClass('menu_home');
+		$(document).ready(function(e) {
+		    var unslider04 = $('#b04').unslider({
+		        dots: true
+		    }),
+		    data04 = unslider04.data('unslider');
+		     
+		    $('.unslider-arrow04').click(function() {
+		        var fn = this.className.split(' ')[1];
+		        data04[fn]();
+		    });
+		});
+		var swiper = new Swiper('.swiper-container', {
+			direction:"vertical",
+		    loop: true,
+		    pagination: '.swiper-pagination',
+		    paginationClickable: true,
+		    nextButton: '.swiper-button-next',
+		    prevButton: '.swiper-button-prev',
+		//		        autoplay:3000,
+		    slidesPerView: 7,		    
+		    spaceBetween: 0
+		});
+	</script>
+	<!--循环id-->
+	 <script>    
+	    $(".news_ul li").click(function(){
+	    	 $(".news_ul li").removeClass("active_nav");
+	    	 $(this).addClass("active_nav");
+	    	 $(".js_list").hide();
+	    	var aa=$(this).index();
+	    	$(".js_list").eq(aa).show();
+	    	
+	    });
+	  
+    </script>
+	</body>
+</html>
+
+<a href="/public/index.php?s=/index/channel/index/category_id/1" class="action">
+					应用渠道
+				</a>

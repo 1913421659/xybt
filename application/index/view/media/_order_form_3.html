@@ -1,0 +1,92 @@
+<table width="100%;" border="0" cellpadding="10" cellspacing="0" class="form_table">
+	<tr>
+		<td width="30%" align="right"><span class="active_nav">* </span>订单类型：</td>
+		<td align="left">
+			<label v-for="item in order_type_list">
+				<input type="radio" name="order_type" :id="'type_'+item.order_type_id" v-model="form.order_type" :value="item.order_type_id" :price_type="item.price_id" @change="changeOrderType"/>
+				{{item.name}}
+			</label>
+		</td>
+	</tr>
+	<tr>
+		<td align="right"><span class="active_nav">* </span>标题： </td>
+		<td align="left"><input name="link"  type="text" class="form-control input_p1" id="title" placeholder="请输入标题" value="" :class="{error:err_title>0}" @keyUp="checkTitle" @blur="checkTitle" v-model="form.title">
+			<template>
+				<label v-if="err_title==1" for="title" class="error">请输入标题</label>
+			</template></td>
+	</tr>
+	<tr>
+		<td align="right"> 摘要： </td>
+		<td align="left"><input name="description"  type="text" class="form-control input_p1" id="description" placeholder="请输入摘要" value="" v-model="form.description"></td>
+	</tr>
+	<tr>
+		<td align="right"> 作者： </td>
+		<td align="left"><input name="author"  type="text" class="form-control input_p1" id="author" placeholder="请输入转发作者" value="" v-model="form.author"></td>
+	</tr>
+	<!---->
+	<tr>
+		<td align="right"> 正文： </td>
+		<td align="left"><input name="content"  type="text" class="form-control input_p1" id="content" placeholder="" value="" v-model="form.content"></td>
+	</tr>
+	<!---->
+	<tr>
+		<td align="right"> 原文链接： </td>
+		<td align="left"><input name="link"  type="text" class="form-control input_p1" id="link" placeholder="请输入原文链接" value="" v-model="form.link"></td>
+	</tr>
+	<!---->
+	<tr>
+		<td align="right"><span class="active_nav">* </span>执行时间： </td>
+		<td align="left"><table border="0" cellspacing="0" cellpadding="5" style="border:1px solid #CCC;">
+				<tr>
+					<td width="90" align="right">开始时间：</td>
+					<td><div class="paidan_1">
+							<input type="text" name="begin_date" class="laydate-icon need_uuu need_u" id="demo" v-model="form.begin_date">
+							<span>
+							<select name="begin_hour" class="select_1" id="begin_hour" v-model="form.begin_hour">
+								<option :value="n-1" v-for="n in 24">{{n-1}}</option>
+							</select>
+							时 </span> <span>
+							<select name="begin_minute" class="select_1" id="begin_minute" v-model="form.begin_minute">
+								<option :value="n-1" v-for="n in 60">{{n-1}}</option>
+							</select>
+							分 </span>
+							<p>默认时间距离当前系统时间，延长十分钟；</p>
+							<p class="active_nav">若想设置每个资源的执行时间，请提交后在我的订单页面修改。</p>
+						</div></td>
+				</tr>
+				<tr>
+					<td align="right">结束时间：</td>
+					<td><select name="select" class="select_1">
+							<option :value="n" v-for="n in [3,5,8,12,24,36,48,72]">{{n}}小时后</option>
+						</select>
+						<p>结束时间距离开始时间最长为3天；</p>
+						<p>若论坛主在结束时间前未接单，系统会自动流单。</p></td>
+				</tr>
+				<tr>
+					<td align="right">KPI上传时间</td>
+					<td><select v-model="form.kpi_time">
+							<option value="24">24小时后</option>
+							<option value="48">48小时后</option>
+							<option value="72">72小时后</option>
+						</select>
+						<p>微信主在您规定的时间内，会向您发送广告的数据分析图截图；</p></td>
+				</tr>
+			</table></td>
+	</tr>
+	<tr>
+		<td align="right"><span class="active_nav">* </span>订单备注： </td>
+		<td align="left"><textarea class="text_box" id="remarks" name="remarks" :class="{error:err_remarks>0}" v-model="form.remarks" @keyUp="checkRemarks" @blur="checkRemarks"></textarea>
+			<template>
+				<label v-if="err_remarks==1" for="remarks" class="error">请填写订单备注</label>
+			</template>
+			<span class="text_span">请填写备注信息，博主会根据自己意愿执行，该备注不影响计费！请不要超过300个汉字！</span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><template>价格合计：{{price_sum_1}}元，<!--会员价100.00元 ,--> </template>
+			账户可用余额{$me.user_money}元 <a class="active_nav" href="#" style="display:none;">去充值 &gt;&gt;</a></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><button class=" button_oo" type="button" @click="submit" style="width:100px;">提交</button></td>
+	</tr>
+</table>

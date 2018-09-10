@@ -1,0 +1,75 @@
+<style type="text/css">
+	.left_action{}
+	.left_action a{
+		color: #FF5C00  !important;
+	}
+	.left_action a span.left{
+		position: absolute;
+		top: 0;
+		left: 0px;
+		width: 3px;
+		height: 51px;
+		display: inline-block;
+		text-align: left;
+		background-color: #ff5c00;
+	
+	}
+	.nav_left .right{
+		float: right;
+		margin-top: 24px;
+		margin-right: 4px;
+		display:block;
+		width:6px;
+		height:11px;
+		background-image:url('__RESOURCES__images/right_2.png');
+	}
+	.nav_left.left_action .right{
+		background-image:url('__RESOURCES__images/right_1 (2).png');
+	}
+</style>
+<div class="col-md-3 que_left">
+	<div class="que_l nav_left " id="nav_left_1">
+		<a class="" href="{:url('index/aboutus')}" title="">
+			<span class="left"></span>
+			关于我们
+			<span class="right"></span>
+		</a>
+	</div>
+	<div class="que_l nav_left" id="nav_left_2">
+		<a class="" href="{:url('index/quention')}" title="">
+			<span class="left"></span>
+			常见问题
+			<span class="right"></span>
+		</a>
+	</div>
+	<div class="que_l nav_left" id="nav_left_3">
+		<a class="" href="{:url('index/contactus')}" title="">
+			<span class="left"></span>
+			联系我们
+			<span class="right"></span>
+		</a>
+	</div>
+	
+	<div class="que_l nav_left" id="nav_left_4">
+		<a class="" href="{:url('index/joinus')}" title="">
+			<span class="left"></span>
+			加入我们
+			<span class="right"></span>
+		</a>
+	</div>
+	
+	<div class="que_l nav_left que_last" id="nav_left_5">
+		<a class="" href="{:url('index/notice')}" title="">
+			<span class="left"></span>
+			小蚁公告
+			<span class="right"></span>
+		</a>
+	</div>
+	
+</div>
+<script>
+function showLeftNavAct(n){
+	var nav = $('#nav_left_'+n).addClass('left_action');
+//	nav.find("a").addClass('color_11 active_nav').find('span').addClass('que_act').;
+}
+</script>

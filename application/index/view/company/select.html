@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的企业</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业管理-->
+		<div class="enterp_box clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				
+				<div class="enter_inner">
+					 <div class="enter_first">
+					 	<p class="enter_des">您未创建企业或加入企业</p>
+					 	<p>
+					 		<a class="btn enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+					 		<a class="btn enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+					 	</p>
+					 	
+					 </div>
+				</div>
+			</div>
+			
+		</div>
+		<!--企业管理结束-->
+		<!--footer-->	
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+		{include file="public/js_1" /}
+	</body>
+	
+</html>

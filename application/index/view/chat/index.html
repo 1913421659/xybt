@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>聊天窗口</title>
+</head>
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/resources/css/com.css"/>
+<link rel="stylesheet" href="/resources/css/style.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/jquery.emoji.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/index.css"/>
+<link rel="stylesheet" href="/resources/emoji/css/jquery.mCustomScrollbar.min.css"/>
+<style>
+	body{
+		min-width: 0px;
+	}
+</style>
+<body class="body_box">
+<div class="chat_box wrap">
+<div class="chat_w">
+    <div class="row">
+        <div class="col-md-3 chat_left">
+            <div class="char_l_top">
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="#" class="img_top">
+                            <img id="sendUserImg" class="media-object" src="<?= !empty($curuser['user_picture'])?$curuser['user_picture']:'/resources/images/a1.png' ?>" alt="头像">
+                        </a>
+                    </div>
+                    <input type="hidden" id="sendUserId" value="<?=$curuser['user_id']?>">
+                    <div class="media-body chat_l_title">
+                        <h4 class="media-heading" id="sendUserName"><?=$curuser['user_name']?></h4>
+                        <p><span id="sendUserRankName"><?=$list_rank[$curuser['user_rank']]->rank_name?></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat_l_sec clearfix">
+                <ul class="chat_ul">
+                    <li>
+                        <a href="/index.php?s=/index/user/wallet.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_7.png"/></dt>
+                                <dd>钱包</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/user/myshare.html"></a>
+                        <dl>
+                            <dt><img src="/resources/images/l_3.png"/></dt>
+                            <dd>分享</dd>
+                        </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/user/myneed/key/3.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_2.png"/></dt>
+                                <dd>促销</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/marketing/index/key/3/p_id/27.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_13.png"/></dt>
+                                <dd>众筹</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?s=/index/marketing/index/key/2/p_id/70.html">
+                            <dl>
+                                <dt><img src="/resources/images/l_2.png"/></dt>
+                                <dd>游戏</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="chat_l_three">
+                <div class="container11 c_1 _scroll clearfix">
+                    <input type="hidden" id="contactStr" value=""/>
+                    <div class="_panel-box" id="contactBox"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-9 chat_p">
+            <div class="chat_right_t clearfix">
+                <div class="col-md-6 chat_2" style="height: 49px;" id="currentUser"></div>
+                <div class="col-md-6 chat_r_r">
+                    <div class="chat_r_1">
+                        <img src="/resources/images/l_8.png"/><a href="index.html">首页</a>
+                        <small></small>
+                        <img src="/resources/images/l_6.png"/>企业管理
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 chat_r_l ">
+
+
+                        <div class="chat_r_pp">
+                            <div class="container22 c_2 _scroll">
+                                <div class="_panel-box" id="chat_window">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="chat_bottom clearfix">
+                            <div class="chat_5">
+                                <div class="chat_5_l">
+                                    <img src="/resources/images/l_1.png" id="emoji"/>
+                                    <!--<img src="/resources/images/l_9.png"/>-->
+                                </div>
+
+                            </div>
+                            <div class="chat_6">
+                                <div id="message_box" contenteditable="true" style="height: 110px;outline:none;"></div>
+
+                                <div class="fasong_2" style="z-index: 10">
+                                    <button class="btn btn-default" type="button" id="clear_message_box" onclick="sendTextMessage()">发送
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 chat_r_p">
+                        <div class="chat_menu">
+                            <ul class="chat_ul_li" id="chat_ul_li">
+                                <!--<li class="active_u">-->
+                                <!--最近聊天-->
+                                <!--</li>-->
+                                <li class="active_u" style="width: 50%">
+                                    我的圈子
+                                </li>
+                                <li style="width: 50%">
+                                    我的群组
+                                </li>
+                            </ul>
+                            <div class="chat_b_4">
+                                <div class="fenzhu">
+                                    <div class="container_p c5 _scroll">
+                                        <div class="_panel-box">
+                                            <!--亲友圈-->
+                                            <ul class="chat_u">
+                                                <li>
+                                                    <img src="/resources/images/l_11.png"/> 亲友圈
+                                                </li>
+                                                <div class="chat_y">
+                                                    <?php foreach($userlist['data'] as $k=>$v){ ?>
+                                                    <div class="media chat_o" data="<?=$v['user_id']?>" data1 = "<?=$v['rank']['rank_name']?>" ctype="PRIVATE">
+                                                        <div class="media-left media-middle">
+                                                            <a href="#" class="chat_three">
+                                                                <img class="media-object" src="<?=!empty($v['user_picture'])?'/'.$v['user_picture']:'/resources/images/yinyuanfuLOGO.png'?>"
+                                                                     alt="...">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body chat_title1">
+                                                            <h4 class="media-heading"><font><?=$v['user_name']?></font>
+                                                                <small>9-15</small>
+                                                            </h4>
+                                                            <p>在吗？我有事找你...</p>
+                                                        </div>
+                                                    </div>
+                                                    <?php }?>
+                                                </div>
+                                            </ul>
+
+                                            <!--朋友圈-->
+
+                                            <!--关系圈-->
+
+                                            <!--商家-->
+
+                                            <!--渠道-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fenzhu fenzhu1">
+                                    <div class="container_p c5 _scroll">
+                                        <div class="_panel-box">
+                                            <?php foreach($groupList as $k=>$v){ ?>
+                                            <div class="media chat_o" data="<?=$v['group_id']?>" ctype="GROUP">
+                                                <div class="media-left media-middle">
+                                                    <a href="#" class="chat_three">
+                                                        <img class="media-object" src="<?=!empty($v['group_img'])?$v['group_img']:'/resources/images/yinyuanfuLOGO.png'?>"
+                                                             alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body chat_title1">
+                                                    <h4 class="media-heading"><font><?=$v['group_name']?></font>
+                                                        <small>9-15</small>
+                                                    </h4>
+                                                    <p>在吗？我有事找你...</p>
+                                                </div>
+                                            </div>
+                                            <?php }?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script type="text/javascript" src="/resources/js/jquery.1.12.3.js"></script>
+<script type="text/javascript" src="/resources/js/yi-scroll.js"></script>
+<script type="text/javascript" src="/resources/js/js.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="/resources/rongcloud/protobuf-2.2.7.min.js" ></script>-->
+<!--<script type="text/javascript" src="/resources/rongcloud/RongIMLib-2.2.7.min.js" ></script>-->
+<script src="//cdn.ronghub.com/RongIMLib-2.2.5.min.js"></script>
+<script src="//cdn.ronghub.com/RongEmoji-2.2.5.min.js"></script>
+<script src="//cdn.ronghub.com/Libamr-2.2.5.min.js"></script>
+<script src="//cdn.ronghub.com/RongIMVoice-2.2.5.min.js"></script>
+
+<script src="/resources/rongcloud/common.js"></script>
+<script type="text/javascript" src="/resources/emoji/js/jquery.emoji.min.js"></script>
+<script type="text/javascript" src="/resources/emoji/js/jquery.mCustomScrollbar.min.js"></script>
+<script>
+    var $ = jQuery;
+    $("._scroll").yi_scroll();
+    $("._scroll-mh").yi_scroll({isMaxHeight: true, isBar: true});
+
+    $("#message_box").emoji({
+        button: "#emoji",
+        showTab: false,
+        animation: 'slide',
+        icons: [{
+            name: "QQ表情",
+            path: "/resources/emoji/img/qq/",
+            maxNum: 91,
+            excludeNums: [41, 45, 54],
+            file: ".gif"
+        }]
+    });
+
+    var params = {
+        appKey: "<?=$appkey?>",
+        token: "<?=$token ?>",
+        navi: ''
+    };
+
+    var userId = '<?=$curuser['user_id']?>';
+    var callbacks = {
+        getInstance: function (instance) {
+            RongIMLib.RongIMEmoji.init();
+            registerMessage("PersonMessage");
+        },
+        getCurrentUser: function (userInfo) {
+            userId = userInfo.userId;
+        },
+        receiveNewMessage: function (message) {
+            //判断是否有 @ 自己的消息
+            var mentionedInfo = message.content.mentionedInfo || {};
+            var ids = mentionedInfo.userIdList || [];
+            for (var i = 0; i < ids.length; i++) {
+                if (ids[i] == userId) {
+                    alert("有人 @ 了你！");
+                }
+            }
+            console.log(message);
+        }
+    }
+
+    init(params, callbacks);
+
+    $('.chat_o').click(function(){
+        $('#chat_window').html('');
+
+        var ctype = $(this).attr('ctype');
+        var targetId = $(this).attr('data');
+        var username =  $(this).children(1).find('font');
+        var headImg = $(this).find('img').attr('src');
+        var c_type = 1;//默认是PRIVATE
+        var rank_name = $(this).attr('data1');
+        if(ctype=='PRIVATE'){
+            c_type = 1;
+            $('#currentUser').attr('data',targetId);
+            $('#currentUser').html('<span>'+rank_name+'</span>'+username.html());
+            $('#currentUser').attr('ctype','PRIVATE');
+            showContactLeft(targetId,username.html(),headImg,c_type,rank_name,'',0);
+        }else if(ctype=='GROUP'){
+            c_type = 3;
+            $('#currentUser').attr('data',targetId);
+            $('#currentUser').attr('ctype','GROUP');
+            $('#currentUser').html(username.html());
+            $('#currentUser').attr('imgv',headImg);
+            showContactLeft(targetId,username.html(),headImg,c_type,'','',0);
+        }
+
+
+        showReadMessage(targetId,c_type);//切换的时候，先显示已读信息
+        showUnreadMessage(targetId,c_type);//显示
+
+    })
+
+
+</script>
+
+</body>
+
+</html>

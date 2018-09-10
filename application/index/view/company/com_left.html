@@ -1,0 +1,68 @@
+<!--企业管理做菜单栏-->
+<template>
+	<!--商家管理-->
+	<div class="com_menu">
+		<div class="que_l">
+			<a class="color_1"  href="{:url('company/myneed')}" title="" :class="{color_1:action==1, active_nav:action>1000&&action<2000}">
+				<span class="que_act" v-if="action>1000&&action<2000"></span>				
+				<img  class="per_img" src="__RESOURCES__images/ying_1_1.png" v-if="action>1000&&action<2000"/>
+				<img  class="per_img" src="__RESOURCES__images/ying_1.png" v-else />
+				商家管理 
+				<span class="per_img2 per_img_3" ></span>
+			</a>
+			<div class="per_hover left_nav_sub" :class="{show1:action>1000&&action<2000}">
+				<a href="{:url('company/myneed')}" :class="{action:action==1001}">商家需求</a>
+				<!--<a href="#" :class="{action:action==1002}">营销工具</a>-->
+				<a href="{:url('company/channel_dispatch')}" :class="{action:action==1003}">渠道派单</a>
+				<a href="{:url('company/media_dispatch')}" :class="{action:action==1004}">媒体派单</a>
+			</div>
+		</div>
+	</div>
+	<!--渠道管理-->
+	<div class="com_menu">
+		<div class="que_l">
+			<!--{:url('company/mytask')}-->
+			<a  class="color_1 menu_y" href="{:url('company/mytask')}" title="" :class="{color_1:action==1, active_nav:action>300&&action<400}">
+				<span class="que_act" v-if="action>300&&action<400"></span>	
+				<img  class="per_img" src="__RESOURCES__images/ying_2_2.png" v-if="action>300&&action<400" />
+				<img  class="per_img" src="__RESOURCES__images/ying_2.png" v-else />
+				渠道管理				
+				<span class="per_img2 per_img_3" ></span>
+			</a>
+			<div class="per_hover left_nav_sub com_hover" :class="{show1:action>300&&action<400}">		
+				<a href="{:url('company/mytask')}" :class="{action:action==301}" >产品管理</a>
+				<a href="{:url('company/channel_receipt')}" :class="{action:action==302}">渠道接单</a>
+				<a href="{:url('company/media_receipt')}" :class="{action:action==303}">媒体接单</a>								
+			</div>
+		</div>
+  </div>	
+	<!--<div class="que_l">-->
+		<!--<a class="color_1"  href="{:url('company/pay_project')}" title="" :class="{color_1:action==1, active_nav:action==5}">-->
+			<!--<span class="que_act" v-if="action==5"></span>				-->
+			<!--<img  class="per_img" src="__RESOURCES__images/ying_5_5.png" v-if="action==5"/>-->
+			<!--<img  class="per_img" src="__RESOURCES__images/ying_5.png" v-else />-->
+			<!--待付款项目<label class="active_nav">（0）</label>-->
+		<!--</a>-->
+	<!--</div>-->
+	<!--<div class="que_l">-->
+		<!--<a  class="color_1" href="{:url('company/receice_project')}" title="" :class="{color_1:action==1, active_nav:action==6}">-->
+			<!--<span class="que_act" v-if="action==6"></span>				-->
+			<!--<img  class="per_img" src="__RESOURCES__images/ying_6_6.png" v-if="action==6" />-->
+			<!--<img  class="per_img" src="__RESOURCES__images/ying_6.png" v-else />-->
+			<!--代收款项目<label class="active_nav">（0）</label>-->
+		<!--</a>-->
+	<!--</div>-->
+	<div class="que_l">
+		<a class="color_1" href="{:url('company/income_record')}" title="" :class="{color_1:action==1, active_nav:action==7}">
+			<span class="que_act" v-if="action==7"></span>				
+			<img  class="per_img" src="__RESOURCES__images/ying_7_7.png" v-if="action==7" />
+			<img  class="per_img" src="__RESOURCES__images/ying_7.png" v-else  />
+			收支记录
+		</a>
+	</div>
+
+</template>
+    <!--企业管理做菜单栏结束-->
+	<script>
+	$('#main_nav_company').addClass('active_nav');
+	</script>

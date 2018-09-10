@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我要培训</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}   
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		<div class="header_second clearfix" style="border-bottom: 1px solid #ff5c00;width: 100%;padding: 4px 0;background-color: #fff;">
+			<div class="wrap">
+				<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/recharge_logo.png" />
+				</a>
+				<span class="header_des" style="left: -101px;"></span>
+				<span class="h_shuoming jionhall_title active_nav">任务大厅</span>
+			</div>
+		</div>
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="company_need">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>				
+						<a href="{:url('index/parttime')}">任务大厅</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<!--<a href="#">成长营规则</a>--> 
+					</p>
+				</div>
+				<div class="com_contain" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							
+					        {include file="index/parttime_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:2
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " >	
+							<div class="row">
+								<div class="jionhall_innter">
+							    	 <div class="com_no_data">
+				                        <img src="__RESOURCES__images/jionhall_c.png" />
+				                        <p>暂无</p>
+				                        <!--<input type="submit" v-on:click="My_check" style="margin-top: 10px;" class="fabu" value="申请加入兼职">-->
+				                    </div>			    	
+							    </div>	
+							</div>			
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+
+			$(".left_nav_sub a").click(function(){
+				$(".left_nav_sub a").removeClass("action");
+				$(this).addClass("action");
+			});
+			var company_need=new Vue({
+				el:"#company_need",
+				data:{
+					
+				},
+				methods:{
+					
+				}
+			})
+		</script>	
+	</body>
+	
+</html>

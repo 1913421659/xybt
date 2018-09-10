@@ -1,0 +1,14 @@
+{notempty name="que_menu"}
+	<div class="que_menu_1">
+		<p><img src="__RESOURCES__images/home.png"/>
+			<a href="{:url('index/index')}">首页</a>
+			{foreach name="que_menu" key="key" item="value"}
+				{if condition="$value eq ''"}
+					<img src="__RESOURCES__images/right_2.png"/><a >{$key}</a>
+				{else/}
+					<img src="__RESOURCES__images/right_2.png"/><a href="{$value}">{$key}</a>
+				{/if}
+			{/foreach}
+		</p>
+	</div>
+{/notempty}

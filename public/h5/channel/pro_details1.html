@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>产品体验详情</title>
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>
+		<style>
+			  .swiper-container {
+		        width: 100%;
+		        height: 100%;
+		    }
+		    .swiper-slide {
+		        text-align: center;
+		        font-size: 18px;
+		        background: #fff;
+		
+		        /* Center slide text vertically */
+		        display: -webkit-box;
+		        display: -ms-flexbox;
+		        display: -webkit-flex;
+		        display: flex;
+		        -webkit-box-pack: center;
+		        -ms-flex-pack: center;
+		        -webkit-justify-content: center;
+		        justify-content: center;
+		        -webkit-box-align: center;
+		        -ms-flex-align: center;
+		        -webkit-align-items: center;
+		        align-items: center;
+		    }
+		</style>
+	</head>
+	<body style="background-color: #f1f0f0;">
+	<div id="media_content">
+		<header class="hanner_box">
+			<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span>产品体验</span>
+			<a href="javascript:;" id="menuBtn" @click="menuBtn"  class="hanner_box_left" style="float: right;"><img class="" src="../images/peosonal.png" /></a>
+		</header>
+		<section>
+			<div class="pro_box" v-for="item in proList">
+			    <a class="media-left media-middle pro_box_img" href="#">
+			        <img class="media-object" :src="item.pro_img"alt="产品体验">          
+			    </a>
+			    <div class="media-body">
+			        <h5 class="media-heading pro_title">{{item.title}}</h5>
+			        <p class="active pro_price">直发价格：{{item.price}}元</p>
+			        <p class="media_power pro_jibie">
+			        	<span class="pri_img_1">
+			        		 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+			        	</span>
+			        	<span>{{item.purpose}}</span>
+			        	<span>余{{item.Surplus}}份</span>
+			        	<span>{{item.time}}</span>
+			        </p>
+			    </div>
+			    <a href="#" class="atonce">马上抢</a>
+			</div>
+		</section>
+		<!--操作流程-->
+		<div class="content clearfix con_a">
+			<div class="con_title">
+				<span></span><label>操作流程（请严格按“操作演示”流程操作）</label>
+			</div>
+			<div class="con_box">
+				<div id="con_border">						
+					<div  class="con_2 con_8">
+						<div class="con_left"><span class="con_3">1</span></div>
+						<div class="con_3_r">								
+							<div class="con_4">
+								下载安装软件<label class="lable">奖200蚁币</label>
+							</div>
+							<div class="hover">
+								<div class="hover_l hover_height" >
+									安装打开体验产品各项目功能一分钟钟安装打开体验产品各项目功能一分钟
+									安装打开体验产品各项目功能一分钟钟安装打开体验产品各项目功能一分钟....
+								</div>
+								<div class="hover_r" @click="heightShow"></div>
+							</div>								
+						</div>								
+					</div>
+					<div  class="con_2 con_8">
+						<div class="con_left"><span class="con_3">2</span></div>
+						<div class="con_3_r">								
+							<div class="con_4">
+								下载安装软件<label class="lable">奖200蚁币</label>
+							</div>
+							<div class="hover">
+								<div class="hover_l hover_height" >
+									安装打开体验产品各项目功能一分钟钟安装打开体验产品各项目功能一分钟
+									安装打开体验产品各项目功能一分钟钟安装打开体验产品各项目功能一分钟....
+								</div>
+								<div class="hover_r" @click="heightShow" ></div>
+							</div>								
+						</div>								
+					</div>
+					<div  class="con_2">
+						<div class="con_left"><span class="con_3">3</span></div>
+						<div class="con_3_r">								
+							<div class="con_4">
+								下载安装软件<label class="lable">奖200蚁币</label>
+							</div>
+							<div class="hover">
+								<div class="hover_l hover_height" >
+									安装打开体验产品各项目功能一分钟钟安装打开体验产品各项目功能一分钟
+									安装打开体验产
+								</div>
+								<div class="hover_r" @click="heightShow" ></div>
+							</div>								
+						</div>								
+					</div>
+					
+					
+			   </div>
+			</div>	
+			
+		</div>
+		<!--操作流程-->
+		<div class="des"></div>
+		<div class="content clearfix con_a">
+			<div class="con_title">
+				<span></span><label>演示流程（点击下面放大图片）</label>
+			</div>
+			<div class="con_box pro_text">
+				 <!-- Swiper -->
+			    <div class="swiper-container case">
+			        <div class="swiper-wrapper">
+			            <div class="swiper-slide img_banner" v-for ="item,index in banners" >
+			            	<a href="#">			            		
+			            		<img  class="img_banner"  :src="item.bannerImg" @click="imgIndex(index)"  />
+			            	</a>
+			            </div>
+			            
+			        </div>
+			        <!-- Add Pagination -->
+			        <div class="swiper-pagination case"></div>
+			        <!-- Add Navigation -->
+			    </div>
+										
+			</div>
+			<p class="tishi">温馨提示：小蚁兵团平台提供下载的APP，100%安全无毒，请大家放心下载，安装APP时请选择本地安装，否则无奖励。</p>
+			
+		</div>
+		<!--产品说明-->
+		<div class="des"></div>
+		<div class="content clearfix con_a">
+			<div class="con_title">
+				<span></span><label>产品说明</label>
+			</div>
+			<div class="con_box">
+				
+			</div>
+			<p class="chan">温馨提示：小蚁兵团平台提供下载的APP，100%安全无毒，请大家放心下载，安装APP时请选择本地安装，否则无奖励。</p>
+			
+		</div>
+		<!--底部说明-->
+		<footer  class="footer_b">
+			<ul class="media_footer media_con_1">
+				<li>
+					<dl class="media_dl">
+						<dt><img  src="../images/shoucang.png"/> </dt>
+						<dd>收藏</dd>
+					</dl>
+				</li>
+				<li>
+					<a class="media_link" href="#">确认派单</a>
+				</li>
+				<li>
+					<dl class="media_dl">
+						<dt><img src="../images/share_1.png"/> </dt>
+						<dd>分享</dd>
+					</dl>
+				</li>
+			</ul>
+		</footer>
+		<!--左右菜单栏-->
+		<div class="menu_left_box" id="menu_show" @click="menu_hide">
+			<div class="menu_l_inner">
+				<div class="menuBg">
+					<div class="weui-flex">
+					  <div class="weui-flex__item menu_l">
+					  	<a href="#" class="menu_l_a"><img src="../images/LOGO.png"/></a>
+					  	<p class="menu_b"><span class="menu_dengji">VIP1</span><span class="yonghu">蚁兵达人</span></p>					  	
+					  </div>
+					  <div class="weui-flex__item ">
+					  	<p>编号：<span class="active">100017</span></p>
+					  	<p>昵称：<span class="active">小蚁用户</span></p>
+					  	<p>总额：<span class="active">20000</span>蚁币</p>
+					  	<p>奖励：<span class="active">10000</span>蚁币</p>
+					  	<p>分红：<span class="active">10000</span>蚁币</p>
+					  	<p>兵团：<span class="active">1090</span>蚁兵</p>
+					  </div>
+					</div>					
+				</div>
+				<div class="explain">您将于<span class="active">2015-03-04</span>完成<span class="active">10元</span>体验和分销任务即
+可获得<span class="active">15964</span>元分成收益！<a href="#" class="active fr">详细说明 >></a> </div>
+				<div class="weui-flex">
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="#" class="menu_list">
+				  		<img src="../images/xueyuan.png" />
+				  		<p>小蚁学院</p>
+				  	</a>
+				  </div>
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="#" class="menu_list">
+				  		<img src="../images/qianbao.png" />
+				  		<p>我的钱包</p>
+				  	</a>
+				  </div>
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="#" class="menu_list">
+				  		<img src="../images/bingtua.png" />
+				  		<p>我的兵团</p>
+				  	</a>
+				  </div>
+				</div>
+				<div class="weui-cells weui_box">
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/ewm.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的二维码</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/cart.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>购物车</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/order.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的订单</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				    <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/shoucang.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的收藏</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/fenxiang.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的分享</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/fenxiangdating.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>分享大厅</p>
+				    </div>	
+				    <div class="weui-cell__ft"></div>
+				  </a>
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/zuji.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的字迹</p>
+				    </div>
+				     <div class="weui-cell__ft"></div>
+				  </a>	
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/xinxi.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>个人信息</p>
+				    </div>	
+				     <div class="weui-cell__ft"></div>
+				  </a>
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/settle.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>设置</p>
+				    </div>	
+				     <div class="weui-cell__ft"></div>
+				  </a>	
+				</div>
+				
+				
+			</div>
+			
+		</div>
+		<!--轮播放大-->
+		<!-- 轮播放大 -->
+		<div class="banner_show ">
+		    <!-- 轮播放大 -->
+		    <div class="banner_a">
+		    	 <!-- Swiper -->
+			    <div class="swiper-container banner_1" style="height: 100%">
+			        <div class="swiper-wrapper">
+			            <div class="swiper-slide" v-for ="item,index in banners">
+			            	<a href="#">
+			            		<img :src="item.bannerImg"  />
+			            	</a>
+			            </div>
+			            
+			        </div>
+			        <!-- Add Pagination -->
+			        <div class="swiper-pagination banner_1"></div>
+			        <!-- Add Navigation -->
+			    </div>
+		    </div>		    
+		</div>
+	</div>
+	<script>
+		var media_content=new Vue({
+			el:"#media_content",
+			data:{
+				proList:[
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},					
+				],
+				banners:[
+					{bannerImg:"../images/v1.jpg"},
+					{bannerImg:"../images/v2.jpg"},
+					{bannerImg:"../images/v1.jpg"},
+					{bannerImg:"../images/v2.jpg"},
+	
+				]
+			},
+			methods:{
+				menuBtn:function(){
+					$("#menu_show").animate({left:"0%"},"800");
+				},
+				menu_hide:function(){
+					$("#menu_show").animate({left:"-100%"},"800");
+				},
+				heightShow:function(event){
+					if($(event.target).siblings().hasClass("hover_height")){
+						$(event.target).siblings().removeClass("hover_height")
+						$(event.target).siblings().css("height","auto");
+					}else{
+						$(event.target).siblings().addClass("hover_height")
+						$(event.target).siblings().css("height","23px");
+					}
+					
+				},
+				imgIndex:function(index){
+					mySwiper1.slideTo(index,0,false);
+				    $(".banner_show").css("height","100%");
+				    $(".banner_show").css("z-index","100000");
+				}
+			},
+
+			
+		})
+	</script>
+	  <script>
+	  	
+//  $(".img_banner").click(function(){
+//     
+//  });
+    $(".banner_show").click(function(){
+        $(this).css("height","0");
+    })
+	  	 var swiper1 = $('.case').swiper({
+            pagination: '.case .swiper-pagination',
+             paginationClickable: true,
+            slidesPerView: 3,
+            spaceBetween: 7,
+            // loop: true,
+     });
+      var mySwiper1 = $('.banner_1').swiper({        
+            pagination:'.banner_1 .swiper-pagination',
+            paginationClickable: true,
+            slidesPerView: 1,
+             // loop: true,
+         });
+
+    </script>
+		
+	</body>
+</html>

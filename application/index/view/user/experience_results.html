@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的需求-产品体验-需求结果</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>
+	<body >
+		<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--顶部说明-->
+		<!--menu-->
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix" >
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img :src="menu_home" /><a href="index.html">{{home}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal_1}}</a>
+						<img :src="menu_img1" /><a href="Myneeds.html">{{marketing_list1}}</a>
+						<img :src="menu_img1" /><a href="Myneed_results.html">{{result}}</a>
+					</p>
+				</div>
+				<div class="que_a">
+					<div class="row">			
+						<div class="col-md-12 need_right ">
+							<div class="d_box1 vv">
+							   <div class="row">
+								<div class="col-md-12">
+									<div class="d_left">
+										<div class="media">
+										  <div class="media-left media-middle">
+										    <a class="ad_img" href="Productdistribution_detail.html">
+										    	<span class="ad_img_g">
+										            <img class="media-object" :src="meed_img1" alt="...">
+										        </span>
+										    </a>
+										  </div>
+										  <div class="media-body need_p">
+										    <h4 class="media-heading dd_title">{{meeg_title}}</h4>
+										    <p class="res_p1">{{publisher}}&nbsp;&nbsp;&nbsp;&nbsp;{{release_time}}&nbsp;&nbsp;&nbsp;&nbsp;{{Audit}}</p>
+										    <p class="res_p"><span>总预算：25056元</span><span>剩余预算：25056元</span><span>数量：5000个</span><span>完成数量：6555个</span><span>商品单价：10.4元</span></p>
+										  </div>
+										</div>
+										
+								    </div>
+								</div>
+																
+							</div>
+							</div>
+							<div class="des"></div>
+								<div class="per_nei vv">								
+								  <div class="col-md-12  riqi">								  
+								  	<div class="" style="float: left;">
+										  <div class="layui-form-item layui_a">
+										  	<div style="float: left;display: inline-block;">{{time}}</div>
+										    <div class="layui-inline month layui_r">
+										      <input type="text" class="layui-input test-item" placeholder="yyyy-MM-dd">
+										    </div>
+										    <div style="float: left;display: inline-block;margin-right: 10px;">-</div>
+										    <div class="layui-inline month layui_r">
+										      <input type="text" class="layui-input test-item" placeholder="yyyy-MM-dd">
+										    </div>										   
+										  </div>
+									</div>
+										<ul style="float: left;">
+											<li class="">
+												<select class="need_sel need_u">
+													<option v-for="province in provinces">{{province.province1}}</option>												
+												</select>									
+										    </li>
+										</ul>
+										<form class="search_btn">
+											<button class="btn btn-default" type="submit">搜索</button>
+										</form>
+									</div>
+								</div>
+							<div class=""  style="padding: 0 20px;">
+								<table class="table table_1">
+									<tr class="table_first">
+								  	   <td>ID</td>
+								       <td>会员名称</td>
+								       <td>提交时间</td>
+								       <td>审核状态</td>
+								       <td>审核方</td>
+								    </tr>
+								     <tr v-for="table in tables">
+								  	   <td>{{table.table_1}}</td>
+								       <td>{{table.table_2}}</td>
+								       <td>{{table.table_3}}</td>
+								       <td>{{table.table_4}}</td>
+								       <td><a class="btn  need_shen" href="#" role="button" v-on:click="My_check">{{table.table_5}}</a></td>
+								    </tr>
+								     <tr v-for="table1 in table1s">
+								  	  <td>{{table1.table1_1}}</td>
+								       <td>{{table1.table1_2}}</td>
+								       <td>{{table1.table1_3}}</td>
+								       <td>{{table1.table1_4}}</td>
+								       <td>{{table1.table1_5}}</td>
+								    </tr>
+								     
+								    
+								    
+								</table>
+							</div>
+									
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+					
+		{include file="public/footer1" /}
+	    {include file="public/footer2" /}
+		<!--马上抢弹窗-->	
+		<div class="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_1">
+					<ul>
+						<li>
+							<div class="header_now">
+								{{tan_title}}
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							
+							<div class="res_inner">
+							    <div class="container_ooo c_8 _scroll">
+									<div class="_panel-box">
+										
+										<div class="content_now" >
+											<div class="shen_sec clearfix">
+												<div class="media shen_sec_1">
+													  <div class="media-left media-middle">
+													    <a href="#" class="ad_img_hh">
+													        <img class="media-object" :src="tan_img1" alt="...">
+													    </a>
+													  </div>
+													  <div class="media-body">
+													    <h4 class="media-heading">
+													    	<div class="per_vip shen_sec_t">
+																<a href="Personal.html"><span>{{tan_vip}}</span>{{tan_tiltle1}}</a>
+															</div>
+													    </h4>
+													    <p><span>{{tan_id}}</span><span>{{tan_jibie}}</span><span>{{tan_Identity}}</span></p>
+													  </div>
+			                                     </div>
+			                                     <div class="sec_r">
+			                                 		<div class="sec_r_1" v-for="reward in rewards">
+			                                 			<p>{{reward.rewards_number}}</p>
+			                                 			<p>{{reward.rewards_totol}}</p>
+			                                 		</div>
+			                      
+			                                     </div>
+												
+											</div>
+											<div class="res_jietu">
+												<h3><strong>截图审核：</strong></h3>
+											</div>
+											
+											<!--有数据调用-->
+											<div class="res_con">
+												<div class="baguetteBoxOne gallery">
+												   <a href="__RESOURCES__images/yingxiao_1.png" >
+												     	<img src="__RESOURCES__images/yingxiao_1.png">
+												   </a>
+												   <a href="__RESOURCES__images/yingxiao_2.png">
+												    	<img src="__RESOURCES__images/yingxiao_2.png">
+												   </a>
+												   <a href="__RESOURCES__images/yingxiao_3.png">
+												   	    <img src="__RESOURCES__images/yingxiao_3.png">
+												   </a>
+												   <a href="__RESOURCES__images/yingxiao_4.png">
+												   	    <img src="__RESOURCES__images/yingxiao_4.png">
+												   </a>
+												   <a href="__RESOURCES__images/yingxiao_5.png">
+												     	<img src="__RESOURCES__images/yingxiao_5.png">
+												   </a>
+												    <a href="__RESOURCES__images/yingxiao_4.png">
+												   	    <img src="__RESOURCES__images/yingxiao_4.png">
+												   </a>
+												   <a href="__RESOURCES__images/yingxiao_5.png">
+												     	<img src="__RESOURCES__images/yingxiao_5.png">
+												   </a>
+												</div>
+												
+											</div> 
+												
+											<!--有数据调用结束-->
+											<!--无数据调用-->
+											<!--<div class="res_nodara">
+												<div class="res_nodata_img">
+													<div class="res_nodata_a">
+														<img src="__RESOURCES__images/no_data.png" />
+													</div>
+													<p class="res_notata_p">暂无上传截图</p>
+												</div>
+											</div>-->
+											<!--无数据调用结束-->
+											<div class="shen_three">
+												<div class="row">
+													<div class="col-md-2 shen_left res_1"><h3><strong>文档审核：</strong></h3></div>
+													<div class="col-md-10">
+														<!--有数据-->
+														<p class="res_word res_b">暂无上传文档</p>
+														<!--有数据结束-->
+														<!--无数据-->
+														<!--<p class="res_word res_down"><img src="__RESOURCES__images/down_app.png" />下载文档</p>-->
+														<!--无数据结束-->
+													</div>
+												</div>
+											</div>
+										
+											<div class="shen_three" style="margin-bottom: 20px;">
+												<div class="row">
+													<div class="col-md-2 shen_left res_1"><h3><strong>审核操作：</strong></h3></div>
+													<div class="col-md-10">
+														<div class="radio radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio1" value="option1" checked="">
+							                                <label for="radio1">平台审核</label>
+							                            </div>
+							                            <div class="radio  radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio2" value="option2">
+							                                <label for="radio2">审核不过</label>
+							                            </div>
+							                             <div class="radio  radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio3" value="option3">
+							                                <label for="radio2">重新提交</label>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										
+											
+										</div>
+				                        
+				                       
+									</div>
+							   </div>
+							
+							</div>
+							
+							
+							
+							<div class="dibu">
+							   <a class="dd_now shen_now" href="javascript:;" title="">提交审核</a>			
+							</div>
+							
+							
+						
+						</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+			
+		</div>		
+		</div>
+		{include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					menu_home:"__RESOURCES__images/home.png",
+					home:"首页",
+					menu_img1:"__RESOURCES__images/right_2.png",
+					personal:"个人中心",
+					personal_1:"我的需求",
+					marketing_list1:"产品体验",
+					result:"需求结果",
+					meed_img1:"__RESOURCES__images/ti_a.png",
+					meeg_title:"双11全球狂欢节",
+					publisher:"发布人：覃俊威",
+					release_time:"发布时间：2017-02-50",
+					Audit:"20小时审核",
+					time:"时间：",
+					provinces:[
+						{province1:"审核状态"},
+						{province1:"待审核"},
+						{province1:"审核通过"},
+						{province1:"审核不过"},
+						{province1:"重新提交"}],
+					tables:[
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+					}],
+					table1s:[{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					},
+					{
+						table1_1:"10086",
+						table1_2:"姑墨王子",
+						table1_3:"2017-02-02",
+						table1_4:"审核未过",
+						table1_5:"平台审核",
+					}],
+					tan_title:"审核需求",
+					tan_img1:"__RESOURCES__images/yinyuanfuLOGO.png",
+					tan_tiltle1:"南城先生",
+					tan_vip:"vip1",
+					tan_id:"ID：326666",
+					tan_jibie:"蚁兵达人",
+					tan_Identity:"学生",
+					rewards:[{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					},
+					{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					},
+					{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					}],
+					
+				},
+				methods:{
+					My_check:function(){
+						$(".now_tan").fadeIn(300);
+					},
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					}
+				}
+					
+				
+				
+				
+					
+				
+				
+			})
+		</script>
+		
+		<script>
+			lay('.test-item').each(function(){
+			    laydate.render({
+			      elem: this
+			      ,trigger: 'click'
+			    });
+			  });
+		</script>			
+		<script type="text/javascript">
+	    	function changeState(el) {
+	        	if (el.readOnly) el.checked=el.readOnly=false;
+	       		 else if (!el.checked) el.readOnly=el.indeterminate=true;
+	   		};
+	    	window.onload = function() {
+			    baguetteBox.run('.baguetteBoxOne');			
+			};
+			$("._scroll").yi_scroll();		
+            $("._scroll-mh").yi_scroll({isMaxHeight:true,isBar:true});
+	  </script>
+
+	</body>
+	
+</html>

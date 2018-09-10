@@ -1,0 +1,16 @@
+<!--媒体扣款-->
+	<div class="recice_con">
+		<div class="media">
+		  <div class="media-left media-middle">
+		    <a class="" href="#">
+		      <img class="media-object img-circle" src="__RESOURCES__images/sz_4.png" alt="...">
+		    </a>
+		  </div>
+		  <div class="media-body recice_p">
+		  	<!--<h4 class="media-heading recice_title">{{rc_title}}</h4>-->
+		 	<p>派单人：{$info.nick_name}</p>
+		 	<p>扣款时间：{$info.add_time|date='Y-m-d H:i:s',###}</p>
+		 	<p class="recice_m income_moneny"><span>{$info.add_type==1?'+':'-'}{$info.money}元</span></p>
+		  </div>
+		</div>	
+	</div>

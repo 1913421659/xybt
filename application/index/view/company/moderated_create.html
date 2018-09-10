@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>等待审核</title>
+	</head>
+	{include file="public/css" /}
+    {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业管理-->
+		<div class="enterp_box clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				
+				<div class="enter_inner">
+					 <div class="enter_first">
+					 	<p class="enter_apply">您正在申请创建</p>
+					 	<p class="enter_des enter_4">{$company.company_name}</p>
+					 	<p>
+					 		<a class="enter_link_5" href="#" >{if condition="$company.status==0"}等待审核{else}审核不通过{/if}</a>
+				 		
+					 	</p>
+					 	
+					 </div>
+				</div>
+			</div>
+			
+		</div>
+		<!--企业管理结束-->
+		<!--footer-->
+		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+		{include file="public/js_1" /}
+	</body>
+	
+</html>

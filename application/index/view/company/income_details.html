@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>记录详情——充值</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body>
+	<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix" id="need_result">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/income_record')}">待付款项目</a> 
+						
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						        <!-- 加入企业-->   
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<div class="col-md-9 que_right " >	
+								<div class="row">
+									<div class="col-md-12 need_right ">
+										<div class="xue_v">
+											<span class="xue_b">收款详情</span>	
+										</div>
+										<template>
+                                        {if condition="$info.bill_type==1"}
+                                            {include file="company/income_details_4" /}	<!--充值-->
+                                        {elseif condition="$info.bill_type==2"}
+                                            {include file="company/income_details_3" /} <!--接单-->
+                                        {elseif condition="$info.bill_type==3"}
+                                            {include file="company/income_details_2" /} <!--派单扣款-->
+                                        {else/}
+                                            {include file="company/income_details_1" /} <!--结算-->
+                                        {/if}
+										</template>
+								    </div>
+								</div>
+						   </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+		<!--企业主页结束-->	
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}	
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					action:1100,
+					rc_img:"__RESOURCES__images/sz_3.png",
+					rc_title:"同道达人",
+					rc_time1:"12：52",
+					rc_name:"微信",
+					rc_time:"2017-12-11",
+					rc_num:"1000000",
+					rc_form:"广州点升信息技术有限公司",
+					rc_month:"周结",
+					rc_apply_time:"2017-12-11",
+					rc_method:"广告投放",
+					rc_man:"金木研",
+					rc_phone:"12345678901",
+				},
+				methods:{
+					
+				}			
+				
+			});
+		
+		</script>
+		
+
+	</body>
+	
+</html>

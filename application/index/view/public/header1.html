@@ -1,0 +1,53 @@
+
+<header class="heaader_top">
+	<div class="wrap">
+		<ul class="heaader_left">
+			<li>您好 欢迎来到小蚁兵团！</li>
+		</ul>
+		<ul class="heaader_right">
+			{if condition="empty($userSession) eq false"}
+			<!--登入后-->
+			<li class="massage_2">
+				<div class="massages_3">
+					<a href="{:url('user/index')}"> 	
+						{$userSession.nick_name}<img id="images2" src="__RESOURCES__images/xia.png" />
+						<div class="dss"></div>
+				   </a>
+			    	<ul class="mas_hover">
+			    		<li>				    		  
+			    			<div class="pernal">
+			    				<a href="{:url('user/index')}">个人中心</a>
+			    			</div>	
+			    		</li>
+			    	
+			    		<li class="active_a"><a href="#" onclick="User.ajaxLogout();return false;">退出</a></li>
+			    	</ul>
+				</div>
+			</li>
+			<!--登入后-->
+			{else/}
+			<!--登入前-->
+			<li><a href="{:url('login/index')}">登录</a></li>
+			<li><a href="{:url('login/register')}">免费注册</a></li>
+			<!--登入前-->
+			{/if}			
+			<li class="massage_1">
+				 <a id="chatIndex" href="{:url('chat/index01')}" target="_blank" style="position: relative;">
+			       <img src="__RESOURCES__images/xiaoxi1.png" />消息<span class="badge  badge_1"></span>
+			         <!--<label class="top_hh"></label>-->
+				 </a> 
+				<!--<a href="#">
+					<img src="__RESOURCES__images/xiaoxi1.png" />消息<small>156</small>
+			    </a>-->
+			</li>
+			<li><a href="//shop.yi-zu.com/flow.php" target="_blank"><img src="__RESOURCES__images/cart1.png"/>购物车 </a></li>
+			<li><a href="{:url('user/wallet')}"><img src="__RESOURCES__images/qianbao4.png"/>我的钱包 </a></li>
+			<li><a href="{:url('user/myCollect')}"><img src="__RESOURCES__images/shoucang1.png"/>我的收藏 </a></li><!--
+			<li><a href="#">客服热线：400-000-0000</a></li>-->
+			<li><span></span><a href="{:url('index/aboutus')}">关于我们</a> <span></span> </li>
+			<li><a href="{:url('index/contactus')}">联系我们</a> </li>
+			
+		</ul>
+	</div>																											
+</header>
+<div class="clearfix"></div>

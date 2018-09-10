@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$media_cat.name}-派单</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<style>
+		input.error,textarea.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   #Verification-error{
+	   	float: right;
+	   }
+	   #agree-error{
+	   	float: right;
+	   }
+	   .form_table td{padding:10px; vertical-align:top;}
+	   .form_table td p{ line-height:200%;}
+	   .form_table td table td{padding:10px 0;}
+	   .order_now{display:none;}
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}	
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a>
+						<img src="__RESOURCES__images/right_2.png"/><a href="{:url('marketing/index')}">营销推广</a>
+						<img src="__RESOURCES__images/right_2.png"/><a href="{:url('media/index',['type'=>$media_cat.id])}">{$media_cat.name}</a>
+						<img src="__RESOURCES__images/right_2.png"/>派单
+					</p>
+				</div>
+				<div class="que_a" id="page_form_order">
+					<div class="row">
+						<div class="business_jianjie paidan_box" >							
+							<div class="paidan_a">
+								<ul class="pai_ul">
+									<li>已选资源&nbsp;&nbsp;&nbsp;&nbsp; </li>
+								</ul>
+								<div class="zi_table">
+									<template>
+									{if condition="$type_id==1"}
+										{include file="media/_list_1"}
+									{elseif condition="$type_id==2"}
+										{include file="media/_list_2"}
+									{elseif condition="$type_id==3"}
+										{include file="media/_list_3"}
+									{elseif condition="$type_id==4"}
+										{include file="media/_list_4"}
+									{elseif condition="$type_id==5"}
+										{include file="media/_list_5"}
+									{elseif condition="$type_id==6"}
+										{include file="media/_list_6"}
+									{elseif condition="$type_id==7"}
+										{include file="media/_list_7"}
+									{elseif condition="$type_id==8"}
+										{include file="media/_list_8"}
+									{/if}
+									</template>
+								</div>
+							</div>
+						<script type="text/javascript">
+							var _now  = new Date();
+							var _date = _now.getFullYear() + '-' + (_now.getMonth()+1) + '-' + _now.getDate();
+							var _hour = _now.getHours();
+							var _minute = _now.getMinutes();
+							/* 表单数据初始值 */
+							var view = {
+								el:'#page_form_order',
+								data:{
+									list:{$list|json_encode},
+									order_type_list : {$order_type_list|json_encode},
+									price_sum_1 : parseFloat('{$price_1_total|default=0}'),
+									price_sum_2 : parseFloat('{$price_2_total|default=0}'),
+									price_sum_3 : parseFloat('{$price_3_total|default=0}'),
+									price_1 : parseFloat('{$price_1_total|default=0}'),
+									price_2 : parseFloat('{$price_2_total|default=0}'),
+									price_3 : parseFloat('{$price_3_total|default=0}'),
+									err_title : 0,
+									err_link : 0,
+									err_remarks : 0,
+									err_content : 0,
+									user_money : parseFloat('{$me.user_money}'),
+									form : {
+										media_type_id 	: {$type_id},
+										media_id 		: '{$media_id}', //
+										order_type 		: 1,
+										order_type_sub 	: '',
+										price_type 		: 1,
+										begin_date 		: _date, //开始日期
+										begin_hour 		: _hour, //开始时
+										begin_minute 	: _minute, //开始分
+										days 			: 1, //订单执行时间（天）
+										timeout 		: 3, //订单有效时间（时）
+										kpi_time 		: 0, //KPI上传时间（时）
+										title 			: '', //标题
+										cover_file 		: '', //封面图
+										cover_in 		: 0, //封面在内容中
+										link 			: '',
+										desc 			: '', //
+										author 			: '', //
+										content 		: '', //
+										accessory_file 	: '', //
+										remarks 		: '',
+									}
+								},
+								methods : {
+									checkTitle : function(){
+										var _title = $('#title').val();
+										if(_title == ''){
+											this.err_title = 1;
+										}else{
+											this.err_title = 0;
+										}
+									},
+									checkLink : function(){
+										var _link = $('#link').val();
+										if(_link == ''){
+											this.err_link = 1;
+										}else{
+											this.err_link = 0;
+										}
+									},
+									checkRemarks : function(){
+										var _v = $('#remarks').val();
+										if(_v == ''){
+											this.err_remarks = 1;
+										}else{
+											this.err_remarks = 0;
+										}
+									},
+									checkContent : function(){
+										if(this.form.content == ''){
+											this.err_content = 1;
+										}else{
+											this.err_content = 0;
+										}
+									},
+									changeOrderType : function(){
+										this.form.price_type = $('#create_form input[name=order_type][value='+this.form.order_type+']').attr('price_type');
+										this.actPriceSum();
+									},
+									actPriceSum : function(){
+										var _s = 0;
+										switch(parseInt(this.form.price_type)){
+											case 1 :
+												_s = this.price_1;
+												break;
+											case 2 :
+												_s = this.price_2;
+												break;
+											case 3 :
+												_s = this.price_3;
+												break;
+											default:
+												break;
+										}
+										this.price_sum_1 = _s * this.form.days;
+									},
+									submit : function(){
+										this.actPriceSum();
+										this.checkTitle();
+										this.checkLink();
+										this.checkRemarks();
+										this.checkContent();
+										if(this.err_title > 0 || this.err_link > 0 || this.err_remarks > 0){
+											return false;
+										}
+										$.post("", this.form, function(rs){
+											if(rs.status){
+												layer.alert(rs.msg, function(){
+													location.href = rs.data.url;
+												});
+												
+											}else{
+												layer.msg(rs.msg);
+											}
+										}, 'json');
+										
+									},
+								},
+								updated : function(){
+								}
+							}
+							</script>
+							<form class="cmxform" id="create_form" method="" action="">
+								{if condition="$type_id==1"}
+									{include file="media/_order_form_1"}
+								{elseif condition="$type_id==2"}
+									{include file="media/_order_form_2"}
+								{elseif condition="$type_id==3"}
+									{include file="media/_order_form_3"}
+								{elseif condition="$type_id==4"}
+									{include file="media/_order_form_4"}
+								{elseif condition="$type_id==5"}
+									{include file="media/_order_form_5"}
+								{elseif condition="$type_id==6"}
+									{include file="media/_order_form_6"}
+								{elseif condition="$type_id==7"}
+									{include file="media/_order_form_7"}
+								{elseif condition="$type_id==8"}
+									{include file="media/_order_form_8"}
+								{/if}
+							</form>		
+							
+						
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		{include file="public/footer1" /}
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script>
+			view = new Vue(view);
+			laydate({
+				elem: '#demo',
+				choose: function(value){
+					view.form.begin_date = value;
+				}
+			}).skin('molv');//绑定元素
+			$('#main_nav_marketing').addClass('menu_home');
+		</script>
+		
+		
+	</body>
+	
+</html>

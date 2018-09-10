@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>万能营销</title>
+</head>
+{include file="public/css" /}
+{include file="public/js" /}
+<body>
+<div id="vue_page">
+    <!--顶部说明-->
+    {include file="public/header1" /}
+    <!-- header2 -->
+    {include file="public/header2" /}
+    <!--menu-->
+    <div class="new_menu">
+        <div class="wrap">
+            {include file="public/menu_r" /}
+        </div>
+    </div>
+    <!--menu结束-->
+    <br clear="all"/>
+    <div class="que_con que-a que_h  clearfix" >
+        <div class="wrap">
+            <div class="que_menu">
+                <p><img src="/__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="/__RESOURCES__images/right_2.png"/><img src="__RESOURCES__images/right_2.png"/>{$top_promotion.promotion_name}</p>
+            </div>
+            <div class="que_a">
+                <div class="row">
+                    {include file="media/left_3" /}
+                    <script>
+                        vue_page.data.left_nav.action=100 + {$top_promotion.id};
+                    </script>
+                    <div class="col-md-9 que_right " id="vue_page_1">
+                        <div class="mark_b clearfix">
+                            <div class="selectNumberScreen">
+
+                                <div id="selectList" class="screenBox screenBackground clearfix">
+                                    <!--二级营销-->
+                                    <dl class="listIndex clearfix vv" attr="terminal_brand_s">
+                                        <dt>营销方式：</dt>
+                                        <dd>
+                                            <div class="aann"><a href="javascript:changePid(0)" class="{if condition='$p_id==0'}selected{/if}" >全部</a></div>{volist name="promotion_list" id="value"}
+                                            <div class="aann"><a href="javascript:changePid({$value.id})" class="{if condition='$p_id==$value.id'}selected{/if}">{$value.promotion_name}</a></div>{/volist}
+
+                                        </dd>
+                                    </dl>
+                                    <!--END-->
+                                </div>
+                                {if condition="$this_promotion.id >0 || $this_category.id > 0"}
+                                <div class="hasBeenSelected" style=" display:none;">
+                                    <dl>
+                                        <dt>选择结果：</dt>
+                                        <dd class="clearDd">
+                                            <div class="clearList">
+                                                {if condition="$this_promotion.id >0"}<div class="selectedInfor selectedShow"><span>营销方式：</span><label>{$this_promotion.promotion_name}&nbsp;</label><em onClick="changePid(0)"></em></div>{/if}
+                                                {if condition="$this_category.id >0"}<div class="selectedInfor selectedShow"><span>项目分类：</span><label>{$this_category.category_name}&nbsp;</label><em onClick="changeCid(0)"></em></div>{/if}
+                                            </div>
+                                            <div class="eliminateCriteria" onClick="clearChange()">清除筛选条件</div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                {/if}
+                            </div>
+
+                        </div>
+                        <div class="des"></div>
+                        {if condition="count($list)"}
+                        <div class="mark_c clearfix">
+                            <!--列表-->
+                            {if condition="$top_promotion.id == 1"}
+                            {include file="marketing/list_1"}
+                            {/if}
+                            {if condition="$top_promotion.id == 2"}
+                            {include file="marketing/list_2"}
+                            {/if}
+                            {if condition="$top_promotion.id == 3"}
+                            {include file="marketing/list_3"}
+                            {/if}
+                            {if condition="$top_promotion.id == 4"}
+                            {include file="marketing/list_4"}
+                            {/if}
+                            {if condition="$top_promotion.id == 5"}
+                            {include file="marketing/list_5"}
+                            {/if}
+                            {if condition="$top_promotion.id == 6"}
+                            {include file="marketing/list_6"}
+                            {/if}
+                        </div>
+                        <!--分页-->
+                        <div class="fenye">
+                            <div style="width:800px;margin:0 auto;">
+                                <div id="kkpager"></div>
+                            </div>
+                        </div>
+
+                        {else/}
+                        <!--无数据-->
+                        <div class="com_no_data">
+                            <img src="__RESOURCES__images/no_data_1.png" />
+                            <p>暂无数据</p>
+                        </div>
+                        <!--无数据-->
+                        {/if}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--footer-->
+    {include file="public/footer1" /}
+    <!--右侧导航栏-->
+    {include file="public/footer2" /}
+    {include file="public/js_1" /}
+    <script type="text/javascript">
+        function getParameter(name) {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r!=null) return unescape(r[2]); return null;
+        }
+        var top_id = "{$top_promotion.id}";
+        var p_id = "{$p_id}";
+        var c_id = "{$c_id}";
+        function changePid(n){
+            p_id = n;
+            flushChange();
+        }
+        function changeCid(n){
+            c_id = n;
+            flushChange();
+        }
+        function flushChange(){
+            var _url = "{:str_replace('.html','',url())}"+'/key/'+top_id+'/p_id/'+p_id+'/c_id/'+c_id;
+            location.href=_url;
+        }
+        function clearChange(){
+            p_id = 0;
+            c_id = 0;
+            flushChange();
+        }
+
+        //init
+        $(function(){
+            var totalPage = {$pages.last_page};
+            var totalRecords = {$pages.total};
+            var pageNo = {$pages.current_page};
+            if(!pageNo){
+                pageNo = 1;
+            }
+            //生成分页
+            //有些参数是可选的，比如lang，若不传有默认值
+            kkpager.generPageHtml({
+                pno : pageNo,
+                //总页码
+                total : totalPage,
+                //总数据条数
+                totalRecords : totalRecords,
+                //链接前部
+                hrefFormer : 'demo',
+                //链接尾部
+                hrefLatter : '.html',
+                getLink : function(n){
+                    return "{:str_replace('.html','',url())}"+'/key/'+top_id+'/p_id/'+p_id+'/c_id/'+c_id+'/page/'+n;
+                }
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var _url_ajax_list = "{:url('media/ajaxList')}";
+        var _url_ajax_cat_list = "{:url('media/ajaxCatList')}";
+        var kkpager_bak = clone(kkpager);
+        vue_page.appendData({
+            cat_list:[],
+            list:[],
+        });
+        vue_page.appendMethods({
+            //获取分类列表
+            getCatList: function(){
+                $.post(_url_ajax_cat_list, {type_id:1},function(rs){
+                    if(rs){
+                        view.cat_list = rs.data;
+                    }
+                },'json');
+            },
+            flushList : function(){
+                $.post(_url_ajax_list, view.filter,function(rs){
+                    if(rs){
+                        view.list = rs.data.list;
+                        view.page_info = rs.data.page_info;
+                    }else{
+                        layer.msg(rs.msg);
+                    }
+                },'json');
+            },
+        });
+        $('#main_nav_marketing').addClass('menu_home');
+        //init
+    </script>
+</div>
+</body>
+<script>
+    vue_page = new Vue(vue_page);
+</script>
+</html>

@@ -1,0 +1,61 @@
+<script type="text/javascript" src="__RESOURCES__js/jquery.1.12.3.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/baguetteBox.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/slider.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/unslider.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/swiper.jquery.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/xcConfirm.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/select2.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/kkpager.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/birthday.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/layer.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/fileinput.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/laydate.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/yi-scroll.js"></script>
+<script type="text/javascript" src="__RESOURCES__js/vue.min.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/User.js?v=20171110_1" ></script>
+<script type="text/javascript" src="__RESOURCES__js/Task.js?v=20171110_1" ></script>
+<script type="text/javascript" src="__RESOURCES__js/Company.js?v=20171110_1" ></script>
+<script type="text/javascript" src="__RESOURCES__js/Channel.js?v=20171110_1" ></script>
+<script>
+//	克隆
+	function clone(obj) {
+		var o;
+		if (typeof obj == "object") {
+			if (obj === null) {
+				o = null;
+			} else {
+				if (obj instanceof Array) {
+					o = [];
+					for (var i = 0, len = obj.length; i < len; i++) {
+						o.push(clone(obj[i]));
+					}
+				} else {
+					o = {};
+					for (var j in obj) {
+						o[j] = clone(obj[j]);
+					}
+				}
+			}
+		} else {
+			o = obj;
+		}
+		return o;
+	}
+	var vue_page = {
+		el:'#vue_page',
+		data:{},
+		methods:{},
+		appendData : function(obj){
+			for(i in obj){
+				this.data[i] = obj[i];
+			}
+		},
+		appendMethods : function(obj){
+			for(i in obj){
+				this.methods[i] = obj[i];
+			}
+		}
+};
+</script>

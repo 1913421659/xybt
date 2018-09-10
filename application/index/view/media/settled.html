@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>资源入驻</title>
+</head>
+{include file="public/css" /}
+<style>
+    input.error {
+        border: 1px solid red;
+    }
+    form.cmxform label.error, label.error {
+        color: red;
+        font-weight: normal;
+        font-size: 12px;
+        margin-left: 10px;
+        line-height: 30px;
+    }
+    #miaosu-error{
+        float: right;
+        position: relative;
+        top: -78px;
+    }
+</style>
+<body>
+<!--顶部说明-->
+{include file="public/header1" /}
+{include file="public/header2" /}
+<!--menu-->
+<div class="new_menu">
+    <div class="wrap">
+        {include file="public/menu_r" /}
+    </div>
+</div>
+<!--menu结束-->
+
+<div class="que_con que-a clearfix" >
+    <div class="wrap">
+       <div class="que_menu_1">
+			<p><img src="__RESOURCES__images/home.png"/>
+			<a href="{:url('index/index')}">首页</a>
+			<img src="__RESOURCES__images/right_2.png"/><a href="#">资源入驻</a>
+			
+		</div>
+        <div class="re_1" >
+            <form method="post" action="" id="form_demand" on-Submit="" enctype="multipart/form-data">
+
+                <div class="re_a">
+
+                    <div class="row bottom_j">
+                        <div class="col-md-3">
+                            <div class="re_left">资源名称：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <div class="re_xia">
+                                    <input type="text" name="name"  class="form-control btn_a" id="name" placeholder="请输入资源名称">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j" id="demo">
+                        <div class="col-md-3">
+                            <div class="re_left">请选择营销地区：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <div class="re_right">
+                                    <!--<input type="text" class="city_box" placeholder="请选择营销地区" value="" data-value="" name="area_ids"  onclick="appendCity(this,'duoxuan')" />-->
+                                    <select v-cloak name="province" v-on:change="selectProvince(event)" class="form-control" style="width: 90px;float: left;margin-right: 5px;" id="province">
+                                        <option  v-for="(item, index) in province" :value="index">{{item}}</option>
+                                    </select>
+                                    <select v-cloak name="city" class="form-control" v-on:change="selectCity(event)" style="width: 120px;float: left;margin-right: 5px;" id="city">
+                                        <option v-for="(item, index) in city" :value="index">{{item}}</option>
+                                    </select>
+                                    <select v-cloak name="district" class="form-control" style="width: 151px;float: left;" id="district">
+                                        <option v-for="(item, index) in district" :value="index">{{item}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j">
+                        <div class="col-md-3">
+                            <div class="re_left">审核方式：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <div class="re_xia1">
+                                    <div class="radio radio1 radio-danger">
+                                        <input type="radio" name="channel_type" id="channel_type_1" value="1" checked>
+                                        <label for="channel_type_1">渠道资源</label>
+                                    </div>
+                                    <div class="radio  radio1 radio-danger">
+                                        <input type="radio" name="channel_type" id="channel_type_2" value="2">
+                                        <label for="channel_type_2">媒体资源</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j" id="channelSelect">
+                        <div class="col-md-3">
+                            <div class="re_left">请选择营销方式：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <select name="type_id" class="form-control" style="width: 371px;" id="channelType">
+                                    {volist name="$channelCategoryList" id="value"}
+                                    <option value="{$value.id}">{$value.category_name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j" style="display: none;" id="mediaSelect">
+                        <div class="col-md-3">
+                            <div class="re_left">请选择营销方式：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <select name="type_id" class="form-control" style="width: 371px;" id="mediaType" disabled>
+                                    {volist name="$mediaCategoryList" id="value"}
+                                    <option value="{$value.id}">{$value.category_name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--姓名-->
+                    <div class="row bottom_j">
+                        <div class="col-md-3">
+                            <div class="re_left">联系人：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <div class="re_xia">
+                                    <input type="text" name="contact_name"  class="form-control btn_a" id="contact_name" placeholder="请输入联系人姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--电话号码-->
+                    <div class="row bottom_j">
+                        <div class="col-md-3">
+                            <div class="re_left">联系电话：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right">
+                                <div class="re_xia">
+                                    <input type="number" name="contact_phone"  class="form-control btn_a" id="contact_phone" placeholder="请输入联系电话">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j">
+                        <div class="col-md-3">
+                            <div class="re_left">资源描述：</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="re_right" style="width: 466px;">
+                                <textarea class="form-control" id="content" rows="5" name="content" placeholder="请描述您的资源优势" style="float: left;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom_j">
+                        <div class="col-md-10">
+                            <input class="fabu"  type="submit" value="提交审核">
+                        </div>
+
+                    </div>
+
+                    <!--结束-->
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--footer-->
+{include file="public/footer1" /}
+
+
+<!--右侧导航栏-->
+{include file="public/footer2" /}
+{include file="public/js" /}
+{include file="public/js_1" /}
+<script type="text/javascript" src="__RESOURCES__js/select2.min.js" ></script>
+<script type="text/javascript" src="{:url('task/getCityDataJs')}" ></script>
+<script type="text/javascript" src="__RESOURCES__js/areadata.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/city-picker.data.js" ></script>
+
+<script type="text/javascript" src="{:url('task/getCateDataJs')}" ></script>
+<script type="text/javascript" src="{:url('media/getRegionDataJs')}" ></script>
+<script type="text/javascript" src="__RESOURCES__js/city-picker.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/main.js" ></script>
+<script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+<script>
+
+
+//    $(".js-example-basic-multiple").select2();
+
+</script>
+<script type="text/javascript">
+    function changeState(el) {
+        if (el.readOnly) el.checked=el.readOnly=false;
+        else if (!el.checked) el.readOnly=el.indeterminate=true;
+    }
+
+    $('#form_demand .city_box').on('change', function(e){
+        $('#areas').val($(e.target).data('value'));
+    });
+    $('#form_demand').on('submit', function(e){
+        $('#area_list').val($('#form_demand .city_box').data('value'));
+        console.log($(e.target).serialize());
+        //return false;
+    });
+
+    $("#form_demand").validate({
+        rules: {
+            name : {required:true},
+            city_box : {required:true},
+            'type_id' : {required:true},
+            contact_phone : {required:true,minlength:11,maxlength:11},
+            contact_name : {required:true,maxlength:5},
+            content : {required:true}
+        },
+        messages: {
+            name:{
+                required:"请输入资源名称"
+            },
+            city_box : {
+                required: "请选择营销地区"
+            },
+            'type_id' : {
+                required: "请选择营销方式"
+            },
+            'contact_phone' : {
+                required: "请输入手机号",
+                minlength:'请输入正确的11位手机号',
+                maxlength:'请输入正确的11位手机号'
+            },
+            'contact_name' : {
+                required: "请输入姓名",
+                maxlength:"长度不能超过5个字"
+            },
+            'content' :{
+                required : '请输入文档描述'
+            }
+        }
+
+    });
+    $('input:radio[name="channel_type"]').change( function(){
+
+        var v = $(this).val();
+        switch (v){
+            case '1':
+                $('#channelSelect').show();
+                $('#mediaSelect').hide();
+                $('#channelSelect').find('select').removeAttr('disabled');
+                $('#mediaSelect').find('select').attr('disabled',true);
+                break;
+            case '2':
+                $('#mediaSelect').show();
+                $('#channelSelect').hide();
+                $('#mediaSelect').find('select').removeAttr('disabled');
+                $('#channelSelect').find('select').attr('disabled',true);
+                break;
+        }
+    })
+
+    var demo1=new Vue({
+        el:'#demo',
+        data:{
+            province:regions.provinces,
+            city:[],
+            district:[]
+        },
+        methods:{
+            selectProvince:function(th){
+                var index = th.target.value;
+                if(index==1){
+                    this.city = []
+                    this.district = [];
+                    return ;
+                }
+                this.district = [];
+                this.city = regions.citys[index];
+                //默认区选择
+                for(var i in this.city){
+                    if(this.district.length || typeof this.district.length=='undefined'){
+                       break;
+                    }else{
+                        this.district = regions.districts[i];
+                    }
+                }
+                $('#city').width($('#city').width());
+            },
+            selectCity:function(th){
+                var index = th.target.value;
+                this.district = regions.districts[index];
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

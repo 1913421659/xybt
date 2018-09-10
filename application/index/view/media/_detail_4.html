@@ -1,0 +1,42 @@
+<table class="table_wx" v-if="obj.type_id==4">
+	<tr>
+		<td rowspan="6" class="wx_head">
+			<div>
+				<p class="wx_title">头像</p>
+				<img :src="obj.logo" onerror="javascript:this.src='__RESOURCES__images/media_wx_default.jpg'"/>
+			</div>
+		</td>
+		<td>昵称：</td>
+		<td style="color: #1c1c1d;">{{obj.title}}</td>
+		<td>微信号：</td>
+		<td style="color: #1c1c1d;">{{obj.title_sub}}</td>
+		<td rowspan="6" class="wx_a">
+			<div class="wx_btn">
+				<a :href="'{:url('media/order')}'+'/type/4/id/'+obj.id">立即派单</a>
+				<a href="#">收      藏</a>
+				<!--<a href="#">分      享</a>-->
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td >好友数量：</td>
+		<td style="color: #1c1c1d;">{{obj.power}}</td>
+		<td>报价：</td>
+		<td style="color: #1c1c1d;">{{obj.price_1}}元</td>
+	</tr>
+	<tr>
+		<td>职业：</td>
+		<td style="color: #1c1c1d;">{{obj.profession}}</td>
+		<td>年龄：</td>
+		<td style="color: #1c1c1d;">{{obj.age}}</td>
+	</tr>
+	<tr>
+		<td >分类：</td>
+		<td style="color: #1c1c1d;" colspan="3">白领</td>
+	</tr>
+	<tr>
+		<td >圈子描述：</td>
+		<td style="color: #1c1c1d;" colspan="3">{{obj.description}}</td>
+	</tr>
+	
+</table>

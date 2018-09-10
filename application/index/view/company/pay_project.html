@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>待付款项目</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">待付款项目</a> 
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+                            <span>
+                                <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                            </span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:900
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " id="need_result">	
+								<div class="row">
+									<div class="col-md-12 need_right ">
+										<div class="receice_menu">
+											<ul class="com_ul receice_box">
+												<li><a href="{:url('company/myneed')}">网络营销</a></li>
+												<li><a class="active" href="{:url('company/myneed')}">产品分销</a></li>
+												<li><a href="{:url('company/myneed')}">广告投放</a></li>
+										    </ul>
+										    <div class="layui-input-inline month receice_input">
+										        <input type="text" class="layui-input " id="test1" placeholder="yyyy-MM-dd">
+										    </div>
+										    
+										</div>
+										<div class=""  style="padding:20px;">
+											<table class="table table_pay" v-for="tables in table">
+												<tr class="table_first table_first_1">
+											  	   <td>{{tables.table_1}}</td>
+											       <td>{{tables.table_2}}</td>
+											       <td>{{tables.table_3}}</td>
+											       <td>{{tables.table_4}}</td>
+											       <td>{{tables.table_5}}</td>
+											       <td>{{tables.table_6}}</td>
+											    </tr>
+											    <tr class="payment_table">
+											  	   <td>	
+												  	   	<a href="#" class="com_list_4" style="width: 127px;height: 88px;">
+												  	   		<img :src="tables.tables_1"  />
+												  	   	</a>
+											  	   </td>
+											       <td>{{tables.tables_2}}</td>
+											       <td>{{tables.tables_3}}</td>
+											       <td><span class="active_nav">{{tables.tables_4}}</span> 元</td>
+											       <td>{{tables.tables_5}}</td>
+											       <td><a class="qidao_pai_1" href="{:url('company/pay_details')}">{{tables.tables_6}}</a></td>
+											    </tr>
+			                                    
+											</table>
+										</div>
+											
+								    </div>
+									<!--分页-->
+									<div class="fenye">
+										
+										<div style="width:800px;margin:0 auto;">
+											<div id="kkpager"></div>
+										</div>
+									</div>
+									
+								</div>
+						   </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					table:[
+						{
+							table_1:"广告图",
+							table_2:"活动名称",
+							table_3:"接单人",
+							table_4:"金额",
+							table_5:"提交时间",
+							table_6:"操作",
+							
+							tables_1:"__RESOURCES__images/xue_2.png",
+							tables_2:"新人注册就送1000书币",
+							tables_3:"覃俊威",
+							tables_4:"100000",
+							tables_5:"2017-12-13",
+							tables_6:"查看详情",
+							
+						},
+					]					
+				},
+			});
+			
+			for (var i=0; i<7; i++) {
+				need_result.table.push(need_result.table[0]) 
+			}
+		</script>
+		
+            <script type="text/javascript">
+            //		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}
+			
+			//init
+			$(function(){
+				
+				var pageNo = getParameter('pno');
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : pageNo,
+					//总页码
+					total : "",
+					//总数据条数
+					totalRecords : "",
+					//链接前部
+					hrefFormer : '',
+					//链接尾部
+					hrefLatter : '.html',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "?pno="+n;
+					}
+					
+				});
+			});
+		  //常规用法
+		  laydate.render({
+		    elem: '#test1'
+		  });	
+		</script>
+
+		
+	
+	</body>
+	
+</html>

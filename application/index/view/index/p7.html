@@ -1,0 +1,81 @@
+<!--视频资源-->
+<div class="louti" id="floor_video">
+	<div class="section_2 section_3" >
+		<div class="csc_2">
+			<img src="__RESOURCES__images/tuiguang_13.png" />
+			<h2>视频资源</h2>
+			<ul class="fen_ul" id="chan_a">
+				<li v-for="item in cat_list"><a href="?s=/index/media/index/type/6">{{item.name}}</a></li>
+			</ul>
+			<a class="more_box_1" href="?s=/index/media/index/type/6" title="">更多<span class="more_i"></span></a>
+		</div>
+		<div class="con_fen3" style="margin-bottom: 60px;">
+			<div class="sec_2_1">
+				<div v-if="loading" class="recording">
+						加载中... ... 
+				</div>	
+				<div class="row bo_b" v-else>
+					<div class="col-md-6 bo_list" v-for="item in list">
+						<div class="bo_left">
+							<div class="bo_l_l">
+								<span class="bo_img"><img :src="item.logo" onerror="javascript:this.src='__RESOURCES__images/media_video_default.png'"/></span>
+								<span class="bo_teng">{{item.profession}}视频</span>
+							</div>
+							<div class="bo_l_r">
+								<p class="bo_l_p" style="width:270px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">链接:<a :href="item.link" class="active_nav">{{item.link}}</a> </p>
+								<p class="bo_pp">报价: <span class="active_nav">{{item.price_1}}元</span>接单数: <span class="active_nav">{{item.history}}</span></p>
+							</div>
+						</div>
+						<div class="bo_right">
+							<a class="qidao_pai_1" :href="'{:url('index/media/detail')}/id/'+item.id" title="" alt="">我要派单</a>
+						</div>
+					</div>
+				</div>
+			    
+			</div>
+			
+		</div>	
+		
+	</div>
+	<script>
+		var floor_video = new Vue({
+			el:"#floor_video",
+			data:{
+				list:[],
+				loading:false,
+				cat_list:[],
+			},
+			methods:{
+				flushList:function(){
+					this.loading = true;
+					$.post('?s=/index/data/channelMediaList', {
+						limit:6,
+						type_id:6,
+					}, function(rs){
+						floor_video.loading = false;
+						if(rs.status == 1){
+							floor_video.list = rs.data.list
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				},
+				flushCatList:function(){
+					$.post('?s=/index/data/channelMediaCategoryList', {
+						limit:6,
+						type_id:6,
+					}, function(rs){
+						if(rs.status == 1){
+							floor_video.cat_list = rs.data
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				}
+			}
+		});
+		floor_video.flushList();
+		floor_video.flushCatList();
+		</script>
+</div>
+<!--产品分销结束-->

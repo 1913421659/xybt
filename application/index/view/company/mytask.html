@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>管理达人-我的{$prom_short_name[$this_prom.id]}</title>
+</head>
+{include file="public/css" /}
+{include file="public/js" /}
+<body>
+	<!--顶部说明-->
+	{include file="public/header1" /}
+	{include file="public/header2" /}
+	<!--menu-->
+	<div class="new_menu">
+		<div class="wrap">
+		    {include file="public/menu_r" /}
+		</div>
+	</div>
+	<!--menu结束-->
+	<div class="que_con que-a clearfix">
+		<div class="wrap">
+			<div class="que_menu">
+				<p>
+					<p>
+					<img src="__RESOURCES__images/home.png" />
+					<a href="{:url('index/index')}">首页</a>
+					<img src="__RESOURCES__images/right_2.png" />
+					<a href="{:url('company/index')}">营销管理</a>
+					<img src="__RESOURCES__images/right_2.png" />
+					   商家需求
+				</p>
+				</p>
+			</div>
+			<div class="que_a">
+				<div class="row">
+					<div class="col-md-3 que_left">
+						<div class="after_box" style="border: none;">
+                            {empty name="$company"}
+                            <!--未加入企业-->
+                            <span>
+                                <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                            </span>
+                            <!--未加入企业-->
+                            <div class="after_pp">{$me.nick_name}</div>
+                            <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                            <p class="com_box">
+                                <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                            </p>
+                            {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                            <div class="after_pp" >{$company.company_name}</div>
+                            {/empty}
+					    </div>
+				     <div class="des"></div>
+							{include file="company/_left" /}
+					</div>
+					<script>
+					new Vue({
+						el:'.col-md-3.que_left',
+						data:{
+							action:801
+						}
+					});
+					</script>
+					<div class="col-md-9 wallet_right ">
+						<!--<div class="per_title8 vv">
+							{if condition="in_array($this_prom.id,[1,2,3])"}
+							<h5>达人管理 - 我的{$prom_short_name[$this_prom.id]}</h5>
+							{else/}
+							<div class="row per_k">
+								<div class="col-md-8 title_a">达人管理 -
+									我的{$prom_short_name[$this_prom.id]}</div>
+								<div class="col-md-4 title_b">
+									<a class="jiesuan1" href="{:url('company/checkout',['t_id'=>$this_prom.id])}" title="">申请结算</a>
+								</div>
+							</div>
+							{/if}
+						</div>-->
+						<ul class="com_ul">
+							<li><a {if condition="$key==1"}class="active"{/if} href="{:url('company/mytask',['key'=>1])}">免费福利</a></li>
+							<li><a {if condition="$key==2"}class="active"{/if} href="{:url('company/mytask',['key'=>2])}">产品体验</a></li>
+							<li><a {if condition="$key==3"}class="active"{/if} href="{:url('company/mytask',['key'=>3])}">促销活动</a></li>
+							<li><a {if condition="$key==4"}class="active"{/if} href="{:url('company/mytask',['key'=>4])}">网络营销</a></li>
+							<li><a {if condition="$key==5"}class="active"{/if} href="{:url('company/mytask',['key'=>5])}">产品分销</a></li>
+							<li><a {if condition="$key==6"}class="active"{/if} href="{:url('company/mytask',['key'=>6])}">广告投放</a></li>
+					    </ul>
+						<div class="des"></div>
+						{if condition="$this_prom.id==1"}
+						<div class="shou_box ds_a" style="padding: 0px 0px 10px 0px;">
+							<div class="row">
+                                {if condition="!empty($list)"}
+								{volist name="list" id="v"}
+								<div class="col-md-3">
+									<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">
+										<div class="shou_a">
+											<span class="shou_img"><img
+												src="{$v.logo_img|get_image_path}" /></span>
+											<div class="shou_title">
+												<p>{$v.name}</p>
+												<p>
+													当前完成量：{$v.finish_qty}
+													<!--label>未体验</label-->
+												</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								{/volist}
+                                {else /}
+                               <!--无数据调用-->
+								<div class="com_no_data">
+									<img src="__RESOURCES__images/no_data.png">
+									<p>暂无数据</p>
+								</div>
+								<!--无数据调用结束-->								
+                                {/if}
+							</div>
+						</div>
+						
+						{/if} 
+						{if condition="$this_prom.id==2"}
+						<div class="shou_box ds_a">
+							<div class="row">
+                                {if condition="!empty($list)"}
+								{foreach name="list" item="v"}
+								<div class="col-md-3 clearfix">
+									<div class="ds_box">
+										<div class="media">
+											<div class="media-left media-middle">
+												<a href="{:Url('marketing/info',['key'=>$v.id])}"
+													class="ds_img"> <img class="media-object"
+													src="{$v.logo_img|get_image_path}" alt="...">
+												</a>
+											</div>
+											<div class="media-body">
+												<div class="ti_e_rr">
+													<p>{$v.name}</p>
+													<p>领取时间：{:date("Y-m-d", $v.add_time)}</p>
+													<p>{$status_names[$v.status]}</p>
+												</div>
+											</div>
+										</div>
+										<div class="ds_1 clearfix">
+											<a href="{:Url('marketing/info',['key'=>$v.id])}">查看任务</a>
+										</div>
+									</div>
+								</div>
+								{/foreach}
+                                {else /}
+                                <!--无数据调用-->
+								<div class="res_nodara">
+									<div class="res_nodata_img">
+										<div class="res_nodata_a">
+											<img src="__RESOURCES__images/no_data.png" />
+										</div>
+										<p class="res_notata_p">没有找到任何记录</p>
+									</div>
+								</div>
+								<!--无数据调用结束-->
+                                {/if}
+							</div>
+						</div>
+						{/if} 
+						{if condition="$this_prom.id==3"}
+						<div class="shou_box ds_a">
+							<div class="row">
+                                {if condition="!empty($list)"}
+								{foreach name="list" item="v"}
+								<div class="col-md-3">
+									<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">
+										<div class="shou_aa">
+											<span class="shou_img_1"><img
+												src="{$v.logo_img|get_image_path}" /></span>
+											<div class="shou_title">
+												<p>{$v.name}</p>
+												<p>
+													领取时间：{:date("Y-m-d", $v.add_time)}<label>{$status_names[$v.status]}</label>
+												</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								{/foreach}
+                                {else /}
+                               <!--无数据调用-->
+								<div class="res_nodara">
+									<div class="res_nodata_img">
+										<div class="res_nodata_a">
+											<img src="__RESOURCES__images/no_data.png" />
+										</div>
+										<p class="res_notata_p">没有找到任何记录</p>
+									</div>
+								</div>
+								<!--无数据调用结束-->
+                                {/if}
+							</div>
+						</div>
+						{/if} 
+						{if condition="in_array($this_prom.id, [4,5,6])"} 
+						<div class="ad_box">
+							<table class="table">
+								<tr>
+							  	   <td>ID</td>
+							       <td>产品名称</td>
+							       <td>未结数据</td>
+							       <td>未结金额</td>
+							       <td><a href="#" title=""></a>详细</td>
+							    </tr>
+                                {if condition="!empty($list)"}
+							    {foreach name="list" item="v"}
+							    <tr>
+							  	   <td>{$v.task_id}</td>
+							       <td>{$v.name}</td>
+							       <td>{$v.finish_qty-$v.checkout_qty}</td>
+							       <td>{$v.cost_price*($v.finish_qty-$v.checkout_qty)}蚁币</td>
+							       <td><a href="{:url('user/advinfo', ['key'=>$v.tap_id,'t_id'=>$this_prom.id])}" title="">查看详情</a></td>
+							    </tr>
+								{/foreach}
+                                {else /}
+                                <tr><td colspan="5">没有找到任何记录</td></tr>
+                                {/if}
+							</table>
+						</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	<!--footer-->
+	{include file="public/footer1" /}
+	<!--右侧导航栏-->
+	{include file="public/footer2" /} 
+	{include file="public/js_1" /}
+	<!--<script>
+		$('#menu_4').addClass('color_act').prev().show();
+		$('#menu_4 .per_img').hide().filter('.act').show();
+		$('#menu_group_4').show();//展开子菜单
+		$('#menu_4_{$this_prom.id}').addClass('color_act');
+		$('#menu_4_{$this_prom.id} img').attr(
+				'src',
+				$('#menu_4_{$this_prom.id} img').attr('src').replace('right_2',
+						'right_1'));
+	</script>-->
+</body>
+
+</html>

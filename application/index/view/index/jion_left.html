@@ -1,0 +1,56 @@
+<template>
+	<!--加盟大厅-->
+	<div class="" style="border: none;">
+	  <!--登入后-->
+		<div class="per_tou">
+			<p><a href="{:url('user/index')}" class="jionhall_i"><img src="{:get_image_path($company['company_head_portrait'])}" onerror="javascript:src='__RESOURCES__images/touxiang.png'" width="100%" /></a></p>
+			<p style="margin-top: 12px;">{$company['company_name']}</p>
+		</div>	   
+	</div>
+	<ul class="jionhall_list clearfix">
+		<li>
+			<p class="active_nav">{$info.performance}元</p>
+			<p>本月KPI</p>
+		</li>
+		<li>
+			<p class="active_nav">{$info.finished_rate}</p>
+			<p>KPI完成率</p>
+		</li>
+	</ul>
+    <div class="que_l">
+		<a href="{:url('index/joinhall')}" title="" class="color_1 " :class="{color_1:action==1, active_nav:action==1}">
+		   <span class="que_act" v-if="action==1"></span>
+			<img  class="per_img" src="__RESOURCES__images/jionhall_66.png" v-if="action==1" />
+			<img  class="per_img" src="__RESOURCES__images/jionhall_6.png" v-else  />
+			{if condition="$info.agent_type==3"}合伙代理{elseif condition="$info.agent_type==2"}成蚁代理{else/}幼蚁代理{/if}
+		</a>
+	</div>
+	
+     <div class="que_l">
+		<a href="{:url('index/joinhall_train')}" title=""  class="color_1" :class="{color_1:action==1, active_nav:action==2}">
+				<span class="que_act" v-if="action==2"></span>		
+			<img  class="per_img" src="__RESOURCES__images/jionhall_22.png"  v-if="action==2"/>
+			<img  class="per_img" src="__RESOURCES__images/jionhall_2.png" v-else  />
+			我要培训
+		</a>
+	</div>
+     <div class="que_l">
+		<a href="{:url('index/joinhall_task')}" title="" class="color_1" :class="{color_1:action==1, active_nav:action==3}">
+			<span class="que_act" v-if="action==3"></span>					
+			<img  class="per_img" src="__RESOURCES__images/jionhall_33.png"  v-if="action==3" />
+			<img  class="per_img" src="__RESOURCES__images/jionhall_3.png" v-else  />
+			已领任务
+		</a>
+	</div>
+     <div class="que_l">		
+		<a href="{:url('index/joinhall_camp')}" title="" class="color_1" :class="{color_1:action==1, active_nav:action==4}">
+			<span class="que_act" v-if="action==4"></span>					
+			<img  class="per_img" src="__RESOURCES__images/jionhall_44.png"  v-if="action==4" />
+			<img  class="per_img" src="__RESOURCES__images/jionhall_4.png" v-else />
+			代理规则
+		</a>
+	</div>
+</template>
+<script>
+	$('#main_nav_company').addClass('menu_home ');
+</script>

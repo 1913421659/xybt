@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>产品体验</title>		
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>		
+	</head>
+	<body style="background-color: #f1f0f0;">
+		<!-- body 顶部加上如下代码 -->
+	<div id="media_content">
+		<header class="hanner_box">
+			<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span>产品体验</span>
+			<a href="javascript:;" id="menuBtn" @click="menuBtn"  class="hanner_box_left" style="float: right;"><img class="" src="../images/peosonal.png" /></a>
+		</header>
+		<section>
+			<div class="pro_box" v-for="item in proList">
+			    <a class="media-left media-middle pro_box_img" href="#">
+			        <img class="media-object" :src="item.pro_img"alt="产品体验">          
+			    </a>
+			    <div class="media-body">
+			        <h5 class="media-heading pro_title">{{item.title}}</h5>
+			        <p class="active pro_price">直发价格：{{item.price}}元</p>
+			        <p class="media_power pro_jibie">
+			        	<span class="pri_img_1">
+			        		 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+			        	</span>
+			        	<span>{{item.purpose}}</span>
+			        	<span>余{{item.Surplus}}份</span>
+			        	<span>{{item.time}}</span>
+			        </p>
+			    </div>
+			    <a href="pro_details.html" class="atonce">马上抢</a>
+			</div>
+		</section>
+		<!--左右菜单栏-->
+		<div class="menu_left_box" id="menu_show" @click="menu_hide">
+			<div class="menu_l_inner">
+				<div class="menuBg">
+					<div class="weui-flex">
+					  <div class="weui-flex__item menu_l">
+					  	<a href="#" class="menu_l_a"><img src="../images/LOGO.png"/></a>
+					  	<p class="menu_b"><span class="menu_dengji">VIP1</span><span class="yonghu">蚁兵达人</span></p>					  	
+					  </div>
+					  <div class="weui-flex__item ">
+					  	<p>编号：<span class="active">100017</span></p>
+					  	<p>昵称：<span class="active">小蚁用户</span></p>
+					  	<p>总额：<span class="active">20000</span>蚁币</p>
+					  	<p>奖励：<span class="active">10000</span>蚁币</p>
+					  	<p>分红：<span class="active">10000</span>蚁币</p>
+					  	<p>兵团：<span class="active">1090</span>蚁兵</p>
+					  </div>
+					</div>					
+				</div>
+				<div class="explain">您将于<span class="active">2015-03-04</span>完成<span class="active">10元</span>体验和分销任务即
+可获得<span class="active">15964</span>元分成收益！<a href="#" class="active fr">详细说明 >></a> </div>
+				<div class="weui-flex">
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="#" class="menu_list">
+				  		<img src="../images/xueyuan.png" />
+				  		<p>小蚁学院</p>
+				  	</a>
+				  </div>
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="cash_withdraw.html" class="menu_list">
+				  		<img src="../images/qianbao.png" />
+				  		<p>我的钱包</p>
+				  	</a>
+				  </div>
+				  <div class="weui-flex__item home_list_1 ">
+				  	<a href="#" class="menu_list">
+				  		<img src="../images/bingtua.png" />
+				  		<p>我的兵团</p>
+				  	</a>
+				  </div>
+				</div>
+				<div class="weui-cells weui_box">
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/ewm.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的二维码</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/cart.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>购物车</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/order.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的订单</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				    <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/shoucang.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的收藏</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>	
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/fenxiang.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的分享</p>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/fenxiangdating.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>分享大厅</p>
+				    </div>	
+				    <div class="weui-cell__ft"></div>
+				  </a>
+				   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/zuji.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>我的字迹</p>
+				    </div>
+				     <div class="weui-cell__ft"></div>
+				  </a>	
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/xinxi.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>个人信息</p>
+				    </div>	
+				     <div class="weui-cell__ft"></div>
+				  </a>
+				  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="../images/settle.png"/></div>
+				    <div class="weui-cell__bd">
+				      <p>设置</p>
+				    </div>	
+				     <div class="weui-cell__ft"></div>
+				  </a>	
+				</div>
+				
+				
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		var media_content=new Vue({
+			el:"#media_content",
+			data:{
+				proList:[
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+					{
+						title:"同道大叔",
+						price:"20000",
+						pro_img:"../images/zi_1.png",
+						pro_img_des:"../images/zi_1.png",
+						purpose:"安装",
+						Surplus:"1200",
+						time:"12H"
+					},
+				]
+			},
+			methods:{
+				menuBtn:function(){
+					$("#menu_show").animate({left:"0%"},"800");
+				},
+				menu_hide:function(){
+					$("#menu_show").animate({left:"-100%"},"800");
+				}
+			}
+		})
+	</script>
+		
+	</body>
+</html>

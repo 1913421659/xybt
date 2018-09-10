@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<body>
+		<div id="vue_page" v-cloak>
+		<!--顶部说明-->
+		{include file="public/header1" /}		
+		{include file="public/header2" /}	
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img src="__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="__RESOURCES__images/right_2.png"/><a href="{:url('marketing/index')}">渠道超市</a>
+						<template>
+						<img src="__RESOURCES__images/right_2.png"/>
+							{{page_title}}
+						</template>
+					</p>
+				</div>
+				<div class="que_a">
+					<div class="row">
+						{include file="media/left_1" /}
+						<script>
+						vue_page.data.left_nav.action=200 + {$category_id};
+						</script>
+						
+						<div class="col-md-9 que_right_1 ">
+							<div class="app_title" >
+
+								<dl class="listi_index clearfix" >
+									<dt>
+										渠道分类：
+									</dt>
+									<dd class="zi_sub">
+										<div class="a_sub sub_left">
+											<a href="javascript:void(0)"  :class="{a_sub_act:filter.order_total==''}" v-on:click="changenunber('')">全部</a>
+										</div>
+										<div class="sub_right right_a">
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='0,2000'}" v-on:click="changenunber('0,2000')"> ico渠道</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='2000,4000'}" v-on:click="changenunber('2000,4000')">cpa模式</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)"  :class="{a_sub_act:filter.order_total=='4000,6000'}" v-on:click="changenunber('4000,6000')"> ico渠道</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='6000,8000'}" v-on:click="changenunber('6000,8000')"> CPC CPM 信息流</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='8000,9999999'}" v-on:click="changenunber('8000,9999999')">DSP wap流量</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='8000,9999999'}" v-on:click="changenunber('8000,9999999')">cpa 安卓</a>
+											</div>
+											<div class="a_sub">
+												<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='8000,9999999'}" v-on:click="changenunber('8000,9999999')">信息流</a>
+											</div>
+										</div>
+									</dd>
+								</dl>
+
+
+								<dl class="listi_index clearfix" >
+								    <dt>
+								            地区：
+								    </dt>
+								    <dd class="zi_sub"  >
+									   <div class="a_sub sub_left left_a">
+									    	<a href="javascript:void(0)"  v-on:click="filter_total"  class="a_sub_act">全部</a> 
+									   </div> 
+									   <div class="sub_right right_a">
+										    <div class="a_sub" v-for="city in citys" >
+										     	<a href="javascript:void(0)"  v-on:click="Filter_area(city.region_id)" class="">{{city.region_name}}</a>
+										    </div>
+									   </div> 
+								    </dd>
+								</dl> <!-- 地区-->
+
+								<dl class="listi_index clearfix" >
+								    <dt>
+								            接单数量：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub sub_left">
+									    	<a href="javascript:void(0)"  :class="{a_sub_act:filter.order_total==''}" v-on:click="changenunber('')">全部</a> 
+									   </div> 
+									   <div class="sub_right right_a">
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='0,2000'}" v-on:click="changenunber('0,2000')"> 0~2000</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='2000,4000'}" v-on:click="changenunber('2000,4000')"> 2000~4000</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)"  :class="{a_sub_act:filter.order_total=='4000,6000'}" v-on:click="changenunber('4000,6000')"> 4000~6000</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='6000,8000'}" v-on:click="changenunber('6000,8000')"> 6000~8000</a> 
+										    </div>
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.order_total=='8000,9999999'}" v-on:click="changenunber('8000,9999999')">8000以上</a> 
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>  <!-- 上传图片-->
+
+								<dl class="listi_index clearfix" >
+								    <dt>
+								              接单金额：
+								    </dt>
+								    <dd class="zi_sub">
+									   <div class="a_sub sub_left">
+									    	<a href="javascript:void(0)" :class="{a_sub_act:filter.price==''}" v-on:click="changePrice('')" >全部</a> 
+									   </div> 
+									   <div class="sub_right right_a">
+										    <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.price=='0,50'}" v-on:click="changePrice('0,50')" >0~50元 </a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)":class="{a_sub_act:filter.price=='50,100'}" v-on:click="changePrice('50,100')" >50~100元</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.price=='100,150'}" v-on:click="changePrice('100,150')">100~150元</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.price=='150,200'}" v-on:click="changePrice('150,200')">150~200元</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.price=='200,250'}" v-on:click="changePrice('200,250')">200~250元</a> 
+										    </div>
+										     <div class="a_sub">
+										     	<a href="javascript:void(0)" :class="{a_sub_act:filter.price=='250,999999999'}" v-on:click="changePrice('250,999999999')">250元以上</a> 
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>
+								<dl class="listi_index clearfix">
+								    <dt>
+								          渠道星级：
+								    </dt>
+								    <dd class="zi_sub"  >
+									   <div class="sub_right right_a">
+										    <div class="a_sub" v-for="(grate,index) in grates" >
+										     	<a href="javascript:void(0)" :class="{a_sub_act : index == 0 }" @click="star_grate(grate.value)">{{grate.star}}</a> 
+										     	
+										    </div>
+									   </div> 
+								    </dd>
+								</dl>
+							</div>
+							<template>
+							 <div v-if="is_loading">
+							 	<div class="recording">
+							 		加载中... ...
+							 	</div>
+							 </div>
+							  <!--无数据-->
+							  <div v-else-if="is_nidata">
+							  	<div class="des"></div>
+                                <div class="com_no_data" >
+                                    <img src="__RESOURCES__images/no_data_1.png" />
+                                    <p>暂无数据</p>
+                                </div>
+                              </div>
+							 <ul class="qidao_list" v-else>
+								<li v-for="list_lis in list">
+									<div class="qidao_li_list" style="margin-left: 0;">
+										<div class="media">
+										 	 <div class="media-left media-middle">
+											    <a href="#" class="qidao_img">
+											       <img class="media-object" :src="list_lis.company_head_portrait" alt="...">
+											    </a>
+										  	</div>
+										 	 <div class="media-body">
+											    <h5 class="media-heading qidao_title" style="width:200px;">{{list_lis.name}}</h5>
+											   	<p class="qidao_des">
+											   	<span>
+											   		<!--{{list_lis.is_auth==0?'普通企业':(list_lis.is_auth==1?'认证企业':'')}}-->
+											   		<template v-if="list_lis.is_auth==0 || list.lis_is_auth==null">普通企业</template>
+											   		<template v-if="list_lis.is_auth==1">认证企业</template>
+											   	</span>
+											   	</p>
+											   	<p class="active_nav">交易金额：{{list_lis.price_total}}元</p>
+										  	</div>
+										</div>
+										<div class="qidao_bottom">
+											<div class="qidao_left">渠道星级</div>
+											<div class="qidao_right">
+												<div class="qidao_star" :class="'qidao_star_' + list_lis.company_grade" ></div>
+											</div>
+											<div class="qidao_paidan">
+												<div class="qidao_left">接单数量 </div>
+												<div class="qidao_right qidao_bottom_1">
+													<span>{{list_lis.order_total}}</span> <a class="qidao_pai" :href="'{:url('channel/channel_details')}/id/'+list_lis.id">我要派单</a>
+												</div>
+											</div>
+										</div>											
+									</div>	
+								</li>
+							</ul>
+							</template>
+							<!--分页-->
+							<div class="fenye" v-if="page_info.total>0">
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager" class="style_1"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<!--右侧导航栏-->
+		<script type="text/javascript">			
+		var _url_ajax_list = "{:url('media/ajaxList')}";
+		var _url_ajax_cat_list = "{:url('media/ajaxCatList')}";
+		var _url_ajax_channel_list="{:url('data/channelCompanyList')}";
+		var kkpager_bak = clone(kkpager);
+		vue_page.appendData({
+			page_title:'',
+			is_loading:1,
+			is_nidata:false,
+			list:[],
+			title_channel:[],
+			attr_selected : [],
+			page_info:{
+
+			},
+			grates:[
+					{star:"全部",value:-1},
+					{star:"1星",value:1},
+					{star:"2星",value:2},
+					{star:"3星",value:3},
+					{star:"4星",value:4},
+					{star:"5星",value:5},
+				],
+			citys:[],
+			filter : {
+				page:1,
+				category_id:{$category_id},
+				page_size:24,
+				grade:-1,
+				order_total:'',
+				price:'',
+				province_id:"0",
+			},
+		});
+		vue_page.appendMethods({
+			//翻页
+			gotoPage:function(n){
+				if(this.is_loading){
+					return;
+				}
+				this.filter.page=n;
+			    this.channel_list();
+			},
+			channel_list:function(){
+				this.is_loading=1;
+				 $.post(_url_ajax_channel_list,vue_page.filter,function(rs){
+				 	if(rs.data.list != ''){
+				 		vue_page.is_loading = 0;
+				 		vue_page.is_nidata = false;
+				 		vue_page.list=rs.data.list;	
+				 		vue_page.page_info = rs.data.page_info;
+				 	}else{
+				 		vue_page.is_loading = 0;
+				 		vue_page.is_nidata = true;
+                        vue_page.page_info = rs.data.page_info;
+				 	}
+//			 		if (category_id!=''){
+//					        if(category_id<1 || category_id>10){
+//					            alert("分类ID....")
+//					            return
+//					        }
+//					   };
+				});	
+			},
+			
+			changePrice:function(price1){
+				//接单金额的筛选
+				if(this.is_loading){
+					return;
+				}
+				if(this.filter.price==price1){  //如果相等就不刷新页面
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.price = price1;
+				this.channel_list();
+			},
+			changenunber:function(nunber){  //接单数量的筛选
+				if(this.is_loading){
+					return;
+				}
+				if(this.filter.order_total==nunber){ //如果相等就不刷新页面
+					return;
+				}
+				this.filter.page = 1;
+				this.filter.order_total = nunber;
+				this.channel_list();
+			},
+			star_grate:function(v){
+				if(this.is_loading){
+					return;
+				}
+				$(event.target).addClass("a_sub_act");
+				$(event.target).parent().siblings().children().removeClass("a_sub_act");
+				$(event.target).parents(".sub_right").prev(".sub_left").children("a").removeClass("a_sub_act");
+				if (v!=''){
+					this.filter.grade=v;
+			    }else {
+			       this.filter.grade=-1;
+			    };
+				this.filter.page=1;
+				this.channel_list();
+			},
+			titleT:function(){
+				 $.post('?s=/index/data/channelCompanyCategoryList',{s:'/index/data/channelCompanyCategoryList'},function(rs){
+			 		vue_page.title_channel=rs.data;	
+			 		for(var i in rs.data){
+			 			if(rs.data[i].id == vue_page.filter.category_id){
+			 				vue_page.page_title = document.title = rs.data[i].category_name;
+			 			}
+			 		}
+				});	
+			},
+			filter_total:function(v){
+				$(event.target).addClass("a_sub_act");
+				$(event.target).parent().siblings().children().find("a").removeClass("a_sub_act");
+                this.filter.province_id = 0;
+                this.channel_list();
+			},
+			Filter_area:function(v){
+				if(this.is_loading){
+					return;
+				};
+				$(event.target).addClass("a_sub_act");
+				$(event.target).parent().siblings().children().removeClass("a_sub_act");
+				$(event.target).parents(".sub_right").prev(".sub_left").children("a").removeClass("a_sub_act");
+                this.filter.province_id = v;
+                this.channel_list();
+			},
+            getRegion:function(){
+                var self =this;
+                $.post('?s=/index/data/getRegion',null,function(rs){
+                    self.citys=rs.data;
+                    console.log(self.citys);
+                });
+            },
+			init:function(){
+				this.channel_list();
+				this.gotoPage();
+				this.titleT();
+                this.getRegion();
+			}
+		})
+		vue_page.updated = function(){
+			//有些参数是可选的，比如lang，若不传有默认值
+			$('#kkpager').html('');
+			kkpager = clone(kkpager_bak);
+			var config = {
+				pagerid :'kkpager',
+				pno : vue_page.page_info.page,
+				//总页码
+				total : vue_page.page_info.end,
+				//总数据条数
+				totalRecords : vue_page.page_info.total,
+				getLink : function(n){
+					return "javascript:vue_page.gotoPage('" + n + "');";
+				}
+			};
+			kkpager.generPageHtml(config, true);
+			kkpager.selectPage(vue_page.page_info.page);
+		}
+		$('#main_nav_marketing').addClass('menu_home');
+	   </script>
+		
+	</div>
+	</body>
+		<script>
+		vue_page = new Vue(vue_page);
+		vue_page.init();
+		</script>
+	
+</html>

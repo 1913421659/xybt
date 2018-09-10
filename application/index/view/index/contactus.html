@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>关于我们</title>
+	</head>
+	{include file="public/css" /}
+		{include file="public/js" /}
+	<style>
+		#l-map{height:533px;width:100%;}
+		#r-result{width:100%; display: none;}
+		.BMap_bubble_content{
+			margin-top: 10px;
+		}
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				
+				<div class="row">
+					{include file="index/art_left" /}
+				<script>
+				showLeftNavAct(3);
+				</script>
+					<div class="col-md-9 que_right que_o">
+						<div class="que_r_a que_top">
+							<h4 class="que-title about_titie">联系我们 <small>CONTACT US</small> </h4>
+						</div>
+						<div class="row">
+							<div class="col-md-12 detail">
+								{$art.content}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=k2yhYRVBprxqaCETtfPLuYy1wo12Zf8K"></script>
+		<script type="text/javascript">
+			// 百度地图API功能
+			var sContent ="广州越秀区东风东路836号东峻广场1座1806室";
+			var map = new BMap.Map('l-map');
+				map.addControl(new BMap.NavigationControl());
+				map.setCurrentCity("广州");
+				map.centerAndZoom("广州");          
+				map.centerAndZoom(new BMap.Point(113.312964,23.137415));
+				
+				map.addControl(new BMap.MapTypeControl()); 
+			    map.enableScrollWheelZoom(true); 
+			   var point = new BMap.Point(113.312964,23.137415);
+			   var marker = new BMap.Marker(point);  // 创建标注
+				map.addOverlay(marker);               // 将标注添加到地图中
+				marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+				var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+				map.openInfoWindow(infoWindow,point); //开启信息窗口
+				document.getElementById("r-result").innerHTML = "信息窗口的内容是：<br />" + infoWindow.getContent();	
+						   
+			   //开启鼠标滚轮缩放
+			   map.centerAndZoom("广州",15);           
+				//单击获取点击的经纬度
+//				map.addEventListener("click",function(e){
+//					alert(e.point.lng + "," + e.point.lat);
+//				});
+		</script>
+	</body>
+	
+</html>

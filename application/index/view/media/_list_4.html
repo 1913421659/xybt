@@ -1,0 +1,41 @@
+<template>
+<table class="table paixu_taible">
+	<tr class="GVhead">
+		<th width="20"><label>
+				<input type="checkbox" id="checkAll" onchange="selectAll(this)" style="display:none;">
+			</label></th>
+		<th>序号</th>
+		<th>头像</th>
+		<th>昵称</th>
+		<th>微信号</th>
+		<th>好友数</th>
+		<th>报价</th>
+		<th>职业</th>
+		<th>年龄</th>
+		<th>圈子描述</th>
+		<th>详情</th>
+		<th>收藏</th>
+		<th class="order_now">立即派单</th>
+	</tr>
+	<tr v-for="item in list">
+		<td><input type="checkbox" name="area[]" style="display:none;"></td>
+		<td>{{item.id}}</td>
+		<td><img :src="item.logo" onerror="javascript:this.src='__RESOURCES__images/media_wx_default.jpg'" width="48" height="48" /></td>
+		<td>{{item.title}}</td>
+		<td><a :href="item.link" target="_blank">{{item.title_sub}}</a></td>
+		<td>{{item.power}}</td>
+		<td><template v-if="item.price_1 == 0">
+			-
+			</template>
+			<template v-else>
+			{{item.price_1}}元
+			</template></td>
+		<td>{{item.profession}}</td>
+		<td>{{item.age}}</td>
+		<td>{{item.desc}}</td>
+		<td><a href="#" :href="'{:url('media/detail')}/id/'+item.id">详情</a></td>
+        <td><a v-on:click="media_collect(item.id,item.is_collect)"  href="javascript:;">{{item.is_collect_name}}</a></td>
+		<td class="order_now"><a class="zi_now" :href="'{:url('media/order')}/type/4/id/'+item.id" style="color: #FF5C00 !important;">立即派单</a></td>
+	</tr>
+</table>
+</template>

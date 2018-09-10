@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付详情</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/payment')}">支付管理</a> 
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">支付详情</a> 
+					</p>
+				</div>
+				<div class="pay_detail" id="need_result">
+					<div class="row">
+						<div class="pay_detail_box">	
+							<h4 class="title_a">派单信息</h4>
+							<p>派单标题：{{title_a}}</p>
+							<p><span>订单类型：{{pay_type}}</span><span>来源：{{form}}</span><span>媒体名称：{{pay_title }}<a href="{:url('media/detail',['id'=>$info.media_id])}" class="active_nav pay_des">查看资源详情</a></label></span></p>
+							<p><span>文档上传：<a href="{$info.link}" class="active_nav">查看文档</a></span> <!--<span>封面上传：  <a href="#" class="active_nav">查看封面</a></span></p>-->
+							<p class="pay_p">派单说明：{{pay_detail}}</p>
+						</div>
+						<table class="table table_pay" v-for="tables in table">
+							<tr class="table_first table_first_1">
+						  	   <td>{{tables.table_1}}</td>
+						       <td>{{tables.table_2}}</td>
+						       <td>{{tables.table_3}}</td>
+						       <td>{{tables.table_4}}</td>
+						       <td>{{tables.table_5}}</td>
+						       <td>{{tables.table_6}}</td>
+						    </tr>
+						    <tr class="payment_table">
+						  	   <td>	
+							  	   	<a href="#" class="com_list_4">
+							  	   		<img :src="tables.tables_1"  class="img-circle" />
+							  	   	</a>
+						  	   </td>
+						       <td>{{tables.tables_2}}</td>
+						       <td>{{tables.tables_3}}</td>
+						       <td>{{tables.tables_4}}</td>
+						       <td>{{tables.tables_5}}</td>
+						       <td>{{tables.tables_6}}</td>
+						    </tr>
+						</table>
+                        {if condition="$info.pay_status==0"}
+						<ul class="pay_list clearfix">
+							<li class="pay_list_li">
+								<p class="pay_list_f">共需扣款</p>
+								<p class="pay_list_p">{$info.price_sum} 元</p>
+							</li>
+							<li class="pay_btn">
+								<a  class="pay_exam" data="1">确认扣款</a>
+								<a  class="pay_exam" data="2">拒绝扣款</a>
+							</li>
+						</ul>
+                        {/if}
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}	
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					title_a:"{$info.order_title}",
+					pay_type:"{$info.order_type_name}",
+					form:"{$info.media_type_name}",
+					pay_title:"{$info.media_title}",
+					pay_detail:"{$info.order_remarks}",
+					table:[
+						{
+							table_1:"头像",
+							table_2:"名称",
+							table_3:"ID",
+							table_4:"申请派单金额",
+							table_5:"提交时间",
+							table_6:"状态",
+							table_7:"操作",
+							tables_1:"{$info.user_picture|get_image_path}",
+							tables_2:"{$info.nick_name}",
+							tables_3:"{$info.user_id}",
+							tables_4:"{$info.price_sum}",
+							tables_5:"{$info.add_time|date='Y-m-d H:i:s',###}",
+							tables_6:"{$info.status_name}",
+							tables_7:"申请查看",
+                            tables_8:"{$info.link}"
+						},
+					]					
+				},
+			});
+
+            $('.pay_exam').click(function(){
+                var d = $(this).attr('data');
+                var msg_show = '';
+                if(d==1){
+                    msg_show='是否确认扣款？'
+                }else if(d==2){
+                    msg_show='是否拒绝扣款？'
+                }else{
+                    return ;
+                }
+                var order_id = "{$info.id}";
+                layer.confirm(msg_show, {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    $.ajax({
+                        type:'post',
+                        url:'index.php?s=/index/company/media_order_pay_exam',
+                        data:{order_id:order_id,status:d},
+                        async:true,
+                        success:function(response){
+                            var obj = JSON.parse(response);
+                            layer.msg(obj.msg);
+                            window.setTimeout(function(){
+                                window.location.reload();
+                            },1500);
+                        },
+                        error:function(msg){
+                            console.log(msg);
+                        }
+                    });
+                }, function(){
+                    console.log('close');
+                    layer.close();
+                });
+
+            });
+		</script>
+	</body>
+	
+</html>

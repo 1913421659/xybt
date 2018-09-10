@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的需求-免费福利-需求结果</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<body >
+		<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--顶部说明-->
+		<!--menu-->
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix" >
+			<div class="wrap">
+				<div class="que_menu">
+					<p>
+						<img :src="menu_home" /><a href="index.html">{{home}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal}}</a>
+						<img :src="menu_img1" /><a href="Personal.html">{{personal_1}}</a>
+						<img :src="menu_img1" /><a href="Myneeds.html">{{marketing_list1}}</a>
+						<img :src="menu_img1" /><a href="Myneed_results.html">{{result}}</a>
+					</p>
+				</div>
+				<div class="que_a">
+					<div class="row">			
+						<div class="col-md-12 need_right ">
+							<div class="d_box1 vv">
+							   <div class="row">
+								<div class="col-md-12">
+									<div class="d_left">
+										<div class="media">
+										  <div class="media-left media-middle">
+										    <a class="ad_img" href="Productdistribution_detail.html">
+										      <img class="media-object" :src="meed_img1" alt="...">
+										    </a>
+										  </div>
+										  <div class="media-body need_p">
+										    <h4 class="media-heading dd_title">{{meeg_title}}</h4>
+										    <p class="res_p1">{{publisher}}&nbsp;&nbsp;&nbsp;&nbsp;{{release_time}}&nbsp;&nbsp;&nbsp;&nbsp;{{Audit}}</p>
+										    <p class="res_p"><span>总预算：{$taskInfo.budget}元</span><span>剩余预算：{$taskInfo.surplus_budget}元</span><span>数量：{$taskInfo.qty}个</span><span>完成数量：{$taskInfo.finish_qty}个</span><span>商品单价：{$taskInfo.cost_unit_price}元</span></p>
+										  </div>
+										</div>
+										
+								    </div>
+								</div>
+																
+							</div>
+							</div>
+							<div class="des"></div>
+								<div class="per_nei vv">
+								<div class="row per_kk">
+								  <div class="col-md-12 title_a cash_a">
+								  
+								  	<div class="footprints_box cash_k_1">
+										<div class="demo3 cash_box need_h">											
+											<span id="time">{{time}}</span><input class="laydate-icon need_u" id="start" value="{$start}">
+											<span>-</span><input class="laydate-icon need_u" id="end" value="{$end}">
+										</div>
+										<ul class="need_ul">
+											<li class="">
+												<select class="need_sel need_u" id="resultSelect">
+													<option v-for="province in provinces" :value="province.value">{{province.province1}}</option>
+												</select>									
+										    </li>
+										</ul>
+										<form class="search_btn">
+											<button class="btn btn-default" id="resultSearch" type="button">搜索</button>
+										</form>
+									</div>
+								  	
+								  </div>
+								  
+								</div>
+							</div>
+							
+							
+							<div class=""  style="padding: 0 20px;">
+								<table class="table table_1">
+									<tr class="table_first">
+								  	   <td>ID</td>
+								       <td>会员名称</td>
+								       <td>提交时间</td>
+								       <td>审核状态</td>
+								       <td>审核方</td>
+								    </tr>
+								     <tr v-for="table1 in table1s">
+								  	  <td>{{table1.task_user_id}}</td>
+								       <td>{{table1.nick_name}}</td>
+								       <td>{{table1.add_time}}</td>
+								       <td>{{table1.exam_status}}</td>
+                                         <td>{if condition="$taskInfo.is_examine==0 OR $taskInfo.exam_type==0"}
+                                             自动审核
+                                             {elseif condition="$taskInfo.exam_type==1"/}
+                                             <a class="btn btn-default need_shen" href="javascript:;" role="button" :data="table1.task_user_id" v-on:click="My_check(table1.task_user_id)">平台审核</a>
+                                             {elseif condition="$taskInfo.exam_type==2"/}
+                                             <a class="btn btn-default need_shen" href="javascript:;" role="button" :data="table1.task_user_id" v-on:click="My_check(table1.task_user_id)">我来审核</a>
+                                             {/if}
+                                         </td>
+								    </tr>
+
+								</table>
+							</div>
+									
+						</div>
+						<!--分页-->
+						<div class="fenye">
+							
+							<div style="width:800px;margin:0 auto;">
+								<div id="kkpager"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->				
+		{include file="public/footer1" /}
+	    {include file="public/footer2" /}
+		<!--马上抢弹窗-->			
+		<div class="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_1">
+					<ul>
+						<li>
+							<div class="header_now">
+								{{tan_title}}
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							
+							<div class="res_inner">
+							    <div class="container_ooo c_8 _scroll">
+									<div class="_panel-box">
+										
+										<div class="content_now" >
+											<div class="shen_sec clearfix">
+												<div class="media shen_sec_1">
+													  <div class="media-left media-middle">
+													    <a href="#" class="shen_sec_img">
+													      <img class="media-object" :src="tan_img1" alt="...">
+													    </a>
+													  </div>
+													  <div class="media-body">
+													    <h4 class="media-heading">
+													    	<div class="per_vip shen_sec_t">
+																<a href="Personal.html"><span>{{tan_vip}}</span>{{tan_tiltle1}}</a>
+															</div>
+													    </h4>
+													    <p><span>{{tan_id}}</span><span>{{tan_jibie}}</span><span>{{tan_Identity}}</span></p>
+													  </div>
+			                                     </div>
+			                                     <div class="sec_r">
+			                                 		<div class="sec_r_1" v-for="reward in rewards">
+			                                 			<p>{{reward.rewards_number}}</p>
+			                                 			<p>{{reward.rewards_totol}}</p>
+			                                 		</div>
+			                      
+			                                     </div>
+												
+											</div>
+											<div class="res_jietu">
+												<h3><strong>截图审核：</strong></h3>
+											</div>
+											
+											<!--有数据调用-->
+											<div class="res_con">
+												<div class="baguetteBoxOne gallery">
+
+												</div>
+												
+											</div> 
+												
+											<!--有数据调用结束-->
+											<!--无数据调用-->
+											<div class="res_nodara" style="display: none;">
+												<div class="res_nodata_img">
+													<div class="res_nodata_a">
+														<img src="__RESOURCES__images/no_data.png" />
+													</div>
+													<p class="res_notata_p">暂无上传截图</p>
+												</div>
+											</div>
+											<!--无数据调用结束-->
+											<div class="shen_three">
+												<div class="row">
+													<div class="col-md-2 shen_left res_1"><h3><strong>文档审核：</strong></h3></div>
+													<div class="col-md-10">
+														<!--有数据-->
+                                                        <p class="res_word res_down" style="display: none;"><a href="#" target="_blank"><img src="__RESOURCES__images/down_app.png" />下载文档</a></p>
+														<!--有数据结束-->
+														<!--无数据-->
+                                                        <p class="res_word res_b">暂无上传文档</p>
+														<!--无数据结束-->
+													</div>
+												</div>
+											</div>
+										
+											<div class="shen_three" style="margin-bottom: 20px;">
+												<div class="row">
+                                                    <input type="hidden" id="taskUid" value="">
+													<div class="col-md-2 shen_left res_1"><h3><strong>审核操作：</strong></h3></div>
+													<div class="col-md-10">
+														<div class="radio radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio1" value="1" checked="true">
+							                                <label for="radio1">审核通过</label>
+							                            </div>
+							                            <div class="radio  radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio2" value="2">
+							                                <label for="radio2">审核不过</label>
+							                            </div>
+							                             <div class="radio  radio2 radio-danger">
+							                                <input type="radio" name="radio1" id="radio3" value="4">
+							                                <label for="radio2">重新提交</label>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										
+											
+										</div>
+				                        
+				                       
+									</div>
+							   </div>
+							
+							</div>
+							<div class="dibu">
+							   <a class="dd_now shen_now" href="javascript:;" title="提价审核">提交审核</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>		
+		</div>
+		{include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					menu_home:"__RESOURCES__images/home.png",
+					home:"首页",
+					menu_img1:"__RESOURCES__images/right_2.png",
+					personal:"个人中心",
+					personal_1:"我的需求",
+					marketing_list1:"免费福利",
+					result:"需求结果",
+					meed_img1:"{$taskInfo.banner_img|get_image_path}",
+					meeg_title:"{$taskInfo.name}",
+					publisher:"发布人：{$taskInfo.advertiser_name}",
+					release_time:"发布时间：{$taskInfo.release_time|date='Y-m-d',###}",
+					Audit:"{$taskInfo.exam_time}审核",
+					time:"时间：",
+					provinces:[
+						{value:-1,province1:"审核状态"},
+						{value:0,province1:"待审核"},
+						{value:1,province1:"审核通过"},
+						{value:2,province1:"审核不过"},
+						{value:4,province1:"重新提交"}],
+					tables:[
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+						},
+						{
+						table_1:"10086",
+						table_2:"姑墨王子",
+						table_3:"2017-02-02",
+						table_4:"审核未过",
+						table_5:"我来审核",
+					}],
+					table1s:{$task_user_list},
+					tan_title:"审核需求",
+					tan_img1:"__RESOURCES__images/yinyuanfuLOGO.png",
+					tan_tiltle1:"南城先生",
+					tan_vip:"vip1",
+					tan_id:"ID：326666",
+					tan_jibie:"蚁兵达人",
+					tan_Identity:"学生",
+					rewards:[{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总奖励"
+					},
+					{
+						rewards_number:"16561蚁币",
+						rewards_totol:"总分红"
+					},
+					{
+						rewards_number:"1蚁兵",
+						rewards_totol:"兵团"
+					}]
+				},
+				methods:{
+					My_check:function(th){
+                        if(!th){
+                            return ;
+                        }
+                        $.ajax({
+                            type:'get',
+                            url:'index.php?s=/index/user/taskExamine',
+                            data:{tid:th},
+                            async:false,
+                            success:function(response){
+                                var obj = JSON.parse(response);
+                                if(obj.code){
+                                    Vue.set(need_result,'tan_tiltle1',obj.data.nick_name);
+                                    Vue.set(need_result,'tan_vip',obj.data.vip);
+                                    Vue.set(need_result,'tan_id',obj.data.user_id);
+                                    Vue.set(need_result,'tan_jibie',obj.data.rank_name);
+                                    Vue.set(need_result,'tan_Identity',obj.data.profession_name);
+                                    Vue.set(need_result,'tan_img1',obj.data.user_picture);
+                                    Vue.set(need_result.rewards[0],'rewards_number',obj.data.reward_total_all+'蚁币');
+                                    Vue.set(need_result.rewards[1],'rewards_number',obj.data.cutting_total_all+'蚁币');
+                                    Vue.set(need_result.rewards[2],'rewards_number',obj.data.sub_user_total+'蚁兵');
+                                    $('#taskUid').val(th);
+                                    if(obj.data.file.length>0 && obj.data.file_type==1){
+                                        var str = '';
+                                        $('.res_nodara').hide();
+                                        $('.baguetteBoxOne').empty();
+                                        $.each(obj.data.file,function(index,item){
+                                            str += '<a href="'+item+'"><img src="'+item+'"/></a>'
+                                            $('.baguetteBoxOne').append(str);
+                                        });
+                                        baguetteBox.run('.baguetteBoxOne');
+                                        $('.res_con').show();
+                                    }else if(obj.data.file.length>0 && obj.data.file_type==2){
+                                        $('.res_b').hide();
+                                        $('.res_nodara').show();
+                                        $('.res_con').hide();
+                                        $('.baguetteBoxOne').empty();
+                                        $.each(obj.data.file,function(index,item){
+                                            $('.res_down').find('a').attr('href',item);
+                                        });
+                                        $('.res_down').show();
+                                    }else if( obj.data.file_type==1){
+                                        $('.baguetteBoxOne').empty();
+                                        $('.res_con').hide();
+                                        $('.res_nodara').show();
+                                        $('.res_down').hide();
+                                        $('.res_b').show();
+                                    }else if(obj.data.file_type==2){
+                                        $('.baguetteBoxOne').empty();
+                                        $('.res_con').hide();
+                                        $('.res_nodara').show();
+                                        $('.res_down').hide();
+                                        $('.res_b').show();
+                                    }
+                                }else{
+                                    $('.baguetteBoxOne').empty();
+                                    $('.res_con').hide();
+                                    $('.res_nodara').show();
+                                    $('.res_down').hide();
+                                    $('.res_b').show();
+                                }
+                            },
+                            error:function(msg){
+                                console.log(msg);
+                            }
+                        });
+						$(".now_tan").fadeIn(300);
+
+					},
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					}
+				}
+			})
+		</script>
+		
+		<script type="text/javascript">
+			!function(){
+				laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+				laydate({elem: '#demo'});//绑定元素
+			}();
+			
+			//日期范围限制
+			var start = {
+			    elem: '#start',
+			    format: 'YYYY-MM-DD',
+//			    min: laydate.now(), //设定最小日期为当前日期
+			    max: '2099-06-16', //最大日期
+			    istime: true,
+			    istoday: false,
+			    choose: function(datas){
+			         end.min = datas; //开始日选好后，重置结束日的最小日期
+			         end.start = datas //将结束日的初始值设定为开始日
+			    }
+			};
+			
+			var end = {
+			    elem: '#end',
+			    format: 'YYYY-MM-DD',
+			    min: laydate.now(),
+			    max: '2099-06-16',
+			    istime: true,
+			    istoday: false,
+			    choose: function(datas){
+			        start.max = datas; //结束日选好后，充值开始日的最大日期
+			    }
+			};
+			laydate(start);
+			laydate(end);
+			
+			//自定义日期格式
+			laydate({
+			    elem: '#test1',
+			    format: 'YYYY年MM月DD日',
+			    festival: true, //显示节日
+			    choose: function(datas){ //选择日期完毕的回调
+			        alert('得到：'+datas);
+			    }
+			});
+			
+			//日期范围限定在昨天到明天
+			laydate({
+			    elem: '#hello3',
+			    min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+			    max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+			});
+			</script>
+				<script type="text/javascript">
+					$("._scroll").yi_scroll();
+		            $("._scroll-mh").yi_scroll({isMaxHeight:true,isBar:true});
+			    	function changeState(el) {
+			        	if (el.readOnly) el.checked=el.readOnly=false;
+			       		 else if (!el.checked) el.readOnly=el.indeterminate=true;
+			   		};
+			  </script>
+			  <script type="text/javascript">
+            //		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}
+			
+			//init
+			$(function(){
+				var totalPage = {$last_page};
+				var totalRecords = {$total};
+				var pageNo = getParameter('page');
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : pageNo,
+					//总页码
+					total : totalPage,
+					//总数据条数
+					totalRecords : totalRecords,
+					//链接前部
+					hrefFormer : '{$page_url}',
+					//链接尾部
+					hrefLatter : '.html',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "&page="+n;
+					}
+					
+				});
+
+                $('#resultSearch').click(function(){
+                    var start = $('#start').val();
+                    var end = $('#end').val();
+                    var status = $('#resultSelect').val();
+                    var url = '{:url("index/user/myneedresults",["id"=>$taskInfo.demand_id])}';
+                    url += '/starttime/'+start+'/endtime/'+end+'/status/'+status;
+                    window.location.href=url;
+                });
+
+                $('.shen_now').click(function(){
+                    var tid = $('#taskUid').val();
+                    var status = $("input[name='radio1']:checked").val();
+                    var data= {tid:tid,status:status};
+                    $.ajax({
+                        type:'post',
+                        url:'index.php?s=/index/user/taskExamineSubmit',
+                        data:data,
+                        async:false,
+                        success:function(response){
+                            var obj = JSON.parse(response);
+                            if(obj.code){
+                                layer.msg(obj.msg);
+                                setTimeout(function(){
+                                    window.location.reload();
+                                },1500);
+                            }else{
+                                layer.msg(obj.msg);
+                            }
+                        },
+                        error:function(msg){
+                            console.log(msg);
+                        }
+                    });
+                });
+			});
+			
+			</script>
+	
+	</body>
+	
+</html>

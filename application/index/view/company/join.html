@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>加入企业</title>
+</head>
+{include file="public/css" /}
+{include file="public/js" /}
+<body>
+<!--顶部说明--> 
+{include file="public/header1" /} 
+<!-- header2 --> 
+{include file="public/header2" /} 
+<!--menu-->
+<div class="new_menu">
+	<div class="wrap">
+	    {include file="public/menu_r" /}
+	</div>
+</div>
+<!--menu结束-->
+<!--企业管理-->
+<div class="enterp_box clearfix" id="page_company_list" style="padding-bottom: 40px;">
+	<div class="wrap">
+		<div class="que_menu_1">
+			<p>
+				<img src="/__RESOURCES__images/home.png"/>
+				<a href="{:url('index/index')}">首页</a>
+				<img src="/__RESOURCES__images/right_2.png"/>				
+				<a href="{:url('company/index')}">营销管理</a>
+				<img src="__RESOURCES__images/right_2.png"/>
+				<a href="#">加入企业</a> 
+			</p>
+		</div>
+		<div class="row">
+			<div class="col-md-3 que_left">
+				<div class="after_box" style="border: none;">
+                    {empty name="$company"}
+                    <!--未加入企业-->
+                <span>
+                    <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                </span>
+                    <!--未加入企业-->
+                    <div class="after_pp">{$me.nick_name}</div>
+                    <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                    <p class="com_box">
+                        <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                        <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                    </p>
+                    {else/}
+                    <span>
+                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                    </span>
+                    <div class="after_pp" >{$company.company_name}</div>
+                    {/empty}
+			</div>
+			<div class="des"></div>
+							{include file="company/_left" /}
+				<!--加入企业后结束-->
+				<script>
+					new Vue({
+						el:'.col-md-3.que_left',
+						data:{
+							action:0
+						}
+					});
+				</script>
+			</div>
+			<div class="col-md-9 que_right">		
+				<div class="enter_inner join_enter_1" style="min-height: 560px;">
+					<div class="joinenter_box">
+						<form class="form_box_box" onSubmit="return false">
+							<input type="text" id="key" placeholder="搜索企业">
+							<button class="buttom_1_1" v-on:Click="flushList">
+								<img src="__RESOURCES__images/search_jion.png">
+							</button>
+						</form>
+						<p> 
+							<a class="enter_link_like" href="#" role="button" v-on:Click="flushList">搜索企业</a>
+						</p>
+					</div>
+					<div class="settlement_cart joinenter_des">
+					</div>
+					<div class="jionenter_ul clearfix">
+						<div class="mark_c clearfix" v-if="is_default">
+							<h3 class="recording">请输入搜索企业的关键字</h3>
+						</div>
+						<div class="mark_c clearfix" v-if="is_loading">
+							<h3 class="recording">数据加载中</h3>
+						</div>
+						<div class="mark_c clearfix" v-if="is_empty" style="background-color:#fff;">
+							<h3 class="recording">没有找到任何记录</h3>
+						</div>
+						<template v-if="list.length > 0">
+							<ul class="joinenter_list">
+								<li v-for="item in list">
+									<div class="joinenter_li">
+										<a href="javascript:;" v-if="item.company_head_portrait==''||item.company_head_portrait==null" class="join_img">
+											<img src="__RESOURCES__images/a1.png" width="100%" />
+										</a>
+										<a href="javascript:;" v-else class="join_img">
+											<img :src="item.company_head_portrait" width="100%" />
+										</a>
+										<p>{{item.company_name}}</p>
+										<p>
+											<a class="enter_link apply_1 js_tan" href="#" role="button" v-on:click="showApplyForm(item)">申请加入</a>
+										</p>
+									</div>
+								</li>
+							</ul>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!--企业管理结束--> 
+<!--马上抢弹窗-->
+<div class="now_tan">
+	<div class="now_tan_a">
+		<div class="now_tan_c apply_tan">
+			<ul>
+				<li>
+					<div class="header_now">
+						申请加入企业
+					</div>
+					<div class="content_now content_now_1">
+						<p class="apply_des_1">您正在申请加入</p>
+						<p class="apply_title_1">{{company_name}}</p>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="re_right re_7">
+									<input type="hidden" name="apply_id" :value="id" />
+									<textarea id="apply_txt"  class="form-control  " rows="5" placeholder="请输入申请说明" @change="" @KeyUp="changeTxt" >{{apply_txt}}</textarea>
+								</div>
+								<template v-if="apply_txt==''">
+								<div class="tishi tishi2" id="tishi3" style="display:block; top: 158px !important;">
+									请输入申请说明
+								</div>
+								</template>
+							</div>
+						</div>
+						<a class="dd_now apply_join " href="javascript:;" @click="postForm" title="">确定加入</a>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;" v-on:click="hideForm">
+					<img class="guanbiBtn" src="__RESOURCES__images/c888.png"/>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--footer--> 
+
+{include file="public/footer1" /} 
+<!--右侧导航栏--> 
+{include file="public/footer2" /} 
+{include file="public/js_1" /}
+</body>
+<script>
+Company.initJoin();
+</script> 
+</html>

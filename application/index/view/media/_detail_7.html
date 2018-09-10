@@ -1,0 +1,54 @@
+<table class="table_wx" v-if="obj.type_id==7">
+	<tr>
+		<td rowspan="6" class="wx_head">
+			<div>
+				<p class="wx_title">头像</p>
+				<img :src="obj.logo" />
+			</div>
+		</td>
+		
+	</tr>
+	<tr>
+		<td >昵称：</td>
+		<td style="color: #1c1c1d;">{{obj.title}}</td>
+		<td>链接：</td>
+		<td style="color: #1c1c1d;">
+			<a :href="obj.link" target="_blank">
+				{{obj.link}}
+			</a>
+		</td>
+		<td rowspan="6" class="wx_a">
+		<div class="wx_btn">
+			<a :href="'{:url('media/order')}'+'/type/7/id/'+obj.id">立即派单</a>
+			<a href="#">收      藏</a>
+			<!--<a href="#">分      享</a>-->
+		</div>
+	</td>
+	</tr>
+	<tr>
+		<td>平台：</td>
+		<td style="color: #1c1c1d;">{{need_result.getAttr(15)}}</td>
+		<td>分类：</td>
+		<!--级别-->
+		<td style="color: #1c1c1d;">{{need_result.getAttr(700)}}</td>
+	</tr>
+	<tr>
+		
+		<td>线上直播：</td>
+		<td style="color: #1c1c1d;">{{obj.price_1}}元</td>
+		<td>线下直播：</td>
+		<td style="color: #1c1c1d;">{{obj.price_2}}元</td>
+	</tr>
+	<tr>
+		<td >粉丝数：</td>
+		<td style="color: #1c1c1d;">{{obj.power/10000}}</td>
+		<td>平均播放数：</td>
+		<td style="color: #1c1c1d;">{{obj.average_play_number}}</td>
+	</tr>
+	<tr>
+		<td>平均评论数：</td>
+		<td style="color: #1c1c1d;">{{obj.average_comment_number}}</td>
+		<td>平均点赞数：</td>
+		<td style="color: #1c1c1d;">{{obj.average_favour_number}}</td>
+	</tr>
+</table>

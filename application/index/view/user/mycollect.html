@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>管理达人-我的收藏-活动</title>
+	</head>
+	{include file="public/css" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				<div class="que_menu">
+					<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('user/index')}">个人中心</a></p>
+				</div>
+				<div class="que_a">
+					<div class="row">
+						<div class="col-md-3  min_w">
+						{include file="user/left" /}
+						</div>
+						
+						<div class="col-md-9 wallet_right ">
+							<div class="per_title8 vv">
+								<h5>达人管理  - 我的收藏</h5>
+							</div>
+							<div class="des"></div>
+							<div class="per_nei ">								
+								<ul class="need_a need_g">{volist name="top_pro_list" id="v"}
+									<li>										
+										<a  href="{:url('',['key'=>$v.id])}" title="">{$prom_short_name[$v.id]}</a>
+										{if condition="$v.id==$this_prom.id"}<span class="xiantiao"></span>{/if}										
+									</li>{/volist}						
+								</ul>
+							</div>
+							<div class="shou_box">
+								<div class="row">
+                                   {if condition="!empty($list)"}
+                                   {volist name="list" id="v"}
+								   <div class="col-md-3">
+								   		<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">
+									   		<div class="shou_a">
+									   			<span class="shou_img"><img src="/{$v.logo_img}"/></span>
+									   			<div class="shou_title">
+									   				<p>{$v.name}</p>
+									   				<p>收藏时间：{:date("Y-m-d",$v.add_time)}<!--label>未体验</label--></p>									   				
+									   			</div>
+									   		</div>
+								   		</a>
+								   </div>{/volist}
+                                    {else /}
+                                    <!--无数据调用-->
+									<div class="res_nodara">
+										<div class="res_nodata_img">
+											<div class="res_nodata_a">
+												<img src="__RESOURCES__images/no_data.png" />
+											</div>
+											<p class="res_notata_p">没有找到任何记录</p>
+										</div>
+									</div>
+									<!--无数据调用结束-->
+                                    {/if}
+								</div>
+							</div>
+					
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js" /}
+		{include file="public/js_1" /}
+		<script>
+			$('#menu_4').addClass('color_act').prev().show();
+			$('#menu_4 .per_img').hide().filter('.act').show();
+			$('#menu_group_4').show();//展开子菜单
+			$('#menu_4_7').addClass('color_act');
+			$('#menu_4_7 img').attr('src',$('#menu_4_7 img').attr('src').replace('right_2','right_1'));
+		</script>
+	</body>
+	
+</html>

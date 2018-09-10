@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>提现记录</title>		
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>	
+		<style>
+			
+		</style>
+	</head>
+	<body style="background-color: #f1f0f0;">
+	<div id="media_content">
+		<header class="hanner_box">
+			<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span>提现记录</span>			
+		</header>
+		<div class="comment_box" >						
+			<div class="commentBox weui-cell_access" >								
+				<div class="weui-panel__bd caseRecord" v-for="item in recordList">
+				    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">				   
+				      <div class="weui-media-box__bd" style="position: relative;">
+				        <h4 class="weui-media-box__title">{{item.recordTitle}}</h4>
+				        <p class="weui-media-box__desc">{{item.recordId}}</p>
+				        <p class="caseTime">{{item.recordTime}}</p>
+				      </div>
+				     
+				    </a>				    
+				</div>		
+			</div>					
+		</div>
+		
+	</div>
+	<script>
+		var media_content=new Vue({
+			el:"#media_content",
+			data:{
+				recordList:[
+					{
+						recordTitle:"支付宝",
+						recordId:"747019196@qq.com",
+						recordTime:"2017-04-28",
+					},
+					{
+						recordTitle:"支付宝",
+						recordId:"747019196@qq.com",
+						recordTime:"2017-04-28",
+					},
+					{
+						recordTitle:"支付宝",
+						recordId:"747019196@qq.com",
+						recordTime:"2017-04-28",
+					},
+					{
+						recordTitle:"支付宝",
+						recordId:"747019196@qq.com",
+						recordTime:"2017-04-28",
+					},
+				]
+			},
+			methods:{
+				
+				
+			}
+		})
+	</script>
+	
+	
+		
+	</body>
+</html>

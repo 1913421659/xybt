@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>渠道详情</title>
+</head>
+{include file="public/css" /}
+{include file="public/js" /}
+<body>
+<!--顶部说明-->
+{include file="public/header1" /}
+
+{include file="public/header2" /}
+<!--menu-->
+<div class="new_menu">
+	<div class="wrap">
+		{include file="public/menu_r" /}
+	</div>
+</div>
+<!--menu结束-->
+<div class="que_con que-a clearfix" id="vue_page">
+	<div class="wrap">
+		<div class="que_menu_1">
+			<p><img src="__RESOURCES__images/home.png"/><a href="{:url('index/index')}">首页</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('marketing/index')}">营销推广</a><img src="__RESOURCES__images/right_2.png"/><a href="{:url('channel/index',['category_id'=>$info.category_id])}">{$info.category_name}</a><img src="__RESOURCES__images/right_2.png"/><a href="#">{$info.name}</a></p>
+		</div>
+		<div class="que_a_a" style="width:80%;" style="position:relative">
+			<div class="d_left channel_box" >
+				<div class="media">
+					<div class="media-left mianfei_1">
+						<a class="channel_img" href="#">
+							<img class="media-object" onerror="__RESOURCES__images/yinyuanfuLOGO.png" src="{$info.company_head_portrait}" alt="...">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading channel_title">{$info.name}</h4>
+						<div class="channel_btn" >
+							<span class="channel_des">{$info.is_auth==1?'认证企业':'普通企业'}</span>
+							<div class="qidao_star qidao_star_{$info.company_grade}"></div>
+						</div>
+						<p class="mian_channel">渠道类型：{$info.category_name}  &nbsp;&nbsp;&nbsp;&nbsp;  接单数：{$info.order_total}
+							<a class="channel_j" href="{:url('channel/immediate_dispatch',['key'=>$info.id])}" title="">我要派单</a>
+						</p>
+						<p class="d_c">
+							交易总额：{$info.price_total}元
+						</p>
+					</div>
+				</div>
+				<div class="fenxiang clearfix ">
+					<div class="col-md-1" style="width: 75px;">分享到：</div>
+					<div class="col-md-11">
+						<div class="bdsharebuttonbox fenxiang_1">
+							<!--<a href="#" class="bds_more" data-cmd="more"></a>-->
+							<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">qq空间</a>
+							<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博 </a>
+							<a href="#" class="bds_weixin bds_peng" data-cmd="weixin" title="分享到微信">朋友圈</a>
+							<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">QQ</a>
+							<span  class="bds_aaa"><img src="__RESOURCES__images/share_dating.png" />分享大厅</span>
+							<span  class="bds_aaa"><img src="__RESOURCES__images/shoucang_1.png" />加入收藏</span>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="des"></div>
+			<div class="col-md-4" style="position:absolute;left:52%;top:15%;">
+				<div class="d_er">
+					<div class="d_er_img">
+						<img src="/public/resources/images/app_down.png">
+					</div>
+					<p style="margin-top: 10px;">扫描二维码</p>
+					<p>下载APP享受最佳体验</p>
+				</div>
+			</div>
+
+			<div class="channel_box" style="width:70%;" >
+				<div class="data_title channel_t">
+					<span></span><label>渠道特长：</label>
+				</div>
+				<p class="channel_p">{$info.content}</p>
+			</div>
+			<div style="position:absolute;right:2%;top:9%;">
+				<div class="col-md-3  detail_l">
+					<div class="per_title8 ">
+						<h5>其它推荐</h5>
+					</div>
+					<div class="per_h">
+						<div class="media">
+							<div class="media-left">
+								<a class="ad_img1" href="/public/index.php?s=/index/marketing/info/key/2481">
+									<img class="media-object" src="https://res.yi-zu.com/data/task_img/1530037452420141260.png" alt="...">
+								</a>
+							</div>
+							<div class="media-body per_j  mark_aa">
+								<h4 class="media-heading" title="刀锋无双-229">刀锋无双-229</h4>
+								<p><span>单价：22.00元</span></p>
+								<p><a class="market_box" href="/public/index.php?s=/index/marketing/info/key/2481" title="">马上申请</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="per_h">
+						<div class="media">
+							<div class="media-left">
+								<a class="ad_img1" href="/public/index.php?s=/index/marketing/info/key/2388">
+									<img class="media-object" src="https://res.yi-zu.com/data/task_img/1529361521424613884.png" alt="...">
+								</a>
+							</div>
+							<div class="media-body per_j  mark_aa">
+								<h4 class="media-heading" title="武林外传">武林外传</h4>
+								<p><span>单价：20.00元</span></p>
+								<p><a class="market_box" href="/public/index.php?s=/index/marketing/info/key/2388" title="">马上申请</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="per_h">
+						<div class="media">
+							<div class="media-left">
+								<a class="ad_img1" href="/public/index.php?s=/index/marketing/info/key/2339">
+									<img class="media-object" src="https://res.yi-zu.com/data/task_img/1528920081676488940.jpg" alt="...">
+								</a>
+							</div>
+							<div class="media-body per_j  mark_aa">
+								<h4 class="media-heading" title="传奇来了">传奇来了</h4>
+								<p><span>单价：40.00元</span></p>
+								<p><a class="market_box" href="/public/index.php?s=/index/marketing/info/key/2339" title="">马上申请</a></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+				<!--常见问题- ->
+                <div class="per_title8 ">
+                    <h5>常见问题</h5>
+                </div>
+                <ul class="detail_a">
+                  <li class="detail_act"><span ></span><a href="#" title="">怎么申请成为小蚁达人呢？</a></li>
+                  <li><span ></span><a href="#" title="">小蚁兵团是个什么样的APP？</a></li>
+                </ul><!---->
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</div>
+<!--footer-->
+<!--footer-->
+{include file="public/footer1" /}
+<!--右侧导航栏-->
+{include file="public/footer2" /}
+{include file="public/js_1" /}
+<!--右侧导航栏-->
+<script>
+    //  	<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+$(document).ready(function() {
+$('#slider').slider({ speed: 500 });
+});
+$('#main_nav_marketing').addClass('menu_home');
+</script>
+<script>
+
+window._bd_share_config = {
+    common: {
+        "bdText" : "",
+        "bdMini" : "2",
+        "bdMiniList" : false,
+        "bdPic" : "",
+        "bdStyle" : "0",
+        "bdSize" : "24"
+    },
+    share: [{
+//			 bdCustomStyle: "__RESOURCES__baidushare/static/api/css/share.css" 
+    }]
+}
+with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="__RESOURCES__baidushare/static/api/js/share.js?cdnversion="+~(-new Date()/36e5)];
+</script>
+</body>
+
+</html>

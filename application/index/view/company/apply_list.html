@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>申请审核</title>
+	</head>
+	{include file="public/css" /}
+	    {include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">申请加入</a> 
+					</p>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-3 que_left">
+						{include file="company/_left" /}	
+					</div>
+					<script>
+					new Vue({
+						el:'.col-md-3.que_left',
+						data:{
+							action:300
+						}
+					});
+					</script>
+					
+					<div class="col-md-9 que_right ">						
+							<!--员工管理-->
+					    <div class="business_yuan" style="padding top: 0;">
+					    	<h4 class="apply_title">未审核</h4>
+							<!--未审核-->
+							{if condition="count($list[0])>0"}
+							{foreach name="$list.0" item="value"}
+							<div class="Business_box business_border">
+								<div class="media">
+								  <div class="media-left media-middle">								   
+								      	<a href="#" class="business_left"><img src="{$value.user_picture|default='__RESOURCES__images/touxiang.png'}" /></a>
+								   
+								  </div>
+								  <div class="media-body business_ov">
+								    	<div class="business_top clearfix">
+								    		<p class="business_pp">
+								    			<span class="vip business_xiu">VIP{$value.rank_level}</span>{$value.nick_name|default=$value.user_name}
+								    			<a class="bianji sent_mesege3" href="#" onClick="agree({$value.id})">同意加入</a>
+								    		</p>
+								    		<ul class="business_ul_list">
+								    			<li>ID：{$value.user_id}</li>
+								    			<li>达人等级：{$value.rank_name}</li>
+								    			<li>电话号码：{$value.mobile_phone}</li>
+								    			<a class="bianji sent_mesege4" href="#" onClick="decline({$value.id})">拒绝加入</a>
+								    		</ul>
+								    		<div class="apply_why">申请理由：{$value.content}</div>
+								    	</div>	
+								  </div>
+								</div>
+							</div>
+							{/foreach}
+							{else}
+							 <!--无数据调用-->
+								<div class="res_nodara">
+									<div class="res_nodata_img">
+										<div class="res_nodata_a">
+											<img src="__RESOURCES__images/no_data.png" />
+										</div>
+										<p class="res_notata_p">没有找到任何记录</p>
+									</div>
+								</div>
+								<!--无数据调用结束-->
+							{/if}
+							<script>
+							var confirm_layer = null;
+							var _url = '';
+							function agree(id){
+								confirm_layer = layer.confirm('是否要同意此用户的申请？', function(index){
+									$.post(_url, {id:id,status:1}, function(rs){
+										if(rs.status){
+											window.location.href = window.location.href;
+											location.reload();
+										}else{
+											layer.msg(rs.msg);
+										}
+									});
+									layer.close(confirm_layer);
+								});
+							}
+							function decline(id){
+								confirm_layer = layer.confirm('是否要拒绝此用户的申请？', function(index){
+									$.post(_url, {id:id,status:2}, function(rs){
+										if(rs.status){
+											window.location.href = window.location.href;
+											location.reload();
+										}else{
+											layer.msg(rs.msg);
+										}
+									});
+									layer.close(confirm_layer);
+								});
+							}
+							</script>
+							<!--已审核-->
+							<h4 class="apply_title" style="padding-top: 23px;">已审核</h4>
+							{if condition="count($list[1])>0"}
+							{foreach name="$list.1" item="value"}
+							<div class="Business_box business_border">
+								<div class="media">
+								  <div class="media-left media-middle">								   
+								      	<a href="#" class="business_left"><img src="{$value.user_picture|default='__RESOURCES__images/touxiang.png'}" /></a>
+								   
+								  </div>
+								  <div class="media-body business_ov">
+								    	<div class="business_top clearfix">
+								    		<p class="business_pp">
+								    			<span class="vip business_xiu">VIP{$value.rank_level}</span>{$value.nick_name|default=$value.user_name}
+								    			
+								    		</p>
+								    		<ul class="business_ul_list">
+								    			<li>ID：{$value.user_id}</li>
+								    			<li>达人等级：{$value.rank_name}</li>
+								    			<li>电话号码：{$value.mobile_phone}</li>
+								    			
+								    			<a class=" sent_mesege2" href="#">已同意</a>
+								    			
+								    		</ul>
+								    		<div class="apply_why">申请理由：{$value.content}</div>
+								    	</div>	
+								  </div>
+								</div>
+							</div>
+							{/foreach}
+							{else}
+							 <!--无数据调用-->
+								<div class="res_nodara">
+									<div class="res_nodata_img">
+										<div class="res_nodata_a">
+											<img src="__RESOURCES__images/no_data.png" />
+										</div>
+										<p class="res_notata_p">没有找到任何记录</p>
+									</div>
+								</div>
+								<!--无数据调用结束-->
+							{/if}
+							
+					    </div>
+						
+					</div>
+				</div>
+			
+			</div>
+		</div>
+		<!--企业主页结束-->
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+			$(".hover_p").hover(function(){
+				$(".business_erm").fadeIn();
+			},function(){
+				$(".business_erm").fadeOut();
+				
+			});
+		</script>
+		
+			
+	</body>
+	
+</html>

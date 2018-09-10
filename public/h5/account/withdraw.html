@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>我的钱包</title>
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>
+		<script type="text/javascript" src="/h5/js/vue_obj.js" ></script>
+		<script type="text/javascript" src="/h5/account/withdraw.js" ></script>
+<style>
+ul.flex{display:flex;}
+ul.flex>li{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+</style>
+	</head>
+	<body style="background-color: #f1f0f0;">
+	<div id="vue_page">
+		<div class="comment_box">
+			<div class="case_header">
+				<div class="weui-flex">
+				  <div class="case_left">
+				  	<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__hd tixian_img">
+				        <img class="weui-media-box__thumb" src="../images/tpuxiang.png" />
+				      </div>
+				      <div class="weui-media-box__bd case_title">
+				        <h4 class="weui-media-box__title" style="margin-bottom: 5px;">{{user.user_name}}</h4>
+				        <p class="weui-media-box__desc"><span v-if="vip>0">VIP{{vip}}</span><span>{{rank_name}}</span></p>
+				      </div>
+				    </a>
+				  	
+				  </div>
+				  <div class="weui-flex__item case_right">
+				  		<p>{{user.yi_currency_total}}</p>
+				  		<p>总收益（蚁币）</p>
+				  		<p><a href="money.html">提现</a></p>				  		
+				  </div>
+				</div>				
+			</div>
+			<ul class="flex case_menu">
+				<li>
+					<p>{{user.reward_total}}蚁币</p>
+					<p>奖励</p>
+				</li>
+				<li>
+					<p>{{user.cutting_total}}蚁币</p>
+					<p>分红</p>
+				</li>
+				<li>
+					<p>{{user.user_money}}元</p>
+					<p>零钱</p>
+				</li>
+			</ul>
+			<div class="des"></div>
+			<div class="commentBox">
+				<!-- 容器 -->
+				<ul class="case_tab">
+					<li :class="{caseAciton:tab_index==0}" @click="changeTab(0)" >待领任务</li>
+					<li :class="{caseAciton:tab_index==1}" @click="changeTab(1)">已领取任</li>
+				</ul>
+				<!--tab二-->
+				<div class="caseTab" v-if="tab_index==0" >
+					<section >
+						<div class="pro_box" v-for="item in proList" style="margin-bottom: 0;">
+						    <a class="media-left media-middle case_img" href="#">
+						        <img class="media-object" :src="item.pro_img" alt="产品体验">          
+						    </a>
+						    <div class="media-body">
+						        <h5 class="media-heading pro_title">{{item.title}}</h5>
+						        <p class="active pro_price">直发价格：{{item.price}}元</p>
+						        <p class="media_power pro_jibie">
+						        	<span class="pri_img_1">
+						        		 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+						        	</span>
+						        	<span>{{item.purpose}}</span>
+						        	<span>余{{item.Surplus}}份</span>
+						        	<span>{{item.time}}</span>
+						        </p>
+						    </div>
+						    <a href="pro_details.html" class="atonce">马上抢</a>
+						</div>
+					</section>
+				</div>
+				<!--tab二-->
+				<div class="caseTab" v-if="tab_index==1" >
+					<section >
+						<div class="pro_box" v-for="item in proList" style="margin-bottom: 0;">
+						    <a class="media-left media-middle case_img" href="#">
+						        <img class="media-object" :src="item.pro_img" alt="产品体验">          
+						    </a>
+						    <div class="media-body">
+						        <h5 class="media-heading pro_title">{{item.title}}2</h5>
+						        <p class="active pro_price">直发价格：{{item.price}}元</p>
+						        <p class="media_power pro_jibie">
+						        	<span class="pri_img_1">
+						        		 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+						        	</span>
+						        	<span>{{item.purpose}}</span>
+						        	<span>余{{item.Surplus}}份</span>
+						        	<span>{{item.time}}</span>
+						        </p>
+						    </div>
+						    <a href="pro_details.html" class="atonce">马上抢</a>
+						</div>
+					</section>
+				</div>
+			</div>	
+		</div>
+	</div>
+	</body>
+</html>

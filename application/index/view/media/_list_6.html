@@ -1,0 +1,46 @@
+<template>
+<table class="table paixu_taible">
+	<tr class="GVhead">
+		<th width="20"><label>
+				<input type="checkbox" id="checkAll" onchange="selectAll(this)" style="display:none;">
+			</label></th>
+		<th>序号</th>
+		<th>网站</th>
+		<th>分类</th>
+		<th>入口级别</th>
+		<th>入口位置</th>
+		<th width="300px">链接</th>
+		<th>时间</th>
+		<th>报价</th>
+		<th>接单数</th>
+		<th>详情</th>
+		<th>收藏</th>
+		<th class="order_now">立即派单</th>
+	</tr>
+	<tr v-for="item in list">
+		<td><input type="checkbox" name="area[]" style="display:none;"></td>
+		<td>{{item.id}}</td>
+		<td>{{item.profession}}</td>
+		<td>-</td>
+		<td>{{item.title}}</td>
+		<td>{{item.title_sub}}</td>
+		<td>
+			<a :href="item.link" style="width: 300px;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: normal; " >
+				{{item.link}}
+			</a>
+			
+		</td>
+		<td>{{item.desc}}</td>
+		<td><template v-if="item.price_1 == 0">
+			-
+			</template>
+			<template v-else>
+			{{item.price_1}}元
+			</template></td>
+		<td>{{item.history}}</td>
+		<td><a href="#" :href="'{:url('media/detail')}/id/'+item.id">详情</a></td>
+        <td><a v-on:click="media_collect(item.id,item.is_collect)"  href="javascript:;">{{item.is_collect_name}}</a></td>
+		<td class="order_now"><a class="zi_now" :href="'{:url('media/order')}'+'/type/6/id/'+item.id" style="color: #FF5C00 !important;">立即派单</a></td>
+	</tr>
+</table>
+</template>

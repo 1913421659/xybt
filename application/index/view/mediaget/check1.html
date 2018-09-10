@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>采集</title>
+	{include file="public/js" /}
+</head>
+<body>
+<div id="page">
+	<h3>
+	敌军还有<span>{{second}}</span>秒到达战场，哦不是，再来，<br/>
+    网页还有<span>{{second}}</span>秒就要跳转。
+    </h3>
+    <button type="button" v-on:click="stop">停止</button>
+</div>
+<script>
+var tt = null;
+var p = new Vue({
+	'el':'#page',
+	data :{
+		second : 1
+	},
+	methods:{
+		stop:function(){
+			window.clearInterval(tt);
+		}
+	}
+});
+tt = window.setInterval(function(){
+	var t = p.second - 1;
+	p.second = t;
+	if(t == 0){
+		window.clearInterval(tt);
+		location.href = "{$url}";
+	}
+}, 1000);
+</script>
+</body>
+</html>

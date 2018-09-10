@@ -1,0 +1,124 @@
+<div class="col-md-3 que_left">
+
+    <!--商家需求-->
+    <div class="com_menu">
+        <div class="que_l">
+            <a class="color_1"  href="{:url('marketing/index',['key'=>1])}" title="" :class="{ active_nav:left_nav.action>100&&left_nav.action<200}">
+                <template>
+                    <span class="que_act" v-if="left_nav.action>100&&left_nav.action<200"></span>
+                    <img  class="per_img" src="__RESOURCES__images/ying_15_15.png" v-if="left_nav.action>100&&left_nav.action<200"/>
+                    <img  class="per_img" src="__RESOURCES__images/ying_15.png" v-else /></template> 兼职达人 <span class="per_img2 per_img_3" ></span>
+            </a>
+            <template>
+                <div class="per_hover left_nav_sub" :class="{show1:left_nav.action>100&&left_nav.action<200}">
+                    <a href="{:url('marketing/index',['key'=>2])}" :class="{action:left_nav.action==102}">
+                        产品体验
+                    </a>
+                </div>
+            </template>
+        </div>
+    </div>
+
+
+    <div class="per_renwu">
+        <div class="des"></div>
+        <div class="per_nei">
+            <div class="row per_k">
+                <div class="col-md-8 title_a">热门网络营销</div>
+            </div>
+        </div>
+        <template>
+            <div class="per_h" v-for="item in left_nav.task_list_1">
+                <div class="media">
+                    <div class="media-left">
+                        <a class="ad_img_kk" :href="'{:url('marketing/info')}/key/'+item.id">
+                            <img class="media-object" :src="item.banner_img" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body per_j mark_a">
+                        <h4 class="media-heading">{{item.name}}</h4>
+                        <p>{{item.category_name}}</p>
+                        <p>
+                            <a class="market_box" :href="'{:url('marketing/info')}/key/'+item.id" title="" >
+                                马上抢
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="per_renwu">
+        <div class="des"></div>
+        <div class="per_nei">
+            <div class="row per_k">
+                <div class="col-md-8 title_a">热门产品分销</div>
+            </div>
+        </div>
+        <template>
+            <div class="per_h" v-for="item in left_nav.task_list_2">
+                <div class="media">
+                    <div class="media-left">
+                        <a class="ad_img_kk" :href="'{:url('marketing/info')}/key/'+item.id">
+                            <img class="media-object" :src="item.banner_img" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body per_j mark_a">
+                        <h4 class="media-heading">{{item.name}}</h4>
+                        <p>{{item.category_name}}</p>
+                        <p>
+                            <a class="market_box" :href="'{:url('marketing/info')}/key/'+item.id" title="" >
+                                马上抢
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+<script>
+    vue_page.data.left_nav = {
+        action:0,
+        task_list_1 : [],
+        task_list_2 : [],
+        menu_sub_channel : [],
+        menu_sub_media : [],
+    }
+    $(function(){
+
+        $.ajax({
+            url:"?s=/index/data/channelCompanyCategoryList"
+            ,type:'GET'
+            ,success: function(rs){
+                if(rs.status){
+                    vue_page.left_nav.menu_sub_channel = rs.data;
+                }
+            }
+            ,dataType:"json"
+        });
+        $.ajax({
+            url:"?s=/index/data/channelMediaTypeList"
+            ,type:'GET'
+            ,success: function(rs){
+                if(rs.status){
+                    vue_page.left_nav.menu_sub_media = rs.data;
+                }
+            }
+            ,dataType:"json"
+        });
+        $.post("{:url('task/ajaxGetTop')}",{parent_id:4,limit:5},function(rs){
+            if(rs.status){
+                vue_page.left_nav.task_list_1 = rs.data;
+            }
+        },'json');
+        $.post("{:url('task/ajaxGetTop')}",{parent_id:5,limit:5},function(rs){
+            if(rs.status){
+                vue_page.left_nav.task_list_2 = rs.data;
+            }
+        },'json');
+    });
+    //左侧链接
+
+
+</script>

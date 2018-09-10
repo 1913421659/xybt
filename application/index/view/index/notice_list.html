@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>小蚁公告</title>
+	</head>
+	{include file="public/css" /}
+		{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				{include file="public/que_menu" /}
+				<div class="row">
+					{include file="index/art_left" /}
+					<script>
+					showLeftNavAct(5);
+					</script>
+					<div class="col-md-9 que_right que_o">
+						<div class="que_r_a">
+							<h4 class="que-title">小蚁公告</h4>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<ul class="que_b">{volist name="list" id="v" mod="2"}{eq name="mod" value="0"}
+									<li>
+										<a href="{:Url('index/notice', ['id'=>$v.article_id])}" title="">{$v.title}</a>
+									</li>{/eq}{/volist}
+									
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul class="que_b">{volist name="list" id="v" mod="2"}{eq name="mod" value="1"}
+									<li>
+										<a href="{:Url('index/notice', ['id'=>$v.article_id])}" title="">{$v.title}</a>
+									</li>{/eq}{/volist}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+	</body>
+	
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>我的二维码</title>
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="../js/jsmodern-1.1.1.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="homeBox">
+			<header class="hanner_box">
+				<a href="#" onclick="javascript:history.back(-1);" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span>我的二维码</span>
+				<a href="javascript:;" id="menuBtn" @click="menuBtn"  class="hanner_box_left" style="float: right;"><img class="" src="../images/peosonal.png" /></a>
+			</header>
+			<div class="qr_box">
+				<div class="weui-panel weui-panel_access">				 
+				  <div class="weui-panel__bd">
+				    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__hd pro_box_img">
+				        <img class="weui-media-box__thumb" src="../images/zi_1.png/">
+				      </div>
+				      <div class="weui-media-box__bd">
+				        <h4 class="weui-media-box__title">标题一</h4>
+				        <p class="weui-media-box__desc">ID：26653</p>
+				      </div>
+				    </a>
+				    <div class="qr_img">
+				    	<img src="../images/app_down.png" />
+				    	<!--二维码加载失败-->
+				    	<!--<div>
+				    		<img src="../images/shibai.png" />
+				    		<p style="font-size: 14px;">二维码加载失败</p>
+				    	</div>-->
+				    </div>
+				   
+				  </div>
+				  
+				</div>				
+			</div>
+			<div class="qrBtn"><a @click="showShare" href="javascript:;" class="weui-btn  weui-btn_primary_1">分享二维码</a></div>
+			<!--分享-->			
+			<div class="share_box share_box_box" id="" v-show="shareHide"@click="hideShare">
+				<div class="share_bottom">
+					<div class="box_a">
+						<div id="share-qrcode" title="二维码分享"></div> 
+						<div id="share-douban" title="豆瓣分享"></div>
+						<div id="share-qzone" title="QQ空间分享"></div>
+						<div id="share-sina" title="新浪微博分享"></div>
+						<div id="share-qq" title="QQ好友分享"></div>
+					</div>
+				</div>
+				
+			</div>
+				<!--左右菜单栏-->
+			<div class="menu_left_box" id="menu_show" @click="menu_hide">
+				<div class="menu_l_inner">
+					<div class="menuBg">
+						<div class="weui-flex">
+						  <div class="weui-flex__item menu_l">
+						  	<a href="#" class="menu_l_a"><img src="../images/LOGO.png"/></a>
+						  	<p class="menu_b"><span class="menu_dengji">VIP1</span><span class="yonghu">蚁兵达人</span></p>					  	
+						  </div>
+						  <div class="weui-flex__item ">
+						  	<p>编号：<span class="active">100017</span></p>
+						  	<p>昵称：<span class="active">小蚁用户</span></p>
+						  	<p>总额：<span class="active">20000</span>蚁币</p>
+						  	<p>奖励：<span class="active">10000</span>蚁币</p>
+						  	<p>分红：<span class="active">10000</span>蚁币</p>
+						  	<p>兵团：<span class="active">1090</span>蚁兵</p>
+						  </div>
+						</div>					
+					</div>
+					<div class="explain">您将于<span class="active">2015-03-04</span>完成<span class="active">10元</span>体验和分销任务即
+	可获得<span class="active">15964</span>元分成收益！<a href="#" class="active fr">详细说明 >></a> </div>
+					<div class="weui-flex">
+					  <div class="weui-flex__item home_list_1 ">
+					  	<a href="#" class="menu_list">
+					  		<img src="../images/xueyuan.png" />
+					  		<p>小蚁学院</p>
+					  	</a>
+					  </div>
+					  <div class="weui-flex__item home_list_1 ">
+					  	<a href="#" class="menu_list">
+					  		<img src="../images/qianbao.png" />
+					  		<p>我的钱包</p>
+					  	</a>
+					  </div>
+					  <div class="weui-flex__item home_list_1 ">
+					  	<a href="#" class="menu_list">
+					  		<img src="../images/bingtua.png" />
+					  		<p>我的兵团</p>
+					  	</a>
+					  </div>
+					</div>
+					<div class="weui-cells weui_box">
+					  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/ewm.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>我的二维码</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					    </div>
+					  </a>	
+					  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/cart.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>购物车</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					    </div>
+					  </a>
+					  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/order.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>我的订单</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					    </div>
+					  </a>	
+					    <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/shoucang.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>我的收藏</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					    </div>
+					  </a>	
+					   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/fenxiang.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>我的分享</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					    </div>
+					  </a>
+					   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/fenxiangdating.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>分享大厅</p>
+					    </div>	
+					    <div class="weui-cell__ft"></div>
+					  </a>
+					   <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/zuji.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>我的字迹</p>
+					    </div>
+					     <div class="weui-cell__ft"></div>
+					  </a>	
+					  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/xinxi.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>个人信息</p>
+					    </div>	
+					     <div class="weui-cell__ft"></div>
+					  </a>
+					  <a class="weui-cell weui-cell_access weui_cell" href="javascript:;">
+					  	<div class="weui-cell__hd"><img src="../images/settle.png"/></div>
+					    <div class="weui-cell__bd">
+					      <p>设置</p>
+					    </div>	
+					     <div class="weui-cell__ft"></div>
+					  </a>	
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		<script>
+			var homeBox = new Vue({
+				el:"#homeBox",
+				data:{
+					shareHide:false,
+					
+				},
+				methods:{
+					menuBtn:function(){
+						$("#menu_show").animate({left:"0%"},"800");
+					},
+					menu_hide:function(){
+						$("#menu_show").animate({left:"-100%"},"800");
+						
+					},
+					showShare:function(){
+						this.shareHide=true;
+						$(".share_bottom").animate({height:"150px"},500);
+						
+					},
+					hideShare:function(){
+						this.shareHide=false;
+						$(".share_bottom").animate({height:"0px"},500);
+					}
+				},
+				beforeCreate: function () {
+				  this.$nextTick(function () {
+				    jsModern.share({
+					    qrcode: "#share-qrcode",
+					    douban: "#share-douban",
+					    qzone: "#share-qzone",
+					    sina: "#share-sina",
+					    qq: "#share-qq"
+					});  
+				  })
+				},
+				
+				
+				 
+			})
+			
+		</script>
+	</body>
+</html>

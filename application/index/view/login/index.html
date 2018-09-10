@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+	</head>
+	{include file="public/css" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   #number11-error{
+	   	    line-height: 34px;
+            margin-left: 10px;
+	   }
+	   #exampleInputPassword1-error{
+	   		line-height: 34px;
+            margin-left: 10px;
+	   }
+	</style>
+	<body>
+		<div class="container-fluid header_second1">
+		 	<div class="wrap">
+		 		<a class="logo_a" href="{:url('index/index')}" title="" alt="">
+					<img src="__RESOURCES__images/logo.png">
+				</a>
+				<span class="h_shuoming  xiu">账号登录</span>
+				<ul class="heaader_right heaader_right1">
+					<li><a href="{:url('index/index')}">首页</a></li>
+					<li><span></span><a href="{:url('index/aboutus')}">关于我们</a>  </li>
+					
+				</ul>
+		 	</div>
+		</div>
+		<div class="container-fluid min_p">
+			<div class="wrap">
+				<ul class="success_box">
+					<li>无账号？ <a href="{:url('login/register')}" title="">注册</a> </li>
+				</ul>
+				<div class="success_a">
+					<div class="sign">
+						<form class="form-horizontal" id="form_login" method="post" action="{:url('login')}" onSubmit="return false;">
+						<input type="hidden" name="from" value="{$form_url|default=''}" />
+							<div class="form-group">
+							    <label  class="col-sm-2 control-label left1 "><span>* </span>账号：</label>
+							    <div class="col-sm-10">
+									<input  type="text" name="user_name" class="form-control input_p" :class="{error:mobile_err>0}" v-on:keyup="checkPhone" v-on:blur="checkPhone" id="user_name" placeholder="请输入手机号"  max-lebgth="30">
+									<template>
+										<label v-if="mobile_err==1" for="number11" class="error">请输入手机号</label>
+										<label v-if="mobile_err==2" for="number11" class="error">请输入正确的手机号</label>
+										<label v-if="mobile_err==3" for="number11" class="error">用户不存在</label>
+									</template>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label  class="col-sm-2 control-label left1"><span>* </span>密码：</label>
+							    <div class="col-sm-10">
+							    	<input  type="password" name="password" class="form-control input_p" :class="{error:password_err>0}" v-on:keyup="checkPassword" id="password" placeholder="请输入登录密码" max-lebgth="30">
+									<template>
+										<label v-if="password_err==1" for="number11" class="error">请输入密码</label>
+										<label v-if="password_err==2" for="number11" class="error">密码长度不应少到5个字符</label>
+										<label v-if="password_err==3" for="number11" class="error">密码错误！</label>
+									</template>
+							    </div>
+							</div>
+						
+							<div class="form-group">
+							    <label  class="col-sm-2 control-label left1">&nbsp;</label>
+							    <div class="col-sm-10">
+							      <!--<a class="dengru" href="#" title="">登陆</a>-->
+							      <button class="dengru" id="submit" v-on:click="submit" >登录</button>
+							      <a  class="wangji" href="{:url('login/forget')}" title="">忘记密码</a>
+							    </div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer_k">
+			<p>©2017广州点升信息技术啊有限公司 Copyright © 2008-2015 vip.com，All Rights Reserved  {if condition="isset($_CFG['icp_number'])"}<a href="http://www.miibeian.gov.cn/" target="_blank">{$_CFG['icp_number']}</a>{/if}</p>
+		</div>
+		<!--右侧导航栏-->
+        {include file="public/footer2" /}
+		{include file="public/js" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript">
+			//User.loginInit();
+			User.Login.init();
+		</script>
+	</body>
+	
+</html>

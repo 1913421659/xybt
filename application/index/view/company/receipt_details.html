@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>媒体接单详情</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body>
+	<div id="need_result">
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/media_receipt')}">媒体接单</a> 
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="#">媒体接单详情</a> 
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+                                <span>
+                                    <img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                </span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                    <span>
+                                        <img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+                                    </span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:803,
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " >	
+								<div class="row">
+									<div class="col-md-12 need_right ">
+										<div class="recice_con">
+											<div class="media">
+											  <div class="media-left media-middle">
+											    <a class="com_list_4" href="#">
+											      <img class="media-object img-circle" src="{$info.user_picture|get_image_path}" alt="..." >
+											    </a>
+											  </div>
+											  <div class="media-body recice_p">
+											    <h4 class="media-heading recice_title">{$info.media_title_sub}</h4>
+											 	<p class="active_nav">派单人：{$info.nick_name}</p>
+											 	<p>接单时间：{$info.add_time|date="Y-m-d",###}</p>
+											 	<a href="{:url('media/detail',['id'=>$info.media_id])}" class="dispath_a">查看资源详情</a>
+											  </div>
+											</div>	
+										</div>
+										<div class="des"></div>
+										<div class="channel_box">
+											<div class="data_title channel_t"><span></span><label>渠道特长：</label></div>
+											<table class="table dispatch_table">
+												<tr>
+													<td>派单标题：</td>
+													<td>{$info.order_title}</td>
+												</tr>
+												<tr>
+													<td>接单渠道：</td>
+													<td>{$info.media_title}</td>
+												</tr>
+												<tr>
+													<td>订单类型：</td>
+													<td>{$info.order_type_name}</td>
+												</tr>
+												<tr>
+													<td>说明文档：</td>
+													<td><a href="{$info.link}" class="active_nav dispatch_more">点击查看</a> </td>
+												</tr>
+												<tr>
+													<td>派单价格：</td>
+													<td><span class="active_nav">{$info.price_sum}元</span></td>
+												</tr>
+												<tr>
+													<td class="dispatch_s">派单说明：</td>
+													<td class="dispatch_td">{$info.remarks}</td>
+												</tr>
+											</table>
+											<div class="receipt_box" v-if="order_status==0">
+												<a href="javascript:;" title="" v-on:click="My_check" class="dd_now shen_now">确定接单</a>
+												<a href="javascript:;" title="" class="dd_now shen_now receipt_bg" v-on:click="submitExam(event,2)">拒接接单</a>
+											</div>
+										</div>
+										
+										
+								    </div>
+								</div>
+						   </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--马上抢弹窗-->
+		<div class="now_tan">
+			<div class="now_tan_a">
+				<div class="now_tan_c shen_box_1">
+					<ul>
+						<li>
+							<div class="header_now">
+								确认接单，并指派
+								<a class="header_close" href="javascript:;"> <img class="guanbiBtn" v-on:click="close" src="__RESOURCES__images/colse_5.png"/></a>
+							</div>
+							<div class="res_inner">
+								<div class="container_ooo c_8 _scroll">
+									<div class="_panel-box">
+										 <div class="col-md-12 shen_check">
+											<div class="checkbox checkbox-success checkbox-inline" v-for="(item,index) in users">
+						                        <input type="radio" name="to_user" :id="'radio_'+(index+1)" :value="item.user_id" checked>
+						                        <label :for="'radio_'+(index+1)">{{item.nick_name}}</label>
+						                    </div>
+						                </div>
+									</div>
+									 
+							    </div>
+							</div>
+							<div class="dibu">
+							   <a class="dd_now shen_now recice_bg" href="javascript:;"  title="" v-on:click="close()">取消</a>
+							    <a class="dd_now shen_now" href="javascript:;"  title="" v-on:click="submitExam(event,1)">确定</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+		<!--企业主页结束-->	
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}	
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					rc_img:"__RESOURCES__images/angr.png",
+					rc_title:"同道大叔",
+					rc_name:"覃俊威",
+					rc_time:"2017-12-11",
+					rc_num:"1000000",
+					rc_form:"广州点升信息技术有限公司",
+					rc_month:"周结",
+					rc_apply_time:"2017-12-11",
+					rc_method:"广告投放",
+					rc_man:"金木研",
+					rc_phone:"12345678901",
+                    users:[],
+                    order_id:"{$info.id}",
+                    order_status:"{$info.receiving_channel_status}"
+				},
+				methods:{
+					close:function(){
+						$(".now_tan").fadeOut(100);
+					},
+					My_check:function(event){
+                        var self = this;
+                        $.ajax({
+                            type:'post',
+                            url:'index.php?s=/index/company/getCompanyUsers',
+                            async:false,
+                            success:function(response){
+                                var obj = JSON.parse(response);
+                                if(obj.code){
+                                    self.users=obj.data;
+                                }else{
+                                    layer.msg(obj.msg);
+                                }
+                            },
+                            error:function(msg){
+                                console.log(msg);
+                            }
+                        });
+						$(".now_tan").fadeIn(300);
+                  },submitExam:function(th,status){
+                        var user = $('input[name="to_user"]:checked');
+                        var user_id = $(user).val();
+                        var user_nick_name = $(user).next().html() ;
+                        var msg = status==1?('你确定要指派给'+user_nick_name+'？'):('你确定要拒绝？');
+                        var order_id = this.order_id;
+                        var self = this;
+                        layer.confirm(msg, {
+                            btn: ['确定','取消'] //按钮
+                        }, function(){
+                            console.log('send');
+                            $.ajax({
+                                type:'post',
+                                url:'index.php?s=/index/company/mediaOrderExam',
+                                data:{user_id:user_id,status:status,order_id:order_id},
+                                async:false,
+                                success:function(response){
+                                    var obj = JSON.parse(response);
+                                    layer.msg(obj.msg);
+                                    if(obj.code){
+                                        self.order_status = status;
+                                    }else{
+//                                        window.setTimeout(function(){
+//                                            window.location.reload();
+//                                        },1500);
+                                    }
+                                },
+                                error:function(msg){
+                                    console.log(msg);
+                                }
+                            });
+                        }, function(){
+                            console.log('close');
+                            layer.close();
+                        });
+                  },
+                  beforecreated:function(){
+				  $("._scroll").yi_scroll();
+				  }
+				}			
+				
+			});
+		
+			need_result.beforecreated();
+		</script>
+		
+
+	</body>
+	
+</html>

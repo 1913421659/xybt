@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>收支记录</title>
+	</head>
+	{include file="public/css" /}
+	{include file="public/js" /}
+	<script type="text/javascript" src="__RESOURCES__js/laydate/laydate.js"></script>	
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--企业主页-->
+		<div class="que_con business_b clearfix">
+			<div class="wrap">
+				<div class="que_menu_1">
+					<p>
+						<img src="/__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="/__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/income_record')}">收支记录</a> 
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/income_record')}">收支记录详情</a>
+					</p>
+				</div>
+				<div class="que_a" style="margin-top: 0;">
+					<div class="row">
+						<div class="col-md-3 que_left">
+							<div class="after_box" style="border: none;">
+                                {empty name="$company"}
+                                <!--未加入企业-->
+	                            <span>
+									<img src="{if condition='!empty($me.user_picture)'}{$me.user_picture|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <!--未加入企业-->
+                                <div class="after_pp">{$me.nick_name}</div>
+                                <div class="per_vip_1"><label class="label_o">{:getUserLevel($me.user_rank,2)}</label>{:getUserLevel($me.user_rank,1)}</div>
+                                <p class="com_box">
+                                    <a class="enter_link" href="{:url('company/create')}" role="button">创建企业</a>
+                                    <a class="enter_link" href="{:url('company/join')}" role="button">加入企业</a>
+                                </p>
+                                {else/}
+                                <span>
+									<img src="{if condition='!empty($company.company_head_portrait)'}{$company.company_head_portrait|get_image_path}{else/}__RESOURCES__images/touxiang.png{/if}"  />
+								</span>
+                                <div class="after_pp" >{$company.company_name}</div>
+                                {/empty}
+						    </div>
+					     <div class="des"></div>
+							{include file="company/_left" /}
+						</div>
+						<script>
+						new Vue({
+							el:'.col-md-3.que_left',
+							data:{
+								action:1100
+							}
+						});
+						</script>
+						<div class="col-md-9 que_right " id="need_result" style="background-color: #f8f8f8;">	
+							<div class="col-md-12 need_right ">
+								<div class="xue_v">
+									<span class="xue_b">收款详情</span>
+									 <div class="layui-input-inline month income_input">
+								        <input type="text" class="layui-input" id="test1" value="{$dateSearch}">
+								    </div>
+								</div>
+								<div class=""  style="padding:20px;min-height: 500px; ">
+                                    {empty name="$list.data"}
+                                    <div class="com_no_data">
+                                        <img src="__RESOURCES__images/no_data_1.png" />
+                                        <p>暂无数据</p>
+                                    </div>
+                                    {else /}
+                                    {volist name="$list.data" id="value">}
+									<table class="table table_pay">
+										<tr class="table_first table_first_1">
+									  	   <td>类型</td>
+									       <td>分类</td>
+									       <td>金额</td>
+									       <td>提交时间</td>
+									       <td>操作</td>
+									    </tr>
+									    <tr class="payment_table">
+									  	   <td>	
+										  	   	<a href="javascript:;" class="">
+										  	   		<img src="__RESOURCES__images/sz_{$value.bill_type==1?3:($value.bill_type==2?2:1)}.png"  />
+										  	   	</a>
+									  	   </td>
+									       <td>{$value.bill_type==1?'充值':($value.bill_type==2?'收入':'支出')}</td>
+									       <td>{$value.money}元</td>
+									       <td>{$value.add_time | date="Y-m-d H:i:s",###}</td>
+									       <td><a class="qidao_pai_1" href="{:url('company/income_details',['bill_id'=>$value.id])}">查看</a></td>
+									    </tr>
+                                    </table>
+                                    {/volist}
+                                    {/empty}
+								</div>
+						    </div>
+                            {notempty name="$list.data"}
+							<!--分页-->
+							<div class="fenye">
+								<div style="width:800px;margin:0 auto;">
+									<div id="kkpager"></div>
+								</div>
+							</div>
+							{/notempty}
+						   </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!--企业主页结束-->			
+		<!--footer-->		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js_1" /}
+		<script>
+			var need_result=new Vue({
+				el:"#need_result",
+				data:{
+					table:[
+						{
+							table_1:"类型",
+							table_2:"分类",
+							table_3:"金额",
+							table_4:"提交时间",
+							table_5:"操作",
+							tables_1:"__RESOURCES__images/sz_1.png",
+							tables_2:"付款",
+							tables_3:"-10000",
+							tables_4:"2017-12-13",
+							tables_hours:"12:51",
+							tables_5:"申请查看",
+						},
+						{
+							table_1:"类型",
+							table_2:"分类",
+							table_3:"金额",
+							table_4:"提交时间",
+							table_5:"操作",
+							tables_1:"__RESOURCES__images/sz_2.png",
+							tables_2:"收款",
+							tables_3:"+2000000",
+							tables_4:"2017-12-13",
+							tables_hours:"12:51",
+							tables_5:"申请查看",
+						},
+						{
+							table_1:"类型",
+							table_2:"分类",
+							table_3:"金额",
+							table_4:"提交时间",
+							table_5:"操作",
+							tables_1:"__RESOURCES__images/sz_3.png",
+							tables_2:"企业充值",
+							tables_3:"+2000000",
+							tables_4:"2017-12-13",
+							tables_hours:"12:51",
+							tables_5:"申请查看",
+						},
+						{
+							table_1:"类型",
+							table_2:"分类",
+							table_3:"金额",
+							table_4:"提交时间",
+							table_5:"操作",
+							tables_1:"__RESOURCES__images/sz_4.png",
+							tables_2:"媒体扣款",
+							tables_3:"-2000000",
+							tables_4:"2017-12-13",
+							tables_hours:"12:51",
+							tables_5:"申请查看",
+						},
+					]					
+				},
+			});
+		</script>
+		
+            <script type="text/javascript">
+            //		分页
+			function getParameter(name) { 
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r!=null) return unescape(r[2]); return null;
+			}
+			
+			//init
+			$(function(){
+				
+				var pageNo = {$list.current_page};
+				if(!pageNo){
+					pageNo = 1;
+				}
+				//生成分页
+				//有些参数是可选的，比如lang，若不传有默认值
+				kkpager.generPageHtml({
+					pno : pageNo,
+					//总页码
+					total : {$list.last_page},
+					//总数据条数
+					totalRecords : {$list.total},
+					//链接前部
+					hrefFormer : '{:url("index/company/income_record")}',
+					//链接尾部
+					hrefLatter : '',
+					getLink : function(n){
+						return this.hrefFormer + this.hrefLatter + "/pno/"+n+'/dateSearch/{$dateSearch}';
+					}
+				});
+
+                $('#test1').change(function(){
+                    var d = $(this).val();
+                    console.log(d);
+                });
+			});
+		  //常规用法
+		  laydate.render({
+		    elem: '#test1',
+            done: function(value, date){
+                window.location.href = '{:url("index/company/income_record")}/pno/'+{$list.current_page}+'/dateSearch/'+value;
+            }
+		  });
+
+
+		</script>
+	</body>
+	
+</html>

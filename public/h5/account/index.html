@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>我的钱包</title>
+		<link rel="stylesheet" href="/css/jquery-weui.css" />
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<link rel="stylesheet" href="/h5/css/twy.css" />
+
+</head>
+<body style="background-color: #f1f0f0;">
+	<div id="vue_page">
+		<div v-if="page=='loading'">
+		加载中~
+		</div>
+		<transition name="slide-fade">
+			<template v-if="page=='page_wallet'">
+			<div class="comment_box">
+				<div class="case_header">
+					<div class="weui-flex">
+					  <div class="case_left">
+						<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+						  <div class="weui-media-box__hd tixian_img">
+							<img class="weui-media-box__thumb" src="../images/tpuxiang.png" />
+						  </div>
+						  <div class="weui-media-box__bd case_title">
+							<h4 class="weui-media-box__title" style="margin-bottom: 5px;">{{user.user_name}}</h4>
+							<p class="weui-media-box__desc"><span v-if="vip>0">VIP{{vip}}</span><span>{{rank_name}}</span></p>
+						  </div>
+						</a>
+						
+					  </div>
+					  <div class="weui-flex__item case_right">
+							<p>{{user.yi_currency_total}}</p>
+							<p>总收益（蚁币）</p>
+							<p><a @click="goto('wallet_withdraw')">提现</a></p>				  		
+					  </div>
+					</div>				
+				</div>
+				<ul class="flex case_menu">
+					<li>
+						<p>{{user.reward_total}}蚁币</p>
+						<p>奖励</p>
+					</li>
+					<li>
+						<p>{{user.cutting_total}}蚁币</p>
+						<p>分红</p>
+					</li>
+					<li>
+						<p>{{user.user_money}}元</p>
+						<p>零钱</p>
+					</li>
+				</ul>
+				<div class="des"></div>
+				<div class="commentBox">
+					<!-- 容器 -->
+					<ul class="case_tab">
+						<li :class="{caseAciton:tab_index==0}" @click="changeTab(0)" >待领任务</li>
+						<li :class="{caseAciton:tab_index==1}" @click="changeTab(1)">已领取任</li>
+					</ul>
+					<!--tab二-->
+					<div class="caseTab" v-if="tab_index==0" >
+						<section >
+							<div class="pro_box" v-for="item in task_list" style="margin-bottom: 0;">
+								<a class="media-left media-middle case_img" href="#">
+									<img class="media-object" :src="item.pro_img" alt="产品体验">          
+								</a>
+								<div class="media-body">
+									<h5 class="media-heading pro_title">{{item.title}}</h5>
+									<p class="active pro_price">直发价格：{{item.price}}元</p>
+									<p class="media_power pro_jibie">
+										<span class="pri_img_1">
+											 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+										</span>
+										<span>{{item.purpose}}</span>
+										<span>余{{item.surplus}}份</span>
+										<span>{{item.time}}</span>
+									</p>
+								</div>
+								<a href="pro_details.html" class="atonce">马上抢</a>
+							</div>
+						</section>
+					</div>
+					<!--tab二-->
+					<div class="caseTab" v-if="tab_index==1" >
+						<section >
+							<div class="pro_box" v-for="item in task_list" style="margin-bottom: 0;">
+								<a class="media-left media-middle case_img" href="#">
+									<img class="media-object" :src="item.pro_img" alt="产品体验">          
+								</a>
+								<div class="media-body">
+									<h5 class="media-heading pro_title">{{item.title}}2</h5>
+									<p class="active pro_price">直发价格：{{item.price}}元</p>
+									<p class="media_power pro_jibie">
+										<span class="pri_img_1">
+											 <img class="media-object" :src="item.pro_img_des" alt="产品体验"> 
+										</span>
+										<span>{{item.purpose}}</span>
+										<span>余{{item.surplus}}份</span>
+										<span>{{item.time}}</span>
+									</p>
+								</div>
+								<a href="pro_details.html" class="atonce">马上抢</a>
+							</div>
+						</section>
+					</div>
+				</div>	
+			</div>
+			</template>
+		</transition>
+		<transition name="slide-fade">
+			<template v-if="page=='page_wallet_withdraw'">
+				<div class="comment_box" >
+					<header class="hanner_box">
+						<a href="#" @click="goto('wallet')" class="hanner_box_left"><img class="" src="../images/back.png" /></a><span >提现</span>
+					</header>
+					<div class="commentBox" style="padding: 0 1rem;">
+						<p class="xianTitle">可用余额：{{user.yi_currency_total}}蚁币<span>（100蚁币=1元）</span> </p>
+						<p class="xian_moeny">可提现金额：{{can_withdraw}}元</p>
+						<p class="xian_shuru">
+							<span style="position: relative;">￥</span><input type="number"  placeholder="请输入金额" v-model="withdraw_money" @change="changedWithdrawMoney" />
+						</p>
+						<div class="commentBox shuoming">
+							<p class="xianTitle">我的零钱：{{user.user_money}}元</p>
+							<p class="xianColor">注：金额必须不低于5元才能提现（首次提现大于1元即可），提现到钱包的金额只能在小蚁商城内进行购买商品。</p>
+						</div>
+						
+					</div>
+					<div class="des"></div>
+					<div class="commentBox weui-cell_access" style="padding:0 1rem;">
+						
+						<div class="weui-panel__hd">选择提现方式</div>
+						<div class="weui-panel__bd" v-if="withdraw_method==1">
+							<a href="javascript:;" class="weui-media-box weui-media-box_appmsg" @click="goto('wallet_withdraw_methods')">
+								<div class="weui-media-box__hd xianImg" >
+									<img class="weui-media-box__thumb" src="../images/zhifubao1.png"  />
+								</div>
+								<div class="weui-media-box__bd">
+									<h4 class="weui-media-box__title">支付宝</h4>
+									<p class="weui-media-box__desc">{{user.alipay_name}}</p>
+								</div>
+								<span class="weui-cell__ft" style="right: -15px;"></span>
+							</a>
+						</div>	
+						<div class="weui-panel__bd" style="border-top: 1px solid #eee;" v-if="withdraw_method==0">
+							<a href="javascript:;" class="weui-media-box weui-media-box_appmsg" @click="goto('wallet_withdraw_methods')">
+								<div class="weui-media-box__hd xianImg" >
+									<img class="weui-media-box__thumb" src="../images/lingqian.png"  />
+								</div>
+								<div class="weui-cell__bd">
+									<p class="methodTitle">小蚁钱包</p>
+								</div>
+								<span class="weui-cell__ft" style="right: -15px;"></span>
+							</a>				    
+						</div>
+			
+					</div>
+					<div class="qrBtn"><a  href="javascript:;" class="weui-btn  weui-btn_primary_1" @click="withdrawGo">确认提现</a></div>
+					<!--确认提现-->
+					<div class="share_box share_box_box" v-show="alertShow" >
+						<div class="alertBox clearfix">
+							<div class="alertInner">
+								<p class="alertColse">
+									<img @click="colseCover" src="../images/colse_1.png"/>
+								</p>
+								<div class="alertImg">
+									<img src="../images/tishi_icon.png" />
+								</div>
+								<div class="alertCon">
+									<p class="active">提现成功</p>
+									<p>您可以通过做小蚁任务获得更多的奖励！</p>
+									<a href="javascript:;" @click="goto('wallet')">去做任务</a>
+								</div>								
+							</div>							
+						</div>
+					</div>
+				</div>
+			</template>
+		</transition>
+		<transition name="slide-fade">
+			<template v-if="page=='page_wallet_withdraw_methods'">
+				<div class="comment_box commentBox" >
+					<header class="hanner_box">
+						<a href="javascropt:;" class="hanner_box_left" @click="goto('wallet_withdraw')"><img class="" src="../images/back.png" /></a><span>提现方式</span>
+						
+					</header>
+					<div class="weui-cell" @click="changeWithdrawmethod(0)">
+						<div class="weui-cell__hd methodImg"><img src="../images/lingqian.png"></div>
+						<div class="weui-cell__bd">
+						  <p class="methodTitle">小蚁钱包</p>
+						</div>
+					</div>
+					<div class="weui-cell" @click="changeWithdrawmethod(1)">
+						<div class="weui-cell__hd methodImg"><img src="../images/zhifubao1.png"></div>
+						<div class="weui-cell__bd">
+						  <p class="methodTitle">支付宝</p>
+						</div>
+						<div class="weui-cell__ft" v-if="user.alipay_bind">{{user.alipay_name}}</div>
+						<div class="weui-cell__ft" v-else>未绑定</div>
+					</div>
+				</div>
+			</template>
+		</transition>
+		<transition name="slide-fade">
+			<template v-if="page=='page_wallet_bind_withdraw_alipay'">
+				<div class="comment_box">
+					<div class="commentBox">
+						<header class="hanner_box">
+							<a href="javascript:;" class="hanner_box_left" @click="goto('wallet_withdraw_methods')">
+								<img class="" src="../images/back.png" />
+							</a>
+							<span>绑定支付宝</span>
+						</header>
+						<div class="weui-cell" style="height: 46px;font-size: 0.875rem;">
+							<div class="weui-cell__hd">
+								<label class="weui-label">支付宝账号</label>
+							</div>
+							<div class="weui-cell__bd">
+								<input class="weui-input" type="text" v-model="new_alipay_name" placeholder="请输入支付宝账号">
+							</div>
+						</div>
+					</div>
+					<div class="qrBtn">
+						<a href="javascript:;" class="weui-btn  weui-btn_primary_1" @click="bindAlipay">
+							确认绑定
+						</a>
+					</div>
+				</div>
+			</template>
+		</transition>
+	</div>
+<script>
+var u = navigator.userAgent;	
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+if (isAndroid) {
+	//window.location = "http://shop.yi-zu.com/xybt_download";
+	window.location = "/topic_h5/lottery/description_android.html";
+}
+//var ua = navigator.userAgent.toLowerCase();	
+//if (!/iphone|ipad|ipod/.test(ua)) {
+	//window.location = "http://shop.yi-zu.com/xybt_download";
+//	window.location = "/topic_h5/lottery/description_android.html";
+//}
+</script>
+<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/cookie.js"></script>
+<script type="text/javascript" src="/js/jquery-weui.min.js" ></script>
+<script type="text/javascript" src="/js/swiper.min.js" ></script>
+<script type="text/javascript" src="/js/weui.min.js" ></script>
+<script type="text/javascript" src="/js/vue.min.js" ></script>
+<script type="text/javascript" src="/h5/js/vue_app.js" ></script>
+<script>
+vue.setDefault('wallet');
+</script>
+<script type="text/javascript" src="/h5/js/app_user.js" ></script>
+<script type="text/javascript" src="/h5/js/account.js" ></script>
+</body>
+</html>

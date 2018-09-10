@@ -1,0 +1,26 @@
+<ul class="tou_ul chan_1 clearfix">
+	{foreach name="list" item="value"}
+	<li>
+		<div class="ti_e tou_ee">
+			<div class="ti_e_l">
+				<a href="{:Url('marketing/info',['key'=>$value.id])}"><img src="{$value.logo_img|get_image_path}"></a>
+			</div>
+			<div class="ti_e_r">
+				<p>{$value.name}</p>
+				<div class="main_4"><span>预算：{$value.budget|number_format}元</span><span>单价：{$value.cost_unit_price}元</span></div>	
+				<div class="main_3">
+					<span><img src="{$value.logo_img|get_image_path}" /></span>
+					<span>{$value.promotion_name|default=""}</span>
+                    <span>余{$value.qty-$value.brought_total}份</span>
+					<span>{$value.checkout_name}</span>
+					<!--<span>{if condition="$value.company_id"}企业发布{/if}</span>-->
+				</div>
+	
+			</div>
+			<div class="now-a clearfix">
+				<a href="{:Url('marketing/info',['key'=>$value.id])}">马上申请</a>
+			</div>
+		</div>
+	</li>
+	{/foreach}
+</ul>

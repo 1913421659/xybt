@@ -1,0 +1,164 @@
+<!--微博资源-->
+<div class="louti" id="floor_microblog">
+	<!--微博资源-->
+
+
+	<div class="section_2  section_3" >
+	<div class="csc_2">
+		<img src="__RESOURCES__images/tuiguang_11.png" />
+		<h2>微博资源</h2>
+		<ul class="fen_ul" id="toufang">
+			<li v-for="item in cat_list"><a href="?s=/index/media/index/type/2">{{item.name}}</a></li>
+		</ul>
+		<a class="more_box_1" href="?s=/index/media/index/type/2" title="">
+		更多<span class="more_i"></span>
+		</a>
+	</div>
+	<div class="con_fen6">
+		<div class="">
+			<div class="live_box">				
+				<div class="live_right" style="margin-top: 20px;">
+					<div class="live_right_a">
+						<div class="data_title">
+						    <span></span><label>热门微博人物</label> 
+					    </div>
+						<div class="data_list">
+							<div v-if="hot_loading" class="recording">
+								加载中... ... 
+							</div>
+							<ul v-else>
+								<li v-for="item in hot_list">
+									<a  :href="'{:url('media/detail')}/id/'+item.id">     
+										<span class="wei_img"><img src="__RESOURCES__images/tuiguang_20.png"/></span>
+										<span class="data_title_2">{{item.title_sub}}</span>
+										<span class="fensi wei_fen">粉丝数:{{item.power}}</span>									
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--左边-->
+				<div class="live_left">
+					<div v-if="loading" class="recording">
+						加载中... ... 
+					</div>
+					<ul class="wei_ul wei_list_1" v-else>
+						<li v-for="item in list">
+							<div class="wei_li wei_oo">
+			    				<div class="clearfix wei_box_1">
+				    				<div class="media">
+									  <div class="media-left">
+									    <a :href="'{:url('media/detail')}/id/'+item.id" class="wei_li_img wei_u">
+									      <img class="media-object" :src="item.logo" alt="...">
+									    </a>
+									    <!--<img class="img_wei_1" src="resources/images/tuiguang_16.png">-->
+									  </div>
+									  <div class="media-body wei_tilte1">
+									    <h5 class="media-heading qidao_title" style="width: 100%;"><a  :href="'{:url('media/detail')}/id/'+item.id">{{item.title_sub}}</a></h5>
+									    <p style="width: 100%;overflow: hidden;margin-top: 17px;"><a class="qidao_pai" style="float: left;" :href="'{:url('media/detail')}/id/'+item.id">我要派单</a></p>
+									    <!--<p class="wei_pp">{{item.desc}}</p>-->
+									  </div>
+									</div>
+																	
+								</div>
+								<div class="wei_bottom_1">
+									<div class="row wei_last">
+										<div class="col-md-4 wei_ti">
+											<p><img src="resources/images/tuiguang_17.png"></p>
+											<p class="wei_a">粉丝数</p>
+											<p class="active_nav" v-if="item.power > 10000">{{Math.floor(item.power/10000)}}万+</p>
+											<p class="active_nav" v-else>{{item.power}}</p>
+										</div>
+										<div class="col-md-4 wei_ti">
+											<p><img src="resources/images/read-mode.png"></p>
+											<p class="wei_a">头条价格</p>
+											<p class="active_nav">{{item.price_1}}</p>
+										</div>
+										<div class="col-md-4 wei_ti">
+											<p><img src="resources/images/dial.png"></p>
+											<p class="wei_a">接单数</p>
+											<p class="active_nav" >{{item.history}}</p>
+										
+										</div>
+										
+									</div>
+								</div>									
+								<!--hover-->
+				    			<!--<div class="liji_hover">
+				    				<a class="qidao_pai_2" :href="'{:url('media/detail')}/id/'+item.id">我要派单</a>
+				    			</div>-->
+			    			</div>	
+						</li>
+						
+					</ul>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>	
+</div>
+
+	<script>
+		var floor_microblog = new Vue({
+			el:"#floor_microblog",
+			data:{
+				list:[],
+				loading:false,
+				cat_list:[],
+				hot_list:[],
+				hot_loading:false,
+			},
+			methods:{
+				flushList:function(){
+					this.loading = true;
+					$.post('?s=/index/data/channelMediaList', {
+						limit:6,
+						type_id:2,
+					}, function(rs){
+						floor_microblog.loading = false;
+						if(rs.status == 1){
+							floor_microblog.list = rs.data.list
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				},
+				flushHotList:function(){
+					this.hot_loading = true;
+					$.post('?s=/index/data/channelMediaList', {
+						limit:9,
+						type_id:2,
+						order_by:'power desc'
+					}, function(rs){
+						floor_microblog.hot_loading = false;
+						if(rs.status == 1){
+							floor_microblog.hot_list = rs.data.list
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				},
+				flushCatList:function(){
+					$.post('?s=/index/data/channelMediaCategoryList', {
+						limit:6,
+						type_id:2,
+					}, function(rs){
+						if(rs.status == 1){
+							floor_microblog.cat_list = rs.data
+						}else{
+							layer.msg(rs.msg);
+						}
+					},'json');
+				}
+			}
+		});
+		floor_microblog.flushList();
+		floor_microblog.flushHotList();
+		floor_microblog.flushCatList();
+		</script>
+	
+</div>	

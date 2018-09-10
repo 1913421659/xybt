@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>小蚁学院</title>
+	</head>
+		{include file="public/css" /}
+		{include file="public/js" /}
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		
+		<div class="que_con que-a clearfix">
+			<div class="wrap">
+				
+				<div class="que_a que_bb">
+					<div class="row">
+						<div class="col-md-9 detail_right clearfix">
+							<div class="xue_v">
+								<span class="xue_b">达人级别进度</span>{if condition="!$me"}
+								<div class="xue_a">
+									<div class="xue_j">
+										<a href="{:url('login/index')}">
+									       <img src="__RESOURCES__images/xue_1.png" />
+									       <span class="xue_title">登录查看进度与积分情况</span>
+										</a>
+								    </div>
+								</div>{/if}
+							</div>
+							<div class="xue_box clearfix">
+								<div class="per_time">
+								<div class="line_a">
+										<div class="row">
+										  <div class="col-md-2">
+										  		<div class="line_title">
+										  			<p>蚁兵达人</p>
+										  			<img style="display:none" id="ico_rank_7" src="__RESOURCES__images/p14.png">
+										  		</div>
+										  </div>
+										  <div class="col-md-2">
+										  	<div class="line_title1">
+										  			<p>蚁士达人</p>
+										  			<img style="display:none" id="ico_rank_8" src="__RESOURCES__images/p14.png">
+										  		</div>
+										  </div>
+										  <div class="col-md-2">
+										  	<div class="line_title1">
+										  			<p>蚁尉达人</p>
+										  			<img style="display:none" id="ico_rank_9" src="__RESOURCES__images/p14.png">
+										  			
+										  		</div>
+										  </div>
+										  <div class="col-md-2">
+										  	<div class="line_title2">
+										  			<p>蚁校达人</p>
+										  			<img style="display:none" id="ico_rank_10" src="__RESOURCES__images/p14.png">
+										  		
+										  		</div>
+										  </div>
+										  <div class="col-md-2">
+										  	<div class="line_title3">
+									  			<p>蚁将达人</p>
+										  			<img style="display:none" id="ico_rank_11" src="__RESOURCES__images/p14.png">
+									  			
+										  	</div>
+										  </div>
+										  <div class="col-md-2">
+										  	<div class="line_title3">
+										  			<p>蚁王达人</p>
+										  			<img style="display:none" id="ico_rank_12" src="__RESOURCES__images/p14.png">
+										  		</div>
+										  </div>
+										  
+										</div>
+									</div>
+								<div class="time_line_box">
+									
+						            <div class="time_line" style="width:100%;">
+						                <ol>
+						                	<li>
+						                        <a class="order_a" style="left:0%;">0分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_item" style="left:15%;">15分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_item selected" style="left:32%;">30分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_item" style="left:49%;">45分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_item" style="left:67%;">65分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_item" style="left:85%;">85分</a>
+						                    </li>
+						                    <li>
+						                        <a class="order_p" style="left:96.5%;">100分</a>
+						                    </li>
+						                </ol>
+						                <span id="filling_line" class="filling_line" style="transform: scaleX(0);"></span>
+						            </div>
+						        </div>{if condition="$me"}
+						        <div class="time_tip">
+						          当前等级：<span><?php echo $list_rank[$me['user_rank']]->rank_name;?></span> 当前积分：<span>{$me.rank_points}</span>
+						        </div>{/if}
+								
+							</div>
+							</div> 
+							<div class="des"></div>		
+							<div class="per_title8 ">
+								<h5>达人升级积分获取流程</h5>
+							</div>
+							<div class="xue_l">
+								<a href="javascript:;" title=""><img src="__RESOURCES__images/xue_9.png"/></a>
+								<div class="row xue_l_b" id="_div_daren_info">
+									  <div class="col-md-2">
+									  		<div class="thumbnail xue_l_1">
+									  			<div class="rank_img">
+									  				<div class="rank_bottom" style="background: url(__RESOURCES__images/xue_7.png);" >
+									  				     <div class="rank_top" style="background: url(__RESOURCES__images/xue_77.png) bottom left no-repeat;">
+									  				     	<div class="rank_number">5</div>
+									  				     </div>
+									  				</div>
+									  			</div>
+										      
+										      <div class="caption1">
+										        <h3>资料完善率占比{{rank_upgrade_list[1].point_scale}}分</h3>
+										        <p>当前{{rank_upgrade_list[1].user_point}}分</p>
+										        <p><a href="#" class="btn btn-primary c" role="button">完善个人信息</a> </p>
+										      </div>
+										    </div>
+									  </div>
+									  <div class="col-md-2">
+									  		<div class="thumbnail xue_l_1">
+										      
+										      <div class="rank_img">
+									  				<div class="rank_bottom" style="background: url(__RESOURCES__images/xue_7.png)">
+									  				    <div class="rank_top" style="background: url(__RESOURCES__images/xue_5.png)bottom left no-repeat;">
+									  				    	<div class="rank_number">30</div>
+									  				    </div>
+									  				</div>
+									  			</div>
+										      <div class="caption1">
+										        <h3>总奖励收益占比{{rank_upgrade_list[2].point_scale}}分</h3>
+										        <p>当前{{rank_upgrade_list[2].user_point}}分</p>
+										        <p><a href="#" class="btn btn-primary c" role="button">体验培训</a> </p>
+										      </div>
+										    </div>
+									  </div>
+									  <div class="col-md-2">
+									  		<div class="thumbnail xue_l_1">
+										      <div class="rank_img">
+									  				<div class="rank_bottom" style="background: url(__RESOURCES__images/xue_7.png)">
+									  				    <div class="rank_top rank_1" style="background: url(__RESOURCES__images/xue_3.png)bottom left no-repeat;">
+									  				    	<div class="rank_number">20</div>
+									  				    </div>
+									  				</div>
+									  			</div>
+										      <div class="caption1">
+										        <h3>总分红收益占比{{rank_upgrade_list[3].point_scale}}分</h3>
+										        <p>当前{{rank_upgrade_list[3].user_point}}分</p>
+										        <p><a href="#" class="btn btn-primary c" role="button">推广培训</a> </p>
+										      </div>
+										    </div>
+									  </div>
+									  <div class="col-md-2">
+									  		<div class="thumbnail xue_l_1">
+										      <div class="rank_img">
+									  				<div class="rank_bottom" style="background: url(__RESOURCES__images/xue_7.png)">
+									  				    <div class="rank_top" style="background: url(__RESOURCES__images/xue_6.png) bottom left no-repeat;">
+									  				    	<div class="rank_number">25</div>
+									  				    </div>
+									  				</div>
+									  			</div>
+										      <div class="caption1">
+										        <h3>亲友圈质量占比{{rank_upgrade_list[4].point_scale}}分</h3>
+										        <p>当前{{rank_upgrade_list[4].user_point}}分</p>
+										        <p><a href="#" class="btn btn-primary c" role="button">指导用户</a> </p>
+										      </div>
+										    </div>
+									  </div>
+									  <div class="col-md-2">
+									  		<div class="thumbnail xue_l_1">
+										      <div class="rank_img">
+									  				<div class="rank_bottom" style="background: url(__RESOURCES__images/xue_7.png)">
+									  				   <div class="rank_top" style="background: url(__RESOURCES__images/xue_8.png) bottom left no-repeat;">
+									  				   	   <div class="rank_number">20</div>
+									  				   </div>
+									  				</div>
+									  			</div>
+										      <div class="caption1">
+										        <h3>消费额占比{{rank_upgrade_list[5].point_scale}}分</h3>
+										        <p>当前{{rank_upgrade_list[5].user_point}}分</p>
+										        <p><a href="#" class="btn btn-primary c" role="button">消费培养</a> </p>
+										      </div>
+										    </div>
+									  </div>
+									  
+								</div>	
+							<script type="text/javascript">
+								var _div_daren_info = new Vue({
+									el:'#_div_daren_info',
+									data:{
+										rank_upgrade_list:{
+											"1":{
+												"id":1,
+												"name":"\u8d44\u6599\u5b8c\u5584\u7387",
+												"point_scale":3,
+												"max_point":3,
+												"value_limit":100,
+												"user_point":"0"
+											},
+											"2":{
+												"id":2,
+												"name":"\u603b\u5956\u52b1\u6536\u76ca",
+												"point_scale":35,
+												"max_point":35,
+												"value_limit":5000,
+												"user_point":"0"
+											},
+											"3":{
+												"id":3,
+												"name":"\u603b\u5206\u7ea2\u6536\u76ca",
+												"point_scale":40,
+												"max_point":40,
+												"value_limit":5000,
+												"user_point":"0"
+											},
+											"4":{
+												"id":4,
+												"name":"\u6d88\u8d39\u989d",
+												"point_scale":10
+												,"max_point":10,
+												"value_limit":5000,
+												"user_point":"0"
+											},
+											"5":{
+												"id":5,
+												"name":"\u4eb2\u53cb\u5708\u8d28\u91cf",
+												"point_scale":12,
+												"max_point":12,
+												"value_limit":50,
+												"user_point":"0"
+											}
+										},
+									}
+								});
+								//上面是静态页面写的Vue渲染，下面一行是用服务器的数据更新页面
+								_div_daren_info.rank_upgrade_list = {$rank_upgrade_list|json_encode};
+							</script>
+							</div>
+							<div class="des"></div>	
+							<div class="clearfix">
+								<div class="wellet_biao">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="wellet_b" style="border-right: 10px solid #f8f8f8;">
+											<div class="per_nei vv  biaoge ">
+												<div class="row per_k">
+												  <div class="col-md-3 title_a wallet_j">达人升级福利</div>
+												  <div class="col-md-9 title_bb"><a href="#" title="">达人级别越高，享受更多营销业务，以及营销业务性价比更高</a></div>
+												</div>
+											</div>
+											<table class="table table2">
+												<tbody><tr>
+											  	   <td>达人级别</td>
+											      <td>奖励系数</td>
+											      <td>分红系数</td>
+											      <td>分红任务额</td>
+											    </tr>{volist name="rank_list" id="v"}
+												<?php if($v['reward_factor']==0) continue; ?>
+											    <tr>
+											  	  <td>{$v.rank_name}</td>
+											      <td>{$v.reward_factor}</td>
+											      <td>{$v.cutting_factor}</td>
+											      <td>{$v.task_sum}</td>
+											    </tr>{/volist}
+											</tbody></table>
+										</div>
+									</div>
+									
+									<div class="col-md-6">
+										<div class="wellet_b wellet_r">
+											<div class="per_nei vv  biaoge ">
+												<div class="row per_k">
+												  <div class="col-md-3 title_a wallet_j">达人升级条件</div>
+												  <div class="col-md-9 title_bb"><a href="#" title="">亲友圈质量超过100人数开始评估质量</a></div>
+												</div>
+											</div>
+											<table class="table table2">
+												<tbody><tr>
+											  	   <td>升级条件</td>
+											      <td>积分占比</td>
+											      <td>最高积分</td>
+											      <td>积分达标要求</td>
+											    </tr>{volist name="rank_upgrade_list" id="v"}
+											    <tr>
+											  	  <td>{$v.name}</td>
+											      <td>{$v.point_scale}%</td>
+											      <td>{$v.max_point}%</td>
+											      <td>{$v.value_limit}</td>
+											    </tr>{/volist}
+											 
+											</tbody></table>
+											<!--<div class="xue_c">备注：这里是一个备注</div>-->
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="des"></div>	
+							<div class="per_nei">
+								<div class="row per_k">
+								  <div class="col-md-8 title_a">奖励任务推荐</div>
+								  <div class="col-md-4 title_b xue_cc"><a href="{:url('marketing/index',['key'=>2])}" title="">更多奖励任务</a></div>
+								</div>
+							</div>
+							<div class="jiang_1 clearfix">
+								<ul class="jiang_ul">{volist name="task_list_1" id="v"}
+									<li>
+										<div class="jiang_img">
+											<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">
+												<span class="img_img"><img src="{$v.logo_img|get_image_path}"/></span>
+												
+											</a>
+											<div class="jiang_title">
+												<h6>{$v.name}</h6>
+												<p>奖励：{$v.reward_value}蚁币</p>
+												<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">马上抢</a>
+											</div>
+										</div>
+									</li>{/volist}
+								</ul>
+							</div>
+							
+							<div class="des"></div>	
+							<div class="per_nei">
+								<div class="row per_k">
+								  <div class="col-md-8 title_a">分红任务推荐</div>
+								  <div class="col-md-4 title_b xue_cc"><a href="{:url('marketing/index',['key'=>1])}" title="">更多分红任务</a></div>
+								</div>
+							</div>
+							<div class="jiang_1 clearfix">
+								<ul class="jiang_ul">{volist name="task_list_2" id="v"}
+									<li>
+										<div class="jiang_img">
+											<a href="{:Url('marketing/info',['key'=>$v.id])}" title=""><img src="{$v.logo_img|get_image_path}"/></a>
+											<div class="jiang_title">
+												<h6>{$v.name}</h6>
+												<p>分红：{$v.cutting_value}蚁币</p>
+												<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">马上抢</a>
+											</div>
+										</div>
+									</li>{/volist}
+								</ul>
+							</div>
+							
+							<div class="des"></div>	
+							<div class="per_nei">
+								<div class="row per_k">
+								  <div class="col-md-8 title_a">消费任务推荐</div>
+								  <div class="col-md-4 title_b xue_cc"><a href="{:url('marketing/index',['key'=>3])}" title="">更多消费任务</a></div>
+								</div>
+							</div>
+							<div class="jiang_1 clearfix">
+								<ul class="jiang_ul">{volist name="task_list_3" id="v"}
+									<li>
+										<div class="jiang_img">
+											<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">
+												<img src="{$v.logo_img|get_image_path}"/>
+											</a>
+											<div class="jiang_title">
+												<h6>{$v.name}</h6>
+												<p>分红：{$v.cutting_value}蚁币</p>
+												<a href="{:Url('marketing/info',['key'=>$v.id])}" title="">马上抢</a>
+											</div>
+										</div>
+									</li>{/volist}
+								</ul>
+							</div>
+						</div>
+						
+						<div class="col-md-3  detail_l">
+							<div class="per_title8 ">
+								<h5>常见问题</h5>
+							</div>
+							<!--常见问题-->
+							
+							<ul class="detail_a">{volist name="qa_list" id="v"}
+							  <li _class="detail_act"><span ></span><a href="{:Url('index/quentioninfo', ['key'=>$v.article_id])}" title="">{$v.title}</a></li>{/volist}
+							</ul><!--
+							<div class="div_xue">
+								<a href="#" title="">
+									<img src="__RESOURCES__images/xue_4.png" />
+								</a>
+								
+							</div>-->
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}			
+		<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script type="text/javascript">
+		$(function(){
+			$('#main_nav_rank').addClass('menu_home');
+		});
+		var rank_points = "{$me.rank_points}";
+		var rank = "{$me.user_rank}";
+			$('#filling_line').css('transform', 'scaleX('+(rank_points/100)+')');
+			$('#ico_rank_' + rank).show();		
+			//_div_daren_info.rank_upgrade = {		
+			//};
+			/** /
+			$.post(_url,{}, function(rs){
+				_div_daren_info.u1.point_scale = 3;
+				_div_daren_info.u2.point_scale = 35;
+				_div_daren_info.u3.point_scale = 40;
+				_div_daren_info.u4.point_scale = 10;
+				_div_daren_info.u5.point_scale = 12;
+				
+			});
+			/**/
+		</script>
+	</body>	
+</html>

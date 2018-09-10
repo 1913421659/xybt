@@ -1,0 +1,20 @@
+<div class="comment_box commentBox" v-if="page=='page_wallet_withdraw_methods'" >
+					<header class="hanner_box">
+						<a href="javascropt:;" class="hanner_box_left" @click="goto('wallet_withdraw')"><img class="" src="../images/back.png" /></a><span>提现方式</span>
+						
+					</header>
+					<div class="weui-cell" @click="changeWithdrawmethod(0)">
+						<div class="weui-cell__hd methodImg"><img src="../images/lingqian.png"></div>
+						<div class="weui-cell__bd">
+						  <p class="methodTitle">小蚁钱包</p>
+						</div>
+					</div>
+					<div class="weui-cell" @click="changeWithdrawmethod(1)">
+						<div class="weui-cell__hd methodImg"><img src="../images/zhifubao1.png"></div>
+						<div class="weui-cell__bd">
+						  <p class="methodTitle">支付宝</p>
+						</div>
+						<div class="weui-cell__ft" v-if="user.alipay_bind">{{user.alipay_name}}</div>
+						<div class="weui-cell__ft" v-else>未绑定</div>
+					</div>
+				</div>

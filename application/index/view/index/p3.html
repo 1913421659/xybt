@@ -1,0 +1,159 @@
+<!--促销活动-->
+<div class="section_2 section_3  louti">
+	<div class="news_box clearfix">
+		<!--<ul class="news_ul">-->
+			<!--<li class="active_nav">最新广告<span class="news_a"></span></li>-->
+			<!--<li>更多</li>-->
+		<!--</ul>-->
+		<!--<div style="width: 30%;height: 3px; background: #0BB20C;display: inline-block;margin-left: 10px"></div>-->
+		<!--<div style="width: 20%;height: 3px; background: #0BB20C;display: inline-block;margin-left: 10px"></div>-->
+		<!--<div style="width: 20%;height: 3px; background: #0BB20C;display: inline-block;margin-left: 10px"></div>-->
+		<div class="news_more clearfix">
+			<div class="info" style="color: #fa7226">最新广告</div>
+			<div class="more">更多></div>
+		</div>
+		<div class="news_more clearfix">
+			<div class="info" style="color: #fa7226">推荐渠道</div>
+			<div class="more">更多></div>
+		</div>
+		<div class="news_more clearfix">
+			<div class="info" style="color: #fa7226">小蚁福利</div>
+			<div class="more">更多></div>
+		</div>
+		<div class="js_list">
+			<div class="row">
+				<div class="col-md-4 news_u1">
+
+					<ul class="list_ul">
+						{volist name="$f6_new" id="item" key="k" length='5'}
+						<li>
+							<a href="{:url('marketing/info',['key'=>$item.id])}">
+								<span class="list_a">{$item.name}</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="list_c active_nav"> 单价：{$item.cost_unit_price}元</span>
+								<span class="list_d list_d_one">{$item.up_time|date="Y-m-d",###}</span>
+							</a>
+						</li>
+						{/volist}
+					</ul>
+
+					<ul class="list_ul list_ul_one">
+						{foreach name='res' item='re'}
+						<li>
+							<a href="{:url('channel/channel_details',['id'=>$re.id])}">
+								<span class="list_a" style="margin-right: 201px;">{$re.name}</span>
+								<span class="list_c active_nav">接单:{$re.order_total}次</span>
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+
+					<ul class="list_ul list_ul_two">
+						{foreach name='res' item='re'}
+						<li>
+							<a href="{:url('channel/channel_details',['id'=>$re.id])}">
+								<span class="list_a" style="margin-right: 201px;">{$re.name}</span>
+								<span class="list_c active_nav">接单:{$re.order_total}次</span>
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="csc_2">
+		<img src="resources/images/a-10.png" />
+		<h2>广告投放</h2>
+		<ul class="fen_ul" id="fen_ul">
+			{foreach name="all_child_list.6" item="v" }
+			{if condition="$key lt 6"}
+			<li><a href="{:url('marketing/index',['key' =>6, 'p_id'=> $v['id']])}">{$v.promotion_name}</a></li>
+			{/if}
+			{/foreach}
+		</ul>
+		<a class="more_box_1" href="?s=/index/marketing/index/key/6" title="">更多<span class="more_i"></span></a>
+		
+	</div>
+	<div class="con_fen">
+		
+		<div class="new_ad">
+			
+			<ul class="new_ad_box">
+				{foreach name="task_list.6" key="key" item="value"}
+				{if condition="$key lt 6"}
+				<li>
+					<div class="new_ad_li">
+						<span class="new_ad_2"></span>
+						<div class="new_ada">
+							<div class="ti_e_l" style="margin-left: 10px;">
+								<a href="{:url('marketing/info',['key' => $value['id']])}">
+									<img src="{$value.logo_img|get_image_path}" width="76" height="76" />
+								</a>
+							</div>
+							<div class="new_ad_right">
+								<p class="qidao_title new_rr" ><a href="{:url('marketing/info',['key' => $value['id']])}">{$value.name}</a> </p>
+								<div class="main_9">
+									<span>预算：{$value.budget|number_format}元</span><span>单价：{$value.cost_unit_price}元</span>
+								</div>
+								<div class="new_ad_b">
+									<span>{$value.promotion_name}</span>
+									<span>{$value.task_exam_time_type_name}审核</span>
+									{if condition="!empty($value.checkout_name)"}<span>{$value.checkout_name}</span>{/if}
+								</div>
+							</div>
+						</div>
+						<div class="new_ad_title clearfix">
+							<a class="qidao_pai_1" href="{:url('marketing/info',['key' => $value['id']])}">我要申请</a>
+						</div>
+					</div>
+				</li>
+				{/if}
+				{/foreach}
+			</ul>
+			
+
+		</div>
+		
+	</div>
+</div>
+
+<style>
+	.news_more {
+		width: 30%;
+		display: inline-block;
+		border-bottom: 1.5px solid #ccc;
+		margin-right: 33px;
+	}
+	.info {
+		float: left;
+	}
+	.more {
+		float: right;
+	}
+
+	.news_u1 {
+		width: 32% !important;
+	}
+	.list_ul_one{
+		position: absolute;
+		top: -0.5px;
+		left: 399px;
+	}
+	.list_ul_two{
+		position: absolute;
+		top: -0.5px;
+		left: 798px;
+	}
+	.list_d_one{
+		position:absolute;
+		left: 281px;
+	}
+	.list_ul li{
+		width: 94%;
+	}
+
+</style>
+<!--促销活动结束-->
+	

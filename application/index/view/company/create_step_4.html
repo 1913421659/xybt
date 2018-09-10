@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对私结算账户</title>
+	</head>
+	{include file="public/css" /}
+	<style>
+		input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		<!-- header2 -->
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<!--创建企业-->
+		<div class="clearfix">
+			<div class="wrap">
+				<div class="enter_inner">
+					 <div class="creat_box">
+					 	<ul class="creat_ul">
+					 		<li class="creat_act">
+					 			<label>1</label>填写基本信息
+					 			<span class="creat_des"></span>
+					 			<div class="creat_bottom"></div>
+					 		</li>
+					 		<li class="creat_act">
+					 			<label>2</label>填写开票信息
+					 			<span class="creat_des"></span>
+					 			<div class="creat_bottom"></div>
+					 		</li>
+					 		<li class="creat_act">
+					 			<label>3</label>对私结算账户
+					 			<span class="creat_des"></span>
+					 			<div class="creat_bottom"></div>
+					 		</li>
+					 		<li>
+					 			<small class="cteat_img"><img src="__RESOURCES__images/create_1.png"></small>成功创建企业
+					 		</li>
+					 	</ul>
+					 </div>
+					 <!--列表-->
+					 <div class="settlement_list">
+					 	<p class="settlement_tishi">至少绑定一种结算方式，慎重填写，修改绑定请联系客服</p>
+					 	 <form class="cmxform" id="create_form" method="" action="">
+				 	    	
+					         <fieldset>
+							 	<div class="setlement_div">
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定支付宝</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >支付宝：</label>
+										<input  type="text" class="form-control input_cart"  name="Alipay" placeholder="">
+								   </p>		
+							 		
+							 	</div>
+							 	<div class="setlement_div">
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定微信</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >微信：</label>
+										<input  type="text" class="form-control input_cart" id="wx" name="wx" placeholder="">
+								   </p>		
+							 	</div>
+							 		<div class="setlement_div">
+							 		<div class="settlement_cart">
+							 			<span class="settlement_title">绑定银行卡</span>
+							 		</div>
+							 		<p class="settlement_p">
+										<label for="nickname" class="col-sm-3 control-label left1" >持卡人姓名：</label>
+										<input  type="text" class="form-control input_cart " name="cartname" placeholder="">
+								   </p>
+								   <p class="settlement_p input_c">
+										<label for="nickname" class="col-sm-3 control-label left1" >开户银行：</label>
+										<input  type="text" class="form-control input_cart "  name="Bank" placeholder="">
+								   </p>	
+								   <p class="settlement_p input_c">
+										<label for="nickname" class="col-sm-3 control-label left1" >卡号：</label>
+										<input  type="text" class="form-control input_cart "  name="cardnumber" placeholder="">
+								   </p>	
+							 		
+							 	</div>
+							    <p class="form_ee form_sub form_bb">								
+							        <button class="dengru" id="next">创建企业</button>
+							   		<a class="billing_back back_o" href="#">返回上一步</a>
+								</p>
+							 </fieldset> 	
+					 	</form>
+					 	
+					 </div>
+					
+					 
+				</div>
+			</div>
+			
+		</div>
+		<!--创建企业结束-->
+		<!--footer-->
+		
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+	    {include file="public/footer2" /}
+	    {include file="public/js" /}
+	    {include file="public/js_1" /}
+	    <script type="text/javascript" src="__RESOURCES__js/jquery.validate.min.js" ></script>
+		<script type="text/javascript">
+	       $("#file-0").fileinput({
+	        'allowedFileExtensions' : ['jpg', 'png','gif'],
+	       });
+        </script>  
+        <script>
+			$.validator.setDefaults({
+				submitHandler: function() {
+					alert("submitted!");
+				}
+			});
+		$("#create_form").validate({
+			rules: {
+				Alipay: "required",		
+				wx:"required",
+				cartname: "required",
+				Bank:"required",
+				cardnumber:"required",
+			},
+			messages: {
+				Alipay: "支付宝必填",		
+				wx:"微信账号必填",
+				cartname: "持卡人姓名必填",
+				Bank:"开户银行必填",
+				cardnumber:"卡号必填",
+			}
+		});
+		$('#main_nav_company').addClass('menu_home ');
+	</script>
+		
+			
+	</body>
+	
+</html>
+

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>个人中心</title>		
+		<link rel="stylesheet" href="/css/weui.min.css" />
+		<link rel="stylesheet" href="/css/jquery-weui.css" />
+		<link rel="stylesheet" href="/css/swiper.min.css" />
+		<link rel="stylesheet" href="../css/com.css" />
+		<link rel="stylesheet" href="../css/style.css" />	
+		<link rel="stylesheet" href="../css/style_1.css" />
+		<script type="text/javascript" src="/js/jquery.1.12.3.js" ></script>	
+		<script type="text/javascript" src="/js/jquery-weui.min.js" ></script>
+		<script type="text/javascript" src="/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="/js/weui.min.js" ></script>
+		<script type="text/javascript" src="/js/vue.min.js" ></script>	
+		<style>
+			
+		</style>
+	</head>
+	<body style="background-color: #f1f0f0;">
+	<div id="media_content">
+		<div class="commentBox" >
+			<div class="per_tou">
+				<!--上传头像-->
+				<div class="file_shang">
+					<div class="file_img">
+						<div id="preview">
+						    <img id="imghead" width=100% height=auto border=0 src='../images/zi_1.png'>
+						</div>
+						<div class="input8">
+							<input  type="file" onchange="previewImage(this)" /> 
+						</div> 
+					</div>
+				</div>				
+				<div class="per_vip">
+					<span>vip1</span>蚁兵达人
+				</div>				
+			</div>
+			<div class="clearfix personal_box">
+				<p>说明:小蚁达人是小蚁兵团的营销专家，完成个人信息申请成为达人，即可加盟小蚁兵团，从始长期与小蚁兵团共享推广收益和分红收益。资料完成100%，最高获3积分。</p>
+			</div>
+			<div class="commentBox">
+				<div class="weui_input weui-cells_form">
+				  <div class="weui-cell">
+				    <div class="weui-cell__hd"><label  class="weui-label">昵称</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" id="nickName" @click="nickName" type="text"  placeholder="请输入昵称" readonly>
+				    </div>
+				  </div>
+				   <div class="weui-cell">
+				    <div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" id="sex" @click="sex"   placeholder="请输入性别" readonly>
+				    </div>
+				  </div>
+				  <div class="weui-cell">
+				    <div class="weui-cell__hd"><label class="weui-label">QQ</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" id="qqNumber1" @click="qqShow1"  placeholder="请输入QQ" readonly>
+				    </div>
+				  </div>
+				   <div class="weui-cell">
+				    <div class="weui-cell__hd"><label class="weui-label">角色</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text"  id="occupation" @click="occupationShow"  placeholder="请输入角色"  readonly>
+				    </div>
+				  </div>
+				   <!--<div class="weui-cell">
+				    <div class="weui-cell__hd"><label for="dataNumber" class="weui-label">出生年月</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" id="dataNumber" @click="dataNumber" value="" placeholder="请输入出生年月">
+				    </div>
+				  </div>-->
+				   <div class="weui-cell">
+			       		<div class="weui-cell__hd"><label for="time3" class="weui-label">出生年月</label></div>
+			        	<div class="weui-cell__bd">
+			         		<input class="weui-input" id="time3"  type="text" placeholder="请输入出生年月"  readonly>
+			        	</div>
+			      </div>
+				  
+				  <div class="weui-cell">
+				    <div class="weui-cell__hd">
+				      <label class="weui-label">绑定手机</label>
+				    </div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="tel" id="phoneShow" @click="phoneShow1" placeholder="请输入手机号"  readonly>
+				    </div>
+				   
+				  </div>				
+				  <div class="prosonal_des">至少绑定一种提现方式</div>
+				  <div class="weui-cell ">
+				    <div class="weui-cell__hd"><label for="" class="weui-label">绑定支付宝</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" pattern="[0-9]*" value="" placeholder="请输入支付宝号"  readonly>
+				    </div>				  
+				  </div>
+				  <div class="weui-cell">
+				    <div class="weui-cell__hd"><label for="" class="weui-label">绑定银行卡</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" pattern="[0-9]*" value="" placeholder="请输入银行卡号"  readonly>
+				    </div>				  
+				  </div>
+				  <div class="weui-cell">
+				    <div class="weui-cell__hd"><label for="" class="weui-label">绑定微信</label></div>
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" type="text" pattern="[0-9]*" value="" placeholder="请输入微信号"  readonly>
+				    </div>				  
+				  </div>
+				  
+				</div>
+				
+			</div>
+		 	 
+		</div>
+		<div class="personal_bottom">
+			<input id="weuiAgree" type="checkbox"checked="checked" class="weui-agree__checkbox"><a href="#" class="active">《用户使用协议》</a> 
+		</div> 	
+		<div class="qrBtn"><a  href="javascript:;" @click="saveData"  class="weui-btn  weui-btn_primary_1">保存</a></div>
+		<!--昵称弹窗-->
+		<div class="share_box share_box_box"	v-show="nickShow" >
+			<div class="sex_box clearfix">
+				<div class="sex_a">
+					<h4 class="nicheng">请填写昵称</h4>
+					<p class="nickName">
+						<input type="text" id="nicheng" placeholder="请输入昵称" />
+					</p>
+					<p class="btnCom">
+						<span class="quxiao" @click="quxiao" >取消</span><span class="queding" @click="queding" >确定</span>
+					</p>
+				</div>
+				
+			</div>
+		</div>
+		<!--性别弹窗-->
+		<div class="share_box share_box_box" v-show="sexShow" >
+			<div class="sex_box clearfix">
+				<div class="sex_a">
+					<p @click="gender" id="gender" >男</p>
+					<p @click="female" id="female"  >女</p>
+				</div>
+				
+			</div>
+		</div>
+		<!--QQ弹窗-->
+		<div class="share_box share_box_box"	v-show="qqShow" >
+			<div class="sex_box clearfix">
+				<div class="sex_a">
+					<h4 class="nicheng">请填写您的QQ号</h4>
+					<p class="nickName">
+						<input type="text" id="qqNumber" placeholder="请输入qq号" />
+					</p>
+					<p class="btnCom">
+						<span class="quxiao" @click="quxiao_1" >取消</span><span class="queding" @click="queding_1" >确定</span>
+					</p>
+				</div>
+				
+			</div>
+		</div>
+		<!--职业弹窗-->
+		<div class="share_box share_box_box" v-show="professionShow" >
+			<div class="sex_box clearfix">
+				<div class="sex_a">
+					<div class="sex_box clearfix">
+						<div class="sex_a profession">
+							<p @click="professionHide">学生</p>
+							<p @click="professionHide">上班族</p>
+							<p @click="professionHide">自由职业</p>
+							<p @click="professionHide">个体户</p>
+							<p @click="professionHide">家庭主妇</p>
+							<p @click="professionHide">农户</p>
+							<p @click="professionHide">其他</p>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		<!--手机号码弹窗-->
+		<div class="share_box share_box_box"	v-show="phoneShow" >
+			<div class="sex_box clearfix">
+				<div class="sex_a">
+					<h4 class="nicheng">请填写手机号码</h4>
+					<p class="nickName">
+						<input type="text" id="phone" placeholder="请输入手机号码" />
+					</p>
+					<p class="btnCom">
+						<span class="quxiao" @click="quxiao_2" >取消</span><span class="queding" @click="queding_2" >确定</span>
+					</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<script>
+		var media_content=new Vue({
+			el:"#media_content",
+			data:{
+				sexShow:false,
+				nickShow:false,
+				qqShow:false,
+				professionShow:false,
+				phoneShow:false,
+			},
+			methods:{
+				
+				sex:function(){
+					this.sexShow = true;
+				},
+				gender:function(){
+					var gender=$("#gender").text();
+					$("#sex").val(gender);
+					this.sexShow = false;
+				},
+				female:function(){
+					var female=$("#female").text();
+					$("#sex").val(female);
+					this.sexShow = false;
+				},
+				nickName:function(){
+					this.nickShow = true;
+				},
+				queding:function(){
+					var nicheng=$("#nicheng").val();
+					$("#nickName").val(nicheng);
+					this.nickShow = false;					
+				},
+				quxiao:function(){
+					this.nickShow = false;					
+				},
+				qqShow1:function(){
+					this.qqShow = true;
+				},
+				queding_1:function(){
+					var qqNumber=$("#qqNumber").val();
+					$("#qqNumber1").val(qqNumber);
+					this.qqShow = false;
+				},
+				quxiao_1:function(){
+					this.qqShow = false;
+				},
+				occupationShow:function(){
+					this.professionShow = true;
+				},
+				professionHide:function(even){
+					var professionText= $(event.target).text();
+					$("#occupation").val(professionText);
+					this.professionShow = false;
+				},
+				phoneShow1:function(){
+					this.phoneShow = true;
+				},
+				queding_2:function(){
+					var phone=$("#phone").val();
+					$("#phoneShow").val(phone);
+					this.phoneShow = false;
+				},
+				quxiao_2:function(){
+					this.phoneShow = false;
+				},
+				saveData:function(){
+					var nicheng=$("#nicheng").val();
+					var sex=$("#sex").val();
+					var qqNumber1=$("#qqNumber1").val();
+					var occupation=$("#occupation").val();
+					var time3=$("#time3").val();
+					var phoneShow=$("#phoneShow").val();
+					if(nicheng == ""){
+						 $.toast("请填写昵称", "text");
+						 return;
+					}else if(sex == ""){
+						 $.toast("请选择性别", "text");
+						 return;
+					}else if(qqNumber1 == ""){
+						 $.toast("请输入QQ号", "text");
+						 return;
+					}else if(occupation == ""){
+						 $.toast("请选择职业", "text");
+						 return;
+					}else if(time3 == ""){
+						 $.toast("请填写出生年月日", "text");
+						 return;
+					}else if(phoneShow == ""){
+						 $.toast("请填写手机号码", "text");
+						 return;
+					}					
+				}				
+			}
+		})
+	</script>
+	<script>
+//		出生年月日
+		$("#time3").datetimePicker({
+	        times: function () {
+	          return [
+	//          {
+	//            values: ['上午', '下午']
+	//          }
+	          ];
+	        },
+//	        value: '2012-12-12   ',
+	        onChange: function (picker, values, displayValues) {
+	          console.log(values);
+	        }
+	      });
+	//图片上传预览    IE是用了滤镜。
+    function previewImage(file)
+	    {
+	      var MAXWIDTH  = 260; 
+	      var MAXHEIGHT = 180;
+	      var div = document.getElementById('preview');
+	      if (file.files && file.files[0])
+	      {
+	          div.innerHTML ='<img id=imghead>';
+	          var img = document.getElementById('imghead');
+	          img.onload = function(){
+	            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+	            img.width  =  rect.width;
+	            img.height =  rect.height;
+	//                 img.style.marginLeft = rect.left+'px';
+	            img.style.marginTop = rect.top+'px';
+	          }
+	          var reader = new FileReader();
+	          reader.onload = function(evt){img.src = evt.target.result;}
+	          reader.readAsDataURL(file.files[0]);
+	      }
+	      else //兼容IE
+	      {
+	        var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+	        file.select();
+	        var src = document.selection.createRange().text;
+	        div.innerHTML = '<img id=imghead>';
+	        var img = document.getElementById('imghead');
+	        img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+	        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+	        status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+	        div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px"+sFilter+src+"\"'></div>";
+	      }
+	    }
+	    function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+	        var param = {top:0, left:0, width:width, height:height};
+	        if( width>maxWidth || height>maxHeight )
+	        {
+	            rateWidth = width / maxWidth;
+	            rateHeight = height / maxHeight;
+	             
+	            if( rateWidth > rateHeight )
+	            {
+	                param.width =  maxWidth;
+	                param.height = Math.round(height / rateWidth);
+	            }else
+	            {
+	                param.width = Math.round(width / rateHeight);
+	                param.height = maxHeight;
+	            }
+	        }
+	        param.left = Math.round((maxWidth - param.width) / 2);
+	        param.top = Math.round((maxHeight - param.height) / 2);
+	        return param;
+	    }
+	</script>
+	
+	
+		
+	</body>
+</html>

@@ -1,0 +1,240 @@
+
+							<div class="per_tou">
+									<!--上传头像-->
+								<div class="file_shang">
+									<div id="preview">
+									    <img id="imghead" width="100%" border=0 src='{if condition="$userSession.user_picture==''"}__RESOURCES__images/touxiang.png{else/}{$userSession.user_picture|get_image_path}{/if}'>
+									</div>
+									<div class="input8">
+									  <input  type="file" onchange="upImage(this)" /> 
+									</div> 
+								</div>
+								<script type="text/javascript">
+								function upImage(file){
+									console.log(file);
+									var formData = new FormData();
+									formData.append("file",file.files[0]);
+									$.ajax({ 
+										url : "{:url('user/uploadhead')}", 
+										type : 'POST', 
+										data : formData, 
+										processData : false, // 告诉jQuery不要去处理发送的数据
+										contentType : false,// 告诉jQuery不要去设置Content-Type请求头
+										beforeSend:function(){
+											console.log("正在进行，请稍候");
+										},
+										success : function(rs) {
+											if(rs.status===1){
+												layer.alert('上传成功',function(){location.href=location.href});
+											}else{
+												layer.msg("上传失败");
+											}
+										}, 
+										error : function(responseStr) { 
+											layer.msg("上传失败");
+										} 
+									});
+								}
+								</script>
+								<p class="per_ming">{$userSession.nick_name}</p>
+								
+								<p class="per_a">ID:{$userSession.user_id}</p>
+								<div class="progress pro_box">
+									  <div class="progress-bar pro_bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+									    <span class="sr-only">60% Complete</span>
+									  </div>
+								</div>
+								<div class="per_vip">
+									<span>VIP{$list_rank[$me.user_rank]->sort_order}</span>{$list_rank[$me.user_rank]->rank_name}
+								</div>
+								
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/index')}" title="" id="menu_1">
+									<img class="per_img" src="__RESOURCES__images/home1.png" /><img class="per_img act" src="__RESOURCES__images/p12.png" style="display:none;" />个人中心 
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/business')}" title="" id="menu_11">
+									<img class="per_img" src="__RESOURCES__images/p5.png" /><img class="per_img act" src="__RESOURCES__images/p5.png" style="display:none;" />负责商务
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/channel')}" title="" id="menu_12">
+									<img class="per_img" src="__RESOURCES__images/p5.png" /><img class="per_img act" src="__RESOURCES__images/p5.png" style="display:none;" />负责渠道
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/team')}" title="" id="menu_2">
+									
+									<img  class="per_img" src="__RESOURCES__images/p10.png" /><img class="per_img act" src="__RESOURCES__images/ico_team_act.png" style="display:none;" />我的兵团 
+								</a>
+							</div>
+							<!--<div class="div_9">
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="javascript:;" title="" id="menu_3">
+									<img  class="per_img" src="__RESOURCES__images/p2.png" /><img class="per_img act" src="__RESOURCES__images/xuqiu1.png" style="display:none;" />我的需求
+									<img class="per_img2" src="__RESOURCES__images/xia.png" />
+								</a>
+								<div class="per_hover" id="menu_group_3">
+									
+									<div class="que_l per_hover1">
+										<a class="color_1 " href="{:url('user/myneed',['key'=>1])}" title="" id="menu_3_1">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />免费福利
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myneed',['key'=>2])}" title="" id="menu_3_2">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />产品体验
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myneed',['key'=>3])}" title="" id="menu_3_3">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />促销活动
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myneed',['key'=>4])}" title="" id="menu_3_4">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />网络营销
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myneed',['key'=>5])}" title="" id="menu_3_5">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />产品分销
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1 " href="{:url('user/myneed',['key'=>6])}" title="" id="menu_3_6">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />广告投放
+										</a>
+									</div>		
+											
+										
+								</div>
+									
+							</div>
+							</div>-->
+							<!--达人管理-->
+							<!--<div class="div_9">
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="javascript:;" title="" id="menu_4">
+									<img  class="per_img" src="__RESOURCES__images/p8.png" /><img class="per_img act" src="__RESOURCES__images/guanli1.png" style="display:none;" />营销管理
+									<img class="per_img2" src="__RESOURCES__images/xia.png" />
+								</a>
+								<div class="per_hover" id="menu_group_4">
+									
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>1])}" title="" id="menu_4_1">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的福利
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>2])}" title="" id="menu_4_2">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的体验
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>3])}" title="" id="menu_4_3">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的活动
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>4])}" title="" id="menu_4_4">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的营销
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>5])}" title="" id="menu_4_5">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的分销
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myTask',['key'=>6])}" title="" id="menu_4_6">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的广告
+										</a>
+									</div>
+									<div class="que_l per_hover1">
+										<a class="color_1 " href="{:url('user/myCollect')}" title="" id="menu_4_7">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的收藏
+										</a>
+									</div>	
+									<div class="que_l per_hover1">
+										<a class="color_1" href="{:url('user/myShare')}" title="" id="menu_4_8">
+											
+											<img  class="per_img per_m" src="__RESOURCES__images/right_2.png" />我的分享
+										</a>
+									</div>			
+										
+								</div>
+									
+							</div>
+						    </div>	-->
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="http://shop.yi-zu.com/user.php?act=order_list" title="" id="menu_5">
+									
+									<img  class="per_img" src="__RESOURCES__images/p5.png" /><img class="per_img act" src="__RESOURCES__images/p5.png" style="display:none;" />我的订单
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="http://shop.yi-zu.com/flow.php" target="_blank" title="" id="menu_6">
+									
+									<img  class="per_img" src="__RESOURCES__images/p7.png" /><img class="per_img act" src="__RESOURCES__images/p7.png" style="display:none;" />购物车
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/wallet')}" title="" id="menu_7">
+									
+									<img  class="per_img" src="__RESOURCES__images/p9.png" /><img class="per_img act" src="__RESOURCES__images/qianbao1.png" style="display:none;" />我的钱包
+								</a>
+							</div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/footprints')}" title="" id="menu_8">
+									
+									<img  class="per_img" src="__RESOURCES__images/p13.png" /><img class="per_img act" src="__RESOURCES__images/zuji1.png" style="display:none;" />我的足迹
+								</a>
+							</div>
+                            <div class="que_l">
+                                <span class="que_act1" style="display:none;"></span>
+                                <a class="color_1" href="{:url('user/myCollect')}" title="" id="menu_4">
+
+                                    <img  class="per_img" src="__RESOURCES__images/shoucang_q.png" /><img class="per_img act" src="__RESOURCES__images/shoucang_q1.png" style="display:none;" />我的收藏
+                                </a>
+                            </div>
+							<div class="que_l">
+								<span class="que_act1" style="display:none;"></span>
+								<a class="color_1" href="{:url('user/information')}" title="" id="menu_9">
+									
+									<img  class="per_img" src="__RESOURCES__images/p6.png" /><img class="per_img act" src="__RESOURCES__images/car_8.png" style="display:none;" />个人信息
+								</a>
+							</div>
+								<span class="que_act1" style="display:none;"></span>
+							<div class="que_l" style="display:none;">
+								<a class="color_1" href="Setup.html" title="" id="menu_10">
+									
+									<img  class="per_img" src="__RESOURCES__images/p11.png" /><img class="per_img act" src="__RESOURCES__images/setup.png" style="display:none;" />设置
+								</a>
+							</div>
+							

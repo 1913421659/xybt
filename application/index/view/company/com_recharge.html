@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>充值</title>
+	</head>
+	{include file="public/css" /}
+		{include file="public/js" /}
+	<style type="text/css">
+	.with_r.disabled{
+	}
+	.with_r.disabled span.with_span{border:none;}
+	input.error {
+	    border: 1px solid red;
+	   }
+	   form.cmxform label.error, label.error {
+	     	color: red;
+		    font-weight: normal;
+		    font-size: 12px;
+		    margin-left: 10px;
+		    line-height: 30px;
+	   }
+	   #money-error{
+	   	   float: right;
+           margin-top: 5px;
+	   }
+	</style>
+	<body>
+		<!--顶部说明-->
+		{include file="public/header1" /}
+		{include file="public/header2" /}
+		<!--menu-->
+		<div class="new_menu">
+			<div class="wrap">
+			    {include file="public/menu_r" /}
+			</div>
+		</div>
+		<!--menu结束-->
+		<div class="que_con que-a clearfix" id="vue_page">
+			<div class="wrap">
+				<div class="que_menu_1 clearfix">
+					<p>
+						<img src="__RESOURCES__images/home.png"/>
+						<a href="{:url('index/index')}">首页</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/index')}">管理营销</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="{:url('company/com_money')}">企业余额</a>
+						<img src="__RESOURCES__images/right_2.png"/>
+						<a href="javascript:;">企业充值</a>
+				</div>
+				<div class="header_second" >
+					<div class="row recharge_title">
+					 	<div class="col-md-8 title_aaa">充值到企业余额&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剩余：<span class="active_nav">{$company.company_money}</span>元</div>
+					</div>
+					<form method="post"  action="{:url('company/ajax_recharge')}" class="with_box" >
+						<div class="row recharge_a">
+						 	<div class="re_left_1 col-md-3">充值方式：</div>
+						  	<div class="col-md-9">
+								<div class="recharge_zhi" style="border:0px;">
+									<img src="__RESOURCES__images/zhifubao_1.png" />
+								</div>
+								<div class="recharge_des"></div>
+						  	</div>
+						</div>
+						<div class="row recharge_a">
+                            <input name="type" value="2" type="hidden">
+						 	<div class="re_left_1 col-md-3">充值金额：</div>
+						  	<div class="col-md-9">
+								<input class="recharge_input" name="money" v-model="money"  type="number" id="money" min="0.01" step="0.01"/>
+								<template>
+									<label v-if="money==0" for="money" class="error">请输入充值金额</label>
+								</template>
+						  	</div>
+						</div>
+						<div class="row recharge_a">
+						 	<div class="re_left_1 col-md-3"></div>
+						  	<div class="col-md-9">
+								<input type="button" class="fabu recharge_btn" v-on:click="recharge_btn" value="确认充值">
+						  	</div>
+						</div>
+						
+				    </form>
+					<!--结束-->
+					
+				</div>
+
+			</div>
+		</div>
+		<!--footer-->
+		{include file="public/footer1" /}
+			<!--右侧导航栏-->
+		{include file="public/footer2" /}
+		{include file="public/js_1" /}
+		<script>
+		vue_page.appendData({
+			money:0,
+            type:2
+		});	
+		vue_page.appendMethods({
+            recharge_btn:function(){
+                if(!this.money){
+                    layer.msg('充值金额必须大于0');
+                    return ;
+                }
+                window.open("{:url('company/ajax_recharge')}"+'&type='+this.type+'&money='+this.money);
+			},
+			init:function(){
+			}
+		});
+		vue_page = new Vue(vue_page);
+		</script>
+		
+	</body>
+
+</html>
